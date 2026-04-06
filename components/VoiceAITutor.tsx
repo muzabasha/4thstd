@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Subject, Chapter, Topic } from '../lib/curriculum';
 import { useVoice } from '../hooks/useVoice';
 import { generateAIResponse } from '../lib/ai';
+import InteractiveMapLab from './InteractiveMapLab';
 
 interface VoiceAITutorProps {
   subject: Subject;
@@ -19,6 +20,17 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
   const chatEndRef = useRef<HTMLDivElement>(null);
   
   const { isListening, transcript, isSpeaking, startListening, stopListening, speak } = useVoice();
+
+  useEffect(() => {
+    if (mode === 'activity') {
+      const currentActivity = topic.activities.find(a => a.level === currentLevel);
+      if (currentActivity) {
+        handleUserAction(`Let's start the ${currentActivity.title} activity! Give me step-by-step instructions.`);
+      }
+    } else if (mode === 'lab') {
+      handleUserAction(`Let's explore the Virtual Lab for ${topic.title}. What is my first task?`);
+    }
+  }, [mode, currentLevel, topic.id]);
 
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -85,11 +97,32 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
       )}
 
       {mode === 'activity' && topic.activities.find(a => a.level === currentLevel) && (
-        <div className="activity-banner animate-fade-in">
+        <div className="activity-banner animate-fade-in activity-manual">
           <div className="activity-icon">🎯</div>
           <div className="activity-info">
             <h4>{topic.activities.find(a => a.level === currentLevel)?.title}</h4>
-            <p>{topic.activities.find(a => a.level === currentLevel)?.description}</p>
+            <p className="activity-desc">{topic.activities.find(a => a.level === currentLevel)?.description}</p>
+            
+            {topic.activities.find(a => a.level === currentLevel)?.materials && (
+              <div className="materials-list card-small">
+                <h5>🧰 Materials Needed:</h5>
+                <ul>
+                  {topic.activities.find(a => a.level === currentLevel)?.materials?.map((m, i) => (
+                    <li key={i}><input type="checkbox" /> {m}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div className="steps-list card-small">
+              <h5>📍 Action Plan:</h5>
+              <ol>
+                {topic.activities.find(a => a.level === currentLevel)?.steps.map((s, i) => (
+                  <li key={i}>{s}</li>
+                ))}
+              </ol>
+            </div>
+
             <span className="skill-tag">{topic.activities.find(a => a.level === currentLevel)?.skill.toUpperCase()} SKILL</span>
           </div>
           <button className="done-btn" onClick={() => handleUserAction("I'm done with the activity!")}>Done! ✅</button>
@@ -102,9 +135,13 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
             <h3>🔬 {topic.virtualLab.title}</h3>
           </div>
           <div className="lab-simulation">
-            <div className="sim-placeholder">
-              <p>{topic.virtualLab.simulation}</p>
-            </div>
+            {topic.virtualLab.title.includes('India Map Lab') ? (
+              <InteractiveMapLab onLandmarkClick={(info) => handleUserAction(info)} />
+            ) : (
+              <div className="sim-placeholder">
+                <p>{topic.virtualLab.simulation}</p>
+              </div>
+            )}
           </div>
           <div className="lab-task activity-info">
             <h4>Objective:</h4>

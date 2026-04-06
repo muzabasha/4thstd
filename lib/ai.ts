@@ -26,7 +26,7 @@ export const generateAIResponse = async (
       } else if (promptType === 'quiz') {
         resolve(`Ready for a challenge? Here is a question about ${topic}: If you have 5 bricks and you add 3 more, how many do you have?`);
       } else if (promptType === 'activity') {
-        resolve(`Hooray Yasmeen! You did a fantastic job on the ${topic} activity. This really helps your brain grow! Did you find it easy or a bit tricky?`);
+        resolve(`Okay Yasmeen, let's do the ${topic} activity together! 🎯 \n\nStep 1: ${context || 'Gather your materials'}. \nStep 2: Start by observing carefully. \nStep 3: Tell me what you see or do! \n\nI'm right here to help you. Ready to start?`);
       } else {
         resolve(`That's a great attempt! You're learning fast. Let's try another one!`);
       }
