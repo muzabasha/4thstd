@@ -17,6 +17,8 @@ export interface Topic {
   subtopics: string[];
   activities: Activity[];
   virtualLab?: VirtualLab;
+  learningOutcomes: string[];
+  crossCurricularLink?: string;
 }
 
 export interface Chapter {
@@ -45,30 +47,34 @@ export const syllabus: Subject[] = [
             title: "Patterns of Bricks", 
             subtopics: ["Jaali patterns", "Jharokha patterns", "Arch patterns"],
             activities: [
-              { level: 'low', title: "Pattern Spotter", description: "Look at your kitchen tiles or walls. Draw 1 pattern you see.", skill: "performing" },
-              { level: 'mid', title: "Jaali Weaver", description: "Using paper strips, weave a simple checkerboard pattern.", skill: "performing" },
-              { level: 'high', title: "Brick Architect", description: "Design a wall with a unique 'Eye' pattern and describe it.", skill: "speaking" }
+              { level: 'low', title: "Pattern Spotter", description: "Look at your kitchen tiles or walls. Why do you think they are arranged like that?", skill: "performing" },
+              { level: 'mid', title: "Jaali Weaver", description: "Using paper strips, weave a simple checkerboard pattern and see how air passes through it.", skill: "performing" },
+              { level: 'high', title: "Brick Architect", description: "Design a wall with a unique 'Eye' pattern. Explain how it stays strong.", skill: "speaking" }
             ],
             virtualLab: {
               title: "Digital Brick Builder",
               simulation: "A 2D grid where you can place colored bricks.",
               task: "Construct a wall with exactly 5 Jaali holes in a row."
-            }
+            },
+            learningOutcomes: ["Identify and reproduce geometric patterns", "Understand symmetry in architecture"],
+            crossCurricularLink: "EVS: Changing Times - Evolution of building materials."
           },
           { 
             id: "math-c1-t2", 
             title: "Brick Dimensions", 
             subtopics: ["Length, width, height", "Drawing a brick"],
             activities: [
-              { level: 'low', title: "Dimension Detective", description: "Point to the longest side of a matchbox.", skill: "listening" },
-              { level: 'mid', title: "Master Measurer", description: "Estimate how many matchboxes fit in your hand.", skill: "performing" },
-              { level: 'high', title: "Volume Explorer", description: "If a brick is twice as big, how much heavier would it be? Tell me why.", skill: "speaking" }
+              { level: 'low', title: "Dimension Detective", description: "Point to the longest side of a matchbox. Why is it longer than the height?", skill: "listening" },
+              { level: 'mid', title: "Master Measurer", description: "Estimate how many matchboxes fit in your hand. How close were you?", skill: "performing" },
+              { level: 'high', title: "Volume Explorer", description: "If a brick is twice as big, how much heavier would it be? Tell me your reasoning.", skill: "speaking" }
             ],
             virtualLab: {
               title: "Volume Slider Lab",
               simulation: "Adjust sliders to change brick size (L, W, H).",
               task: "Make a brick that has a length of 20 and a height of 5."
-            }
+            },
+            learningOutcomes: ["Measure 3D objects", "Estimate volume intuitively"],
+            crossCurricularLink: "Science: Physical properties of matter."
           }
         ]
       },
@@ -81,36 +87,17 @@ export const syllabus: Subject[] = [
             title: "Reading Time", 
             subtopics: ["Clock faces", "12-hour vs 24-hour"],
             activities: [
-              { level: 'low', title: "Clock Mimic", description: "Show the time 3 o'clock using your arms as hands.", skill: "performing" },
-              { level: 'mid', title: "Time Log", description: "Note down the time you brush, eat, and play today.", skill: "writing" },
-              { level: 'high', title: "Schedule Master", description: "Think of a school trip. Present a 1-hour schedule for it.", skill: "speaking" }
+              { level: 'low', title: "Clock Mimic", description: "Show 3 o'clock with your arms. Why do we have two hands on a clock?", skill: "performing" },
+              { level: 'mid', title: "Time Log", description: "Note down your daily schedule. How much time do you spend playing?", skill: "writing" },
+              { level: 'high', title: "Schedule Master", description: "Create a travel plan for a 1-day trip to a park.", skill: "speaking" }
             ],
             virtualLab: {
               title: "Clock Face Lab",
-              simulation: "A digital clock with movable hour and minute hands.",
-              task: "Set the clock to 10:15 and then move it forward by 45 minutes."
-            }
-          }
-        ]
-      },
-      {
-        id: "math-c7",
-        title: "Jugs and Mugs",
-        topics: [
-          { 
-            id: "math-c7-t1", 
-            title: "Measuring Capacity", 
-            subtopics: ["Liters", "Milliliters"],
-            activities: [
-              { level: 'low', title: "Spoon Counter", description: "How many spoons of water fill a small cup?", skill: "performing" },
-              { level: 'mid', title: "Liquid Mixologist", description: "Mix juice in a 1L bottle and mark the 500ml line.", skill: "performing" },
-              { level: 'high', title: "Capacity Cook", description: "Explain to me how much water you need for a tea cup.", skill: "speaking" }
-            ],
-            virtualLab: {
-              title: "Measurement Lab",
-              simulation: "Virtual jugs of different sizes with pouring physics.",
-              task: "Fill a 2L jug exactly halfway using a 250ml cup."
-            }
+              simulation: "A digital clock with movable hands.",
+              task: "Set the clock to 10:15."
+            },
+            learningOutcomes: ["Read and tell time", "Calculate time intervals"],
+            crossCurricularLink: "EVS: Omana's Journey - Reading train timetables."
           }
         ]
       }
@@ -129,11 +116,12 @@ export const syllabus: Subject[] = [
             title: "Modes of Transport", 
             subtopics: ["Bamboo Bridge", "Trolley", "Vallam"],
             activities: [
-              { level: 'low', title: "Sound Matcher", description: "Identify transport sounds.", skill: "listening" },
-              { level: 'mid', title: "Bridge Builder", description: "Use sticks to make a bridge.", skill: "performing" },
-              { level: 'high', title: "Travel Reporter", description: "Interview a person about their school transport story.", skill: "speaking" }
+              { level: 'low', title: "Sound Matcher", description: "Identify vehicle sounds. Which one is the loudest?", skill: "listening" },
+              { level: 'mid', title: "Bridge Builder", description: "Build a bridge with sticks. Why do some bridges have arches?", skill: "performing" },
+              { level: 'high', title: "Travel Reporter", description: "Describe a difficult journey you imagine. How would you overcome it?", skill: "speaking" }
             ],
-            virtualLab: { title: "Bridge Simulator", simulation: "Test weights on different bridges.", task: "Build a bridge that holds 3 trucks." }
+            learningOutcomes: ["Identify diverse transport modes", "Understand geographical challenges"],
+            crossCurricularLink: "Social Studies: Geographical regions of India."
           }
         ]
       },
@@ -144,17 +132,14 @@ export const syllabus: Subject[] = [
           { 
             id: "evs-c3-t1", 
             title: "Elephant Herds", 
-            subtopics: ["Social Life", "Roles in a herd"],
+            subtopics: ["Social Life", "Roles"],
             activities: [
-              { level: 'low', title: "Elephant Mask", description: "Make an elephant mask using a paper plate.", skill: "performing" },
-              { level: 'mid', title: "Herd Storyteller", description: "Imagine you are Nandu. Write 3 lines about your day.", skill: "writing" },
-              { level: 'high', title: "Social Expert", description: "Compare an elephant family to your own family. What is same?", skill: "speaking" }
+              { level: 'low', title: "Elephant Mask", description: "Create a trunk. How do elephants use it?", skill: "performing" },
+              { level: 'mid', title: "Herd Storyteller", description: "Write about a group of animals living together.", skill: "writing" },
+              { level: 'high', title: "Social Expert", description: "Why do animals live in herds? Discuss the benefits.", skill: "speaking" }
             ],
-            virtualLab: {
-              title: "Wildlife Observer Lab",
-              simulation: "A panning 360 view of an elephant herd.",
-              task: "Count how many adult elephants and calves you can see."
-            }
+            learningOutcomes: ["Understand animal behavior", "Identify social structures in nature"],
+            crossCurricularLink: "English: The Giving Tree - Nature and social bonds."
           }
         ]
       }
@@ -171,11 +156,11 @@ export const syllabus: Subject[] = [
           { 
             id: "eng-c1-t1", title: "Wake Up! (Poem)", subtopics: ["Recitation", "Rhymes"],
             activities: [
-              { level: 'low', title: "Word Finder", description: "Find rhyming words.", skill: "listening" },
-              { level: 'mid', title: "Nature Sketch", description: "Draw the morning scene from the poem.", skill: "performing" },
-              { level: 'high', title: "Poet Voice", description: "Record yourself reciting with emotion.", skill: "speaking" }
+              { level: 'low', title: "Word Finder", description: "Find rhyming words. Why do poems rhyme?", skill: "listening" },
+              { level: 'high', title: "Poet Voice", description: "Recite with emotion. How does the poem make you feel?", skill: "speaking" }
             ],
-            virtualLab: { title: "Rhyme Lab", simulation: "Click words to find pairs.", task: "Find 5 pairs of rhyming words." }
+            learningOutcomes: ["Recite poems with rhythm", "Identify rhyming patterns"],
+            crossCurricularLink: "EVS: A Busy Month - Birds waking up in the morning."
           }
         ]
       }
@@ -192,30 +177,11 @@ export const syllabus: Subject[] = [
           { 
             id: "g-c1-t1", title: "Proper & Common", subtopics: ["Categorization"],
             activities: [
-              { level: 'low', title: "Noun Hunt", description: "Find 3 nouns in your room.", skill: "performing" },
-              { level: 'mid', title: "Naming Game", description: "List 5 proper nouns for cities.", skill: "writing" },
-              { level: 'high', title: "Grammar Guru", description: "Teach me the difference using examples from your family.", skill: "speaking" }
+              { level: 'low', title: "Noun Hunt", description: "Find 3 nouns. Why is your name a 'Proper' noun?", skill: "performing" },
+              { level: 'mid', title: "Naming Game", description: "List proper nouns for your favorite places.", skill: "writing" }
             ],
-            virtualLab: { title: "Noun Sorter", simulation: "Drag words into buckets.", task: "Sort 10 words into Proper or Common." }
-          }
-        ]
-      },
-      {
-        id: "g-c2",
-        title: "Verbs",
-        topics: [
-          { 
-            id: "g-c2-t1", title: "Action Words", subtopics: ["Identification"],
-            activities: [
-              { level: 'low', title: "Dumb Charades", description: "Act out an action. Can others guess the verb?", skill: "performing" },
-              { level: 'mid', title: "Verb Collector", description: "Write 10 verbs you common use in a day.", skill: "writing" },
-              { level: 'high', title: "Action Story", description: "Tell a story where every sentence has a strong verb.", skill: "speaking" }
-            ],
-            virtualLab: {
-              title: "Verb Animator",
-              simulation: "An avatar that performs actions based on verbs typed.",
-              task: "Make the avatar run, jump, and wave in sequence."
-            }
+            learningOutcomes: ["Classify nouns", "Use capitalization correctly"],
+            crossCurricularLink: "Math: Smart Charts - Categorizing data names."
           }
         ]
       }

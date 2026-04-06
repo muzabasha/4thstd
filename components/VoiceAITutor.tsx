@@ -113,6 +113,26 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
         </div>
       )}
 
+      <div className="nep-insights glass-card animate-fade-in">
+        <div className="nep-header">
+          <span>🎓 NEP Preparatory Stage</span>
+          <div className="cc-link">{topic.crossCurricularLink}</div>
+        </div>
+        <div className="lo-list">
+          {topic.learningOutcomes.map((lo, i) => (
+            <span key={i} className="lo-tag">🏆 {lo}</span>
+          ))}
+        </div>
+        <div className="inquiry-area">
+          <p className="inquiry-label">Ask a Critical Thinking Question:</p>
+          <div className="inquiry-chips">
+            <button key="why" onClick={() => handleUserAction(`Why does ${topic.title} happen like that?`)}>Why? 🤔</button>
+            <button key="how" onClick={() => handleUserAction(`How is ${topic.title} used in real life?`)}>How? 🛠️</button>
+            <button key="what" onClick={() => handleUserAction(`What if ${topic.title} were different?`)}>What if? 🌈</button>
+          </div>
+        </div>
+      </div>
+
       <div className="chat-window dark-glass-card">
         {messages.map((m, i) => (
           <div key={i} className={`message-bubble ${m.role}`}>
