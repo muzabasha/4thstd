@@ -17,6 +17,7 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
   const [isLoading, setIsLoading] = useState(false);
   const [mode, setMode] = useState<'learn' | 'quiz' | 'activity' | 'lab'>('learn');
   const [currentLevel, setCurrentLevel] = useState<'low' | 'mid' | 'high'>('low');
+  const [masteryStep, setMasteryStep] = useState(0); // 0: Intro, 1: Subtopic 1, etc.
   const chatEndRef = useRef<HTMLDivElement>(null);
   
   const { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang } = useVoice();
@@ -32,15 +33,28 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
   }, [subject.id, setLang]);
 
   useEffect(() => {
-    if (mode === 'activity') {
-      const currentActivity = topic.activities.find(a => a.level === currentLevel);
-      if (currentActivity) {
-        handleUserAction(`Let's start the ${currentActivity.title} activity! Give me step-by-step instructions.`);
+    // Proactive Guidance: Starts when topic or mastery step changes
+    const guideMe = async () => {
+      let prompt: string = "";
+      if (masteryStep === 0) {
+        prompt = `Hi Yasmeen! I'm so excited to help you master ${topic.title}. First, let's look at the big picture. ${topic.subtopics.join(", ")} are what we'll explore. Ready to start with the first part?`;
+      } else if (masteryStep <= topic.subtopics.length) {
+        prompt = `Great! Step ${masteryStep}: Let's talk about ${topic.subtopics[masteryStep - 1]}. It's very important because... [Explanation]. Shall we try a quick activity to see how this works?`;
+      } else {
+        prompt = `Hooray! You've reached the end of our lesson on ${topic.title}. You are now a master! Would you like to try the Expert Activity now?`;
       }
-    } else if (mode === 'lab') {
-      handleUserAction(`Let's explore the Virtual Lab for ${topic.title}. What is my first task?`);
-    }
-  }, [mode, currentLevel, topic.id]);
+      
+      setIsLoading(true);
+      // Simulate/Generate AI guiding response
+      setTimeout(() => {
+        setMessages(prev => [...prev, { role: 'ai', content: prompt }]);
+        speak(prompt);
+        setIsLoading(false);
+      }, 1000);
+    };
+
+    guideMe();
+  }, [topic.id, masteryStep, speak]); // Triggered on topic change or step completion
 
   // Scroll to bottom whenever messages change
   useEffect(() => {
@@ -190,26 +204,66 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
         <div ref={chatEndRef} />
       </div>
 
-      <div className="controls">
-        <button 
-          className={`mic-button ${isListening ? 'listening' : ''}`} 
-          onClick={isListening ? stopListening : startListening}
-        >
-          {isListening ? 'Stop' : 'Ask Me!'} 🎙️
-        </button>
-        <div className="input-group">
-          <input 
-            type="text" 
-            placeholder="Type your question here..." 
-            onKeyDown={(e) => e.key === 'Enter' && handleUserAction(e.currentTarget.value)} 
-          />
-          <button className="send-btn" onClick={() => {
-            const input = document.querySelector('input');
-            if (input?.value) handleUserAction(input.value);
-            if (input) input.value = '';
-          }}>➔</button>
-        </div>
+      <div className="action-area animate-fade-in">
+        {!isLoading && (
+          <div className="response-chips">
+            {masteryStep === 0 && (
+              <button className="chip primary" onClick={() => setMasteryStep(1)}>
+                Yes, let's start! 🚀
+              </button>
+            )}
+            {masteryStep > 0 && masteryStep <= topic.subtopics.length && (
+              <>
+                <button className="chip" onClick={() => speak(messages[messages.length-1].content)}>
+                  Can you repeat that? 🔄
+                </button>
+                <button className="chip primary" onClick={() => setMasteryStep(prev => prev + 1)}>
+                  I understand, next step! ➡️
+                </button>
+                <button className="chip accent" onClick={() => setMode('activity')}>
+                  Let's do an Activity! 🎯
+                </button>
+              </>
+            )}
+            {masteryStep > topic.subtopics.length && (
+              <button className="chip success" onClick={() => setMasteryStep(0)}>
+                Restart & Review 🔄
+              </button>
+            )}
+          </div>
+        )}
+        {isLoading && <div className="typing-indicator">Professor Spark is preparing your next step...</div>}
       </div>
+
+      <style jsx>{`
+        .action-area {
+          padding: 1.5rem;
+          background: rgba(255, 255, 255, 0.05);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .response-chips {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+        .chip {
+          padding: 0.8rem 1.5rem;
+          border-radius: 50px;
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          font-weight: 700;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s;
+        }
+        .chip.primary { background: var(--primary); border-color: var(--primary); }
+        .chip.accent { background: var(--accent); color: var(--primary); border-color: var(--accent); }
+        .chip.success { background: var(--success); border-color: var(--success); }
+        .chip:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+      `}</style>
     </div>
   );
 }
