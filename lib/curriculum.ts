@@ -58,130 +58,141 @@ export const syllabus: Subject[] = [
             },
             learningOutcomes: ["Identify and reproduce geometric patterns", "Understand symmetry in architecture"],
             crossCurricularLink: "EVS: Changing Times - Evolution of building materials."
-          },
-          { 
-            id: "math-c1-t2", 
-            title: "Brick Dimensions", 
-            subtopics: ["Length, width, height", "Drawing a brick"],
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: "science",
+    title: "General Science",
+    chapters: [
+      {
+        id: "sci-c1",
+        title: "Plant Life",
+        topics: [
+          {
+            id: "sci-c1-t1",
+            title: "Photosynthesis",
+            subtopics: ["Chlorophyll", "Stomata", "Sunlight requirement"],
             activities: [
-              { level: 'low', title: "Dimension Detective", description: "Point to the longest side of a matchbox. Why is it longer than the height?", skill: "listening" },
-              { level: 'mid', title: "Master Measurer", description: "Estimate how many matchboxes fit in your hand. How close were you?", skill: "performing" },
-              { level: 'high', title: "Volume Explorer", description: "If a brick is twice as big, how much heavier would it be? Tell me your reasoning.", skill: "speaking" }
+              { level: 'low', title: "Leaf Collector", description: "Find a green leaf and a non-green leaf. What is the difference?", skill: "performing" },
+              { level: 'mid', title: "Starch Test", description: "Put iodine on a potato (with parent). Why did it turn blue?", skill: "performing" },
+              { level: 'high', title: "Oxygen Expert", description: "Explain why plants are called 'Earth's Lungs'.", skill: "speaking" }
             ],
             virtualLab: {
-              title: "Volume Slider Lab",
-              simulation: "Adjust sliders to change brick size (L, W, H).",
-              task: "Make a brick that has a length of 20 and a height of 5."
+              title: "Photosynthesis Simulator",
+              simulation: "A plant where you control Sunlight, Water, and CO2.",
+              task: "Make the plant grow by finding the perfect balance."
             },
-            learningOutcomes: ["Measure 3D objects", "Estimate volume intuitively"],
-            crossCurricularLink: "Science: Physical properties of matter."
+            learningOutcomes: ["Understand how plants make food", "Identify parts of a leaf"],
+            crossCurricularLink: "EVS: The Giving Tree - Our dependence on plants."
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    id: "social-studies",
+    title: "Social Studies",
+    chapters: [
       {
-        id: "math-c4",
-        title: "Tick-Tick-Tick",
+        id: "soc-c1",
+        title: "Geography of India",
         topics: [
-          { 
-            id: "math-c4-t1", 
-            title: "Reading Time", 
-            subtopics: ["Clock faces", "12-hour vs 24-hour"],
+          {
+            id: "soc-c1-t1",
+            title: "Northern Mountains",
+            subtopics: ["Himalayas", "States in the north", "Climate"],
             activities: [
-              { level: 'low', title: "Clock Mimic", description: "Show 3 o'clock with your arms. Why do we have two hands on a clock?", skill: "performing" },
-              { level: 'mid', title: "Time Log", description: "Note down your daily schedule. How much time do you spend playing?", skill: "writing" },
-              { level: 'high', title: "Schedule Master", description: "Create a travel plan for a 1-day trip to a park.", skill: "speaking" }
+              { level: 'low', title: "Mountain Modeler", description: "Use clay to make a mountain range.", skill: "performing" },
+              { level: 'mid', title: "Climate Reporter", description: "Record a weather report for Kashmir.", skill: "speaking" },
+              { level: 'high', title: "Trek Planner", description: "Write down 5 things you'd pack for a Himalayan trek.", skill: "writing" }
             ],
             virtualLab: {
-              title: "Clock Face Lab",
-              simulation: "A digital clock with movable hands.",
-              task: "Set the clock to 10:15."
+              title: "India Map Lab",
+              simulation: "A satellite view map where you click on landmarks.",
+              task: "Find the 3 highest peaks of India."
             },
-            learningOutcomes: ["Read and tell time", "Calculate time intervals"],
-            crossCurricularLink: "EVS: Omana's Journey - Reading train timetables."
+            learningOutcomes: ["Identify physical features of India", "Understand regional climates"],
+            crossCurricularLink: "EVS: Going to School - Challenging terrains."
           }
         ]
       }
     ]
   },
   {
-    id: "environmental-studies",
-    title: "Environmental Studies (Looking Around)",
+    id: "hindi",
+    title: "Hindi (Rimjhim)",
     chapters: [
       {
-        id: "evs-c1",
-        title: "Going to School",
+        id: "hi-c1",
+        title: "Man Ke Bhole Bhale Badal",
         topics: [
-          { 
-            id: "evs-c1-t1", 
-            title: "Modes of Transport", 
-            subtopics: ["Bamboo Bridge", "Trolley", "Vallam"],
+          {
+            id: "hi-c1-t1",
+            title: "Cloud Poetry",
+            subtopics: ["Recitation", "Rhymes"],
             activities: [
-              { level: 'low', title: "Sound Matcher", description: "Identify vehicle sounds. Which one is the loudest?", skill: "listening" },
-              { level: 'mid', title: "Bridge Builder", description: "Build a bridge with sticks. Why do some bridges have arches?", skill: "performing" },
-              { level: 'high', title: "Travel Reporter", description: "Describe a difficult journey you imagine. How would you overcome it?", skill: "speaking" }
+              { level: 'low', title: "Cloud Painter", description: "Paint different types of clouds (Nimbo, Cirrus).", skill: "performing" },
+              { level: 'mid', title: "Rhyme Maker", description: "Create 2 rhyming words for 'Badal'.", skill: "writing" },
+              { level: 'high', title: "Cloud Story", description: "Tell me a story about a cloud that never rained.", skill: "speaking" }
             ],
-            learningOutcomes: ["Identify diverse transport modes", "Understand geographical challenges"],
-            crossCurricularLink: "Social Studies: Geographical regions of India."
-          }
-        ]
-      },
-      {
-        id: "evs-c3",
-        title: "A Day with Nandu",
-        topics: [
-          { 
-            id: "evs-c3-t1", 
-            title: "Elephant Herds", 
-            subtopics: ["Social Life", "Roles"],
-            activities: [
-              { level: 'low', title: "Elephant Mask", description: "Create a trunk. How do elephants use it?", skill: "performing" },
-              { level: 'mid', title: "Herd Storyteller", description: "Write about a group of animals living together.", skill: "writing" },
-              { level: 'high', title: "Social Expert", description: "Why do animals live in herds? Discuss the benefits.", skill: "speaking" }
-            ],
-            learningOutcomes: ["Understand animal behavior", "Identify social structures in nature"],
-            crossCurricularLink: "English: The Giving Tree - Nature and social bonds."
+            learningOutcomes: ["Recite Hindi poetry with expression", "Identify metaphors in clouds"],
+            crossCurricularLink: "Science: The Water Cycle."
           }
         ]
       }
     ]
   },
   {
-    id: "english",
-    title: "English (Marigold)",
+    id: "kannada",
+    title: "Kannada (Siri Kannada)",
     chapters: [
       {
-        id: "eng-c1",
-        title: "Wake Up!",
+        id: "kn-c1",
+        title: "Kannada Taayi",
         topics: [
-          { 
-            id: "eng-c1-t1", title: "Wake Up! (Poem)", subtopics: ["Recitation", "Rhymes"],
+          {
+            id: "kn-c1-t1",
+            title: "Akshara Maley",
+            subtopics: ["Vowels", "Consonants"],
             activities: [
-              { level: 'low', title: "Word Finder", description: "Find rhyming words. Why do poems rhyme?", skill: "listening" },
-              { level: 'high', title: "Poet Voice", description: "Recite with emotion. How does the poem make you feel?", skill: "speaking" }
+              { level: 'low', title: "Letter Match", description: "Find Kannada letters in a newspaper.", skill: "performing" },
+              { level: 'mid', title: "Word Weaver", description: "Write 5 two-letter words in Kannada.", skill: "writing" },
+              { level: 'high', title: "Spoken Kannada", description: "Introduce yourself in 3 sentences of Kannada.", skill: "speaking" }
             ],
-            learningOutcomes: ["Recite poems with rhythm", "Identify rhyming patterns"],
-            crossCurricularLink: "EVS: A Busy Month - Birds waking up in the morning."
+            learningOutcomes: ["Identify Kannada alphabets", "Form basic words in Kannada"],
+            crossCurricularLink: "Social Studies: Regional languages of India."
           }
         ]
       }
     ]
   },
   {
-    id: "grammar",
-    title: "Grammar & Communication",
+    id: "computers",
+    title: "Computer Science",
     chapters: [
       {
-        id: "g-c1",
-        title: "Nouns",
+        id: "comp-c1",
+        title: "Input and Output Devices",
         topics: [
-          { 
-            id: "g-c1-t1", title: "Proper & Common", subtopics: ["Categorization"],
+          {
+            id: "comp-c1-t1",
+            title: "Identifying Hardware",
+            subtopics: ["Keyboard", "Mouse", "Printer", "Monitor"],
             activities: [
-              { level: 'low', title: "Noun Hunt", description: "Find 3 nouns. Why is your name a 'Proper' noun?", skill: "performing" },
-              { level: 'mid', title: "Naming Game", description: "List proper nouns for your favorite places.", skill: "writing" }
+              { level: 'low', title: "Hardware Hunt", description: "Find 3 computer parts in your home/school.", skill: "performing" },
+              { level: 'mid', title: "Typing Pro", description: "Type your name 5 times in MS Word.", skill: "writing" },
+              { level: 'high', title: "System Architect", description: "Explain how a mouse command reaches the CPU.", skill: "speaking" }
             ],
-            learningOutcomes: ["Classify nouns", "Use capitalization correctly"],
-            crossCurricularLink: "Math: Smart Charts - Categorizing data names."
+            virtualLab: {
+              title: "PC Builder Lab",
+              simulation: "Drag and drop hardware into a virtual CPU case.",
+              task: "Connect the Monitor and Keyboard correctly."
+            },
+            learningOutcomes: ["Identify I/O devices", "Understand basic PC architecture"],
+            crossCurricularLink: "Science: Living vs Non-living (Robots)."
           }
         ]
       }
