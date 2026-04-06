@@ -19,7 +19,17 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
   const [currentLevel, setCurrentLevel] = useState<'low' | 'mid' | 'high'>('low');
   const chatEndRef = useRef<HTMLDivElement>(null);
   
-  const { isListening, transcript, isSpeaking, startListening, stopListening, speak } = useVoice();
+  const { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang } = useVoice();
+  
+  useEffect(() => {
+    if (subject.id === 'hindi') {
+      setLang('hi-IN');
+    } else if (subject.id === 'kannada') {
+      setLang('kn-IN');
+    } else {
+      setLang('en-IN');
+    }
+  }, [subject.id, setLang]);
 
   useEffect(() => {
     if (mode === 'activity') {

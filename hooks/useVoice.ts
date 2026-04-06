@@ -6,6 +6,7 @@ export const useVoice = () => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [lang, setLang] = useState('en-IN');
 
   // Check for SpeechRecognition support
   const SpeechRecognition = typeof window !== 'undefined' ? 
@@ -16,7 +17,7 @@ export const useVoice = () => {
   if (recognition) {
     recognition.continuous = false;
     recognition.interimResults = false;
-    recognition.lang = 'en-IN';
+    recognition.lang = lang;
   }
 
   const startListening = useCallback(() => {
@@ -58,7 +59,7 @@ export const useVoice = () => {
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-IN';
+    utterance.lang = lang;
     utterance.rate = 1.0;
     utterance.pitch = 1.2; // Child-friendly pitch
 
@@ -68,5 +69,5 @@ export const useVoice = () => {
     window.speechSynthesis.speak(utterance);
   }, []);
 
-  return { isListening, transcript, isSpeaking, startListening, stopListening, speak };
+  return { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang };
 };
