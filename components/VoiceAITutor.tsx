@@ -194,74 +194,138 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
         </div>
       </div>
 
-      <div className="chat-window dark-glass-card">
-        {messages.map((m, i) => (
-          <div key={i} className={`message-bubble ${m.role}`}>
-            {m.content}
+      <div className="guidance-stage-container">
+        <div className="mentor-zone animate-fade-in">
+          <div className="professor-avatar">🤖</div>
+          <div className="professor-speech-bubble glass-card">
+            <h2 className="mastery-title">Chapter: {chapter.title}</h2>
+            <div className="current-guidance">
+              {messages.length > 0 ? (
+                <p className="mentor-text">{messages[messages.length - 1].content}</p>
+              ) : (
+                <p className="mentor-text">Welcome back, Yasmeen! Let's start our journey.</p>
+              )}
+            </div>
           </div>
-        ))}
-        {isLoading && <div className="message-bubble ai loading">Thinking...</div>}
-        <div ref={chatEndRef} />
-      </div>
+        </div>
 
-      <div className="action-area animate-fade-in">
-        {!isLoading && (
-          <div className="response-chips">
-            {masteryStep === 0 && (
-              <button className="chip primary" onClick={() => setMasteryStep(1)}>
-                Yes, let's start! 🚀
-              </button>
-            )}
-            {masteryStep > 0 && masteryStep <= topic.subtopics.length && (
-              <>
-                <button className="chip" onClick={() => speak(messages[messages.length-1].content)}>
-                  Can you repeat that? 🔄
-                </button>
-                <button className="chip primary" onClick={() => setMasteryStep(prev => prev + 1)}>
-                  I understand, next step! ➡️
-                </button>
-                <button className="chip accent" onClick={() => setMode('activity')}>
-                  Let's do an Activity! 🎯
-                </button>
-              </>
-            )}
-            {masteryStep > topic.subtopics.length && (
-              <button className="chip success" onClick={() => setMasteryStep(0)}>
-                Restart & Review 🔄
-              </button>
-            )}
+        <div className="stage-controls">
+          <div className="nep-bar card-small">
+            <span>🎓 NEP Progress: Mastering {topic.title}</span>
+            <div className="lo-tags">
+              {topic.learningOutcomes.map((lo, i) => (
+                <span key={i} className="lo-pill">🏆 {lo}</span>
+              ))}
+            </div>
           </div>
-        )}
-        {isLoading && <div className="typing-indicator">Professor Spark is preparing your next step...</div>}
+        </div>
+
+        <div className="action-area full-view-actions animate-fade-in">
+          {!isLoading && (
+            <div className="response-chips">
+              {masteryStep === 0 && (
+                <button className="chip primary Large" onClick={() => setMasteryStep(1)}>
+                  Yes, let's start! 🚀
+                </button>
+              )}
+              {masteryStep > 0 && masteryStep <= topic.subtopics.length && (
+                <>
+                  <button className="chip" onClick={() => speak(messages[messages.length-1].content)}>
+                    Can you repeat that? 🔄
+                  </button>
+                  <button className="chip primary" onClick={() => setMasteryStep(prev => prev + 1)}>
+                    I understand, next step! ➡️
+                  </button>
+                  <button className="chip accent" onClick={() => setMode('activity')}>
+                    Let's do an Activity! 🎯
+                  </button>
+                </>
+              )}
+              {masteryStep > topic.subtopics.length && (
+                <button className="chip success" onClick={() => setMasteryStep(0)}>
+                  Restart & Review 🔄
+                </button>
+              )}
+            </div>
+          )}
+          {isLoading && <div className="typing-indicator">Professor Spark is thinking...</div>}
+        </div>
       </div>
 
       <style jsx>{`
-        .action-area {
-          padding: 1.5rem;
-          background: rgba(255, 255, 255, 0.05);
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .response-chips {
+        .guidance-stage-container {
+          flex: 1;
           display: flex;
-          gap: 1rem;
+          flex-direction: column;
+          align-items: center;
           justify-content: center;
-          flex-wrap: wrap;
+          padding: 2rem;
+          background: radial-gradient(circle at center, rgba(88, 61, 161, 0.1) 0%, transparent 70%);
+          overflow-y: auto;
         }
-        .chip {
-          padding: 0.8rem 1.5rem;
-          border-radius: 50px;
-          background: rgba(255, 255, 255, 0.1);
+        .mentor-zone {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2rem;
+          max-width: 800px;
+          text-align: center;
+        }
+        .professor-avatar {
+          font-size: 5rem;
+          background: white;
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+          border: 4px solid var(--accent);
+        }
+        .professor-speech-bubble {
+          padding: 2.5rem;
+          border-radius: 30px;
+          background: rgba(0, 0, 0, 0.4);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          width: 100%;
+        }
+        .mastery-title {
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: var(--accent);
+          margin-bottom: 1rem;
+          opacity: 0.8;
+        }
+        .mentor-text {
+          font-size: 1.5rem;
+          line-height: 1.6;
           color: white;
-          font-weight: 700;
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          transition: all 0.3s;
+          font-weight: 500;
         }
-        .chip.primary { background: var(--primary); border-color: var(--primary); }
-        .chip.accent { background: var(--accent); color: var(--primary); border-color: var(--accent); }
-        .chip.success { background: var(--success); border-color: var(--success); }
-        .chip:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .lo-tags {
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin-top: 1rem;
+        }
+        .lo-pill {
+          font-size: 0.7rem;
+          background: rgba(255, 209, 102, 0.2);
+          color: var(--accent);
+          padding: 0.2rem 0.6rem;
+          border-radius: 50px;
+          border: 1px solid rgba(255, 209, 102, 0.3);
+        }
+        .full-view-actions {
+          margin-top: 3rem;
+          width: 100%;
+        }
+        .chip.Large {
+          padding: 1.2rem 2.5rem;
+          font-size: 1.2rem;
         }
       `}</style>
     </div>
