@@ -411,3 +411,138 @@ button {
   box-shadow: 0 0 20px rgba(255, 209, 102, 0.2);
   margin: 0;
 }
+
+/* Activity Zone Styling */
+.activity-banner {
+  background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(17, 138, 178, 0.2));
+  border: 2px dashed var(--success);
+  border-radius: var(--rounded);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.activity-icon {
+  font-size: 2.5rem;
+  background: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.activity-info {
+  flex-grow: 1;
+}
+
+.activity-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--success);
+  font-size: 1.2rem;
+}
+
+.activity-info p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.skill-tag {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--primary);
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.done-btn {
+  background: var(--success);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.done-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(6, 214, 160, 0.3);
+}
+
+/* Level Selector */
+.level-selector {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.level-selector button {
+  padding: 0.4rem 1.2rem;
+  border-radius: 50px;
+  color: white;
+  opacity: 0.6;
+  font-weight: 700;
+  transition: all 0.3s;
+}
+
+.level-selector button.active {
+  background: var(--accent);
+  color: var(--primary);
+  opacity: 1;
+  box-shadow: 0 0 15px var(--accent);
+}
+
+/* Virtual Lab */
+.lab-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, rgba(88, 61, 161, 0.2), rgba(0, 0, 0, 0.4));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lab-header h3 {
+  margin: 0;
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+.lab-simulation {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sim-placeholder p {
+  font-style: italic;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.lab-task {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+}
+
+.lab-task h4 {
+  color: white;
+  margin-bottom: 0.3rem;
+}

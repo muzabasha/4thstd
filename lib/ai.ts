@@ -4,7 +4,7 @@ export interface AIResponse {
 }
 
 export const generateAIResponse = async (
-  promptType: 'explain' | 'quiz' | 'evaluate',
+  promptType: 'explain' | 'quiz' | 'evaluate' | 'activity',
   topic: string,
   context?: string
 ): Promise<string> => {
@@ -25,6 +25,8 @@ export const generateAIResponse = async (
         resolve(`Hey Yasmeen! Let's talk about ${topic}. ${topic} is super interesting. It's like when you have a set of patterns and you try to understand the logic behind them. For example, in Grade 4, we see this in ${context || 'our daily life'}. Would you like an example or should I ask you a question?`);
       } else if (promptType === 'quiz') {
         resolve(`Ready for a challenge? Here is a question about ${topic}: If you have 5 bricks and you add 3 more, how many do you have?`);
+      } else if (promptType === 'activity') {
+        resolve(`Hooray Yasmeen! You did a fantastic job on the ${topic} activity. This really helps your brain grow! Did you find it easy or a bit tricky?`);
       } else {
         resolve(`That's a great attempt! You're learning fast. Let's try another one!`);
       }

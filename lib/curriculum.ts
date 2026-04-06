@@ -1,7 +1,22 @@
+export interface Activity {
+  title: string;
+  description: string;
+  skill: 'listening' | 'speaking' | 'writing' | 'performing';
+  level: 'low' | 'mid' | 'high';
+}
+
+export interface VirtualLab {
+  title: string;
+  simulation: string;
+  task: string;
+}
+
 export interface Topic {
   id: string;
   title: string;
   subtopics: string[];
+  activities: Activity[];
+  virtualLab?: VirtualLab;
 }
 
 export interface Chapter {
@@ -25,112 +40,78 @@ export const syllabus: Subject[] = [
         id: "math-c1",
         title: "Building with Bricks",
         topics: [
-          { id: "math-c1-t1", title: "Patterns of Bricks", subtopics: ["Jaali patterns", "Jharokha patterns", "Arch patterns"] },
-          { id: "math-c1-t2", title: "Brick Dimensions", subtopics: ["Length, width, height", "Drawing a brick"] }
-        ]
-      },
-      {
-        id: "math-c2",
-        title: "Long and Short",
-        topics: [
-          { id: "math-c2-t1", title: "Measuring Length", subtopics: ["Centimeters", "Meters", "Kilometers"] },
-          { id: "math-c2-t2", title: "Inter-conversion", subtopics: ["m to cm", "km to m"] }
-        ]
-      },
-      {
-        id: "math-c3",
-        title: "A Trip to Bhopal",
-        topics: [
-          { id: "math-c3-t1", title: "Word Problems", subtopics: ["Addition", "Subtraction", "Multiplication", "Division"] },
-          { id: "math-c3-t2", title: "Time and Distance", subtopics: ["Estimating time", "Fuel consumption"] }
+          { 
+            id: "math-c1-t1", 
+            title: "Patterns of Bricks", 
+            subtopics: ["Jaali patterns", "Jharokha patterns", "Arch patterns"],
+            activities: [
+              { level: 'low', title: "Pattern Spotter", description: "Look at your kitchen tiles or walls. Draw 1 pattern you see.", skill: "performing" },
+              { level: 'mid', title: "Jaali Weaver", description: "Using paper strips, weave a simple checkerboard pattern.", skill: "performing" },
+              { level: 'high', title: "Brick Architect", description: "Design a wall with a unique 'Eye' pattern and describe it.", skill: "speaking" }
+            ],
+            virtualLab: {
+              title: "Digital Brick Builder",
+              simulation: "A 2D grid where you can place colored bricks.",
+              task: "Construct a wall with exactly 5 Jaali holes in a row."
+            }
+          },
+          { 
+            id: "math-c1-t2", 
+            title: "Brick Dimensions", 
+            subtopics: ["Length, width, height", "Drawing a brick"],
+            activities: [
+              { level: 'low', title: "Dimension Detective", description: "Point to the longest side of a matchbox.", skill: "listening" },
+              { level: 'mid', title: "Master Measurer", description: "Estimate how many matchboxes fit in your hand.", skill: "performing" },
+              { level: 'high', title: "Volume Explorer", description: "If a brick is twice as big, how much heavier would it be? Tell me why.", skill: "speaking" }
+            ],
+            virtualLab: {
+              title: "Volume Slider Lab",
+              simulation: "Adjust sliders to change brick size (L, W, H).",
+              task: "Make a brick that has a length of 20 and a height of 5."
+            }
+          }
         ]
       },
       {
         id: "math-c4",
         title: "Tick-Tick-Tick",
         topics: [
-          { id: "math-c4-t1", title: "Reading Time", subtopics: ["Clock faces", "12-hour vs 24-hour", "Minutes and hours"] },
-          { id: "math-c4-t2", title: "Calendar", subtopics: ["Dates", "Duration calculation"] }
-        ]
-      },
-      {
-        id: "math-c5",
-        title: "The Way The World Looks",
-        topics: [
-          { id: "math-c5-t1", title: "Perspectives", subtopics: ["Top view", "Side view", "Front view"] },
-          { id: "math-c5-t2", title: "Mapping", subtopics: ["Finding routes", "Distances on maps"] }
-        ]
-      },
-      {
-        id: "math-c6",
-        title: "The Junk Seller",
-        topics: [
-          { id: "math-c6-t1", title: "Buying and Selling", subtopics: ["Profit and Loss", "Loan concepts"] },
-          { id: "math-c6-t2", title: "Multiplication", subtopics: ["Box method", "Mental math"] }
+          { 
+            id: "math-c4-t1", 
+            title: "Reading Time", 
+            subtopics: ["Clock faces", "12-hour vs 24-hour"],
+            activities: [
+              { level: 'low', title: "Clock Mimic", description: "Show the time 3 o'clock using your arms as hands.", skill: "performing" },
+              { level: 'mid', title: "Time Log", description: "Note down the time you brush, eat, and play today.", skill: "writing" },
+              { level: 'high', title: "Schedule Master", description: "Think of a school trip. Present a 1-hour schedule for it.", skill: "speaking" }
+            ],
+            virtualLab: {
+              title: "Clock Face Lab",
+              simulation: "A digital clock with movable hour and minute hands.",
+              task: "Set the clock to 10:15 and then move it forward by 45 minutes."
+            }
+          }
         ]
       },
       {
         id: "math-c7",
         title: "Jugs and Mugs",
         topics: [
-          { id: "math-c7-t1", title: "Measuring Capacity", subtopics: ["Liters", "Milliliters"] },
-          { id: "math-c7-t2", title: "Daily Life application", subtopics: ["Liquid addition", "Container sizes"] }
-        ]
-      },
-      {
-        id: "math-c8",
-        title: "Carts and Wheels",
-        topics: [
-          { id: "math-c8-t1", title: "Circles", subtopics: ["Radius", "Diameter", "Center"] },
-          { id: "math-c8-t2", title: "Compass Work", subtopics: ["Drawing circles", "Circle patterns"] }
-        ]
-      },
-      {
-        id: "math-c9",
-        title: "Halves and Quarters",
-        topics: [
-          { id: "math-c9-t1", title: "Fractions Intro", subtopics: ["Whole to parts", "1/2, 1/4, 3/4"] },
-          { id: "math-c9-t2", title: "Equivalent Parts", subtopics: ["Fractional shapes", "Shading regions"] }
-        ]
-      },
-      {
-        id: "math-c10",
-        title: "Play with Patterns",
-        topics: [
-          { id: "math-c10-t1", title: "Number Patterns", subtopics: ["Increasing/Decreasing sequence", "Magic Squares"] },
-          { id: "math-c10-t2", title: "Secret Messages", subtopics: ["Ciphers", "Encoding/Decoding"] }
-        ]
-      },
-      {
-        id: "math-c11",
-        title: "Tables and Shares",
-        topics: [
-          { id: "math-c11-t1", title: "Multiplication Tables", subtopics: ["Tables up to 20", "Doubling"] },
-          { id: "math-c11-t2", title: "Division", subtopics: ["Equal sharing", "Laying out objects"] }
-        ]
-      },
-      {
-        id: "math-c12",
-        title: "How Heavy? How Light?",
-        topics: [
-          { id: "math-c12-t1", title: "Measuring Weight", subtopics: ["Gram", "Kilogram"] },
-          { id: "math-c12-t2", title: "Balance Scales", subtopics: ["Using a balance", "Estimating weight"] }
-        ]
-      },
-      {
-        id: "math-c13",
-        title: "Fields and Fences",
-        topics: [
-          { id: "math-c13-t1", title: "Perimeter", subtopics: ["Boundary measurement", "Irregular shapes"] },
-          { id: "math-c13-t2", title: "Area (Simple)", subtopics: ["Inside spaces", "Grid counting"] }
-        ]
-      },
-      {
-        id: "math-c14",
-        title: "Smart Charts",
-        topics: [
-          { id: "math-c14-t1", title: "Tally Marks", subtopics: ["Recording data", "Table representation"] },
-          { id: "math-c14-t2", title: "Graphs", subtopics: ["Bar graphs", "Pie (Chapati) charts"] }
+          { 
+            id: "math-c7-t1", 
+            title: "Measuring Capacity", 
+            subtopics: ["Liters", "Milliliters"],
+            activities: [
+              { level: 'low', title: "Spoon Counter", description: "How many spoons of water fill a small cup?", skill: "performing" },
+              { level: 'mid', title: "Liquid Mixologist", description: "Mix juice in a 1L bottle and mark the 500ml line.", skill: "performing" },
+              { level: 'high', title: "Capacity Cook", description: "Explain to me how much water you need for a tea cup.", skill: "speaking" }
+            ],
+            virtualLab: {
+              title: "Measurement Lab",
+              simulation: "Virtual jugs of different sizes with pouring physics.",
+              task: "Fill a 2L jug exactly halfway using a 250ml cup."
+            }
+          }
         ]
       }
     ]
@@ -143,59 +124,40 @@ export const syllabus: Subject[] = [
         id: "evs-c1",
         title: "Going to School",
         topics: [
-          { id: "evs-c1-t1", title: "Modes of Transport", subtopics: ["Bamboo Bridge", "Trolley", "Vallam", "Camel cart", "Bullock cart"] },
-          { id: "evs-c1-t2", title: "Geographical Challenges", subtopics: ["Mountains", "Snowy paths", "Jungles"] }
-        ]
-      },
-      {
-        id: "evs-c2",
-        title: "Ear to Ear",
-        topics: [
-          { id: "evs-c2-t1", title: "Animal Ears", subtopics: ["Visible ears", "Internal ears", "Patterns on skin"] },
-          { id: "evs-c2-t2", title: "Classification", subtopics: ["Mammals", "Birds", "Reptiles"] }
+          { 
+            id: "evs-c1-t1", 
+            title: "Modes of Transport", 
+            subtopics: ["Bamboo Bridge", "Trolley", "Vallam"],
+            activities: [
+              { level: 'low', title: "Sound Matcher", description: "Identify transport sounds.", skill: "listening" },
+              { level: 'mid', title: "Bridge Builder", description: "Use sticks to make a bridge.", skill: "performing" },
+              { level: 'high', title: "Travel Reporter", description: "Interview a person about their school transport story.", skill: "speaking" }
+            ],
+            virtualLab: { title: "Bridge Simulator", simulation: "Test weights on different bridges.", task: "Build a bridge that holds 3 trucks." }
+          }
         ]
       },
       {
         id: "evs-c3",
         title: "A Day with Nandu",
         topics: [
-          { id: "evs-c3-t1", title: "Elephant Herds", subtopics: ["Herd life", "Elephant habits"] },
-          { id: "evs-c3-t2", title: "Social Animals", subtopics: ["Living in groups", "Animal behavior"] }
-        ]
-      },
-      {
-        id: "evs-c4",
-        title: "The Story of Amrita",
-        topics: [
-          { id: "evs-c4-t1", title: "Trees and People", subtopics: ["Bishnoi community", "Khejadli village"] },
-          { id: "evs-c4-t2", title: "Protecting Nature", subtopics: ["Importance of trees", "Environment conservation"] }
-        ]
-      },
-      {
-        id: "evs-c5",
-        title: "Anita and the Honeybees",
-        topics: [
-          { id: "evs-c5-t1", title: "Beekeeping", subtopics: ["Life of honeybees", "Honey production"] },
-          { id: "evs-c5-t2", title: "Education and Empowerment", subtopics: ["Right to education", "Overcoming challenges"] }
-        ]
-      },
-      {
-        id: "evs-c6",
-        title: "Omana’s Journey",
-        topics: [
-          { id: "evs-c6-t1", title: "Train Travel", subtopics: ["Travel arrangements", "Railway stations"] },
-          { id: "evs-c6-t2", title: "Geography of India", subtopics: ["Landscape observation", "Regional differences"] }
-        ]
-      },
-      {
-        id: "evs-c25",
-        title: "Spicy Riddles",
-        topics: [
-          { id: "evs-c25-t1", title: "Spices in Food", subtopics: ["Identification of spices", "Taste and aroma"] },
-          { id: "evs-c25-t2", title: "Culinary Uses", subtopics: ["Spices as medicine", "Daily cooking"] }
+          { 
+            id: "evs-c3-t1", 
+            title: "Elephant Herds", 
+            subtopics: ["Social Life", "Roles in a herd"],
+            activities: [
+              { level: 'low', title: "Elephant Mask", description: "Make an elephant mask using a paper plate.", skill: "performing" },
+              { level: 'mid', title: "Herd Storyteller", description: "Imagine you are Nandu. Write 3 lines about your day.", skill: "writing" },
+              { level: 'high', title: "Social Expert", description: "Compare an elephant family to your own family. What is same?", skill: "speaking" }
+            ],
+            virtualLab: {
+              title: "Wildlife Observer Lab",
+              simulation: "A panning 360 view of an elephant herd.",
+              task: "Count how many adult elephants and calves you can see."
+            }
+          }
         ]
       }
-      // Note: Coverage expanded to core themes; others follow same structure
     ]
   },
   {
@@ -204,34 +166,17 @@ export const syllabus: Subject[] = [
     chapters: [
       {
         id: "eng-c1",
-        title: "Wake Up! & Neha’s Alarm Clock",
+        title: "Wake Up!",
         topics: [
-          { id: "eng-c1-t1", title: "Wake Up! (Poem)", subtopics: ["Poem recitation", "Phyming words"] },
-          { id: "eng-c1-t2", title: "Neha’s Alarm Clock", subtopics: ["Comprehension", "Daily Routine"] }
-        ]
-      },
-      {
-        id: "eng-c2",
-        title: "Noses & The Little Fir Tree",
-        topics: [
-          { id: "eng-c2-t1", title: "Noses (Poem)", subtopics: ["Imagery", "Body parts vocabulary"] },
-          { id: "eng-c2-t2", title: "The Little Fir Tree", subtopics: ["Story summary", "Self-acceptance"] }
-        ]
-      },
-      {
-        id: "eng-c3",
-        title: "Run! & Nasiruddin’s Aim",
-        topics: [
-          { id: "eng-c3-t1", title: "Run! (Poem)", subtopics: ["Action words", "Rhythm"] },
-          { id: "eng-c3-t2", title: "Nasiruddin’s Aim", subtopics: ["Humor in stories", "Dialogue practice"] }
-        ]
-      },
-      {
-        id: "eng-c4",
-        title: "Why? & Alice in Wonderland",
-        topics: [
-          { id: "eng-c4-t1", title: "Why? (Poem)", subtopics: ["Inquiry skills", "Curiosity"] },
-          { id: "eng-c4-t2", title: "Alice in Wonderland", subtopics: ["Fantasy stories", "Adjective practice"] }
+          { 
+            id: "eng-c1-t1", title: "Wake Up! (Poem)", subtopics: ["Recitation", "Rhymes"],
+            activities: [
+              { level: 'low', title: "Word Finder", description: "Find rhyming words.", skill: "listening" },
+              { level: 'mid', title: "Nature Sketch", description: "Draw the morning scene from the poem.", skill: "performing" },
+              { level: 'high', title: "Poet Voice", description: "Record yourself reciting with emotion.", skill: "speaking" }
+            ],
+            virtualLab: { title: "Rhyme Lab", simulation: "Click words to find pairs.", task: "Find 5 pairs of rhyming words." }
+          }
         ]
       }
     ]
@@ -242,19 +187,36 @@ export const syllabus: Subject[] = [
     chapters: [
       {
         id: "g-c1",
-        title: "Parts of Speech (Basic)",
+        title: "Nouns",
         topics: [
-          { id: "g-c1-t1", title: "Nouns", subtopics: ["Proper, Common, Collective"] },
-          { id: "g-c1-t2", title: "Pronouns", subtopics: ["Personal, Possessive"] },
-          { id: "g-c1-t3", title: "Verbs", subtopics: ["Action verbs", "Helping verbs"] }
+          { 
+            id: "g-c1-t1", title: "Proper & Common", subtopics: ["Categorization"],
+            activities: [
+              { level: 'low', title: "Noun Hunt", description: "Find 3 nouns in your room.", skill: "performing" },
+              { level: 'mid', title: "Naming Game", description: "List 5 proper nouns for cities.", skill: "writing" },
+              { level: 'high', title: "Grammar Guru", description: "Teach me the difference using examples from your family.", skill: "speaking" }
+            ],
+            virtualLab: { title: "Noun Sorter", simulation: "Drag words into buckets.", task: "Sort 10 words into Proper or Common." }
+          }
         ]
       },
       {
         id: "g-c2",
-        title: "Tenses",
+        title: "Verbs",
         topics: [
-          { id: "g-c2-t1", title: "Simple Present", subtopics: ["Daily habits", "General truths"] },
-          { id: "g-c2-t2", title: "Simple Past", subtopics: ["Past actions", "Yesterday events"] }
+          { 
+            id: "g-c2-t1", title: "Action Words", subtopics: ["Identification"],
+            activities: [
+              { level: 'low', title: "Dumb Charades", description: "Act out an action. Can others guess the verb?", skill: "performing" },
+              { level: 'mid', title: "Verb Collector", description: "Write 10 verbs you common use in a day.", skill: "writing" },
+              { level: 'high', title: "Action Story", description: "Tell a story where every sentence has a strong verb.", skill: "speaking" }
+            ],
+            virtualLab: {
+              title: "Verb Animator",
+              simulation: "An avatar that performs actions based on verbs typed.",
+              task: "Make the avatar run, jump, and wave in sequence."
+            }
+          }
         ]
       }
     ]

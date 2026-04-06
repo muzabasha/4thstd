@@ -14,7 +14,8 @@ interface VoiceAITutorProps {
 export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorProps) {
   const [messages, setMessages] = useState<{ role: 'ai' | 'user'; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState<'learn' | 'quiz'>('learn');
+  const [mode, setMode] = useState<'learn' | 'quiz' | 'activity' | 'lab'>('learn');
+  const [currentLevel, setCurrentLevel] = useState<'low' | 'mid' | 'high'>('low');
   const chatEndRef = useRef<HTMLDivElement>(null);
   
   const { isListening, transcript, isSpeaking, startListening, stopListening, speak } = useVoice();
@@ -42,10 +43,13 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
     setMessages(prev => [...prev, { role: 'user', content: input }]);
     setIsLoading(true);
 
-    let promptType: 'explain' | 'quiz' | 'evaluate' = 'explain';
+    let promptType: 'explain' | 'quiz' | 'evaluate' | 'activity' = 'explain';
     if (input.toLowerCase().includes('quiz')) {
       promptType = 'quiz';
       setMode('quiz');
+    } else if (input.toLowerCase().includes('finished')) {
+      promptType = 'activity';
+      setMode('activity');
     } else if (mode === 'quiz') {
       promptType = 'evaluate';
     }
@@ -67,8 +71,47 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
         <div className="mode-toggle glass-card">
           <button className={mode === 'learn' ? 'active' : ''} onClick={() => setMode('learn')}>Learning</button>
           <button className={mode === 'quiz' ? 'active' : ''} onClick={() => setMode('quiz')}>Quick Quiz</button>
+          <button className={mode === 'activity' ? 'active' : ''} onClick={() => setMode('activity')}>Activity Zone ✨</button>
+          <button className={mode === 'lab' ? 'active' : ''} onClick={() => setMode('lab')}>Virtual Lab 🧪</button>
         </div>
       </div>
+
+      {mode === 'activity' && (
+        <div className="level-selector glass-card animate-fade-in">
+          <button className={currentLevel === 'low' ? 'active' : ''} onClick={() => setCurrentLevel('low')}>Starter</button>
+          <button className={currentLevel === 'mid' ? 'active' : ''} onClick={() => setCurrentLevel('mid')}>Explorer</button>
+          <button className={currentLevel === 'high' ? 'active' : ''} onClick={() => setCurrentLevel('high')}>Expert</button>
+        </div>
+      )}
+
+      {mode === 'activity' && topic.activities.find(a => a.level === currentLevel) && (
+        <div className="activity-banner animate-fade-in">
+          <div className="activity-icon">🎯</div>
+          <div className="activity-info">
+            <h4>{topic.activities.find(a => a.level === currentLevel)?.title}</h4>
+            <p>{topic.activities.find(a => a.level === currentLevel)?.description}</p>
+            <span className="skill-tag">{topic.activities.find(a => a.level === currentLevel)?.skill.toUpperCase()} SKILL</span>
+          </div>
+          <button className="done-btn" onClick={() => handleUserAction("I'm done with the activity!")}>Done! ✅</button>
+        </div>
+      )}
+
+      {mode === 'lab' && topic.virtualLab && (
+        <div className="lab-panel glass-card animate-fade-in">
+          <div className="lab-header">
+            <h3>🔬 {topic.virtualLab.title}</h3>
+          </div>
+          <div className="lab-simulation">
+            <div className="sim-placeholder">
+              <p>{topic.virtualLab.simulation}</p>
+            </div>
+          </div>
+          <div className="lab-task activity-info">
+            <h4>Objective:</h4>
+            <p>{topic.virtualLab.task}</p>
+          </div>
+        </div>
+      )}
 
       <div className="chat-window dark-glass-card">
         {messages.map((m, i) => (
