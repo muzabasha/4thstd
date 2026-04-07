@@ -13,12 +13,19 @@ export interface VirtualLab {
   task: string;
 }
 
+export interface QuizQuestion {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+}
+
 export interface Topic {
   id: string;
   title: string;
   subtopics: string[];
   activities: Activity[];
   virtualLab?: VirtualLab;
+  quiz: QuizQuestion[];
   learningOutcomes: string[];
   crossCurricularLink?: string;
 }
@@ -54,6 +61,10 @@ export const syllabus: Subject[] = [
               { level: 'high', title: "Brick Architect", description: "Design a wall with a unique 'Eye' pattern. Explain how it stays strong.", skill: "speaking" , steps: ["Sketch a brick wall with 3 different patterns", "Explain to your tutor how the patterns look", "Discuss which one is strongest"] }
             ],
             virtualLab: { title: "Digital Brick Builder", simulation: "A 2D grid where you can place colored bricks.", task: "Construct a wall with exactly 5 Jaali holes in a row." },
+            quiz: [
+              { question: "What is a 'Jaali' in a brick wall?", options: ["A solid wall", "A decorative hole pattern for air and light", "A type of cement", "A large door"], correctAnswer: "A decorative hole pattern for air and light" },
+              { question: "Which pattern is often used in traditional arches?", options: ["Circular", "Square", "Arch pattern", "Triangular"], correctAnswer: "Arch pattern" }
+            ],
             learningOutcomes: ["Identify and reproduce geometric patterns"],
             crossCurricularLink: "Social Studies: Taj Mahal's architecture."
           },
@@ -67,6 +78,10 @@ export const syllabus: Subject[] = [
               { level: 'high', title: "Volume Explorer", description: "If a brick is twice as big, how much heavier would it be? Tell me your reasoning.", skill: "speaking" , steps: ["Imagine a small and big brick", "Discuss weight difference with professor spark", "Explain your reasoning through voice"] }
             ],
             virtualLab: { title: "Volume Slider Lab", simulation: "Adjust sliders to change brick size (L, W, H).", task: "Make a brick that has a length of 20 and a height of 5." },
+            quiz: [
+              { question: "How many faces does a standard brick have?", options: ["4", "6", "8", "10"], correctAnswer: "6" },
+              { question: "Which dimension of a brick is usually the longest?", options: ["Height", "Width", "Length", "Weight"], correctAnswer: "Length" }
+            ],
             learningOutcomes: ["Measure 3D objects", "Estimate volume intuitively"],
             crossCurricularLink: "Science: Physical properties of matter."
           }
@@ -83,6 +98,10 @@ export const syllabus: Subject[] = [
             activities: [
               { level: 'low', title: "Spoon Counter", description: "How many spoons of water fill a small cup?", skill: "performing", steps: ["Take a small cup", "Fill a spoon with water", "Count until cup is full"] },
               { level: 'mid', title: "Liquid Mixologist", description: "Mix juice in a bottle and mark the half level.", skill: "performing", steps: ["Take a bottle", "Pour water exactly halfway", "Discuss why it is half"] }
+            ],
+            quiz: [
+              { question: "Which unit is used to measure a large bucket of water?", options: ["Milliliters", "Liters", "Grams", "Kilograms"], correctAnswer: "Liters" },
+              { question: "If a cup holds 250ml, how many cups make 1 liter?", options: ["2", "4", "5", "10"], correctAnswer: "4" }
             ],
             learningOutcomes: ["Understand liters and milliliters"],
             crossCurricularLink: "Science: Liquid states."
@@ -105,6 +124,10 @@ export const syllabus: Subject[] = [
                { level: 'low', title: "Leaf Search", description: "Find a green leaf.", skill: "performing", steps: ["Go to garden", "Pickup a fallen leaf", "Look at the tiny pores"] }
             ],
             virtualLab: { title: "Light Lab", simulation: "Change leaf color with light", task: "Keep plant in dark for 2 days" },
+            quiz: [
+              { question: "What gas do plants take in for photosynthesis?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correctAnswer: "Carbon Dioxide" },
+              { question: "Which part of the plant is called the 'kitchen of the plant'?", options: ["Root", "Stem", "Leaf", "Flower"], correctAnswer: "Leaf" }
+            ],
             learningOutcomes: ["Identify how plants breathe"],
             crossCurricularLink: "Social Studies: Food crops in India."
           }
@@ -126,6 +149,10 @@ export const syllabus: Subject[] = [
                { level: 'low', title: "Paper Mountain", description: "Fold paper to make peaks.", skill: "performing", steps: ["Fold A4 paper into cone", "Mark 'snow' on top", "Label Everest"] }
             ],
             virtualLab: { title: "India Map Lab", simulation: "Satellite clickable map", task: "Find Everest on the map" },
+            quiz: [
+              { question: "Which is the highest peak in the world?", options: ["Kanchenjunga", "Mount Everest", "Nanda Devi", "K2"], correctAnswer: "Mount Everest" },
+              { question: "In which direction of India are the Himalayas located?", options: ["South", "East", "West", "North"], correctAnswer: "North" }
+            ],
             learningOutcomes: ["Locate landmarks on map"],
             crossCurricularLink: "Math: Calculating height of mountains."
           }
@@ -147,6 +174,10 @@ export const syllabus: Subject[] = [
                { level: 'low', title: "Parts Label", description: "Identify screen and buttons.", skill: "performing", steps: ["Point to power button", "Point to the screen", "Discuss what we see"] }
             ],
             virtualLab: { title: "PC Builder Lab", simulation: "Assemble PC logic", task: "Connect monitor to CPU" },
+            quiz: [
+              { question: "The Monitor is an ________ device.", options: ["Input", "Output", "Storage", "Processing"], correctAnswer: "Output" },
+              { question: "What do we use to see pictures and text on a computer?", options: ["Keyboard", "Mouse", "Monitor", "Printer"], correctAnswer: "Monitor" }
+            ],
             learningOutcomes: ["Identify Monitor as O/P device"]
           }
         ]
@@ -169,6 +200,10 @@ export const syllabus: Subject[] = [
               { level: 'low', title: "सुनो और दोहराओ", description: "कविता की पहली पंक्ति को दोहराएं।", skill: "listening", steps: ["प्रोफेसर स्पार्क की आवाज़ सुनें", "शुद्ध उच्चारण करें"] },
               { level: 'high', title: "बोलना सीखें", description: "बादलों का वर्णन हिन्दी में करें।", skill: "speaking", steps: ["आकाश की ओर देखें", "हिन्दी में बोलें"] }
             ],
+            quiz: [
+              { question: "कविता में बादल कैसे हैं?", options: ["गुस्सैल", "भोले-भाले", "डरावने", "छोटे"], correctAnswer: "भोले-भाले" },
+              { question: "'बादल' का पर्यायवाची शब्द क्या है?", options: ["सूरज", "जलद", "पवन", "भूमि"], correctAnswer: "जलद" }
+            ],
             learningOutcomes: ["हिन्दी वर्णमाला का सही उच्चारण"],
             crossCurricularLink: "Science: जल चक्र."
           }
@@ -190,6 +225,10 @@ export const syllabus: Subject[] = [
             subtopics: ["Swaragalu"],
             activities: [
               { level: 'low', title: "ಅಕ್ಷರ ಗುರುತಿಸಿ", description: "ಅಕ್ಷರಗಳನ್ನು ಪಟ್ಟಿಯಲ್ಲಿ ಹುಡುಕಿ.", skill: "listening", steps: ["ಅಕ್ಷರವನ್ನು ಕೇಳಿ", "ಅದನ್ನು ತೋರಿಸಿ"] }
+            ],
+            quiz: [
+              { question: "ಕನ್ನಡ ವರ್ಣಮಾಲೆಯಲ್ಲಿ ಎಷ್ಟು ಸ್ವರಗಳಿವೆ?", options: ["೧೦", "೧೩", "೧೫", "೨೦"], correctAnswer: "೧೩" },
+              { question: "'ಅ' ಯಾವ ಗುಂಪಿಗೆ ಸೇರುತ್ತದೆ?", options: ["ವ್ಯಂಜನ", "ಸ್ವರ", "ಯೋಗವಾಹ", "ಅನುನಾಸಿಕ"], correctAnswer: "ಸ್ವರ" }
             ],
             learningOutcomes: ["ಕನ್ನಡ ಅಕ್ಷರಗಳ ಅರಿವು"],
             crossCurricularLink: "Social Studies: ಕರ್ನಾಟಕ ಸಂಸ್ಕೃತಿ."
