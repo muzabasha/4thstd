@@ -50,46 +50,6 @@ export default function Home() {
         </footer>
       </main>
 
-      <style jsx>{`
-        .page-header {
-          margin-bottom: 2rem;
-        }
-
-        .breadcrumb {
-          font-size: 0.9rem;
-          color: rgba(255, 255, 255, 0.6);
-          margin-bottom: 0.5rem;
-          font-weight: 500;
-        }
-
-        h1 {
-          font-size: 2.5rem;
-          font-weight: 800;
-          background: linear-gradient(to right, white, var(--accent));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .learning-area {
-          margin-top: 1rem;
-        }
-
-        .page-footer {
-          position: fixed;
-          bottom: 2rem;
-          right: 2rem;
-        }
-
-        .premium-badge {
-          font-size: 0.8rem;
-          padding: 0.8rem 1.2rem;
-          border-radius: 50px;
-          color: white;
-          border: 1px solid rgba(255, 255, 255, 0.4);
-          font-weight: 700;
-          box-shadow: 0 0 20px rgba(255, 209, 102, 0.2);
-        }
-      `}</style>
     </div>
   );
 }

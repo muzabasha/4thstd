@@ -124,6 +124,17 @@ export default function InteractiveMapLab({ onLandmarkClick }: MapLabProps) {
           100% { box-shadow: 0 0 0 0 rgba(255, 209, 102, 0); }
         }
 
+        @media (max-width: 600px) {
+          .map-lab-container {
+            height: 250px;
+          }
+          .landmark-spot {
+            width: 24px;
+            height: 24px;
+            font-size: 1rem;
+          }
+        }
+
         .landmark-info {
           background: rgba(0,0,0,0.6);
           border: 1px solid var(--accent);

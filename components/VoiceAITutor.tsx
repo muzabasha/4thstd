@@ -344,6 +344,31 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
           padding: 1.2rem 2.5rem;
           font-size: 1.2rem;
         }
+
+        @media (max-width: 768px) {
+          .guidance-stage-container {
+            padding: 1rem;
+          }
+          .professor-avatar {
+            width: 80px;
+            height: 80px;
+            font-size: 3rem;
+          }
+          .professor-speech-bubble {
+            padding: 1.5rem;
+            border-radius: 20px;
+          }
+          .mentor-text {
+            font-size: 1.1rem;
+          }
+          .mastery-title {
+            font-size: 0.8rem;
+          }
+          .chip.Large {
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+          }
+        }
       `}</style>
     </div>
   );
