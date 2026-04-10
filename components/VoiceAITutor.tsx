@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { Subject, Topic } from '../lib/curriculum';
+import { useVoice } from '../hooks/useVoice';
 import { generateAIResponse } from '../lib/ai';
 import InteractiveQuiz from './InteractiveQuiz';
 
@@ -17,6 +18,14 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
   const [currentLevel, setCurrentLevel] = useState<'low' | 'mid' | 'high'>('low');
   const [masteryStep, setMasteryStep] = useState(0); 
 
+  const { speak, setLang } = useVoice();
+
+  useEffect(() => {
+    if (subject.id === 'hindi') setLang('hi-IN');
+    else if (subject.id === 'kannada') setLang('kn-IN');
+    else setLang('en-IN');
+  }, [subject.id, setLang]);
+
   useEffect(() => {
     const guideMe = async () => {
       setIsLoading(true);
@@ -25,21 +34,23 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
       
       if (masteryStep === 0) {
         const scenario = await generateAIResponse('explain', topic.title, chapterId);
-        prompt = `🌈 **The Mission:** "${topic.title}" \n\n${scenario} \n\nAre you ready? Tap the button below to start! 🚀`;
+        prompt = `🌈 **The Mission:** "${topic.title}" \n\n${scenario}`;
       } else if (masteryStep <= topic.subtopics.length) {
         const subtopic = topic.subtopics[masteryStep - 1];
         const explanation = await generateAIResponse('explain', topic.title, subtopic);
-        prompt = `🔍 **Concept Explorer:** ${subtopic} \n\n${explanation} \n\n**Let's Learn by Doing:** Check out the activity panel!`;
+        prompt = `🔍 **Concept Explorer:** ${subtopic} \n\n${explanation}`;
       } else {
         prompt = `Mission Accomplished! You've successfully navigated the scenarios for "${topic.title}". Time for your final Mastery Challenge! 🏆`;
       }
       
+      const cleanPrompt = prompt.replace(/\*\*/g, '').replace(/🌈|🔍|🚀|🏆/g, '');
       setMessages([{ role: 'ai', content: prompt }]);
+      speak(cleanPrompt);
       setIsLoading(false);
     };
 
     guideMe();
-  }, [topic.id, topic.title, topic.subtopics, masteryStep]);
+  }, [topic.id, topic.title, topic.subtopics, masteryStep, speak]);
 
   const handleUserAction = useCallback(async (input: string) => {
     setMessages(prev => [...prev, { role: 'user', content: input }]);
@@ -75,7 +86,19 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
             <div className="loading-state">Generating your mission scenario...</div>
           ) : (
             <div className="scenario-content">
-              <div className="scenario-badge">LEARNING SCENARIO</div>
+              <div className="scenario-header">
+                <div className="scenario-badge">LEARNING MISSION</div>
+                <button 
+                  className="read-aloud-btn" 
+                  onClick={() => {
+                    const clean = messages[messages.length - 1]?.content.replace(/\*\*/g, '').replace(/🌈|🔍|🚀|🏆/g, '');
+                    speak(clean);
+                  }}
+                  title="Read Aloud"
+                >
+                  🔈 Listen
+                </button>
+              </div>
               <p className="scenario-text">{messages[messages.length - 1]?.content.replace(/Professor Spark|Hi Yasmeen!/g, '').trim()}</p>
             </div>
           )}
@@ -201,6 +224,13 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
           text-align: center;
           background: white;
         }
+
+        .scenario-header {
+          display: flex;
+          align-items: center;
+          gap: 1.5rem;
+          margin-bottom: 2.5rem;
+        }
         
         .scenario-badge {
           display: inline-block;
@@ -210,9 +240,23 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
           border-radius: 50px;
           font-weight: 900;
           font-size: 0.9rem;
-          margin-bottom: 2.5rem;
           letter-spacing: 1px;
         }
+
+        .read-aloud-btn {
+          background: var(--accent);
+          color: var(--primary);
+          border: none;
+          padding: 0.5rem 1.2rem;
+          border-radius: 50px;
+          font-weight: 800;
+          cursor: pointer;
+          transition: transform 0.2s;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .read-aloud-btn:hover { transform: scale(1.1); }
         
         .scenario-text {
           font-size: 2rem;
