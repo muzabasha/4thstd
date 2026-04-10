@@ -56,6 +56,7 @@ export const useVoice = () => {
     if (typeof window === 'undefined') return;
 
     const currentLang = overrideLang || lang;
+    const langCode = currentLang.split('-')[0].toLowerCase();
     
     // Stop current speech
     window.speechSynthesis.cancel();
@@ -65,10 +66,20 @@ export const useVoice = () => {
     
     // Attempt to find a high-quality native voice
     const voices = window.speechSynthesis.getVoices();
-    const targetVoice = voices.find(v => 
-      v.lang.toLowerCase().startsWith(currentLang.split('-')[0].toLowerCase()) ||
-      v.name.toLowerCase().includes(currentLang.split('-')[0].toLowerCase())
+    let targetVoice = voices.find(v => 
+      v.lang.toLowerCase() === currentLang.toLowerCase() ||
+      v.lang.toLowerCase().startsWith(langCode) ||
+      v.name.toLowerCase().includes(langCode)
     );
+
+    // Specific fallback search for Hindi/Kannada if the above failed
+    if (!targetVoice && (langCode === 'hi' || langCode === 'kn')) {
+      targetVoice = voices.find(v => 
+        v.name.includes('India') || 
+        v.name.includes('Google') ||
+        v.name.includes('Microsoft')
+      );
+    }
     
     if (targetVoice) {
       utterance.voice = targetVoice;
@@ -87,11 +98,20 @@ export const useVoice = () => {
     window.speechSynthesis.speak(utterance);
   }, [lang]);
 
-  // Pre-fetch voices to ensure they are available
+  // Pre-fetch and update voices
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+
+    const updateVoices = () => {
       window.speechSynthesis.getVoices();
-    }
+    };
+
+    updateVoices();
+    window.speechSynthesis.onvoiceschanged = updateVoices;
+    
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
   }, []);
 
   return { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang };
