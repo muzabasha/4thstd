@@ -17,6 +17,7 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
   const [mode, setMode] = useState<'learn' | 'quiz' | 'activity'>('learn');
   const [currentLevel, setCurrentLevel] = useState<'low' | 'mid' | 'high'>('low');
   const [masteryStep, setMasteryStep] = useState(0); 
+  const [audioStarted, setAudioStarted] = useState(false);
 
   const { speak, setLang } = useVoice();
 
@@ -105,8 +106,16 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
           
           <div className="action-tray">
             {masteryStep === 0 && !isLoading && (
-              <button className="action-btn primary pulse" onClick={() => setMasteryStep(1)}>
-                Start Learning Mission 🚀
+              <button 
+                className="action-btn primary pulse" 
+                onClick={() => {
+                  setMasteryStep(1);
+                  setAudioStarted(true);
+                  // Trigger a silent speak to 'unlock' audio
+                  speak("");
+                }}
+              >
+                Start Learning Mission & Audio 🔊
               </button>
             )}
             {masteryStep > 0 && masteryStep <= topic.subtopics.length && !isLoading && (

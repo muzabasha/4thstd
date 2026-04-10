@@ -55,47 +55,54 @@ export const useVoice = () => {
   const speak = useCallback((text: string, overrideLang?: string) => {
     if (typeof window === 'undefined') return;
 
-    const currentLang = overrideLang || lang;
-    const langCode = currentLang.split('-')[0].toLowerCase();
+    // Browser policy: Resume if paused
+    if (window.speechSynthesis.paused) {
+      window.speechSynthesis.resume();
+    }
     
     // Stop current speech
     window.speechSynthesis.cancel();
 
+    const currentLang = overrideLang || lang;
+    const langCode = currentLang.split('-')[0].toLowerCase();
+
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = currentLang;
     
-    // Attempt to find a high-quality native voice
+    // Discovery loop for voices
     const voices = window.speechSynthesis.getVoices();
     let targetVoice = voices.find(v => 
       v.lang.toLowerCase() === currentLang.toLowerCase() ||
-      v.lang.toLowerCase().startsWith(langCode) ||
-      v.name.toLowerCase().includes(langCode)
+      v.lang.toLowerCase().startsWith(langCode)
     );
 
-    // Specific fallback search for Hindi/Kannada if the above failed
+    // Deep search for Hindi/Kannada indicators in voice names
     if (!targetVoice && (langCode === 'hi' || langCode === 'kn')) {
-      targetVoice = voices.find(v => 
-        v.name.includes('India') || 
-        v.name.includes('Google') ||
-        v.name.includes('Microsoft')
-      );
+      targetVoice = voices.find(v => {
+        const name = v.name.toLowerCase();
+        return name.includes('india') || name.includes('hindi') || name.includes('kannada');
+      });
     }
     
     if (targetVoice) {
       utterance.voice = targetVoice;
     }
 
-    utterance.rate = 0.95; 
-    utterance.pitch = 1.15; 
+    utterance.rate = 0.9; // Even slower for better articulation of complex scripts
+    utterance.pitch = 1.1; 
+    utterance.volume = 1.0;
 
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = (e) => {
-      console.error('Speech Synthesis Error:', e);
+      console.error('TTS Error:', e);
       setIsSpeaking(false);
     };
 
-    window.speechSynthesis.speak(utterance);
+    // Final check for synthesis readiness
+    setTimeout(() => {
+      window.speechSynthesis.speak(utterance);
+    }, 50);
   }, [lang]);
 
   // Pre-fetch and update voices
