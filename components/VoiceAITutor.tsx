@@ -20,16 +20,18 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
   useEffect(() => {
     const guideMe = async () => {
       setIsLoading(true);
+      const chapterId = topic.id.split('-')[0];
       let prompt: string = "";
       
       if (masteryStep === 0) {
-        prompt = `Let's begin exploring the world of "${topic.title}". Today we'll discover new scenarios and learn by doing! 🚀`;
+        const scenario = await generateAIResponse('explain', topic.title, chapterId);
+        prompt = `🌈 **The Mission:** "${topic.title}" \n\n${scenario} \n\nAre you ready? Tap the button below to start! 🚀`;
       } else if (masteryStep <= topic.subtopics.length) {
         const subtopic = topic.subtopics[masteryStep - 1];
         const explanation = await generateAIResponse('explain', topic.title, subtopic);
-        prompt = `🌈 **The Scenario:** ${explanation} \n\n**Mission:** Try the activity below to master this concept!`;
+        prompt = `🔍 **Concept Explorer:** ${subtopic} \n\n${explanation} \n\n**Let's Learn by Doing:** Check out the activity panel!`;
       } else {
-        prompt = `Mission Accomplished! You've navigated through "${topic.title}". Are you ready for the final mastery challenge? 🏆`;
+        prompt = `Mission Accomplished! You've successfully navigated the scenarios for "${topic.title}". Time for your final Mastery Challenge! 🏆`;
       }
       
       setMessages([{ role: 'ai', content: prompt }]);

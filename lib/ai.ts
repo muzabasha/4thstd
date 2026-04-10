@@ -4,55 +4,54 @@ export interface AIResponse {
 }
 
 const KNOWLEDGE_BASE: Record<string, string> = {
-  // Math - Patterns
-  "Jaali patterns": "Imagine your house is wearing a beautiful lace dress! That's what a Jaali is. It's a wall with tiny holes that lets the wind play hide-and-seek and keeps the house cool without a fan. Just like how your window screen keeps out flies, Jaali keeps out the heat but welcomes the breeze!",
-  
-  "Brick Symmetry": "Think of a brick as a twin! If you cut it down the middle, the left side looks exactly like the right side, like they are looking into a mirror. It's like your face—two eyes, two ears, and one nose in the middle. If a brick wasn't symmetrical, your wall would look like it was doing a funny dance!",
-  
-  // Math - Time
-  "24-Hour Clock": "Imagine a clock that never sleeps! Most clocks count to 12 and then start over, like they've had enough. But the 24-hour clock is a marathon runner. It goes all the way to 24. For example, 13:00 is just 1 PM after a lunch nap. It's like counting your fingers and then starting on your toes!",
-  
-  // Science - Travel
-  "Different Bridges": "Imagine you're an ant trying to cross a puddle. A bamboo bridge is like using a single straw—it's light and wiggly! A cement bridge is like a giant elephant standing across the water—it's super strong and doesn't move at all. Bamboo bridges are for light-footed explorers, while cement bridges can carry heavy school buses!",
-  
-  "Animal Skins": "Imagine if you could wear a suit that makes you invisible! Some animals, like Zebras, wear striped pajamas so they can hide in the tall grass. It's like playing a giant game of 'Where's Waldo?' in the wild. The patterns help them stay safe from bigger animals who are looking for a snack!",
+  // MATHEMATICS
+  "m1": "Imagine your house is wearing a beautiful lace dress! Bricks can be arranged in 'Jaali' patterns (with holes) to let the breeze in, or 'Jharokhas' (balconies) to see the world. It's like building with giant Lego blocks that have super-symmetry!",
+  "m2": "Think of yourself as a giant! To you, 1 centimeter is like a tiny ant's step, but 1 kilometer is a long journey. Remember, it takes exactly 1,000 meters to make 1 kilometer. If you ran a 1km race, you'd be passing 1000 meter-sticks!",
+  "m3": "Imagine you are the leader of a school trip with 210 students! You need to calculate how many buses you need. It's like being a detective with numbers—adding up seats and dividing the kids so everyone gets a window view!",
+  "m4": "Meet the 24-Hour Clock! It's a marathon runner that doesn't stop at 12. Instead of 1 PM, it says 13:00. It's used by trains and planes so they never get their morning and evening mixed up. 2:30 PM is just 14:30 in 'Railway Time'!",
+  "m6": "You are now a 'Recycle Superhero'! Just like Kiran from Patna, you buy junk and sell it for a profit. Profit is your 'Magic Grow Potion'—if you buy for ₹20 and sell for ₹25, your money just grew by ₹5!",
+  "m7": "Meet the 'Liter Boss' and the '1,000 mL Soldiers'. To fill one big 1-Liter bottle, you need exactly 1,000 tiny milliliters. If one soldier is missing, the Boss isn't full! It's like building a giant tower out of 1000 tiny blocks.",
+  "m9": "Imagine a giant chocolate bar! Halves are when you share it equally with one friend. Quarters are when four of you want a piece. It's like cutting a pizza into 4 'Quarter' slices so everyone is happy!",
+  "m13": "You are a Farmer protecting your crops! The 'Perimeter' is the fence you build around your field. It's like measuring the belt around your waist. If your field is a square, the fence has to go all the way around all four sides!",
 
-  // Computers
-  "CPU": "The CPU is the Master Chef of the computer! It's a tiny brain that tells the screen what to show and the mouse where to go. Just like a chef follows a recipe to make yummy pasta, the CPU follows codes to run your favorite games!",
-  
-  "MS Word": "Think of MS Word as your digital magic notebook. If you make a mistake, you don't need an eraser; you just tap 'Delete' and it vanishes! It's like writing on a chalkboard that never gets dusty. You can even change your handwriting to look like a robot or a princess with just one click!",
+  // EVS
+  "e1": "Imagine you're an ant crossing a puddle! A bamboo bridge is like using a single straw—it's light and wiggly. A cement bridge is like a giant elephant standing across the water—super strong and steady. Some kids even use 'Vallams' (small wooden boats) in Kerala to reach their desks!",
+  "e2": "Who has ears like fans? The Elephant! Some animals have ears you can't even see, like birds who have tiny holes hidden by feathers. It's like they have secret built-in headphones!",
+  "e3": "Imagine being in an Elephant Herd! The oldest female is the 'Grandma Boss' who leads everyone to water. Male elephants are like teenagers who leave the house at 15 to go on their own adventures!",
+  "e11": "Welcome to the 'Valley of Flowers' in Uttarakhand! It's nature's 'Swiss Army Knife'. Some flowers are for smelling, some are for medicine, and some—like Kachnar or Sahjan—are actually yummy vegetables for dinner!",
+  "e23": "Meet the weavers of Pochampalli! They turn silk threads into beautiful 'Ikkat' sarees with bright colors. It's like they are 'Code-Designers', but instead of computers, they use looms to weave patterns into cloth!",
+  "e27": "Meet Chuskit! She's a 10-year-old girl in Ladakh who uses a wheelchair. Her school mission was like a 'Race Track' build—her friends and teachers built a bridge so her 'Speed Racer' wheelchair could cross the river to school!",
 
-  // AI
-  "Smart Machines": "Imagine your toy car started deciding where to drive by itself! That's a bit like AI. It's when a machine learns to 'think' by looking at thousands of examples. It's like teaching a puppy a trick, but the puppy is a computer chip that never forgets!",
+  // COMPUTER SCIENCE
+  "c1": "The CPU is the 'Master Chef' of the computer! It's a tiny brain that tells the screen what to show. Just like a chef follows a recipe, the CPU follow codes to play your favorite games!",
+  "c7": "AI is like teaching a robot puppy! You show it thousands of pictures of cats, and soon it learns to say 'Meow' whenever it sees a kitten. It's a machine that learns to 'think' by looking at patterns!",
 
-  "default": "Imagine this part of our topic is like a secret ingredient in a recipe! It helps everything else make sense. Just like how salt brings out the flavor in food, this concept helps us understand the bigger picture of our world."
+  // HINDI / ENGLISH / KANNADA
+  "h1": "बादल शरारती बच्चों की तरह हैं! वे कभी गुब्बारों जैसे गाल फुलाते हैं, तो कभी झब्बर-झब्बर बालों वाले लगते हैं। वे आसमान में इधर-उधर दौड़ते हुए बहुत ही भोले-भाले लगते हैं।",
+  "en1": "Imagine the Sun is your alarm clock! The birds are singing 'Wake up!' and even the tiny bees are buzzing. It's like the whole world is throwing a party to start the day!",
+  "k1": "ಕನ್ನಡ ತಾಯಿ ಎಂದರೆ ನಮಗೆಲ್ಲರಿಗೂ ಪ್ರೀತಿ. ಅವಳು ನಮಗೆ ಸುಂದರವಾದ ಭಾಷೆ ಮತ್ತು ಸಂಸ್ಕೃತಿಯನ್ನು ನೀಡಿದ್ದಾಳೆ. ಅವಳನ್ನು ಗೌರವಿಸುವುದು ನಮ್ಮೆಲ್ಲರ ಕರ್ತವ್ಯ.",
+
+  "default": "This topic is a secret key to understanding the world! Just like a puzzle piece fits into a picture, this concept helps you see how nature and numbers work together. Ready to be a top performer?"
 };
 
 export const generateAIResponse = async (
   promptType: 'explain' | 'quiz' | 'evaluate' | 'activity',
-  topic: string,
-  context?: string
+  topicTitle: string,
+  subtopicOrId: string
 ): Promise<string> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       if (promptType === 'explain') {
-        let explanation = KNOWLEDGE_BASE[context || ""] || KNOWLEDGE_BASE[topic] || KNOWLEDGE_BASE["default"];
-        
-        // Scenario augmentation
-        if (context === 'Introduction') {
-          explanation = `Picture this: You are the lead explorer in a new world! To navigate, you need to master ${topic}. It's like having a secret map that only you can read. Ready to find the treasure?`;
-        } else if (context === 'Core Concepts') {
-          explanation = `These concepts are the 'Superpowers' of ${topic}. Without them, you'd be like a superhero without a cape! Let's learn to fly!`;
-        }
-        
+        // Look up by ID first, then by Subtopic/Title
+        const explanation = KNOWLEDGE_BASE[subtopicOrId] || KNOWLEDGE_BASE[topicTitle] || KNOWLEDGE_BASE["default"];
         resolve(explanation);
       } else if (promptType === 'quiz') {
-        resolve(`Quick Quiz! Imagine you're on a game show. For 100 points, what's one funny thing you learned about ${topic}?`);
+        resolve(`Time for a Discovery Challenge! Imagine you're on a game show. What's the most surprising thing you just learned?`);
       } else if (promptType === 'activity') {
-        resolve(`Time to get your hands dirty! Let's do the ${topic} activity. It's more fun than a barrel of monkeys!`);
+        resolve(`Let's start the 'Learning by Doing' mission. Ready to use your inner powers?`);
       } else {
-        resolve(`You're a genius! You've navigated this part of the scenario perfectly. Onward to the next adventure!`);
+        resolve(`Spot on! You've mastered this scenario like a pro. Your class will be impressed!`);
       }
-    }, 1000);
+    }, 800);
   });
 };
