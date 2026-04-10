@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import { Subject, Chapter, Topic } from '../lib/curriculum';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Subject, Topic } from '../lib/curriculum';
 import { useVoice } from '../hooks/useVoice';
 import { generateAIResponse } from '../lib/ai';
 import InteractiveMapLab from './InteractiveMapLab';
@@ -9,74 +9,49 @@ import InteractiveQuiz from './InteractiveQuiz';
 
 interface VoiceAITutorProps {
   subject: Subject;
-  chapter: Chapter;
   topic: Topic;
 }
 
-export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorProps) {
+export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
   const [messages, setMessages] = useState<{ role: 'ai' | 'user'; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [mode, setMode] = useState<'learn' | 'quiz' | 'activity' | 'lab'>('learn');
   const [currentLevel, setCurrentLevel] = useState<'low' | 'mid' | 'high'>('low');
-  const [masteryStep, setMasteryStep] = useState(0); // 0: Intro, 1: Subtopic 1, etc.
-  const chatEndRef = useRef<HTMLDivElement>(null);
+  const [masteryStep, setMasteryStep] = useState(0); 
+  const [showTechnical, setShowTechnical] = useState(false);
+  const lastTranscriptRef = useRef<string>('');
   
   const { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang } = useVoice();
   
   useEffect(() => {
-    if (subject.id === 'hindi') {
-      setLang('hi-IN');
-    } else if (subject.id === 'kannada') {
-      setLang('kn-IN');
-    } else {
-      setLang('en-IN');
-    }
+    if (subject.id === 'hindi') setLang('hi-IN');
+    else if (subject.id === 'kannada') setLang('kn-IN');
+    else setLang('en-IN');
   }, [subject.id, setLang]);
 
   useEffect(() => {
-    // Proactive Guidance: Starts when topic or mastery step changes
     const guideMe = async () => {
       let prompt: string = "";
       if (masteryStep === 0) {
-        prompt = `Hi Yasmeen! I'm so excited to help you master ${topic.title}. First, let's look at the big picture. ${topic.subtopics.join(", ")} are what we'll explore. Ready to start with the first part?`;
+        prompt = `Hi Yasmeen! I'm Professor Spark. Ready to explore ${topic.title}? We'll learn about ${topic.subtopics.join(" and ")}. Click the Rocket to start!`;
       } else if (masteryStep <= topic.subtopics.length) {
-        prompt = `Great! Step ${masteryStep}: Let's talk about ${topic.subtopics[masteryStep - 1]}. It's very important because... [Explanation]. Shall we try a quick activity to see how this works?`;
+        prompt = `Step ${masteryStep}: Let's talk about ${topic.subtopics[masteryStep - 1]}. [AI Explanation]. Did you find that interesting? We can do an activity next!`;
       } else {
-        prompt = `Hooray! You've reached the end of our lesson on ${topic.title}. You are now a master! Would you like to try the Expert Activity now?`;
+        prompt = `Mission Accomplished! You've mastered ${topic.title}. Ready for the Final Quiz?`;
       }
       
       setIsLoading(true);
-      // Simulate/Generate AI guiding response
       setTimeout(() => {
-        setMessages(prev => [...prev, { role: 'ai', content: prompt }]);
+        setMessages([{ role: 'ai', content: prompt }]);
         speak(prompt);
         setIsLoading(false);
-      }, 1000);
+      }, 800);
     };
 
     guideMe();
-  }, [topic.id, masteryStep, speak]); // Triggered on topic change or step completion
+  }, [topic.id, topic.title, topic.subtopics, masteryStep, speak]);
 
-  // Scroll to bottom whenever messages change
-  useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
-
-  // Handle new transcript from voice
-  useEffect(() => {
-    if (transcript && !isListening) {
-      handleUserAction(transcript);
-    }
-  }, [transcript]);
-
-  // Initial greeting when topic changes
-  useEffect(() => {
-    const initialText = `Hi Yasmeen! Let's learn about ${topic.title} in ${subject.title}. Should I explain it to you, or would you like to start a quiz?`;
-    setMessages([{ role: 'ai', content: initialText }]);
-    speak(initialText);
-  }, [topic.id]);
-
-  const handleUserAction = async (input: string) => {
+  const handleUserAction = useCallback(async (input: string) => {
     setMessages(prev => [...prev, { role: 'user', content: input }]);
     setIsLoading(true);
 
@@ -84,9 +59,6 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
     if (input.toLowerCase().includes('quiz')) {
       promptType = 'quiz';
       setMode('quiz');
-    } else if (input.toLowerCase().includes('finished')) {
-      promptType = 'activity';
-      setMode('activity');
     } else if (mode === 'quiz') {
       promptType = 'evaluate';
     }
@@ -95,279 +67,362 @@ export default function VoiceAITutor({ subject, chapter, topic }: VoiceAITutorPr
     setMessages(prev => [...prev, { role: 'ai', content: aiResponseText }]);
     speak(aiResponseText);
     setIsLoading(false);
-  };
+  }, [mode, topic.title, speak]);
+
+  useEffect(() => {
+    if (transcript && !isListening && transcript !== lastTranscriptRef.current) {
+      lastTranscriptRef.current = transcript;
+      // Defer state update to avoid cascading render warning in some lint configs
+      setTimeout(() => {
+        handleUserAction(transcript);
+      }, 0);
+    }
+  }, [transcript, isListening, handleUserAction]);
 
   return (
-    <div className="tutor-container">
-      <div className="tutor-header">
-        <div className="avatar Large">🤖</div>
-        <div className="tutor-info">
-          <h3>Professor Spark</h3>
-          <span className="status">{isSpeaking ? 'Speaking...' : isListening ? 'Listening...' : 'Ready'}</span>
+    <div className="tutor-layout">
+      {/* Top Progress Bar */}
+      <div className="mission-bar">
+        <div className="mission-progress">
+          <div 
+            className="progress-fill" 
+            style={{ width: `${(masteryStep / (topic.subtopics.length + 1)) * 100}%` }}
+          ></div>
         </div>
-        <div className="mode-toggle glass-card">
-          <button className={mode === 'learn' ? 'active' : ''} onClick={() => setMode('learn')}>Learning</button>
-          <button className={mode === 'quiz' ? 'active' : ''} onClick={() => setMode('quiz')}>Quick Quiz</button>
-          <button className={mode === 'activity' ? 'active' : ''} onClick={() => setMode('activity')}>Activity Zone ✨</button>
-          <button className={mode === 'lab' ? 'active' : ''} onClick={() => setMode('lab')}>Virtual Lab 🧪</button>
+        <div className="mission-label">
+          {masteryStep === 0 ? "Mission: Start Journey" : 
+           masteryStep <= topic.subtopics.length ? `Mission: Step ${masteryStep}` : 
+           "Mission: Mastery Quiz"}
         </div>
       </div>
 
-      {mode === 'activity' && (
-        <div className="level-selector glass-card animate-fade-in">
-          <button className={currentLevel === 'low' ? 'active' : ''} onClick={() => setCurrentLevel('low')}>Starter</button>
-          <button className={currentLevel === 'mid' ? 'active' : ''} onClick={() => setCurrentLevel('mid')}>Explorer</button>
-          <button className={currentLevel === 'high' ? 'active' : ''} onClick={() => setCurrentLevel('high')}>Expert</button>
-        </div>
-      )}
-
-      {mode === 'activity' && topic.activities.find(a => a.level === currentLevel) && (
-        <div className="activity-banner animate-fade-in activity-manual">
-          <div className="activity-icon">🎯</div>
-          <div className="activity-info">
-            <h4>{topic.activities.find(a => a.level === currentLevel)?.title}</h4>
-            <p className="activity-desc">{topic.activities.find(a => a.level === currentLevel)?.description}</p>
+      <div className="tutor-main">
+        {/* Hero Section: Professor Spark */}
+        <section className="hero-zone">
+          <div className={`spark-avatar ${isSpeaking ? 'bounce' : ''} ${isListening ? 'pulse' : ''}`}>
+            <div className="avatar-frame">🤖</div>
+            {isListening && <div className="listening-ring"></div>}
+          </div>
+          
+          <div className="speech-container">
+            <div className="speech-bubble glass-card animate-fade-in">
+              {isLoading ? (
+                <div className="typing">Professor Spark is thinking...</div>
+              ) : (
+                <p className="mentor-text">{messages[messages.length - 1]?.content}</p>
+              )}
+            </div>
             
-            {topic.activities.find(a => a.level === currentLevel)?.materials && (
-              <div className="materials-list card-small">
-                <h5>🧰 Materials Needed:</h5>
-                <ul>
-                  {topic.activities.find(a => a.level === currentLevel)?.materials?.map((m, i) => (
-                    <li key={i}><input type="checkbox" /> {m}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            <div className="steps-list card-small">
-              <h5>📍 Action Plan:</h5>
-              <ol>
-                {topic.activities.find(a => a.level === currentLevel)?.steps.map((s, i) => (
-                  <li key={i}>{s}</li>
-                ))}
-              </ol>
+            <div className="hero-actions">
+              {masteryStep === 0 && !isLoading && (
+                <button className="mission-btn primary pulse" onClick={() => setMasteryStep(1)}>
+                  Start Mission 🚀
+                </button>
+              )}
+              {masteryStep > 0 && masteryStep <= topic.subtopics.length && !isLoading && (
+                <div className="step-actions">
+                  <button className="mission-btn secondary" onClick={() => setMasteryStep(prev => prev + 1)}>
+                    Next Step ➡️
+                  </button>
+                  <button className="mission-btn accent" onClick={() => setMode('activity')}>
+                    Try Activity 🎯
+                  </button>
+                </div>
+              )}
+              {masteryStep > topic.subtopics.length && !isLoading && (
+                <button className="mission-btn success" onClick={() => setMode('quiz')}>
+                  Take Quiz 🏆
+                </button>
+              )}
             </div>
-
-            <span className="skill-tag">{topic.activities.find(a => a.level === currentLevel)?.skill.toUpperCase()} SKILL</span>
           </div>
-          <button className="done-btn" onClick={() => handleUserAction("I'm done with the activity!")}>Done! ✅</button>
-        </div>
-      )}
+        </section>
 
-      {mode === 'lab' && topic.virtualLab && (
-        <div className="lab-panel glass-card animate-fade-in">
-          <div className="lab-header">
-            <h3>🔬 {topic.virtualLab.title}</h3>
-          </div>
-          <div className="lab-simulation">
-            {topic.virtualLab.title.includes('India Map Lab') ? (
-              <InteractiveMapLab onLandmarkClick={(info) => handleUserAction(info)} />
-            ) : (
-              <div className="sim-placeholder">
-                <p>{topic.virtualLab.simulation}</p>
-              </div>
-            )}
-          </div>
-          <div className="lab-task activity-info">
-            <h4>Objective:</h4>
-            <p>{topic.virtualLab.task}</p>
-          </div>
-        </div>
-      )}
+        {/* Dynamic Content Area (Activity/Lab/Quiz) */}
+        {mode !== 'learn' && (
+          <div className="content-overlay animate-fade-in">
+            <div className="overlay-header">
+              <button className="close-btn" onClick={() => setMode('learn')}>✕ Close</button>
+            </div>
+            
+            <div className="overlay-body">
+              {mode === 'activity' && (
+                <div className="activity-view">
+                   <div className="level-tabs">
+                    <button className={currentLevel === 'low' ? 'active' : ''} onClick={() => setCurrentLevel('low')}>Starter</button>
+                    <button className={currentLevel === 'mid' ? 'active' : ''} onClick={() => setCurrentLevel('mid')}>Explorer</button>
+                    <button className={currentLevel === 'high' ? 'active' : ''} onClick={() => setCurrentLevel('high')}>Expert</button>
+                  </div>
+                  {topic.activities.find(a => a.level === currentLevel) && (
+                    <div className="activity-details glass-card">
+                      <h4>{topic.activities.find(a => a.level === currentLevel)?.title}</h4>
+                      <p>{topic.activities.find(a => a.level === currentLevel)?.description}</p>
+                      <div className="steps">
+                        {topic.activities.find(a => a.level === currentLevel)?.steps.map((s, i) => (
+                          <div key={i} className="step-item">
+                            <span className="step-num">{i+1}</span>
+                            <span className="step-text">{s}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <button className="done-btn" onClick={() => { setMode('learn'); handleUserAction("I did the activity!"); }}>Finished! ✅</button>
+                    </div>
+                  )}
+                </div>
+              )}
 
-      {mode === 'quiz' && (
-        <div className="quiz-panel animate-fade-in">
-          <InteractiveQuiz 
-            questions={topic.quiz} 
-            onComplete={(score) => {
-              const msg = `Wow Yasmeen! You finished the quiz with a score of ${score}/${topic.quiz.length}! You are doing amazing!`;
-              setMessages(prev => [...prev, { role: 'ai', content: msg }]);
-              speak(msg);
-              setMode('learn');
-            }} 
-          />
-        </div>
-      )}
+              {mode === 'lab' && topic.virtualLab && (
+                <div className="lab-view glass-card">
+                   <h3>🔬 {topic.virtualLab.title}</h3>
+                   <div className="lab-sim">
+                      {topic.virtualLab.title.includes('India Map Lab') ? (
+                        <InteractiveMapLab onLandmarkClick={(info) => handleUserAction(info)} />
+                      ) : (
+                        <div className="sim-msg">{topic.virtualLab.simulation}</div>
+                      )}
+                   </div>
+                   <div className="lab-footer">
+                      <p><strong>Goal:</strong> {topic.virtualLab.task}</p>
+                   </div>
+                </div>
+              )}
 
-      <div className="nep-insights glass-card animate-fade-in">
-        <div className="nep-header">
-          <span>🎓 NEP Preparatory Stage</span>
-          <div className="cc-link">{topic.crossCurricularLink}</div>
-        </div>
-        <div className="lo-list">
-          {topic.learningOutcomes.map((lo, i) => (
-            <span key={i} className="lo-tag">🏆 {lo}</span>
-          ))}
-        </div>
-        <div className="inquiry-area">
-          <p className="inquiry-label">Ask a Critical Thinking Question:</p>
-          <div className="inquiry-chips">
-            <button key="why" onClick={() => handleUserAction(`Why does ${topic.title} happen like that?`)}>Why? 🤔</button>
-            <button key="how" onClick={() => handleUserAction(`How is ${topic.title} used in real life?`)}>How? 🛠️</button>
-            <button key="what" onClick={() => handleUserAction(`What if ${topic.title} were different?`)}>What if? 🌈</button>
+              {mode === 'quiz' && (
+                <div className="quiz-view">
+                  <InteractiveQuiz 
+                    questions={topic.quiz} 
+                    onComplete={(score) => {
+                      const msg = `Amazing Yasmeen! You scored ${score}/${topic.quiz.length}!`;
+                      setMessages([{ role: 'ai', content: msg }]);
+                      speak(msg);
+                      setMode('learn');
+                      setMasteryStep(0); // Reset for review
+                    }} 
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+        
+        {/* Interaction Hub (Voice & Text) */}
+        <div className="interaction-hub glass-card">
+          <div className="voice-zone">
+            <button 
+              className={`mic-btn ${isListening ? 'listening' : ''}`} 
+              onClick={isListening ? stopListening : startListening}
+            >
+              {isListening ? '🛑 Stop' : '🎤 Talk to Spark'}
+            </button>
+            <p className="transcript">{isListening ? (transcript || "Listening...") : "Tap to speak!"}</p>
+          </div>
+          
+          <div className="quick-questions">
+            <button onClick={() => handleUserAction("Why?")}>Why? 🤔</button>
+            <button onClick={() => handleUserAction("How?")}>How? 🛠️</button>
+            <button onClick={() => handleUserAction("Explain more")}>Explain More 📚</button>
           </div>
         </div>
       </div>
 
-      {mode !== 'quiz' && (
-        <div className="guidance-stage-container">
-          <div className="mentor-zone animate-fade-in">
-            <div className="professor-avatar">🤖</div>
-            <div className="professor-speech-bubble glass-card">
-              <h2 className="mastery-title">Chapter: {chapter.title}</h2>
-              <div className="current-guidance">
-                {messages.length > 0 ? (
-                  <p className="mentor-text">{messages[messages.length - 1].content}</p>
-                ) : (
-                  <p className="mentor-text">Welcome back, Yasmeen! Let's start our journey.</p>
-                )}
+      {/* Advanced Drawer for Teachers/Parents */}
+      <footer className="tutor-footer">
+        <button className="tech-toggle" onClick={() => setShowTechnical(!showTechnical)}>
+          {showTechnical ? "Hide Teacher Info" : "Show Teacher Info (NEP)"}
+        </button>
+        {showTechnical && (
+          <div className="technical-info animate-fade-in glass-card">
+            <div className="info-grid">
+              <div>
+                <h5>Learning Outcomes</h5>
+                <div className="tags">
+                  {topic.learningOutcomes.map((lo, i) => <span key={i} className="tag">{lo}</span>)}
+                </div>
+              </div>
+              <div>
+                <h5>Cross-Curricular</h5>
+                <p>{topic.crossCurricularLink}</p>
               </div>
             </div>
           </div>
-  
-          <div className="stage-controls">
-            <div className="nep-bar card-small">
-              <span>🎓 NEP Progress: Mastering {topic.title}</span>
-              <div className="lo-tags">
-                {topic.learningOutcomes.map((lo, i) => (
-                  <span key={i} className="lo-pill">🏆 {lo}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-  
-          <div className="action-area full-view-actions animate-fade-in">
-            {!isLoading && (
-              <div className="response-chips">
-                {masteryStep === 0 && (
-                  <button className="chip primary Large" onClick={() => setMasteryStep(1)}>
-                    Yes, let's start! 🚀
-                  </button>
-                )}
-                {masteryStep > 0 && masteryStep <= topic.subtopics.length && (
-                  <>
-                    <button className="chip" onClick={() => speak(messages[messages.length-1].content)}>
-                      Can you repeat that? 🔄
-                    </button>
-                    <button className="chip primary" onClick={() => setMasteryStep(prev => prev + 1)}>
-                      I understand, next step! ➡️
-                    </button>
-                    <button className="chip accent" onClick={() => setMode('activity')}>
-                      Let's do an Activity! 🎯
-                    </button>
-                  </>
-                )}
-                {masteryStep > topic.subtopics.length && (
-                  <button className="chip success" onClick={() => setMasteryStep(0)}>
-                    Restart & Review 🔄
-                  </button>
-                )}
-              </div>
-            )}
-            {isLoading && <div className="typing-indicator">Professor Spark is thinking...</div>}
-          </div>
-        </div>
-      )}
+        )}
+      </footer>
 
       <style jsx>{`
-        .guidance-stage-container {
-          flex: 1;
+        .tutor-layout {
           display: flex;
           flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 2rem;
-          background: radial-gradient(circle at center, rgba(88, 61, 161, 0.1) 0%, transparent 70%);
-          overflow-y: auto;
+          height: 100%;
+          gap: 1.5rem;
+          color: white;
         }
-        .mentor-zone {
+
+        .mission-bar {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          background: rgba(0, 0, 0, 0.3);
+          padding: 0.75rem 1.5rem;
+          border-radius: 50px;
+        }
+        .mission-progress {
+          flex: 1;
+          height: 8px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--accent), var(--success));
+          transition: width 0.5s ease;
+        }
+        .mission-label { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
+
+        .hero-zone {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 2rem;
-          max-width: 800px;
-          text-align: center;
+          padding: 2rem 0;
         }
-        .professor-avatar {
-          font-size: 5rem;
+        
+        .spark-avatar {
+          position: relative;
+          width: 140px;
+          height: 140px;
+          cursor: pointer;
+        }
+        .avatar-frame {
+          width: 100%;
+          height: 100%;
           background: white;
-          width: 120px;
-          height: 120px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-          border: 4px solid var(--accent);
+          font-size: 5rem;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+          border: 6px solid var(--accent);
+          z-index: 2;
+          position: relative;
         }
-        .professor-speech-bubble {
-          padding: 2.5rem;
+        
+        .listening-ring {
+          position: absolute;
+          top: -10px; left: -10px; right: -10px; bottom: -10px;
+          border: 4px solid var(--success);
+          border-radius: 50%;
+          animation: pulse 1.5s infinite;
+        }
+
+        .speech-container {
+          width: 100%;
+          max-width: 700px;
+          text-align: center;
+        }
+        .speech-bubble {
+          padding: 2rem;
           border-radius: 30px;
-          background: rgba(0, 0, 0, 0.4);
-          border: 1px solid rgba(255, 255, 255, 0.15);
-          width: 100%;
-        }
-        .mastery-title {
-          font-size: 0.9rem;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          color: var(--accent);
-          margin-bottom: 1rem;
-          opacity: 0.8;
-        }
-        .mentor-text {
-          font-size: 1.5rem;
-          line-height: 1.6;
-          color: white;
-          font-weight: 500;
-        }
-        .lo-tags {
+          margin-bottom: 2rem;
+          min-height: 120px;
           display: flex;
-          gap: 0.5rem;
-          flex-wrap: wrap;
+          align-items: center;
           justify-content: center;
-          margin-top: 1rem;
         }
-        .lo-pill {
-          font-size: 0.7rem;
-          background: rgba(255, 209, 102, 0.2);
-          color: var(--accent);
-          padding: 0.2rem 0.6rem;
+        .mentor-text { font-size: 1.6rem; font-weight: 500; line-height: 1.4; color: white; }
+
+        .mission-btn {
+          padding: 1rem 2.5rem;
           border-radius: 50px;
-          border: 1px solid rgba(255, 209, 102, 0.3);
+          font-size: 1.25rem;
+          font-weight: 700;
+          transition: all 0.3s;
+          box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-        .full-view-actions {
-          margin-top: 3rem;
-          width: 100%;
+        .mission-btn.primary { background: var(--primary); color: white; }
+        .mission-btn.secondary { background: var(--info); color: white; }
+        .mission-btn.accent { background: var(--accent); color: var(--primary); }
+        .mission-btn.success { background: var(--success); color: white; }
+        .mission-btn:hover { transform: scale(1.05) translateY(-2px); }
+
+        .step-actions { display: flex; gap: 1rem; justify-content: center; }
+
+        .content-overlay {
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0, 0, 0, 0.85);
+          backdrop-filter: blur(10px);
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          padding: 2rem;
         }
-        .chip.Large {
-          padding: 1.2rem 2.5rem;
-          font-size: 1.2rem;
+        .overlay-header { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+        .close-btn { background: rgba(255,255,255,0.1); padding: 0.5rem 1.5rem; border-radius: 12px; font-weight: 700; }
+        .overlay-body { flex: 1; overflow-y: auto; display: flex; align-items: center; justify-content: center; }
+
+        .interaction-hub {
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          background: rgba(255, 255, 255, 0.05) !important;
+        }
+        .voice-zone { display: flex; align-items: center; gap: 1.5rem; }
+        .mic-btn {
+          padding: 1rem 2rem;
+          background: var(--danger);
+          border-radius: 50px;
+          font-weight: 800;
+          color: white;
+          min-width: 180px;
+        }
+        .mic-btn.listening { background: var(--success); }
+        .transcript { font-size: 1.1rem; font-style: italic; opacity: 0.7; }
+        
+        .quick-questions { display: flex; gap: 0.75rem; }
+        .quick-questions button {
+          padding: 0.5rem 1rem;
+          background: rgba(255,255,255,0.1);
+          border-radius: 12px;
+          font-size: 0.9rem;
+        }
+
+        .level-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; justify-content: center; }
+        .level-tabs button { padding: 0.5rem 1.5rem; border-radius: 50px; background: rgba(255,255,255,0.1); }
+        .level-tabs button.active { background: var(--accent); color: var(--primary); font-weight: 700; }
+
+        .steps { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; text-align: left; }
+        .step-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .step-num { 
+          background: var(--primary); width: 28px; height: 28px; 
+          border-radius: 50%; display: flex; align-items: center; 
+          justify-content: center; font-size: 0.8rem; font-weight: 800;
+          flex-shrink: 0;
+        }
+
+        .tech-toggle { background: none; color: var(--accent); font-size: 0.8rem; margin-top: 1rem; text-decoration: underline; }
+        .technical-info { margin-top: 1rem; text-align: left; background: rgba(0,0,0,0.4) !important; }
+        .tag { background: rgba(255,255,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.4rem; }
+
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.1); opacity: 0.4; }
+          100% { transform: scale(1); opacity: 0.8; }
+        }
+        .bounce { animation: bounce 0.5s infinite; }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
         }
 
         @media (max-width: 768px) {
-          .guidance-stage-container {
-            padding: 1rem;
-          }
-          .professor-avatar {
-            width: 80px;
-            height: 80px;
-            font-size: 3rem;
-          }
-          .professor-speech-bubble {
-            padding: 1.5rem;
-            border-radius: 20px;
-          }
-          .mentor-text {
-            font-size: 1.1rem;
-          }
-          .mastery-title {
-            font-size: 0.8rem;
-          }
-          .chip.Large {
-            padding: 0.8rem 1.5rem;
-            font-size: 1rem;
-          }
+          .mentor-text { font-size: 1.2rem; }
+          .spark-avatar { width: 100px; height: 100px; }
+          .avatar-frame { font-size: 3rem; }
+          .mission-btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
+          .voice-zone { flex-direction: column; align-items: center; text-align: center; }
         }
       `}</style>
     </div>

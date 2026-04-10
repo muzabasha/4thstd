@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 
 export const useVoice = () => {
   const [isListening, setIsListening] = useState(false);
@@ -8,17 +8,37 @@ export const useVoice = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [lang, setLang] = useState('en-IN');
 
-  // Check for SpeechRecognition support
-  const SpeechRecognition = typeof window !== 'undefined' ? 
-    (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition : null;
+  const recognition = useMemo(() => {
+    if (typeof window === 'undefined') return null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) return null;
+    
+    const rec = new SpeechRecognition();
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.lang = lang;
 
-  const recognition = SpeechRecognition ? new SpeechRecognition() : null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onresult = (event: any) => {
+      const current = event.resultIndex;
+      const result = event.results[current][0].transcript;
+      setTranscript(result);
+      setIsListening(false);
+    };
 
-  if (recognition) {
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = lang;
-  }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    rec.onerror = (event: any) => {
+      console.error('Speech recognition error:', event.error);
+      setIsListening(false);
+    };
+
+    rec.onend = () => {
+      setIsListening(false);
+    };
+
+    return rec;
+  }, [lang]);
 
   const startListening = useCallback(() => {
     if (!recognition) return;
@@ -30,26 +50,6 @@ export const useVoice = () => {
     if (!recognition) return;
     setIsListening(false);
     recognition.stop();
-  }, [recognition]);
-
-  useEffect(() => {
-    if (!recognition) return;
-
-    recognition.onresult = (event: any) => {
-      const current = event.resultIndex;
-      const result = event.results[current][0].transcript;
-      setTranscript(result);
-      setIsListening(false);
-    };
-
-    recognition.onerror = (event: any) => {
-      console.error('Speech recognition error:', event.error);
-      setIsListening(false);
-    };
-
-    recognition.onend = () => {
-      setIsListening(false);
-    };
   }, [recognition]);
 
   const speak = useCallback((text: string) => {
@@ -67,7 +67,7 @@ export const useVoice = () => {
     utterance.onend = () => setIsSpeaking(false);
 
     window.speechSynthesis.speak(utterance);
-  }, []);
+  }, [lang]);
 
   return { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang };
 };
