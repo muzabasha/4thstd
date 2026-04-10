@@ -1,33 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Subject, Topic } from '../lib/curriculum';
-import { useVoice } from '../hooks/useVoice';
 import { generateAIResponse } from '../lib/ai';
-import InteractiveMapLab from './InteractiveMapLab';
 import InteractiveQuiz from './InteractiveQuiz';
 
-interface VoiceAITutorProps {
+interface TopicExplorerProps {
   subject: Subject;
   topic: Topic;
 }
 
-export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
+export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
   const [messages, setMessages] = useState<{ role: 'ai' | 'user'; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState<'learn' | 'quiz' | 'activity' | 'lab'>('learn');
+  const [mode, setMode] = useState<'learn' | 'quiz' | 'activity'>('learn');
   const [currentLevel, setCurrentLevel] = useState<'low' | 'mid' | 'high'>('low');
   const [masteryStep, setMasteryStep] = useState(0); 
-  const [showTechnical, setShowTechnical] = useState(false);
-  const lastTranscriptRef = useRef<string>('');
-  
-  const { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang } = useVoice();
-  
-  useEffect(() => {
-    if (subject.id === 'hindi') setLang('hi-IN');
-    else if (subject.id === 'kannada') setLang('kn-IN');
-    else setLang('en-IN');
-  }, [subject.id, setLang]);
 
   useEffect(() => {
     const guideMe = async () => {
@@ -35,14 +23,13 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
       let prompt: string = "";
       
       if (masteryStep === 0) {
-        prompt = `Hi Yasmeen! I'm Professor Spark. Imagine we are on a grand adventure! Today, we are exploring "${topic.title}". Are you ready to dive into this scenario? Tap the Rocket! 🚀`;
+        prompt = `Let's begin exploring the world of "${topic.title}". Today we'll discover new scenarios and learn by doing! 🚀`;
       } else if (masteryStep <= topic.subtopics.length) {
         const subtopic = topic.subtopics[masteryStep - 1];
         const explanation = await generateAIResponse('explain', topic.title, subtopic);
-        
-        prompt = `🌈 **The Scenario:** ${explanation} \n\n**Let's Try It:** Look at your activity board to see how we can do this together!`;
+        prompt = `🌈 **The Scenario:** ${explanation} \n\n**Mission:** Try the activity below to master this concept!`;
       } else {
-        prompt = `Success! You've navigated the scenario for "${topic.title}". I'm so proud of your progress! Ready for your top-performer challenge? 🏆`;
+        prompt = `Mission Accomplished! You've navigated through "${topic.title}". Are you ready for the final mastery challenge? 🏆`;
       }
       
       setMessages([{ role: 'ai', content: prompt }]);
@@ -54,383 +41,225 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
 
   const handleUserAction = useCallback(async (input: string) => {
     setMessages(prev => [...prev, { role: 'user', content: input }]);
-    setIsLoading(true);
-
-    let promptType: 'explain' | 'quiz' | 'evaluate' | 'activity' = 'explain';
-    if (input.toLowerCase().includes('quiz')) {
-      promptType = 'quiz';
-      setMode('quiz');
-    } else if (mode === 'quiz') {
-      promptType = 'evaluate';
-    }
-
-    const aiResponseText = await generateAIResponse(promptType, topic.title, input);
-    setMessages(prev => [...prev, { role: 'ai', content: aiResponseText }]);
-    setIsLoading(false);
-  }, [mode, topic.title]);
-
-  useEffect(() => {
-    if (transcript && !isListening && transcript !== lastTranscriptRef.current) {
-      lastTranscriptRef.current = transcript;
-      // Defer state update to avoid cascading render warning in some lint configs
-      setTimeout(() => {
-        handleUserAction(transcript);
-      }, 0);
-    }
-  }, [transcript, isListening, handleUserAction]);
+  }, []);
 
   return (
-    <div className="tutor-layout">
-      {/* Top Progress Bar */}
-      <div className="mission-bar">
-        <div className="mission-progress">
-          <div 
-            className="progress-fill" 
-            style={{ width: `${(masteryStep / (topic.subtopics.length + 1)) * 100}%` }}
-          ></div>
+    <div className="topic-explorer">
+      {/* Header with Progress */}
+      <div className="explorer-header glass-card">
+        <div className="topic-info">
+          <span className="subject-tag">{subject.title}</span>
+          <h2>{topic.title}</h2>
         </div>
-        <div className="mission-label">
-          {masteryStep === 0 ? "Mission: Start Journey" : 
-           masteryStep <= topic.subtopics.length ? `Mission: Step ${masteryStep}` : 
-           "Mission: Mastery Quiz"}
+        <div className="mission-status">
+          <div className="progress-container">
+            <div 
+              className="progress-bar" 
+              style={{ width: `${(masteryStep / (topic.subtopics.length + 1)) * 100}%` }}
+            ></div>
+          </div>
+          <span className="status-text">
+            {masteryStep === 0 ? "Ready to Start" : 
+             masteryStep <= topic.subtopics.length ? `Concept ${masteryStep} of ${topic.subtopics.length}` : 
+             "Mastery Achieved"}
+          </span>
         </div>
       </div>
 
-      <div className="tutor-main">
-        {/* Hero Section: Professor Spark */}
-        <section className="hero-zone">
-          <div className={`spark-avatar ${isListening ? 'pulse' : ''}`}>
-            <div className="avatar-frame">🤖</div>
-            {isListening && <div className="listening-ring"></div>}
-          </div>
+      <main className="explorer-main">
+        {/* Main Content Area */}
+        <section className="scenario-section glass-card animate-fade-in">
+          {isLoading ? (
+            <div className="loading-state">Generating your mission scenario...</div>
+          ) : (
+            <div className="scenario-content">
+              <div className="scenario-badge">LEARNING SCENARIO</div>
+              <p className="scenario-text">{messages[messages.length - 1]?.content.replace(/Professor Spark|Hi Yasmeen!/g, '').trim()}</p>
+            </div>
+          )}
           
-          <div className="speech-container">
-            <div className="speech-bubble glass-card animate-fade-in">
-              {isLoading ? (
-                <div className="typing">Professor Spark is calculating...</div>
-              ) : (
-                <div className="mentor-content">
-                  <p className="mentor-text">{messages[messages.length - 1]?.content}</p>
-                </div>
-              )}
-            </div>
-            
-            <div className="hero-actions">
-              {masteryStep === 0 && !isLoading && (
-                <button className="mission-btn primary pulse" onClick={() => setMasteryStep(1)}>
-                  Start Mission 🚀
+          <div className="action-tray">
+            {masteryStep === 0 && !isLoading && (
+              <button className="action-btn primary pulse" onClick={() => setMasteryStep(1)}>
+                Start Learning Mission 🚀
+              </button>
+            )}
+            {masteryStep > 0 && masteryStep <= topic.subtopics.length && !isLoading && (
+              <div className="step-actions">
+                <button className="action-btn secondary" onClick={() => setMasteryStep(prev => prev + 1)}>
+                  Next Concept ➡️
                 </button>
-              )}
-              {masteryStep > 0 && masteryStep <= topic.subtopics.length && !isLoading && (
-                <div className="step-actions">
-                  <button className="mission-btn secondary" onClick={() => setMasteryStep(prev => prev + 1)}>
-                    Next Step ➡️
-                  </button>
-                  <button className="mission-btn accent" onClick={() => setMode('activity')}>
-                    Try Activity 🎯
-                  </button>
-                </div>
-              )}
-              {masteryStep > topic.subtopics.length && !isLoading && (
-                <button className="mission-btn success" onClick={() => setMode('quiz')}>
-                  Take Quiz 🏆
+                <button className="action-btn accent" onClick={() => setMode('activity')}>
+                  Learn by Doing Activity 🎯
                 </button>
-              )}
-            </div>
+              </div>
+            )}
+            {masteryStep > topic.subtopics.length && !isLoading && (
+              <button className="action-btn success" onClick={() => setMode('quiz')}>
+                Take Mastery Quiz 🏆
+              </button>
+            )}
           </div>
         </section>
 
-        {/* Dynamic Content Area (Activity/Lab/Quiz) */}
-        {mode !== 'learn' && (
-          <div className="content-overlay animate-fade-in">
-            <div className="overlay-header">
-              <button className="close-btn" onClick={() => setMode('learn')}>✕ Close</button>
-            </div>
-            
-            <div className="overlay-body">
-              {mode === 'activity' && (
-                <div className="activity-view">
-                   <div className="level-tabs">
-                    <button className={currentLevel === 'low' ? 'active' : ''} onClick={() => setCurrentLevel('low')}>Starter</button>
-                    <button className={currentLevel === 'mid' ? 'active' : ''} onClick={() => setCurrentLevel('mid')}>Explorer</button>
-                    <button className={currentLevel === 'high' ? 'active' : ''} onClick={() => setCurrentLevel('high')}>Expert</button>
-                  </div>
-                  {topic.activities.find(a => a.level === currentLevel) && (
-                    <div className="activity-details glass-card">
-                      <h4>{topic.activities.find(a => a.level === currentLevel)?.title}</h4>
-                      <p>{topic.activities.find(a => a.level === currentLevel)?.description}</p>
-                      <div className="steps">
-                        {topic.activities.find(a => a.level === currentLevel)?.steps.map((s, i) => (
-                          <div key={i} className="step-item">
-                            <span className="step-num">{i+1}</span>
-                            <span className="step-text">{s}</span>
-                          </div>
-                        ))}
-                      </div>
-                      <button className="done-btn" onClick={() => { setMode('learn'); handleUserAction("I did the activity!"); }}>Finished! ✅</button>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {mode === 'lab' && topic.virtualLab && (
-                <div className="lab-view glass-card">
-                   <h3>🔬 {topic.virtualLab.title}</h3>
-                   <div className="lab-sim">
-                      {topic.virtualLab.title.includes('India Map Lab') ? (
-                        <InteractiveMapLab onLandmarkClick={(info) => handleUserAction(info)} />
-                      ) : (
-                        <div className="sim-msg">{topic.virtualLab.simulation}</div>
-                      )}
-                   </div>
-                   <div className="lab-footer">
-                      <p><strong>Goal:</strong> {topic.virtualLab.task}</p>
-                   </div>
-                </div>
-              )}
-
-              {mode === 'quiz' && (
-                <div className="quiz-view">
-                  <InteractiveQuiz 
-                    questions={topic.quiz} 
-                    onComplete={(score) => {
-                      const msg = `Amazing Yasmeen! You scored ${score}/${topic.quiz.length}!`;
-                      setMessages([{ role: 'ai', content: msg }]);
-                      speak(msg);
-                      setMode('learn');
-                      setMasteryStep(0); // Reset for review
-                    }} 
-                  />
-                </div>
-              )}
+        {/* Technical/Teacher Details (Optional) */}
+        {!mode && (
+          <div className="learning-outcomes">
+            <h4>Learning Outcomes</h4>
+            <div className="outcome-tags">
+              {topic.learningOutcomes.map((lo, i) => <span key={i} className="outcome-tag">{lo}</span>)}
             </div>
           </div>
         )}
-        
-        {/* Interaction Hub (Voice & Text) */}
-        <div className="interaction-hub glass-card">
-          <div className="voice-zone">
-            <button 
-              className={`mic-btn ${isListening ? 'listening' : ''}`} 
-              onClick={isListening ? stopListening : startListening}
-            >
-              {isListening ? '🛑 Stop' : '🎤 Talk to Spark'}
-            </button>
-            <p className="transcript">{isListening ? (transcript || "Listening...") : "Tap to speak!"}</p>
+      </main>
+
+      {/* Overlays for Labs, Quizzes, Activities */}
+      {mode !== 'learn' && (
+        <div className="feature-overlay animate-scale-in">
+          <div className="overlay-nav">
+             <h3>{mode === 'quiz' ? 'Mastery Challenge' : mode === 'activity' ? 'Learn by Doing' : 'Virtual Lab'}</h3>
+             <button className="exit-btn" onClick={() => setMode('learn')}>Exit ✕</button>
           </div>
           
-          <div className="quick-questions">
-            <button onClick={() => handleUserAction("Why?")}>Why? 🤔</button>
-            <button onClick={() => handleUserAction("How?")}>How? 🛠️</button>
-            <button onClick={() => handleUserAction("Explain more")}>Explain More 📚</button>
+          <div className="overlay-content">
+            {mode === 'activity' && (
+              <div className="activity-panel glass-card">
+                 <div className="difficulty-picker">
+                  <button className={currentLevel === 'low' ? 'active' : ''} onClick={() => setCurrentLevel('low')}>Starter</button>
+                  <button className={currentLevel === 'mid' ? 'active' : ''} onClick={() => setCurrentLevel('mid')}>Explorer</button>
+                  <button className={currentLevel === 'high' ? 'active' : ''} onClick={() => setCurrentLevel('high')}>Expert</button>
+                </div>
+                {topic.activities.find(a => a.level === currentLevel) && (
+                  <div className="activity-details">
+                    <h3>{topic.activities.find(a => a.level === currentLevel)?.title}</h3>
+                    <p className="desc">{topic.activities.find(a => a.level === currentLevel)?.description}</p>
+                    <div className="checklist">
+                      {topic.activities.find(a => a.level === currentLevel)?.steps.map((s, i) => (
+                        <div key={i} className="check-item">
+                          <input type="checkbox" id={`step-${i}`} />
+                          <label htmlFor={`step-${i}`}>{s}</label>
+                        </div>
+                      ))}
+                    </div>
+                    <button className="complete-btn" onClick={() => { setMode('learn'); handleUserAction("Action completed."); }}>Mission Complete! ✅</button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {mode === 'quiz' && (
+              <InteractiveQuiz 
+                questions={topic.quiz} 
+                onComplete={(score) => {
+                  setMessages([{ role: 'ai', content: `Score: ${score}/${topic.quiz.length}` }]);
+                  setMode('learn');
+                  setMasteryStep(0);
+                }} 
+              />
+            )}
           </div>
         </div>
-      </div>
-
-      {/* Advanced Drawer for Teachers/Parents */}
-      <footer className="tutor-footer">
-        <button className="tech-toggle" onClick={() => setShowTechnical(!showTechnical)}>
-          {showTechnical ? "Hide Teacher Info" : "Show Teacher Info (NEP)"}
-        </button>
-        {showTechnical && (
-          <div className="technical-info animate-fade-in glass-card">
-            <div className="info-grid">
-              <div>
-                <h5>Learning Outcomes</h5>
-                <div className="tags">
-                  {topic.learningOutcomes.map((lo, i) => <span key={i} className="tag">{lo}</span>)}
-                </div>
-              </div>
-              <div>
-                <h5>Cross-Curricular</h5>
-                <p>{topic.crossCurricularLink}</p>
-              </div>
-            </div>
-          </div>
-        )}
-      </footer>
+      )}
 
       <style jsx>{`
-        .tutor-layout {
+        .topic-explorer {
           display: flex;
           flex-direction: column;
-          height: 100%;
-          gap: 1.5rem;
-          color: var(--text-color);
-        }
-
-        .mission-bar {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          background: white;
-          padding: 0.75rem 1.5rem;
-          border-radius: 50px;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-        .mission-progress {
-          flex: 1;
-          height: 8px;
-          background: rgba(0, 0, 0, 0.05);
-          border-radius: 10px;
-          overflow: hidden;
-        }
-        .progress-fill {
-          height: 100%;
-          background: linear-gradient(90deg, var(--accent), var(--success));
-          transition: width 0.5s ease;
-        }
-        .mission-label { font-size: 0.8rem; font-weight: 700; color: var(--accent); }
-
-        .hero-zone {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
           gap: 2rem;
-          padding: 2rem 0;
-        }
-        
-        .spark-avatar {
-          position: relative;
-          width: 140px;
-          height: 140px;
-          cursor: pointer;
-        }
-        .avatar-frame {
-          width: 100%;
-          height: 100%;
-          background: white;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 5rem;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-          border: 6px solid var(--accent);
-          z-index: 2;
-          position: relative;
-        }
-        
-        .listening-ring {
-          position: absolute;
-          top: -10px; left: -10px; right: -10px; bottom: -10px;
-          border: 4px solid var(--success);
-          border-radius: 50%;
-          animation: pulse 1.5s infinite;
-        }
-
-        .speech-container {
-          width: 100%;
-          max-width: 700px;
-          text-align: center;
-        }
-        .speech-bubble {
-          padding: 2rem;
-          border-radius: 30px;
-          margin-bottom: 2rem;
-          min-height: 120px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .mentor-text { font-size: 1.6rem; font-weight: 700; line-height: 1.4; color: var(--primary); }
-
-        .mission-btn {
-          padding: 1rem 2.5rem;
-          border-radius: 50px;
-          font-size: 1.25rem;
-          font-weight: 700;
-          transition: all 0.3s;
-          box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-        .mission-btn.primary { background: var(--primary); color: white; }
-        .mission-btn.secondary { background: var(--info); color: white; }
-        .mission-btn.accent { background: var(--accent); color: var(--primary); }
-        .mission-btn.success { background: var(--success); color: white; }
-        .mission-btn:hover { transform: scale(1.05) translateY(-2px); }
-
-        .step-actions { display: flex; gap: 1rem; justify-content: center; }
-
-        .content-overlay {
-          position: fixed;
-          top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(248, 251, 255, 0.98);
-          backdrop-filter: blur(10px);
-          z-index: 1000;
-          display: flex;
-          flex-direction: column;
-          padding: 2rem;
+          padding: 1rem;
+          max-width: 1000px;
+          margin: 0 auto;
           color: var(--text-color);
         }
-        .overlay-header { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
-        .close-btn { background: rgba(255,255,255,0.1); padding: 0.5rem 1.5rem; border-radius: 12px; font-weight: 700; }
-        .overlay-body { flex: 1; overflow-y: auto; display: flex; align-items: center; justify-content: center; }
 
-        .interaction-hub {
-          padding: 1.5rem;
+        .explorer-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1.5rem 2rem;
+          border-radius: 24px;
+          background: white;
+        }
+        .subject-tag { font-size: 0.8rem; font-weight: 800; color: var(--accent); text-transform: uppercase; }
+        h2 { font-size: 2rem; color: var(--primary); margin: 0.2rem 0; }
+        
+        .mission-status { width: 250px; }
+        .progress-container { height: 10px; background: rgba(0,0,0,0.05); border-radius: 10px; overflow: hidden; margin-bottom: 0.5rem; }
+        .progress-bar { height: 100%; background: var(--success); transition: width 0.4s; }
+        .status-text { font-size: 0.8rem; font-weight: 700; opacity: 0.6; }
+
+        .scenario-section {
+          padding: 4rem 3rem;
+          border-radius: 32px;
+          min-height: 450px;
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
-          background: white !important;
-          box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
-          border-radius: 40px 40px 0 0;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          background: white;
         }
-        .voice-zone { display: flex; align-items: center; gap: 1.5rem; }
-        .mic-btn {
-          padding: 1rem 2rem;
-          background: var(--danger);
-          border-radius: 50px;
-          font-weight: 800;
-          color: white;
-          min-width: 180px;
-        }
-        .mic-btn.listening { background: var(--success); }
-        .transcript { font-size: 1.1rem; font-style: italic; opacity: 0.7; }
         
-        .quick-questions { display: flex; gap: 0.75rem; }
-        .quick-questions button {
-          padding: 0.5rem 1rem;
-          background: rgba(108, 92, 231, 0.08);
-          border-radius: 12px;
+        .scenario-badge {
+          display: inline-block;
+          padding: 0.5rem 1.5rem;
+          background: var(--primary);
+          color: white;
+          border-radius: 50px;
+          font-weight: 900;
           font-size: 0.9rem;
-          color: var(--primary);
-          font-weight: 700;
+          margin-bottom: 2.5rem;
+          letter-spacing: 1px;
+        }
+        
+        .scenario-text {
+          font-size: 2rem;
+          line-height: 1.6;
+          font-weight: 800;
+          color: var(--text-color);
+          margin-bottom: 3.5rem;
+          max-width: 850px;
         }
 
-        .level-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; justify-content: center; }
-        .level-tabs button { padding: 0.5rem 1.5rem; border-radius: 50px; background: rgba(255,255,255,0.1); }
-        .level-tabs button.active { background: var(--accent); color: var(--primary); font-weight: 700; }
-
-        .steps { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; text-align: left; }
-        .step-item { display: flex; gap: 1rem; align-items: flex-start; }
-        .step-num { 
-          background: var(--primary); width: 28px; height: 28px; 
-          border-radius: 50%; display: flex; align-items: center; 
-          justify-content: center; font-size: 0.8rem; font-weight: 800;
-          flex-shrink: 0;
+        .action-tray { display: flex; gap: 1.5rem; width: 100%; justify-content: center; }
+        .action-btn { 
+          padding: 1.4rem 3.5rem; border-radius: 20px; font-weight: 900; font-size: 1.3rem;
+          border: none; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
         }
-
-        .tech-toggle { background: none; color: var(--accent); font-size: 0.8rem; margin-top: 1rem; text-decoration: underline; }
-        .technical-info { margin-top: 1rem; text-align: left; background: rgba(0,0,0,0.4) !important; }
-        .tag { background: rgba(255,255,255,0.1); padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.7rem; margin-right: 0.4rem; }
-
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 0.8; }
-          50% { transform: scale(1.1); opacity: 0.4; }
-          100% { transform: scale(1); opacity: 0.8; }
+        .action-btn.primary { background: var(--primary); color: white; box-shadow: 0 10px 25px rgba(108, 92, 231, 0.2); }
+        .action-btn.secondary { background: var(--info); color: white; }
+        .action-btn.accent { background: var(--accent); color: var(--primary); }
+        .action-btn.success { background: var(--success); color: white; }
+        .action-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        
+        .feature-overlay {
+          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+          background: var(--bg-color); z-index: 1000; padding: 2.5rem;
+          overflow-y: auto;
         }
-        .bounce { animation: bounce 0.5s infinite; }
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
-        }
+        .overlay-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+        .exit-btn { padding: 0.8rem 2rem; border-radius: 12px; font-weight: 800; border: none; background: rgba(0,0,0,0.05); cursor: pointer; }
+        
+        .activity-panel { max-width: 850px; margin: 0 auto; padding: 3rem; background: white; border-radius: 32px; }
+        .difficulty-picker { display: flex; gap: 0.75rem; margin-bottom: 2.5rem; justify-content: center; }
+        .difficulty-picker button { padding: 0.8rem 2.2rem; border-radius: 50px; border: none; background: rgba(0,0,0,0.05); cursor: pointer; }
+        .difficulty-picker button.active { background: var(--primary); color: white; font-weight: 900; }
+        
+        .checklist { display: flex; flex-direction: column; gap: 1.5rem; margin: 3rem 0; text-align: left; }
+        .check-item { display: flex; gap: 1.2rem; align-items: center; font-size: 1.4rem; font-weight: 600; cursor: pointer; }
+        input[type="checkbox"] { width: 26px; height: 26px; accent-color: var(--success); cursor: pointer; }
+
+        .loading-state { font-size: 1.2rem; font-weight: 700; color: var(--primary); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        .learning-outcomes { margin-top: 4rem; padding: 2rem; background: rgba(255, 255, 255, 0.5); border-radius: 20px; }
+        .outcome-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1rem; }
+        .outcome-tag { padding: 0.4rem 1rem; background: white; border-radius: 10px; font-size: 0.9rem; font-weight: 700; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 
         @media (max-width: 768px) {
-          .mentor-text { font-size: 1.2rem; }
-          .spark-avatar { width: 100px; height: 100px; }
-          .avatar-frame { font-size: 3rem; }
-          .mission-btn { padding: 0.8rem 1.5rem; font-size: 1rem; }
-          .voice-zone { flex-direction: column; align-items: center; text-align: center; }
+          .explorer-header { flex-direction: column; text-align: center; gap: 1.5rem; }
+          .scenario-text { font-size: 1.4rem; }
+          .action-tray { flex-direction: column; }
         }
       `}</style>
     </div>
