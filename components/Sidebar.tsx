@@ -1,16 +1,14 @@
 "use client";
 
 import React, { useState } from 'react';
-import { syllabus, Subject, Chapter, Topic } from '../lib/curriculum';
+import { syllabus } from '../lib/curriculum';
 
 interface SidebarProps {
-  onSelectTopic: (subject: Subject, chapter: Chapter, topic: Topic) => void;
-  onGoHome: () => void;
-  selectedTopicId?: string;
+  onSelectSubject: (subjectId: string | null) => void;
+  selectedSubjectId: string | null;
 }
 
-export default function Sidebar({ onSelectTopic, onGoHome, selectedTopicId }: SidebarProps) {
-  const [expandedSubject, setExpandedSubject] = useState<string | null>(syllabus[0].id);
+export default function Sidebar({ onSelectSubject, selectedSubjectId }: SidebarProps) {
 
   return (
     <aside className="sidebar">
@@ -25,8 +23,8 @@ export default function Sidebar({ onSelectTopic, onGoHome, selectedTopicId }: Si
       <div className="subjects-list">
         <h3 className="section-label">Main</h3>
         <button 
-          className={`subject-item ${selectedTopicId === undefined ? 'active' : ''}`}
-          onClick={() => { setExpandedSubject(null); onGoHome(); }}
+          className={`subject-item ${selectedSubjectId === null ? 'active' : ''}`}
+          onClick={() => onSelectSubject(null)}
         >
           <div className="subject-icon-box">🏠</div>
           <span className="subject-name">Dashboard</span>
@@ -36,8 +34,8 @@ export default function Sidebar({ onSelectTopic, onGoHome, selectedTopicId }: Si
         {syllabus.map((subject) => (
           <button 
             key={subject.id}
-            className={`subject-item ${expandedSubject === subject.id ? 'active' : ''}`}
-            onClick={() => setExpandedSubject(subject.id)}
+            className={`subject-item ${selectedSubjectId === subject.id ? 'active' : ''}`}
+            onClick={() => onSelectSubject(subject.id)}
           >
             <div className="subject-icon-box">
               {subject.id === 'hindi' ? '🇮🇳' : subject.id === 'kannada' ? '🚩' : 
@@ -45,37 +43,11 @@ export default function Sidebar({ onSelectTopic, onGoHome, selectedTopicId }: Si
                subject.id === 'social-studies' ? '🌍' : '💻'}
             </div>
             <span className="subject-name">{subject.title.split(' (')[0]}</span>
-            {expandedSubject === subject.id && <span className="active-dot"></span>}
+            {selectedSubjectId === subject.id && <span className="active-dot"></span>}
           </button>
         ))}
       </div>
 
-      <nav className="sidebar-nav">
-        {expandedSubject && (
-          <div className="active-subject-view animate-fade-in">
-            {syllabus.find(s => s.id === expandedSubject)?.chapters.map((chapter) => (
-              <div key={chapter.id} className="chapter-box glass-card">
-                <h3 className="chapter-title">📖 {chapter.title}</h3>
-                <div className="topic-grid">
-                  {chapter.topics.map((topic) => (
-                    <button 
-                      key={topic.id} 
-                      className={`topic-card ${selectedTopicId === topic.id ? 'selected' : ''}`}
-                      onClick={() => onSelectTopic(syllabus.find(s => s.id === expandedSubject)!, chapter, topic)}
-                    >
-                      <div className="topic-card-icon">{selectedTopicId === topic.id ? '✅' : '🎯'}</div>
-                      <div className="topic-card-info">
-                        <span className="topic-card-title">{topic.title}</span>
-                        <span className="topic-card-meta">{topic.subtopics.length} steps</span>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </nav>
 
       <style jsx>{`
         .sidebar {
@@ -143,52 +115,6 @@ export default function Sidebar({ onSelectTopic, onGoHome, selectedTopicId }: Si
         }
         .subject-name { font-size: 0.9rem; }
 
-        .sidebar-nav {
-          flex: 1;
-          overflow-y: auto;
-          padding: 1rem;
-        }
-
-        .chapter-box {
-          margin-bottom: 1.5rem;
-          padding: 1rem !important;
-          background: white !important;
-        }
-        .chapter-title {
-          font-size: 0.9rem;
-          margin-bottom: 0.75rem;
-          color: var(--primary);
-          border-bottom: 1px solid rgba(0,0,0,0.05);
-          padding-bottom: 0.5rem;
-        }
-        
-        .topic-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
-        }
-
-        .topic-card {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 0.75rem;
-          background: #f8f9fa;
-          border-radius: 12px;
-          border: 1px solid transparent;
-          transition: all 0.2s;
-          text-align: left;
-        }
-        .topic-card:hover { border-color: var(--primary); transform: translateX(5px); }
-        .topic-card.selected {
-          background: rgba(88, 61, 161, 0.1);
-          border-color: var(--primary);
-        }
-        
-        .topic-card-icon { font-size: 1.2rem; }
-        .topic-card-info { display: flex; flex-direction: column; }
-        .topic-card-title { font-size: 0.85rem; font-weight: 700; color: #333; }
-        .topic-card-meta { font-size: 0.7rem; color: #666; }
       `}</style>
     </aside>
   );

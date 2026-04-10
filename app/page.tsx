@@ -10,6 +10,19 @@ export default function Home() {
   const [selectedChapter, setSelectedChapter] = useState<Chapter | null>(null);
   const [selectedTopic, setSelectedTopic] = useState<Topic | null>(null);
 
+  const handleSelectSubject = (subjectId: string | null) => {
+    if (!subjectId) {
+      setSelectedSubject(null);
+      setSelectedChapter(null);
+      setSelectedTopic(null);
+    } else {
+      const subject = syllabus.find(s => s.id === subjectId);
+      setSelectedSubject(subject || null);
+      setSelectedChapter(null);
+      setSelectedTopic(null);
+    }
+  };
+
   const handleSelectTopic = (subject: Subject, chapter: Chapter, topic: Topic) => {
     setSelectedSubject(subject);
     setSelectedChapter(chapter);
@@ -25,17 +38,12 @@ export default function Home() {
   return (
     <div className="container">
       <Sidebar 
-        onSelectTopic={handleSelectTopic} 
-        onGoHome={() => {
-          setSelectedSubject(null);
-          setSelectedChapter(null);
-          setSelectedTopic(null);
-        }}
-        selectedTopicId={selectedTopic?.id} 
+        onSelectSubject={handleSelectSubject} 
+        selectedSubjectId={selectedSubject?.id || null} 
       />
       
       <main className="main-content">
-        {!selectedTopic ? (
+        {!selectedSubject ? (
           <div className="welcome-dashboard animate-fade-in">
             <header className="welcome-header">
               <h1>Welcome back, Yasmeen! 🌟</h1>
@@ -67,19 +75,52 @@ export default function Home() {
               <h2>Explore your Subjects</h2>
               <div className="subject-grid">
                 {syllabus.map(s => (
-                  <div key={s.id} className="subject-box card-small">
+                  <button key={s.id} className="subject-box card-small" onClick={() => handleSelectSubject(s.id)}>
                     <span className="box-icon">📚</span>
                     <span>{s.title}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
+            </div>
+          </div>
+        ) : !selectedTopic ? (
+          <div className="subject-detail-view animate-fade-in">
+            <header className="page-header">
+              <div className="breadcrumb">
+                <button className="back-btn" onClick={() => handleSelectSubject(null)}>⬅ Dashboard</button>
+                <span>{selectedSubject.title}</span>
+              </div>
+              <h1>Select a Topic</h1>
+            </header>
+
+            <div className="chapters-explorer">
+              {selectedSubject.chapters.map(chapter => (
+                <div key={chapter.id} className="chapter-section glass-card">
+                  <h2 className="chapter-title">📖 {chapter.title}</h2>
+                  <div className="topic-grid">
+                    {chapter.topics.map(topic => (
+                      <button 
+                        key={topic.id} 
+                        className="topic-box card-small"
+                        onClick={() => handleSelectTopic(selectedSubject, chapter, topic)}
+                      >
+                        <div className="topic-icon">🎯</div>
+                        <div className="topic-info">
+                          <span className="topic-name">{topic.title}</span>
+                          <span className="topic-steps">{topic.subtopics.length} learning steps</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         ) : (
           <div className="learning-view animate-fade-in">
             <header className="page-header">
               <div className="breadcrumb">
-                <button className="back-btn" onClick={() => setSelectedTopic(null)}>⬅ Dashboard</button>
+                <button className="back-btn" onClick={() => setSelectedTopic(null)}>⬅ Topics</button>
                 <span>{selectedSubject?.title}</span> / <span>{selectedChapter?.title}</span>
               </div>
               <h1>{selectedTopic.title}</h1>
@@ -142,7 +183,31 @@ export default function Home() {
           padding: 1.5rem !important;
           box-shadow: 0 4px 15px rgba(0,0,0,0.05);
           border: 1px solid rgba(0,0,0,0.02);
+          transition: transform 0.2s;
+          width: 100%;
         }
+        .subject-box:hover { transform: translateY(-3px); }
+
+        .chapter-section { margin-bottom: 2rem; padding: 2rem !important; }
+        .chapter-title { margin-bottom: 1.5rem; color: var(--primary); font-size: 1.5rem; }
+        .topic-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+          gap: 1rem;
+        }
+        .topic-box {
+          display: flex; gap: 1rem; align-items: center; 
+          background: white !important;
+          padding: 1rem !important;
+          border-radius: 16px;
+          text-align: left;
+          transition: all 0.2s;
+        }
+        .topic-box:hover { transform: translateX(5px); border-color: var(--primary); }
+        .topic-icon { font-size: 1.5rem; }
+        .topic-info { display: flex; flex-direction: column; }
+        .topic-name { font-weight: 700; color: var(--text-color); }
+        .topic-steps { font-size: 0.8rem; opacity: 0.6; }
 
         .back-btn { background: none; color: var(--primary); font-weight: 800; margin-right: 1rem; border: 2px solid rgba(108, 92, 231, 0.2); padding: 0.5rem 1rem; border-radius: 12px; }
 
