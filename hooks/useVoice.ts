@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 
 export const useVoice = () => {
   const [isListening, setIsListening] = useState(false);
@@ -60,14 +60,34 @@ export const useVoice = () => {
 
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = lang;
-    utterance.rate = 1.0;
-    utterance.pitch = 1.2; // Child-friendly pitch
+    
+    // Attempt to find a high-quality native voice
+    const voices = window.speechSynthesis.getVoices();
+    const targetVoice = voices.find(v => v.lang.startsWith(lang.split('-')[0]));
+    
+    if (targetVoice) {
+      utterance.voice = targetVoice;
+    }
+
+    utterance.rate = 0.95; // Slightly slower for better clarity for kids
+    utterance.pitch = 1.15; // Pleasant, child-friendly pitch
 
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = (e) => {
+      console.error('Speech Synthesis Error:', e);
+      setIsSpeaking(false);
+    };
 
     window.speechSynthesis.speak(utterance);
   }, [lang]);
+
+  // Pre-fetch voices to ensure they are available
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.getVoices();
+    }
+  }, []);
 
   return { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang };
 };
