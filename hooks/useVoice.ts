@@ -55,6 +55,14 @@ export const useVoice = () => {
   const speak = useCallback((text: string, overrideLang?: string) => {
     if (typeof window === 'undefined') return;
 
+    // Auto-detect Language based on script
+    let detectedLang = overrideLang || lang;
+    if (/[\u0900-\u097F]/.test(text)) {
+      detectedLang = 'hi-IN';
+    } else if (/[\u0C80-\u0CFF]/.test(text)) {
+      detectedLang = 'kn-IN';
+    }
+
     // Browser policy: Resume if paused
     if (window.speechSynthesis.paused) {
       window.speechSynthesis.resume();
@@ -63,16 +71,15 @@ export const useVoice = () => {
     // Stop current speech
     window.speechSynthesis.cancel();
 
-    const currentLang = overrideLang || lang;
-    const langCode = currentLang.split('-')[0].toLowerCase();
+    const langCode = detectedLang.split('-')[0].toLowerCase();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = currentLang;
+    utterance.lang = detectedLang;
     
     // Discovery loop for voices
     const voices = window.speechSynthesis.getVoices();
     let targetVoice = voices.find(v => 
-      v.lang.toLowerCase() === currentLang.toLowerCase() ||
+      v.lang.toLowerCase() === detectedLang.toLowerCase() ||
       v.lang.toLowerCase().startsWith(langCode)
     );
 
