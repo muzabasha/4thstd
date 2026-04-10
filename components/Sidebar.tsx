@@ -5,10 +5,11 @@ import { syllabus, Subject, Chapter, Topic } from '../lib/curriculum';
 
 interface SidebarProps {
   onSelectTopic: (subject: Subject, chapter: Chapter, topic: Topic) => void;
+  onGoHome: () => void;
   selectedTopicId?: string;
 }
 
-export default function Sidebar({ onSelectTopic, selectedTopicId }: SidebarProps) {
+export default function Sidebar({ onSelectTopic, onGoHome, selectedTopicId }: SidebarProps) {
   const [expandedSubject, setExpandedSubject] = useState<string | null>(syllabus[0].id);
 
   return (
@@ -21,16 +22,30 @@ export default function Sidebar({ onSelectTopic, selectedTopicId }: SidebarProps
         </div>
       </div>
 
-      <div className="subject-pills">
+      <div className="subjects-list">
+        <h3 className="section-label">Main</h3>
+        <button 
+          className={`subject-item ${selectedTopicId === undefined ? 'active' : ''}`}
+          onClick={() => { setExpandedSubject(null); onGoHome(); }}
+        >
+          <div className="subject-icon-box">🏠</div>
+          <span className="subject-name">Dashboard</span>
+        </button>
+
+        <h3 className="section-label">Subjects</h3>
         {syllabus.map((subject) => (
           <button 
             key={subject.id}
-            className={`subject-pill ${expandedSubject === subject.id ? 'active' : ''}`}
+            className={`subject-item ${expandedSubject === subject.id ? 'active' : ''}`}
             onClick={() => setExpandedSubject(subject.id)}
-            title={subject.title}
           >
-            <span className="pill-icon">{subject.id === 'hindi' ? '🇮🇳' : subject.id === 'kannada' ? '🚩' : '📚'}</span>
-            <span className="pill-text">{subject.title}</span>
+            <div className="subject-icon-box">
+              {subject.id === 'hindi' ? '🇮🇳' : subject.id === 'kannada' ? '🚩' : 
+               subject.id === 'mathematics' ? '📐' : subject.id === 'science' ? '🧪' :
+               subject.id === 'social-studies' ? '🌍' : '💻'}
+            </div>
+            <span className="subject-name">{subject.title.split(' (')[0]}</span>
+            {expandedSubject === subject.id && <span className="active-dot"></span>}
           </button>
         ))}
       </div>
@@ -75,36 +90,58 @@ export default function Sidebar({ onSelectTopic, selectedTopicId }: SidebarProps
           z-index: 100;
           box-shadow: 10px 0 40px rgba(0,0,0,0.02);
         }
-        .subject-pills {
-          display: flex;
-          gap: 0.5rem;
+        .subjects-list {
           padding: 1rem;
-          overflow-x: auto;
-          background: rgba(255, 255, 255, 0.5);
-          border-bottom: 1px solid rgba(0,0,0,0.05);
-          scrollbar-width: none;
-        }
-        .subject-pills::-webkit-scrollbar { display: none; }
-        
-        .subject-pill {
           display: flex;
           flex-direction: column;
+          gap: 0.5rem;
+          border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .section-label {
+          font-size: 0.75rem;
+          text-transform: uppercase;
+          color: #999;
+          letter-spacing: 1px;
+          margin-bottom: 0.5rem;
+          padding-left: 0.5rem;
+        }
+        .subject-item {
+          display: flex;
           align-items: center;
-          gap: 0.25rem;
-          padding: 0.5rem;
-          min-width: 60px;
-          border-radius: 12px;
+          gap: 0.75rem;
+          padding: 0.75rem;
+          border-radius: 16px;
           transition: all 0.2s;
-          opacity: 0.6;
+          text-align: left;
+          color: var(--text-color);
+          font-weight: 700;
         }
-        .subject-pill.active {
-          opacity: 1;
+        .subject-item:hover {
+          background: rgba(0,0,0,0.03);
+        }
+        .subject-item.active {
+          background: rgba(108, 92, 231, 0.1);
+          color: var(--primary);
+        }
+        .subject-icon-box {
+          width: 36px;
+          height: 36px;
+          background: white;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.2rem;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .active-dot {
+          width: 8px;
+          height: 8px;
           background: var(--primary);
-          color: white;
-          box-shadow: 0 4px 10px rgba(88, 61, 161, 0.2);
+          border-radius: 50%;
+          margin-left: auto;
         }
-        .pill-icon { font-size: 1.2rem; }
-        .pill-text { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; }
+        .subject-name { font-size: 0.9rem; }
 
         .sidebar-nav {
           flex: 1;

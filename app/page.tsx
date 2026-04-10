@@ -26,6 +26,11 @@ export default function Home() {
     <div className="container">
       <Sidebar 
         onSelectTopic={handleSelectTopic} 
+        onGoHome={() => {
+          setSelectedSubject(null);
+          setSelectedChapter(null);
+          setSelectedTopic(null);
+        }}
         selectedTopicId={selectedTopic?.id} 
       />
       
