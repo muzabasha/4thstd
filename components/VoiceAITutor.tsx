@@ -21,14 +21,13 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
   const { speak, setLang } = useVoice();
 
   useEffect(() => {
-    if (subject.id === 'hindi') setLang('hi-IN');
-    else if (subject.id === 'kannada') setLang('kn-IN');
-    else setLang('en-IN');
-  }, [subject.id, setLang]);
-
-  useEffect(() => {
     const guideMe = async () => {
       setIsLoading(true);
+
+      // Ensure language is set before speaking
+      const targetLang = subject.id === 'hindi' ? 'hi-IN' : (subject.id === 'kannada' ? 'kn-IN' : 'en-IN');
+      setLang(targetLang);
+
       const chapterId = topic.id.split('-')[0];
       let prompt: string = "";
       
@@ -45,12 +44,12 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
       
       const cleanPrompt = prompt.replace(/\*\*/g, '').replace(/🌈|🔍|🚀|🏆/g, '');
       setMessages([{ role: 'ai', content: prompt }]);
-      speak(cleanPrompt);
+      speak(cleanPrompt, targetLang);
       setIsLoading(false);
     };
 
     guideMe();
-  }, [topic.id, topic.title, topic.subtopics, masteryStep, speak]);
+  }, [topic.id, topic.title, topic.subtopics, masteryStep, speak, subject.id, setLang]);
 
   const handleUserAction = useCallback(async (input: string) => {
     setMessages(prev => [...prev, { role: 'user', content: input }]);
@@ -92,7 +91,8 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
                   className="read-aloud-btn" 
                   onClick={() => {
                     const clean = messages[messages.length - 1]?.content.replace(/\*\*/g, '').replace(/🌈|🔍|🚀|🏆/g, '');
-                    speak(clean);
+                    const targetLang = subject.id === 'hindi' ? 'hi-IN' : (subject.id === 'kannada' ? 'kn-IN' : 'en-IN');
+                    speak(clean, targetLang);
                   }}
                   title="Read Aloud"
                 >
