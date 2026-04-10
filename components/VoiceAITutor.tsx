@@ -31,21 +31,22 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
 
   useEffect(() => {
     const guideMe = async () => {
+      setIsLoading(true);
       let prompt: string = "";
+      
       if (masteryStep === 0) {
-        prompt = `Hi Yasmeen! I'm Professor Spark. Ready to explore ${topic.title}? We'll learn about ${topic.subtopics.join(" and ")}. Click the Rocket to start!`;
+        prompt = `Hi Yasmeen! I'm Professor Spark. Ready to explore ${topic.title}? We'll learn about ${topic.subtopics.join(" and ")}. Click the Rocket to start! 🚀`;
       } else if (masteryStep <= topic.subtopics.length) {
-        prompt = `Step ${masteryStep}: Let's talk about ${topic.subtopics[masteryStep - 1]}. [AI Explanation]. Did you find that interesting? We can do an activity next!`;
+        const subtopic = topic.subtopics[masteryStep - 1];
+        const explanation = await generateAIResponse('explain', topic.title, subtopic);
+        prompt = `Step ${masteryStep}: Let's talk about ${subtopic}. \n\n${explanation} \n\nDid you find that interesting? We can do an activity next!`;
       } else {
-        prompt = `Mission Accomplished! You've mastered ${topic.title}. Ready for the Final Quiz?`;
+        prompt = `Mission Accomplished! You've mastered ${topic.title}. Ready for the Final Quiz? 🏆`;
       }
       
-      setIsLoading(true);
-      setTimeout(() => {
-        setMessages([{ role: 'ai', content: prompt }]);
-        speak(prompt);
-        setIsLoading(false);
-      }, 800);
+      setMessages([{ role: 'ai', content: prompt }]);
+      speak(prompt);
+      setIsLoading(false);
     };
 
     guideMe();
