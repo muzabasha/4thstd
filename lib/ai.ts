@@ -48,7 +48,7 @@ const KNOWLEDGE_BASE: Record<string, string> = {
   "Swaragalu": "ಕನ್ನಡ ವರ್ಣಮಾಲೆಯಲ್ಲಿ ೧೩ ಸ್ವರಗಳಿವೆ. ಅವುಗಳು ಅ ಇಂದ ಔ ವರೆಗೆ ಸ್ವತಂತ್ರವಾಗಿ ಉಚ್ಚರಿಸಲ್ಪಡುವ ಅಕ್ಷರಗಳು.",
   
   // Default
-  "default": "That's a very interesting part of what we are learning! It helps us understand how things are connected in the real world. Would you like to know more about it?"
+  "default": "This is a fascinating part of our world! It reveals how different things work together. As we explore more, you'll see why this is such an important skill to learn!"
 };
 
 export const generateAIResponse = async (
@@ -59,7 +59,15 @@ export const generateAIResponse = async (
   return new Promise((resolve) => {
     setTimeout(() => {
       if (promptType === 'explain') {
-        const explanation = KNOWLEDGE_BASE[context || ""] || KNOWLEDGE_BASE[topic] || KNOWLEDGE_BASE["default"];
+        let explanation = KNOWLEDGE_BASE[context || ""] || KNOWLEDGE_BASE[topic] || KNOWLEDGE_BASE["default"];
+        
+        // Dynamic handling for generic Intro/Core subtopics
+        if (context === 'Introduction') {
+          explanation = `Welcome to our lesson on ${topic}! This is where we learn why this topic is so useful. Whether it's for building things or understanding nature, ${topic} is all around us!`;
+        } else if (context === 'Core Concepts') {
+          explanation = `In this part of ${topic}, we look at the most important ideas. These are the building blocks that will help you master the whole subject!`;
+        }
+        
         resolve(explanation);
       } else if (promptType === 'quiz') {
         resolve(`Ready for a challenge? Can you tell me one thing you remember about ${topic}? I'll check if you're right!`);

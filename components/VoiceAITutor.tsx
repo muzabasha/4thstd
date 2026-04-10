@@ -35,13 +35,31 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
       let prompt: string = "";
       
       if (masteryStep === 0) {
-        prompt = `Hi Yasmeen! I'm Professor Spark. Ready to explore ${topic.title}? We'll learn about ${topic.subtopics.join(" and ")}. Click the Rocket to start! 🚀`;
+        prompt = `Hi Yasmeen! I'm Professor Spark. Today we are exploring "${topic.title}". We'll cover things like ${topic.subtopics.slice(0, 3).join(", ")}. Tap the Rocket to jump in! 🚀`;
       } else if (masteryStep <= topic.subtopics.length) {
         const subtopic = topic.subtopics[masteryStep - 1];
         const explanation = await generateAIResponse('explain', topic.title, subtopic);
-        prompt = `Step ${masteryStep}: Let's talk about ${subtopic}. \n\n${explanation} \n\nDid you find that interesting? We can do an activity next!`;
+        
+        // Dynamic variatons for step framing
+        const openers = [
+          `Let's look at ${subtopic}.`,
+          `Next, we have ${subtopic}!`,
+          `Check this out: ${subtopic}`,
+          `Now for something cool: ${subtopic}`
+        ];
+        const closers = [
+          `Isn't that neat?`,
+          `Does that make sense?`,
+          `Want to try an activity on this?`,
+          `What do you think about that?`
+        ];
+        
+        const opener = openers[(masteryStep - 1) % openers.length];
+        const closer = closers[(masteryStep - 1) % closers.length];
+        
+        prompt = `${opener} \n\n${explanation} \n\n${closer}`;
       } else {
-        prompt = `Mission Accomplished! You've mastered ${topic.title}. Ready for the Final Quiz? 🏆`;
+        prompt = `You did it! You've successfully explored all parts of "${topic.title}". I'm so proud of you! Ready for the final challenge? 🏆`;
       }
       
       setMessages([{ role: 'ai', content: prompt }]);
