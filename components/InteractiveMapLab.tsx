@@ -63,7 +63,7 @@ export default function InteractiveMapLab({ onLandmarkClick }: MapLabProps) {
           flex-direction: column;
           gap: 1rem;
           padding: 1rem;
-          background: #1a1a2e;
+          background: #f0f7ff;
           position: relative;
         }
 
@@ -86,8 +86,8 @@ export default function InteractiveMapLab({ onLandmarkClick }: MapLabProps) {
           position: absolute;
           inset: 0;
           background-image: 
-            linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
           background-size: 20px 20px;
         }
 
@@ -136,8 +136,9 @@ export default function InteractiveMapLab({ onLandmarkClick }: MapLabProps) {
         }
 
         .landmark-info {
-          background: rgba(0,0,0,0.6);
-          border: 1px solid var(--accent);
+          background: white;
+          border: 2px solid var(--accent);
+          color: var(--text-color);
         }
       `}</style>
     </div>

@@ -72,12 +72,14 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
           }
           .score-text {
             font-size: 1.8rem;
-            color: white;
+            color: var(--primary);
             margin-bottom: 1.5rem;
+            font-weight: 800;
           }
           .feedback-message {
             font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: var(--text-color);
+            opacity: 0.8;
             margin-bottom: 2rem;
           }
           @keyframes bounce {
@@ -159,22 +161,23 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
           text-transform: uppercase;
         }
         .progress-bar {
-          height: 6px;
-          background: rgba(255, 255, 255, 0.1);
+          height: 8px;
+          background: rgba(0, 0, 0, 0.05);
           border-radius: 10px;
           margin-top: 0.5rem;
           overflow: hidden;
         }
         .progress-fill {
           height: 100%;
-          background: var(--accent);
+          background: var(--primary);
           transition: width 0.3s ease;
         }
         h3 {
           font-size: 1.8rem;
           margin-bottom: 2rem;
-          color: white;
+          color: var(--text-color);
           line-height: 1.4;
+          font-weight: 800;
         }
         .options-grid {
           display: grid;
@@ -182,11 +185,11 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
           gap: 1rem;
         }
         .option-btn {
-          background: rgba(255, 255, 255, 0.05);
-          border: 2px solid rgba(255, 255, 255, 0.1);
+          background: white;
+          border: 2px solid rgba(0, 0, 0, 0.05);
           padding: 1.5rem;
-          border-radius: 12px;
-          color: white;
+          border-radius: 16px;
+          color: var(--text-color);
           font-size: 1.2rem;
           text-align: left;
           cursor: pointer;
@@ -196,6 +199,8 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
           gap: 1.2rem;
           position: relative;
           width: 100%;
+          font-weight: 600;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
         .option-btn:hover:not(:disabled) {
           background: rgba(255, 255, 255, 0.1);
@@ -203,7 +208,7 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
           transform: translateY(-2px);
         }
         .option-label {
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(108, 92, 231, 0.1);
           width: 35px;
           height: 35px;
           display: flex;
@@ -211,7 +216,7 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
           justify-content: center;
           border-radius: 8px;
           font-weight: 800;
-          color: var(--accent);
+          color: var(--primary);
         }
         .option-btn.correct {
           background: rgba(46, 213, 115, 0.2);
@@ -231,12 +236,13 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
         .explanation {
           margin-top: 1.5rem;
           padding: 1.5rem;
-          background: rgba(255, 255, 255, 0.03);
+          background: white;
           border-radius: 20px;
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 1rem;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
         .correct-text {
           color: #2ed573;
@@ -250,10 +256,10 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
         }
         .next-btn {
           padding: 1.2rem 4rem;
-          background: var(--accent);
-          color: black;
+          background: var(--primary);
+          color: white;
           border: none;
-          border-radius: 12px;
+          border-radius: 16px;
           font-weight: 800;
           cursor: pointer;
           transition: all 0.2s;
@@ -262,6 +268,7 @@ export default function InteractiveQuiz({ questions, onComplete }: InteractiveQu
           font-size: 1.1rem;
           width: 100%;
           max-width: 400px;
+          box-shadow: 0 8px 20px rgba(108, 92, 231, 0.2);
         }
         .next-btn:hover {
           transform: scale(1.05);
