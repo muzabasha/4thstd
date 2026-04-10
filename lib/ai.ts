@@ -9,6 +9,13 @@ const KNOWLEDGE_BASE: Record<string, string> = {
   "Jharokha patterns": "A Jharokha is a balcony that pops out from the wall. It's used to get a better view and to provide cross-ventilation. Think of it as a 3D window!",
   "Arch patterns": "Arches are curved tops over doors or windows. They aren't just pretty; they are very strong! The curve helps distribute the weight of the wall above it.",
   
+  // Math - Symmetry
+  "Brick Symmetry": "Symmetry means that one half of a shape is a mirror image of the other half. If you cut a brick exactly in the middle, both sides look exactly the same! This is why bricks are so good for building straight walls.",
+  
+  // Math - Time
+  "24-Hour Clock": "Did you know there's a clock that goes all the way to 24? Instead of saying 1 PM, we say 13:00. It's used by railways and pilots so they never get confused between morning and evening!",
+  "Railway Time": "Railways in India use 24-hour time. This means if a train arrives at 14:30, it actually mean 2:30 in the afternoon. It's a very smart way to stay on schedule!",
+  
   // Math - Capacity
   "Liters": "A liter is how we measure big amounts of liquid, like a large bottle of water or a bucket of milk. One liter is quite a lot for a single cup!",
   "Milliliters": "Milliliters (ml) are for tiny amounts. One teaspoon holds about 5ml. We use ml for medicine or for measuring small drops of juice.",
@@ -16,11 +23,20 @@ const KNOWLEDGE_BASE: Record<string, string> = {
   // Science - Photosynthesis
   "Making food": "Plants make their own food using sunlight, water, and air (Carbon Dioxide). This process is called Photosynthesis! Their leaves are like little solar panels and kitchens combined.",
   
-"Length, width, height": "Every 3D object like a brick has three sides we can measure. Length is how long it is, Width is how wide, and Height is how tall it stands!",
+  // Science - Travel
+  "Different Bridges": "Bridges can be made of bamboo, cement, or even iron! Bamboo bridges are light and used in places like Assam, while big iron bridges can carry heavy trains across huge rivers.",
+  "Animal Skins": "Why do zebras have stripes or tigers have spots? It's called camouflage! These patterns help them hide in the grass or trees so they can stay safe or catch their food.",
+
+  "Length, width, height": "Every 3D object like a brick has three sides we can measure. Length is how long it is, Width is how wide, and Height is how tall it stands!",
   "Drawing a brick": "To draw a brick, we first draw a rectangle, then add lines to make it look like it's popping out! It's like turning a square into a box.",
   
   // Computers
   "Visual output": "A Monitor is like the eyes of the computer. It shows us pictures, videos, and our homework! Since it shows us things, we call it an Output Device.",
+  
+  // AI
+  "Smart Machines": "Artificial Intelligence or AI is when a machine can 'think' and 'learn' like a human. It can recognize your face, translate languages, and even help you solve math problems!",
+  
+  "Pattern Recognition": "How does AI know a drawing is a cat? It looks for patterns like pointy ears and whiskers! AI is very good at finding these patterns in thousands of pictures.",
   
   // Social Studies - Himalayas
   "Landmarks": "The Himalayas are the highest mountains in the world! They have Mount Everest, which is almost 9 kilometers high. These mountains protect India from cold winds and are the source of many great rivers like the Ganga.",
