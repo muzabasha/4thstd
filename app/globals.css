@@ -1,17 +1,17 @@
 :root {
-  --primary: #583DA1;
-  --secondary: #FF8BA7;
-  --accent: #FFD166;
-  --success: #06D6A0;
-  --info: #118AB2;
-  --danger: #EF476F;
-  --bg-color: #F7F9FC;
-  --text-color: #333333;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(255, 255, 255, 0.2);
+  --primary: #6C5CE7;
+  --secondary: #FF7675;
+  --accent: #FDCB6E;
+  --success: #55E6C1;
+  --info: #00CEC9;
+  --danger: #D63031;
+  --bg-color: #F8FBFF;
+  --text-color: #2D3436;
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.5);
   --sidebar-width: 280px;
-  --rounded: 24px;
-  --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+  --rounded: 32px;
+  --shadow: 0 10px 40px rgba(0, 50, 150, 0.08);
 }
 
 @font-face {
@@ -106,11 +106,11 @@ button {
   flex-grow: 1;
   padding: 2rem;
   background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+    radial-gradient(at 10% 10%, #E0F2FE 0px, transparent 50%),
+    radial-gradient(at 90% 10%, #FEE2E2 0px, transparent 50%),
+    radial-gradient(at 50% 90%, #F0F9FF 0px, transparent 50%);
   background-attachment: fixed;
-  color: white;
+  color: var(--text-color);
 }
 
 /* Premium Glass Cards */
@@ -296,9 +296,11 @@ button {
 
 .message-bubble.ai {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
+  background: white;
+  color: var(--text-color);
   border-bottom-left-radius: 4px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.03);
 }
 
 .message-bubble.user {
@@ -375,20 +377,19 @@ button {
 }
 
 .breadcrumb {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  color: var(--primary);
+  opacity: 0.7;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .main-content h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  background: linear-gradient(to right, white, var(--accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 2.8rem;
+  font-weight: 900;
+  color: var(--primary);
   margin: 0;
+  letter-spacing: -1px;
 }
 
 .learning-area {

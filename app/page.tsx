@@ -102,8 +102,8 @@ export default function Home() {
           margin: 0 auto;
           padding: 2rem 0;
         }
-        .welcome-header h1 { font-size: 3.5rem; margin-bottom: 0.5rem; }
-        .welcome-header p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem; }
+        .welcome-header h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: var(--primary); font-weight: 900; }
+        .welcome-header p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem; color: var(--text-color); }
 
         .dashboard-grid {
           display: grid;
@@ -122,7 +122,7 @@ export default function Home() {
 
         .stats-card { padding: 2rem !important; }
         .stat-row { display: flex; justify-content: space-between; margin: 1rem 0 0.5rem 0; font-weight: 700; }
-        .mini-progress { height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .mini-progress { height: 8px; background: rgba(0,0,0,0.05); border-radius: 10px; }
         .mini-progress .fill { height: 100%; background: var(--success); border-radius: 10px; }
 
         .subject-explorer h2 { margin-bottom: 1.5rem; }
@@ -133,11 +133,13 @@ export default function Home() {
         }
         .subject-box {
           display: flex; gap: 1rem; align-items: center; 
-          background: rgba(255,255,255,0.05) !important;
+          background: white !important;
           padding: 1.5rem !important;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+          border: 1px solid rgba(0,0,0,0.02);
         }
 
-        .back-btn { background: none; color: var(--accent); font-weight: 700; margin-right: 1rem; }
+        .back-btn { background: none; color: var(--primary); font-weight: 800; margin-right: 1rem; border: 2px solid rgba(108, 92, 231, 0.2); padding: 0.5rem 1rem; border-radius: 12px; }
 
         @media (max-width: 768px) {
           .dashboard-grid { grid-template-columns: 1fr; }

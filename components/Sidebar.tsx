@@ -63,6 +63,18 @@ export default function Sidebar({ onSelectTopic, selectedTopicId }: SidebarProps
       </nav>
 
       <style jsx>{`
+        .sidebar {
+          width: 280px;
+          height: 100vh;
+          background: white;
+          border-right: 1px solid rgba(0,0,0,0.05);
+          display: flex;
+          flex-direction: column;
+          position: sticky;
+          top: 0;
+          z-index: 100;
+          box-shadow: 10px 0 40px rgba(0,0,0,0.02);
+        }
         .subject-pills {
           display: flex;
           gap: 0.5rem;

@@ -254,21 +254,22 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
           flex-direction: column;
           height: 100%;
           gap: 1.5rem;
-          color: white;
+          color: var(--text-color);
         }
 
         .mission-bar {
           display: flex;
           align-items: center;
           gap: 1rem;
-          background: rgba(0, 0, 0, 0.3);
+          background: white;
           padding: 0.75rem 1.5rem;
           border-radius: 50px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
         .mission-progress {
           flex: 1;
           height: 8px;
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(0, 0, 0, 0.05);
           border-radius: 10px;
           overflow: hidden;
         }
@@ -302,7 +303,7 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
           align-items: center;
           justify-content: center;
           font-size: 5rem;
-          box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+          box-shadow: 0 10px 40px rgba(0,0,0,0.1);
           border: 6px solid var(--accent);
           z-index: 2;
           position: relative;
@@ -330,7 +331,7 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
           align-items: center;
           justify-content: center;
         }
-        .mentor-text { font-size: 1.6rem; font-weight: 500; line-height: 1.4; color: white; }
+        .mentor-text { font-size: 1.6rem; font-weight: 700; line-height: 1.4; color: var(--primary); }
 
         .mission-btn {
           padding: 1rem 2.5rem;
@@ -351,12 +352,13 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
         .content-overlay {
           position: fixed;
           top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(0, 0, 0, 0.85);
+          background: rgba(248, 251, 255, 0.98);
           backdrop-filter: blur(10px);
           z-index: 1000;
           display: flex;
           flex-direction: column;
           padding: 2rem;
+          color: var(--text-color);
         }
         .overlay-header { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
         .close-btn { background: rgba(255,255,255,0.1); padding: 0.5rem 1.5rem; border-radius: 12px; font-weight: 700; }
@@ -367,7 +369,9 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
           display: flex;
           flex-direction: column;
           gap: 1.5rem;
-          background: rgba(255, 255, 255, 0.05) !important;
+          background: white !important;
+          box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+          border-radius: 40px 40px 0 0;
         }
         .voice-zone { display: flex; align-items: center; gap: 1.5rem; }
         .mic-btn {
@@ -384,9 +388,11 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
         .quick-questions { display: flex; gap: 0.75rem; }
         .quick-questions button {
           padding: 0.5rem 1rem;
-          background: rgba(255,255,255,0.1);
+          background: rgba(108, 92, 231, 0.08);
           border-radius: 12px;
           font-size: 0.9rem;
+          color: var(--primary);
+          font-weight: 700;
         }
 
         .level-tabs { display: flex; gap: 0.5rem; margin-bottom: 1rem; justify-content: center; }
