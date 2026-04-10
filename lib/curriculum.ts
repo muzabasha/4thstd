@@ -56,185 +56,94 @@ export const syllabus: Subject[] = [
             title: "Patterns of Bricks", 
             subtopics: ["Jaali patterns", "Jharokha patterns", "Arch patterns"],
             activities: [
-              { level: 'low', title: "Pattern Spotter", description: "Look at your kitchen tiles or walls. Why do you think they are arranged like that?", skill: "performing", materials: ["Observation Notebook", "Pencil"], steps: ["Go to the kitchen or bathroom", "Find the tile pattern", "Sketch one specific pattern you see", "Count how many times it repeats"] },
-              { level: 'mid', title: "Jaali Weaver", description: "Using paper strips, weave a simple checkerboard pattern and see how air passes through it.", skill: "performing" , materials: ["Color paper strips (2 colors)", "Glue", "Scissors"], steps: ["Cut 10 strips of each color", "Lay one color vertically", "Weave the second color horizontally (over and under)", "Check for holes - these are your Jaali!"] },
-              { level: 'high', title: "Brick Architect", description: "Design a wall with a unique 'Eye' pattern. Explain how it stays strong.", skill: "speaking" , steps: ["Sketch a brick wall with 3 different patterns", "Explain to your tutor how the patterns look", "Discuss which one is strongest"] }
+              { level: 'low', title: "Pattern Spotter", description: "Look at your kitchen tiles or walls.", skill: "performing", steps: ["Observation"] },
+              { level: 'mid', title: "Jaali Weaver", description: "Weave paper strips.", skill: "performing" , steps: ["Weaving"] }
             ],
-            virtualLab: { title: "Digital Brick Builder", simulation: "A 2D grid where you can place colored bricks.", task: "Construct a wall with exactly 5 Jaali holes in a row." },
             quiz: [
-              { question: "What is a 'Jaali' in a brick wall?", options: ["A solid wall", "A decorative hole pattern for air and light", "A type of cement", "A large door"], correctAnswer: "A decorative hole pattern for air and light" },
-              { question: "Which pattern is often used in traditional arches?", options: ["Circular", "Square", "Arch pattern", "Triangular"], correctAnswer: "Arch pattern" }
+              { question: "What is a 'Jaali'?", options: ["Hole pattern", "Solid wall", "Cement", "Door"], correctAnswer: "Hole pattern" }
             ],
-            learningOutcomes: ["Identify and reproduce geometric patterns"],
-            crossCurricularLink: "Social Studies: Taj Mahal's architecture."
+            learningOutcomes: ["Geometric patterns"]
           },
           { 
-            id: "math-c1-t2", 
-            title: "Brick Dimensions", 
-            subtopics: ["Length, width, height", "Drawing a brick"],
-            activities: [
-              { level: 'low', title: "Dimension Detective", description: "Point to the longest side of a matchbox. Why is it longer than the height?", skill: "listening" , steps: ["Find a matchbox", "Measure length, width and height with your finger", "Point to the longest edge"] },
-              { level: 'mid', title: "Master Measurer", description: "Estimate how many matchboxes fit in your hand. How close were you?", skill: "performing" , steps: ["Take 3 matchboxes", "Hold them in your hand", "Try to see if a 4th can fit", "Describe the shape they make"] },
-              { level: 'high', title: "Volume Explorer", description: "If a brick is twice as big, how much heavier would it be? Tell me your reasoning.", skill: "speaking" , steps: ["Imagine a small and big brick", "Discuss weight difference with professor spark", "Explain your reasoning through voice"] }
-            ],
-            virtualLab: { title: "Volume Slider Lab", simulation: "Adjust sliders to change brick size (L, W, H).", task: "Make a brick that has a length of 20 and a height of 5." },
-            quiz: [
-              { question: "How many faces does a standard brick have?", options: ["4", "6", "8", "10"], correctAnswer: "6" },
-              { question: "Which dimension of a brick is usually the longest?", options: ["Height", "Width", "Length", "Weight"], correctAnswer: "Length" }
-            ],
-            learningOutcomes: ["Measure 3D objects", "Estimate volume intuitively"],
-            crossCurricularLink: "Science: Physical properties of matter."
+            id: "math-c1-t2", title: "Brick Dimensions", subtopics: ["L, W, H"],
+            activities: [], quiz: [], learningOutcomes: []
           }
         ]
       },
-      {
-        id: "math-c7",
-        title: "Jugs and Mugs",
-        topics: [
-          { 
-            id: "math-c7-t1", 
-            title: "Measuring Capacity", 
-            subtopics: ["Liters", "Milliliters"],
-            activities: [
-              { level: 'low', title: "Spoon Counter", description: "How many spoons of water fill a small cup?", skill: "performing", steps: ["Take a small cup", "Fill a spoon with water", "Count until cup is full"] },
-              { level: 'mid', title: "Liquid Mixologist", description: "Mix juice in a bottle and mark the half level.", skill: "performing", steps: ["Take a bottle", "Pour water exactly halfway", "Discuss why it is half"] }
-            ],
-            quiz: [
-              { question: "Which unit is used to measure a large bucket of water?", options: ["Milliliters", "Liters", "Grams", "Kilograms"], correctAnswer: "Liters" },
-              { question: "If a cup holds 250ml, how many cups make 1 liter?", options: ["2", "4", "5", "10"], correctAnswer: "4" }
-            ],
-            learningOutcomes: ["Understand liters and milliliters"],
-            crossCurricularLink: "Science: Liquid states."
-          }
-        ]
-      }
+      { id: "math-c2", title: "Long and Short", topics: [{ id: "math-c2-t1", title: "Centimeters & Meters", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c3", title: "A Trip to Bhopal", topics: [{ id: "math-c3-t1", title: "Large Numbers", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c4", title: "Tick-Tick-Tick", topics: [{ id: "math-c4-t1", title: "Telling Time", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c5", title: "The Way The World Looks", topics: [{ id: "math-c5-t1", title: "Drawings", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c6", title: "The Junk Seller", topics: [{ id: "math-c6-t1", title: "Currency", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c7", title: "Jugs and Mugs", topics: [{ id: "math-c7-t1", title: "Volume", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c8", title: "Carts and Wheels", topics: [{ id: "math-c8-t1", title: "Circles", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c9", title: "Halves and Quarters", topics: [{ id: "math-c9-t1", title: "Fractions", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c10", title: "Play with Patterns", topics: [{ id: "math-c10-t1", title: "Sequencing", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c11", title: "Tables and Shares", topics: [{ id: "math-c11-t1", title: "Dividing", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c12", title: "How Heavy? How Light?", topics: [{ id: "math-c12-t1", title: "Weight", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c13", title: "Fields and Fences", topics: [{ id: "math-c13-t1", title: "Perimeter", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "math-c14", title: "Smart Charts", topics: [{ id: "math-c14-t1", title: "Graphs", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] }
     ]
   },
   {
     id: "science",
-    title: "General Science",
+    title: "EVS (Looking Around)",
     chapters: [
-      {
-        id: "sci-c1",
-        title: "Plant Life",
-        topics: [
-          { 
-            id: "sci-c1-t1", title: "Photosynthesis", subtopics: ["Making food"],
-            activities: [
-               { level: 'low', title: "Leaf Search", description: "Find a green leaf.", skill: "performing", steps: ["Go to garden", "Pickup a fallen leaf", "Look at the tiny pores"] }
-            ],
-            virtualLab: { title: "Light Lab", simulation: "Change leaf color with light", task: "Keep plant in dark for 2 days" },
-            quiz: [
-              { question: "What gas do plants take in for photosynthesis?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correctAnswer: "Carbon Dioxide" },
-              { question: "Which part of the plant is called the 'kitchen of the plant'?", options: ["Root", "Stem", "Leaf", "Flower"], correctAnswer: "Leaf" }
-            ],
-            learningOutcomes: ["Identify how plants breathe"],
-            crossCurricularLink: "Social Studies: Food crops in India."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: "social-studies",
-    title: "Social Studies",
-    chapters: [
-      {
-        id: "soc-c1",
-        title: "Geography of India",
-        topics: [
-          { 
-            id: "soc-c1-t1", title: "The Great Himalayas", subtopics: ["Landmarks"],
-            activities: [
-               { level: 'low', title: "Paper Mountain", description: "Fold paper to make peaks.", skill: "performing", steps: ["Fold A4 paper into cone", "Mark 'snow' on top", "Label Everest"] }
-            ],
-            virtualLab: { title: "India Map Lab", simulation: "Satellite clickable map", task: "Find Everest on the map" },
-            quiz: [
-              { question: "Which is the highest peak in the world?", options: ["Kanchenjunga", "Mount Everest", "Nanda Devi", "K2"], correctAnswer: "Mount Everest" },
-              { question: "In which direction of India are the Himalayas located?", options: ["South", "East", "West", "North"], correctAnswer: "North" }
-            ],
-            learningOutcomes: ["Locate landmarks on map"],
-            crossCurricularLink: "Math: Calculating height of mountains."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    id: "computers",
-    title: "Computer Science",
-    chapters: [
-      {
-        id: "comp-c1",
-        title: "PC Components",
-        topics: [
-          { 
-            id: "comp-c1-t1", title: "The Monitor", subtopics: ["Visual output"],
-            activities: [
-               { level: 'low', title: "Parts Label", description: "Identify screen and buttons.", skill: "performing", steps: ["Point to power button", "Point to the screen", "Discuss what we see"] }
-            ],
-            virtualLab: { title: "PC Builder Lab", simulation: "Assemble PC logic", task: "Connect monitor to CPU" },
-            quiz: [
-              { question: "The Monitor is an ________ device.", options: ["Input", "Output", "Storage", "Processing"], correctAnswer: "Output" },
-              { question: "What do we use to see pictures and text on a computer?", options: ["Keyboard", "Mouse", "Monitor", "Printer"], correctAnswer: "Monitor" }
-            ],
-            learningOutcomes: ["Identify Monitor as O/P device"]
-          }
-        ]
-      }
+      { id: "evs-c1", title: "Going to School", topics: [{ id: "evs-c1-t1", title: "Travel", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c2", title: "Ear to Ear", topics: [{ id: "evs-c2-t1", title: "Animal Body Parts", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c3", title: "A Day with Nandu", topics: [{ id: "evs-c3-t1", title: "Elephants", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c4", title: "The Story of Amrita", topics: [{ id: "evs-c4-t1", title: "Trees", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c5", title: "Anita and the Honeybees", topics: [{ id: "evs-c5-t1", title: "Bees", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c6", title: "Omana's Journey", topics: [{ id: "evs-c6-t1", title: "Railway", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c11", title: "The Valley of Flowers", topics: [{ id: "evs-c11-t1", title: "Floriculture", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c15", title: "From Market to Home", topics: [{ id: "evs-c15-t1", title: "Food Supply", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "evs-c27", title: "Chuskit Goes to School", topics: [{ id: "evs-c27-t1", title: "Accessibility", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] }
     ]
   },
   {
     id: "hindi",
     title: "हिन्दी (रिमझिम)",
     chapters: [
-      {
-        id: "hi-c1",
-        title: "मन के भोले-भाले बादल",
-        topics: [
-          {
-            id: "hi-c1-t1",
-            title: "बादल कविता (Cloud Poetry)",
-            subtopics: ["Recitation", "Rhymes"],
-            activities: [
-              { level: 'low', title: "सुनो और दोहराओ", description: "कविता की पहली पंक्ति को दोहराएं।", skill: "listening", steps: ["प्रोफेसर स्पार्क की आवाज़ सुनें", "शुद्ध उच्चारण करें"] },
-              { level: 'high', title: "बोलना सीखें", description: "बादलों का वर्णन हिन्दी में करें।", skill: "speaking", steps: ["आकाश की ओर देखें", "हिन्दी में बोलें"] }
-            ],
-            quiz: [
-              { question: "कविता में बादल कैसे हैं?", options: ["गुस्सैल", "भोले-भाले", "डरावने", "छोटे"], correctAnswer: "भोले-भाले" },
-              { question: "'बादल' का पर्यायवाची शब्द क्या है?", options: ["सूरज", "जलद", "पवन", "भूमि"], correctAnswer: "जलद" }
-            ],
-            learningOutcomes: ["हिन्दी वर्णमाला का सही उच्चारण"],
-            crossCurricularLink: "Science: जल चक्र."
-          }
-        ]
-      }
+      { id: "hi-c1", title: "मन के भोले-भाले बादल", topics: [{ id: "hi-c1-t1", title: "कविता", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "hi-c2", title: "जैसा सवाल वैसा जवाब", topics: [{ id: "hi-c2-t1", title: "कहानी", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "hi-c3", title: "किर्च की गेंद", topics: [{ id: "hi-c3-t1", title: "नाटक", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "hi-c4", title: "पापा जब बच्चे थे", topics: [{ id: "hi-c4-t1", title: "संस्मरण", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] }
+    ]
+  },
+  {
+    id: "english",
+    title: "English (Marigold)",
+    chapters: [
+      { id: "en-c1", title: "Wake Up!", topics: [{ id: "en-c1-t1", title: "Reading", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "en-c2", title: "Neha's Alarm Clock", topics: [{ id: "en-c2-t1", title: "Story", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "en-c3", title: "The Little Fir Tree", topics: [{ id: "en-c3-t1", title: "Moral", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "en-c4", title: "Alice in Wonderland", topics: [{ id: "en-c4-t1", title: "Fantasy", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] }
+    ]
+  },
+  {
+    id: "computers",
+    title: "Computer Science",
+    chapters: [
+      { id: "comp-c1", title: "Inside the Computer", topics: [{ id: "comp-c1-t1", title: "Hardware", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "comp-c2", title: "MS Word", topics: [{ id: "comp-c2-t1", title: "Formatting", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "comp-c3", title: "The Internet", topics: [{ id: "comp-c3-t1", title: "Safety", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "comp-c4", title: "Intro to AI", topics: [{ id: "comp-c4-t1", title: "Digital Assistants", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] }
+    ]
+  },
+  {
+    id: "social-studies",
+    title: "Social Studies",
+    chapters: [
+      { id: "soc-c1", title: "Geography of India", topics: [{ id: "soc-c1-t1", title: "The Great Himalayas", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "soc-c2", title: "States and Capitals", topics: [{ id: "soc-c2-t1", title: "Civics", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] }
     ]
   },
   {
     id: "kannada",
     title: "ಕನ್ನಡ (ಸಿರಿ ಕನ್ನಡ)",
     chapters: [
-      {
-        id: "kn-c1",
-        title: "ಕನ್ನಡ ತಾಯಿ",
-        topics: [
-          {
-            id: "kn-c1-t1",
-            title: "ವರ್ಣಮಾಲೆ (Varnamale)",
-            subtopics: ["Swaragalu"],
-            activities: [
-              { level: 'low', title: "ಅಕ್ಷರ ಗುರುತಿಸಿ", description: "ಅಕ್ಷರಗಳನ್ನು ಪಟ್ಟಿಯಲ್ಲಿ ಹುಡುಕಿ.", skill: "listening", steps: ["ಅಕ್ಷರವನ್ನು ಕೇಳಿ", "ಅದನ್ನು ತೋರಿಸಿ"] }
-            ],
-            quiz: [
-              { question: "ಕನ್ನಡ ವರ್ಣಮಾಲೆಯಲ್ಲಿ ಎಷ್ಟು ಸ್ವರಗಳಿವೆ?", options: ["೧೦", "೧೩", "೧೫", "೨೦"], correctAnswer: "೧೩" },
-              { question: "'ಅ' ಯಾವ ಗುಂಪಿಗೆ ಸೇರುತ್ತದೆ?", options: ["ವ್ಯಂಜನ", "ಸ್ವರ", "ಯೋಗವಾಹ", "ಅನುನಾಸಿಕ"], correctAnswer: "ಸ್ವರ" }
-            ],
-            learningOutcomes: ["ಕನ್ನಡ ಅಕ್ಷರಗಳ ಅರಿವು"],
-            crossCurricularLink: "Social Studies: ಕರ್ನಾಟಕ ಸಂಸ್ಕೃತಿ."
-          }
-        ]
-      }
+      { id: "kn-c1", title: "ಕನ್ನಡ ತಾಯಿ", topics: [{ id: "kn-c1-t1", title: "ವರ್ಣಮಾಲೆ", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] },
+      { id: "kn-c2", title: "ನಾಗರಹಾವೆ", topics: [{ id: "kn-c2-t1", title: "ಕವಿತೆ", subtopics: [], activities: [], quiz: [], learningOutcomes: [] }] }
     ]
   }
 ];
