@@ -35,40 +35,22 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
       let prompt: string = "";
       
       if (masteryStep === 0) {
-        prompt = `Hi Yasmeen! I'm Professor Spark. Today we are exploring "${topic.title}". We'll cover things like ${topic.subtopics.slice(0, 3).join(", ")}. Tap the Rocket to jump in! 🚀`;
+        prompt = `Hi Yasmeen! I'm Professor Spark. Imagine we are on a grand adventure! Today, we are exploring "${topic.title}". Are you ready to dive into this scenario? Tap the Rocket! 🚀`;
       } else if (masteryStep <= topic.subtopics.length) {
         const subtopic = topic.subtopics[masteryStep - 1];
         const explanation = await generateAIResponse('explain', topic.title, subtopic);
         
-        // Dynamic variatons for step framing
-        const openers = [
-          `Let's look at ${subtopic}.`,
-          `Next, we have ${subtopic}!`,
-          `Check this out: ${subtopic}`,
-          `Now for something cool: ${subtopic}`
-        ];
-        const closers = [
-          `Isn't that neat?`,
-          `Does that make sense?`,
-          `Want to try an activity on this?`,
-          `What do you think about that?`
-        ];
-        
-        const opener = openers[(masteryStep - 1) % openers.length];
-        const closer = closers[(masteryStep - 1) % closers.length];
-        
-        prompt = `${opener} \n\n${explanation} \n\n${closer}`;
+        prompt = `🌈 **The Scenario:** ${explanation} \n\n**Let's Try It:** Look at your activity board to see how we can do this together!`;
       } else {
-        prompt = `You did it! You've successfully explored all parts of "${topic.title}". I'm so proud of you! Ready for the final challenge? 🏆`;
+        prompt = `Success! You've navigated the scenario for "${topic.title}". I'm so proud of your progress! Ready for your top-performer challenge? 🏆`;
       }
       
       setMessages([{ role: 'ai', content: prompt }]);
-      speak(prompt);
       setIsLoading(false);
     };
 
     guideMe();
-  }, [topic.id, topic.title, topic.subtopics, masteryStep, speak]);
+  }, [topic.id, topic.title, topic.subtopics, masteryStep]);
 
   const handleUserAction = useCallback(async (input: string) => {
     setMessages(prev => [...prev, { role: 'user', content: input }]);
@@ -84,9 +66,8 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
 
     const aiResponseText = await generateAIResponse(promptType, topic.title, input);
     setMessages(prev => [...prev, { role: 'ai', content: aiResponseText }]);
-    speak(aiResponseText);
     setIsLoading(false);
-  }, [mode, topic.title, speak]);
+  }, [mode, topic.title]);
 
   useEffect(() => {
     if (transcript && !isListening && transcript !== lastTranscriptRef.current) {
@@ -118,7 +99,7 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
       <div className="tutor-main">
         {/* Hero Section: Professor Spark */}
         <section className="hero-zone">
-          <div className={`spark-avatar ${isSpeaking ? 'bounce' : ''} ${isListening ? 'pulse' : ''}`}>
+          <div className={`spark-avatar ${isListening ? 'pulse' : ''}`}>
             <div className="avatar-frame">🤖</div>
             {isListening && <div className="listening-ring"></div>}
           </div>
@@ -126,9 +107,11 @@ export default function VoiceAITutor({ subject, topic }: VoiceAITutorProps) {
           <div className="speech-container">
             <div className="speech-bubble glass-card animate-fade-in">
               {isLoading ? (
-                <div className="typing">Professor Spark is thinking...</div>
+                <div className="typing">Professor Spark is calculating...</div>
               ) : (
-                <p className="mentor-text">{messages[messages.length - 1]?.content}</p>
+                <div className="mentor-content">
+                  <p className="mentor-text">{messages[messages.length - 1]?.content}</p>
+                </div>
               )}
             </div>
             

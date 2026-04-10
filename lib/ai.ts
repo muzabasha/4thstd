@@ -5,50 +5,27 @@ export interface AIResponse {
 
 const KNOWLEDGE_BASE: Record<string, string> = {
   // Math - Patterns
-  "Jaali patterns": "Jaali is like a beautiful stone window with holes! It lets cool air and sunlight into the building while making it look like a palace. In old forts, kings used these to see outside without being seen.",
-  "Jharokha patterns": "A Jharokha is a balcony that pops out from the wall. It's used to get a better view and to provide cross-ventilation. Think of it as a 3D window!",
-  "Arch patterns": "Arches are curved tops over doors or windows. They aren't just pretty; they are very strong! The curve helps distribute the weight of the wall above it.",
+  "Jaali patterns": "Imagine your house is wearing a beautiful lace dress! That's what a Jaali is. It's a wall with tiny holes that lets the wind play hide-and-seek and keeps the house cool without a fan. Just like how your window screen keeps out flies, Jaali keeps out the heat but welcomes the breeze!",
   
-  // Math - Symmetry
-  "Brick Symmetry": "Symmetry means that one half of a shape is a mirror image of the other half. If you cut a brick exactly in the middle, both sides look exactly the same! This is why bricks are so good for building straight walls.",
+  "Brick Symmetry": "Think of a brick as a twin! If you cut it down the middle, the left side looks exactly like the right side, like they are looking into a mirror. It's like your face—two eyes, two ears, and one nose in the middle. If a brick wasn't symmetrical, your wall would look like it was doing a funny dance!",
   
   // Math - Time
-  "24-Hour Clock": "Did you know there's a clock that goes all the way to 24? Instead of saying 1 PM, we say 13:00. It's used by railways and pilots so they never get confused between morning and evening!",
-  "Railway Time": "Railways in India use 24-hour time. This means if a train arrives at 14:30, it actually mean 2:30 in the afternoon. It's a very smart way to stay on schedule!",
-  
-  // Math - Capacity
-  "Liters": "A liter is how we measure big amounts of liquid, like a large bottle of water or a bucket of milk. One liter is quite a lot for a single cup!",
-  "Milliliters": "Milliliters (ml) are for tiny amounts. One teaspoon holds about 5ml. We use ml for medicine or for measuring small drops of juice.",
-  
-  // Science - Photosynthesis
-  "Making food": "Plants make their own food using sunlight, water, and air (Carbon Dioxide). This process is called Photosynthesis! Their leaves are like little solar panels and kitchens combined.",
+  "24-Hour Clock": "Imagine a clock that never sleeps! Most clocks count to 12 and then start over, like they've had enough. But the 24-hour clock is a marathon runner. It goes all the way to 24. For example, 13:00 is just 1 PM after a lunch nap. It's like counting your fingers and then starting on your toes!",
   
   // Science - Travel
-  "Different Bridges": "Bridges can be made of bamboo, cement, or even iron! Bamboo bridges are light and used in places like Assam, while big iron bridges can carry heavy trains across huge rivers.",
-  "Animal Skins": "Why do zebras have stripes or tigers have spots? It's called camouflage! These patterns help them hide in the grass or trees so they can stay safe or catch their food.",
+  "Different Bridges": "Imagine you're an ant trying to cross a puddle. A bamboo bridge is like using a single straw—it's light and wiggly! A cement bridge is like a giant elephant standing across the water—it's super strong and doesn't move at all. Bamboo bridges are for light-footed explorers, while cement bridges can carry heavy school buses!",
+  
+  "Animal Skins": "Imagine if you could wear a suit that makes you invisible! Some animals, like Zebras, wear striped pajamas so they can hide in the tall grass. It's like playing a giant game of 'Where's Waldo?' in the wild. The patterns help them stay safe from bigger animals who are looking for a snack!",
 
-  "Length, width, height": "Every 3D object like a brick has three sides we can measure. Length is how long it is, Width is how wide, and Height is how tall it stands!",
-  "Drawing a brick": "To draw a brick, we first draw a rectangle, then add lines to make it look like it's popping out! It's like turning a square into a box.",
-  
   // Computers
-  "Visual output": "A Monitor is like the eyes of the computer. It shows us pictures, videos, and our homework! Since it shows us things, we call it an Output Device.",
+  "CPU": "The CPU is the Master Chef of the computer! It's a tiny brain that tells the screen what to show and the mouse where to go. Just like a chef follows a recipe to make yummy pasta, the CPU follows codes to run your favorite games!",
   
+  "MS Word": "Think of MS Word as your digital magic notebook. If you make a mistake, you don't need an eraser; you just tap 'Delete' and it vanishes! It's like writing on a chalkboard that never gets dusty. You can even change your handwriting to look like a robot or a princess with just one click!",
+
   // AI
-  "Smart Machines": "Artificial Intelligence or AI is when a machine can 'think' and 'learn' like a human. It can recognize your face, translate languages, and even help you solve math problems!",
-  
-  "Pattern Recognition": "How does AI know a drawing is a cat? It looks for patterns like pointy ears and whiskers! AI is very good at finding these patterns in thousands of pictures.",
-  
-  // Social Studies - Himalayas
-  "Landmarks": "The Himalayas are the highest mountains in the world! They have Mount Everest, which is almost 9 kilometers high. These mountains protect India from cold winds and are the source of many great rivers like the Ganga.",
-  
-  // Hindi
-  "Recitation": "कविता 'मन के भोले-भाले बादल' में बादलों को बहुत शरारती और प्यारा बताया गया है। वे कभी झब्बर-झब्बर बालों वाले लगते हैं, तो कभी गुब्बारों जैसे गालों वाले!",
-  
-  // Kannada
-  "Swaragalu": "ಕನ್ನಡ ವರ್ಣಮಾಲೆಯಲ್ಲಿ ೧೩ ಸ್ವರಗಳಿವೆ. ಅವುಗಳು ಅ ಇಂದ ಔ ವರೆಗೆ ಸ್ವತಂತ್ರವಾಗಿ ಉಚ್ಚರಿಸಲ್ಪಡುವ ಅಕ್ಷರಗಳು.",
-  
-  // Default
-  "default": "This is a fascinating part of our world! It reveals how different things work together. As we explore more, you'll see why this is such an important skill to learn!"
+  "Smart Machines": "Imagine your toy car started deciding where to drive by itself! That's a bit like AI. It's when a machine learns to 'think' by looking at thousands of examples. It's like teaching a puppy a trick, but the puppy is a computer chip that never forgets!",
+
+  "default": "Imagine this part of our topic is like a secret ingredient in a recipe! It helps everything else make sense. Just like how salt brings out the flavor in food, this concept helps us understand the bigger picture of our world."
 };
 
 export const generateAIResponse = async (
@@ -61,21 +38,21 @@ export const generateAIResponse = async (
       if (promptType === 'explain') {
         let explanation = KNOWLEDGE_BASE[context || ""] || KNOWLEDGE_BASE[topic] || KNOWLEDGE_BASE["default"];
         
-        // Dynamic handling for generic Intro/Core subtopics
+        // Scenario augmentation
         if (context === 'Introduction') {
-          explanation = `Welcome to our lesson on ${topic}! This is where we learn why this topic is so useful. Whether it's for building things or understanding nature, ${topic} is all around us!`;
+          explanation = `Picture this: You are the lead explorer in a new world! To navigate, you need to master ${topic}. It's like having a secret map that only you can read. Ready to find the treasure?`;
         } else if (context === 'Core Concepts') {
-          explanation = `In this part of ${topic}, we look at the most important ideas. These are the building blocks that will help you master the whole subject!`;
+          explanation = `These concepts are the 'Superpowers' of ${topic}. Without them, you'd be like a superhero without a cape! Let's learn to fly!`;
         }
         
         resolve(explanation);
       } else if (promptType === 'quiz') {
-        resolve(`Ready for a challenge? Can you tell me one thing you remember about ${topic}? I'll check if you're right!`);
+        resolve(`Quick Quiz! Imagine you're on a game show. For 100 points, what's one funny thing you learned about ${topic}?`);
       } else if (promptType === 'activity') {
-        resolve(`Great! Let's start the ${topic} activity. Follow the steps on your screen, and let me know if you need any help!`);
+        resolve(`Time to get your hands dirty! Let's do the ${topic} activity. It's more fun than a barrel of monkeys!`);
       } else {
-        resolve(`Excellent job! You're becoming an expert in ${topic}. Let's move to the next part!`);
+        resolve(`You're a genius! You've navigated this part of the scenario perfectly. Onward to the next adventure!`);
       }
-    }, 1200);
+    }, 1000);
   });
 };
