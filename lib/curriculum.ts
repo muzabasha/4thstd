@@ -4,6 +4,13 @@ export interface Activity {
   skill: 'listening' | 'speaking' | 'writing' | 'performing';
   level: 'low' | 'mid' | 'high';
   steps: string[];
+  materials?: string[];
+}
+
+export interface VirtualLab {
+  title: string;
+  simulation: string;
+  task: string;
 }
 
 export interface QuizQuestion {
@@ -17,8 +24,10 @@ export interface Topic {
   title: string;
   subtopics: string[];
   activities: Activity[];
+  virtualLab?: VirtualLab;
   quiz: QuizQuestion[];
   learningOutcomes: string[];
+  crossCurricularLink?: string;
 }
 
 export interface Chapter {
