@@ -623,7 +623,7 @@ const hindiSubject: Subject = {
     {
       id: 'h1', title: '1. मन के भोले-भाले बादल', topics: [{
         id: 'h1-t1', title: 'बादलों की कविता',
-        subtopics: ['The Cotton Candy Cloud Analogy', 'How Clouds are Born', 'Cloud Observation Task', 'The Sky Canvas Art', 'Weather & Moods', 'The Water Cycle Song', 'Rainmakers Challenge', 'Protecting Our Sky'],
+        subtopics: ['रुई के गोले जैसे बादल', 'बादलों का जन्म', 'बादल देखने का मिशन', 'आसमान का कैनवास', 'मौसम और मन के भाव', 'जल चक्र का गीत', 'बारिश लाने की चुनौती', 'अपने आसमान की सुरक्षा'],
         readingText: {
           en: 'This poem describes clouds as innocent, playful children. They puff their cheeks like balloons, have fluffy hair, and run around the sky looking very cute.',
           hi: 'यह कविता बादलों को भोले-भाले बच्चों की तरह बताती है। वे गाल फुलाते हैं, झब्बर-झब्बर बालों वाले हैं, और आसमान में इधर-उधर दौड़ते हैं।',
@@ -654,7 +654,7 @@ const hindiSubject: Subject = {
     {
       id: 'h2', title: '2. बीरबल की सूझ-बूझ', topics: [{
         id: 'h2-t1', title: 'बीरबल की चतुराई',
-        subtopics: ['The Brain vs Brawn Analogy', 'The King\'s Impossible Questions', 'The Wit Detective', 'Solving Your Own Riddle', 'Logic & Clear Thinking', 'Birbal\'s Court History', 'Fair Justice Mission', 'The Future of Wisdom'],
+        subtopics: ['बुद्धि बनाम ताकत', 'राजा के असंभव सवाल', 'चतुराई का जासूस', 'अपनी पहेली सुलझाओ', 'तर्क और स्पष्ट सोच', 'बीरबल का दरबारी इतिहास', 'निष्पक्ष न्याय का मिशन', 'बुद्धिमानी का भविष्य'],
         readingText: {
           en: 'Birbal was a witty minister in Akbar\'s court. When asked impossible questions, Birbal gave such clever answers that the questioner was left speechless. Intelligence is the greatest weapon.',
           hi: 'बीरबल अकबर के दरबार में सबसे चतुर मंत्री थे। जब अकबर ने असंभव सवाल पूछे, बीरबल ने ऐसे जवाब दिए कि पूछने वाले हैरान रह गए। बुद्धि सबसे बड़ा हथियार है!',
@@ -685,7 +685,7 @@ const hindiSubject: Subject = {
     {
       id: 'h3', title: '3. किरमिच की गेंद', topics: [{
         id: 'h3-t1', title: 'ईमानदारी',
-        subtopics: ['The Lost Treasure Analogy', 'The Shiny Kirmic Ball', 'The Truth Mirror Test', 'Returning the Found Item', 'Honesty – The Real Gold', 'Trust Building Task', 'The Consequence Game', 'Becoming an Integrity Hero'],
+        subtopics: ['खोया हुआ खज़ाना', 'चमकदार किरमिच की गेंद', 'सच्चाई का आईना', 'मिली हुई चीज़ लौटाना', 'ईमानदारी ही असली सोना है', 'विश्वास बनाने का मिशन', 'परिणामों का खेल', 'ईमानदारी के हीरो बनें'],
         readingText: {
           en: 'This story is about a shiny ball made of kirmic (rexine). A child finds it and must decide whether to keep it or return it to its owner. Honesty is the best policy.',
           hi: 'यह कहानी किरमिच (रेक्सिन) की एक चमकदार गेंद के बारे में है। एक बच्चे को गेंद मिलती है और उसे फैसला करना है कि वह रखे या मालिक को लौटाए। ईमानदारी सबसे अच्छी नीति है।',
@@ -716,7 +716,7 @@ const hindiSubject: Subject = {
     {
       id: 'h4', title: '4. पापा जब बच्चे थे', topics: [{
         id: 'h4-t1', title: 'बचपन की यादें',
-        subtopics: ['The Time Machine Analogy', 'Papa\'s Funny Dreams', 'When Toys were Sticks', 'Interviewing Grandpa Task', 'The Bridge of Generations', 'The Value of Play', 'Dreaming Big Challenge', 'Building Your Own Future'],
+        subtopics: ['समय की मशीन', 'पापा के मज़ेदार सपने', 'जब खिलौने डंडे और पत्थर थे', 'दादाजी का इंटरव्यू', 'पीढ़ियों का पुल', 'खेल का महत्व', 'बड़े सपने देखने की चुनौती', 'अपना भविष्य बनाना'],
         readingText: {
           en: 'This poem imagines what Papa was like as a child. Did he want to be a dog, or a watchman? Children have the funniest dreams! Let us explore Papa\'s childhood.',
           hi: 'यह कविता कल्पना करती है कि पापा बचपन में कैसे थे। क्या वे कुत्ता बनना चाहते थे या चौकीदार? बच्चों के सपने कितने मज़ेदार होते हैं! आइए पापा के बचपन की सैर करें।',
@@ -747,7 +747,7 @@ const hindiSubject: Subject = {
     {
       id: 'h7', title: '5. दान का हिसाब', topics: [{
         id: 'h7-t1', title: 'गणित और चतुराई',
-        subtopics: ['The Doubling Rice Analogy', 'The Greedy King Trap', 'Exponential Growth Power', 'Charity – The Heart of Math', 'Clever Negotiation Task', 'Kingdom Budget Mission', 'Fair Resource Sharing', 'Math for Social Good'],
+        subtopics: ['चावल के दोगुने होने का जादू', 'लालची राजा का जाल', 'दोगुना होने की शक्ति', 'दान और दया का गणित', 'चतुर सौदेबाजी का मिशन', 'राज्य के बजट का मिशन', 'संसाधनों का सही बँटवारा', 'समाज कल्याण के लिए गणित'],
         readingText: {
           en: 'A saint asks a greedy king for just 1 rupee on the first day, doubling each day for 30 days. The king agrees, not realizing that 1 doubled 30 times is over 100 crore! Small beginnings can lead to huge results.',
           hi: 'एक संन्यासी ने लालची राजा से बस पहले दिन 1 रुपया माँगा, हर दिन दोगुना करते हुए 30 दिनों तक। राजा ने हाँ कर दी, बिना यह समझे कि 1 का 30 बार दोगुना 100 करोड़ से ज़्यादा बनता है!',
@@ -778,7 +778,7 @@ const hindiSubject: Subject = {
     {
       id: 'h9', title: '6. बिन्नी और गांधीजी', topics: [{
         id: 'h9-t1', title: 'स्वतंत्रता संग्राम',
-        subtopics: ['The Salt & Freedom Analogy', 'The Long Walk Mission', 'Children in History', 'Passive Resistance Power-Up', 'Writing Your Own Message', 'Simple Living Philosophy', 'Swadeshi & Self-Reliance', 'Leading the Nation Vision'],
+        subtopics: ['नमक और आज़ादी का नाता', 'दांडी यात्रा का मिशन', 'इतिहास में बच्चे', 'अहिंसा की ताकत', 'अपना संदेश लिखो', 'सादा जीवन, उच्च विचार', 'स्वदेशी और स्वावलंबन', 'राष्ट्र का नेतृत्व'],
         readingText: {
           en: 'Binni is a child who cares for his goat while Gandhi prepares for the Salt March. Even children can be part of great missions. Gandhi\'s non-violent resistance changed India.',
           hi: 'बिन्नी एक बच्चा है जो अपनी बकरी की देखभाल करता है जबकि गांधीजी नमक यात्रा की तैयारी करते हैं। बच्चे भी बड़े मिशन का हिस्सा बन सकते हैं।',
