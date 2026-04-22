@@ -33,8 +33,10 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
       let prompt: string = "";
       
       if (masteryStep === 0) {
+        // Introduction with Reading Text contextualized
+        const readingBody = topic.readingText?.[subject.id === 'hindi' ? 'hi' : (subject.id === 'kannada' ? 'kn' : 'en')] || topic.readingText?.en || "";
         const scenario = await generateAIResponse('explain', topic.title, chapterId);
-        prompt = `🌈 **The Mission:** "${topic.title}" \n\n${scenario}`;
+        prompt = `🌈 **The Mission:** "${topic.title}" \n\n${scenario}\n\n📖 **Textbook Summary:** ${readingBody}`;
       } else if (masteryStep <= topic.subtopics.length) {
         const subtopic = topic.subtopics[masteryStep - 1];
         const explanation = await generateAIResponse('explain', topic.title, subtopic);
@@ -43,14 +45,14 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
         prompt = `Mission Accomplished! You've successfully navigated the scenarios for "${topic.title}". Time for your final Mastery Challenge! 🏆`;
       }
       
-      const cleanPrompt = prompt.replace(/\*\*/g, '').replace(/🌈|🔍|🚀|🏆/g, '');
+      const cleanPrompt = prompt.replace(/\*\*/g, '').replace(/🌈|🔍|🚀|📖|🏆/g, '');
       setMessages([{ role: 'ai', content: prompt }]);
       speak(cleanPrompt, targetLang);
       setIsLoading(false);
     };
 
     guideMe();
-  }, [topic.id, topic.title, topic.subtopics, masteryStep, speak, subject.id, setLang]);
+  }, [topic.id, topic.title, topic.subtopics, topic.readingText, masteryStep, speak, subject.id, setLang]);
 
   const handleUserAction = useCallback(async (input: string) => {
     setMessages(prev => [...prev, { role: 'user', content: input }]);
@@ -100,7 +102,18 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
                   🔈 Listen
                 </button>
               </div>
-              <p className="scenario-text">{messages[messages.length - 1]?.content.replace(/Professor Spark|Hi Yasmeen!/g, '').trim()}</p>
+              <div className="scenario-text">
+                {messages[messages.length - 1]?.content.split('\n').map((line, i) => (
+                  <p key={i} style={{ marginBottom: line.trim() ? '1rem' : '0.5rem' }}>
+                    {line.split(/(\*\*.*?\*\*)/).map((part, j) => {
+                      if (part.startsWith('**') && part.endsWith('**')) {
+                        return <strong key={j} className="highlight-text">{part.slice(2, -2)}</strong>;
+                      }
+                      return part;
+                    })}
+                  </p>
+                ))}
+              </div>
             </div>
           )}
           
@@ -268,12 +281,24 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
         .read-aloud-btn:hover { transform: scale(1.1); }
         
         .scenario-text {
-          font-size: 2rem;
+          font-size: 1.5rem;
           line-height: 1.6;
-          font-weight: 800;
+          font-weight: 500;
           color: var(--text-color);
           margin-bottom: 3.5rem;
           max-width: 850px;
+          text-align: left;
+          width: 100%;
+        }
+
+        .highlight-text {
+          color: var(--primary);
+          font-weight: 900;
+          background: linear-gradient(120deg, rgba(108, 92, 231, 0.1) 0%, rgba(108, 92, 231, 0.1) 100%);
+          background-repeat: no-repeat;
+          background-size: 100% 0.3em;
+          background-position: 0 88%;
+          padding: 0 0.2rem;
         }
 
         .action-tray { display: flex; gap: 1.5rem; width: 100%; justify-content: center; }

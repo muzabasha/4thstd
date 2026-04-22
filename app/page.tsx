@@ -72,12 +72,20 @@ export default function Home() {
             </div>
 
             <div className="subject-explorer">
-              <h2>Explore your Subjects</h2>
+              <h2>🚀 Start Your Subject Missions</h2>
               <div className="subject-grid">
                 {syllabus.map(s => (
-                  <button key={s.id} className="subject-box card-small" onClick={() => handleSelectSubject(s.id)}>
-                    <span className="box-icon">📚</span>
-                    <span>{s.title}</span>
+                  <button 
+                    key={s.id} 
+                    className="subject-box glass-card" 
+                    onClick={() => handleSelectSubject(s.id)}
+                    style={{ borderLeft: `6px solid ${s.color}` }}
+                  >
+                    <div className="box-icon" style={{ fontSize: '2rem' }}>{s.icon}</div>
+                    <div className="subject-box-info">
+                      <span className="subject-box-title">{s.title}</span>
+                      <span className="subject-box-status">{s.chapters.length} Units</span>
+                    </div>
                   </button>
                 ))}
               </div>
@@ -178,15 +186,19 @@ export default function Home() {
           gap: 1.5rem;
         }
         .subject-box {
-          display: flex; gap: 1rem; align-items: center; 
+          display: flex; gap: 1.5rem; align-items: center; 
           background: white !important;
-          padding: 1.5rem !important;
+          padding: 2rem !important;
           box-shadow: 0 4px 15px rgba(0,0,0,0.05);
           border: 1px solid rgba(0,0,0,0.02);
-          transition: transform 0.2s;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           width: 100%;
+          border-radius: 24px;
         }
-        .subject-box:hover { transform: translateY(-3px); }
+        .subject-box:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+        .subject-box-info { display: flex; flex-direction: column; text-align: left; }
+        .subject-box-title { font-weight: 800; font-size: 1.2rem; color: var(--text-color); }
+        .subject-box-status { font-size: 0.85rem; opacity: 0.6; font-weight: 600; }
 
         .chapter-section { margin-bottom: 2rem; padding: 2rem !important; }
         .chapter-title { margin-bottom: 1.5rem; color: var(--primary); font-size: 1.5rem; }

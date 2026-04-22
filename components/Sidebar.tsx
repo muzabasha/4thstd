@@ -37,13 +37,11 @@ export default function Sidebar({ onSelectSubject, selectedSubjectId }: SidebarP
             className={`subject-item ${selectedSubjectId === subject.id ? 'active' : ''}`}
             onClick={() => onSelectSubject(subject.id)}
           >
-            <div className="subject-icon-box">
-              {subject.id === 'hindi' ? '🇮🇳' : subject.id === 'kannada' ? '🚩' : 
-               subject.id === 'mathematics' ? '📐' : subject.id === 'science' ? '🧪' :
-               subject.id === 'social-studies' ? '🌍' : '💻'}
+            <div className="subject-icon-box" style={{ background: `${subject.color}15`, color: subject.color }}>
+              {subject.icon}
             </div>
             <span className="subject-name">{subject.title.split(' (')[0]}</span>
-            {selectedSubjectId === subject.id && <span className="active-dot"></span>}
+            {selectedSubjectId === subject.id && <span className="active-dot" style={{ background: subject.color }}></span>}
           </button>
         ))}
       </div>

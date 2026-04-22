@@ -1,0 +1,13 @@
+const fs = require('fs');
+const path = require('path');
+const out = path.join(__dirname, '..', 'lib', 'curriculum.ts');
+const parts = [];
+parts.push(fs.readFileSync(path.join(__dirname, 'parts', 'p1.ts'), 'utf8'));
+parts.push(fs.readFileSync(path.join(__dirname, 'parts', 'p2.ts'), 'utf8'));
+parts.push(fs.readFileSync(path.join(__dirname, 'parts', 'p3.ts'), 'utf8'));
+parts.push(fs.readFileSync(path.join(__dirname, 'parts', 'p4.ts'), 'utf8'));
+parts.push(fs.readFileSync(path.join(__dirname, 'parts', 'p5.ts'), 'utf8'));
+parts.push(fs.readFileSync(path.join(__dirname, 'parts', 'p6.ts'), 'utf8'));
+parts.push(fs.readFileSync(path.join(__dirname, 'parts', 'p7.ts'), 'utf8'));
+fs.writeFileSync(out, parts.join('\n'), 'utf8');
+console.log('curriculum.ts written successfully');
