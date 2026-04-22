@@ -82,6 +82,20 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
       </div>
 
       <main className="explorer-main">
+        {/* Mission Progress Bar */}
+        <div className="mission-progress-container glass-card">
+          <div className="progress-info">
+            <span className="mission-title">🚀 {topic.title}</span>
+            <span className="step-badge">Phase {masteryStep + 1} of {topic.subtopics.length + 1}</span>
+          </div>
+          <div className="progress-track">
+            <div 
+              className="progress-fill" 
+              style={{ width: `${((masteryStep + 1) / (topic.subtopics.length + 1)) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+
         {/* Main Content Area */}
         <section className="scenario-section glass-card animate-fade-in">
           {isLoading ? (
@@ -149,10 +163,10 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
           </div>
         </section>
 
-        {/* Technical/Teacher Details (Optional) */}
-        {!mode && (
-          <div className="learning-outcomes">
-            <h4>Learning Outcomes</h4>
+        {/* Technical Details / Learning Outcomes (Simplified) */}
+        {!mode && masteryStep === 0 && (
+          <div className="learning-outcomes animate-fade-in">
+            <h4>💡 Mission Learning Goals</h4>
             <div className="outcome-tags">
               {topic.learningOutcomes.map((lo, i) => <span key={i} className="outcome-tag">{lo}</span>)}
             </div>
@@ -280,6 +294,40 @@ export default function VoiceAITutor({ subject, topic }: TopicExplorerProps) {
         }
         .read-aloud-btn:hover { transform: scale(1.1); }
         
+        .mission-progress-container {
+          margin-bottom: 2rem;
+          padding: 1.2rem 2rem !important;
+          border-radius: 20px;
+          border: 1px solid rgba(255,255,255,0.4);
+        }
+        .progress-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.8rem;
+        }
+        .mission-title { font-weight: 800; font-size: 1.1rem; color: var(--primary); }
+        .step-badge { 
+          background: var(--primary); 
+          color: white; 
+          padding: 0.3rem 0.8rem; 
+          border-radius: 12px; 
+          font-size: 0.85rem; 
+          font-weight: 700;
+        }
+        .progress-track {
+          height: 10px;
+          background: rgba(0,0,0,0.05);
+          border-radius: 10px;
+          overflow: hidden;
+        }
+        .progress-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--primary), var(--accent));
+          transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+          border-radius: 10px;
+        }
+
         .scenario-text {
           font-size: 1.5rem;
           line-height: 1.6;

@@ -35,7 +35,7 @@ const mathSubject: Subject = {
     {
       id: 'm1', title: '1. Building with Bricks', topics: [{
         id: 'm1-t1', title: 'Patterns & Symmetry',
-        subtopics: ['Jaali patterns', 'Mirror symmetry', 'Faces of a brick'],
+        subtopics: ['The Lego Lunchbox Analogy', 'Counting Faces & Edges', 'Jaali Pattern Ninja', 'Mirror Magic Symmetry', 'The Floor Pattern Challenge', 'Brick Chemistry & Strength', 'Architect\'s Vision', 'The Future of Building'],
         readingText: {
           en: 'Bricks are cuboids with 6 faces, 8 corners and 12 edges. A Jaali is a decorative pattern with holes that lets air and light through.',
           hi: 'ईंटें घनाभ होती हैं जिनके 6 फलक, 8 कोने और 12 किनारे होते हैं। जाली एक सजावटी पैटर्न है।',
@@ -67,7 +67,7 @@ const mathSubject: Subject = {
     {
       id: 'm2', title: '2. Long and Short', topics: [{
         id: 'm2-t1', title: 'Measuring Length',
-        subtopics: ['Centimetre and metre', 'Kilometre', 'Estimating lengths'],
+        subtopics: ['The Giant Step Analogy', 'Centimetre vs Metre War', 'Kilometre Marathon', 'Human Ruler Task', 'Estimating the Impossible', 'Map Scale Secrets', 'Sports Track Design', 'Navigation Mastery'],
         readingText: {
           en: '1 metre = 100 centimetres. 1 kilometre = 1000 metres. We measure short things in cm, longer things in m, and very long distances in km.',
           hi: '1 मीटर = 100 सेंटीमीटर। 1 किलोमीटर = 1000 मीटर। हम छोटी चीजें सेमी में और बड़ी दूरी किमी में मापते हैं।',
@@ -99,7 +99,7 @@ const mathSubject: Subject = {
     {
       id: 'm3', title: '3. A Trip to Bhopal', topics: [{
         id: 'm3-t1', title: 'Large Numbers & Estimation',
-        subtopics: ['Place value up to thousands', 'Addition of large numbers', 'Estimation in daily life'],
+        subtopics: ['The Number Skyscraper', 'Bus Seat Logic', 'Mental Math Buffet', 'Addition Mission', 'The River Crossing Challenge', 'Bhopal History & Geography', 'Estimated Arrival Time', 'Trip Planning Mastery'],
         readingText: {
           en: 'When we plan trips, we use large numbers. 210 students need buses—if each bus holds 40, we need 6 buses. Estimation helps us plan quickly.',
           hi: 'यात्रा की योजना बनाते समय हम बड़ी संख्याओं का उपयोग करते हैं। 210 छात्रों को बसों की ज़रूरत—अगर हर बस में 40 बैठें, तो 6 बसें चाहिए।',
@@ -131,7 +131,7 @@ const mathSubject: Subject = {
     {
       id: 'm4', title: '4. Tick-Tick-Tick', topics: [{
         id: 'm4-t1', title: 'Time & Calendar',
-        subtopics: ['Reading a clock', '24-hour format', 'AM and PM', 'Calendar reading'],
+        subtopics: ['The Sun Clock Analogy', 'Hour Boss & Minute Runner', 'The 24-Hour Marathon', 'Railway Time Decoding', 'Calendar Time Machine', 'Birthdays & Leap Years', 'Aging in Seconds', 'Planning Your Future Day'],
         readingText: {
           en: 'A day has 24 hours. The 12-hour clock uses AM (morning) and PM (afternoon/night). Train timetables use 24-hour time: 2:30 PM = 14:30.',
           hi: 'एक दिन में 24 घंटे होते हैं। 12-घंटे की घड़ी AM (सुबह) और PM (दोपहर/रात) का उपयोग करती है। ट्रेन 24-घंटे का समय इस्तेमाल करती है: दोपहर 2:30 = 14:30।',
@@ -163,7 +163,7 @@ const mathSubject: Subject = {
     {
       id: 'm6', title: '5. The Junk Seller', topics: [{
         id: 'm6-t1', title: 'Profit, Loss & Money',
-        subtopics: ['Buying and selling', 'Profit and loss basics', 'Bills and change'],
+        subtopics: ['The Tea Stall Story', 'Cost vs Selling Price', 'Profit Power-Up', 'Loss Prevention Mission', 'Smart Shopping Math', 'Creating Your First Bill', 'The Junk Recycling Hero', 'Business Ethics & Values'],
         readingText: {
           en: 'Profit = Selling Price − Cost Price. If you buy something for ₹20 and sell for ₹25, profit is ₹5. Loss happens when you sell for less than you paid.',
           hi: 'लाभ = बिक्री मूल्य − लागत मूल्य। अगर आप ₹20 में खरीदें और ₹25 में बेचें तो ₹5 का लाभ है। हानि तब होती है जब कम में बेचते हैं।',
@@ -195,7 +195,7 @@ const mathSubject: Subject = {
     {
       id: 'm7', title: '6. Jugs and Mugs', topics: [{
         id: 'm7-t1', title: 'Capacity & Volume',
-        subtopics: ['Litre and millilitre', 'Measuring liquids', 'Comparing capacities'],
+        subtopics: ['The Elephant\'s Mug Analogy', 'Litre vs Millilitre Battle', 'Measuring Jug Missions', 'Health Drink Recipe', 'Estimating Bucket Volume', 'The Thirsty Traveller Fix', 'Water Saving Strategy', 'Global Water Vision'],
         readingText: {
           en: '1 Litre = 1000 millilitres. A teaspoon holds about 5 mL, a cup about 200 mL, and a water bottle about 1 L.',
           hi: '1 लीटर = 1000 मिलीलीटर। एक चम्मच में करीब 5 mL, एक कप में करीब 200 mL, और एक पानी की बोतल में करीब 1 L होता है।',
@@ -227,7 +227,7 @@ const mathSubject: Subject = {
     {
       id: 'm8', title: '7. Carts and Wheels', topics: [{
         id: 'm8-t1', title: 'Circles & Patterns',
-        subtopics: ['Parts of a circle', 'Radius and diameter', 'Drawing circles'],
+        subtopics: ['The Pizza Compass Analogy', 'Radius – The Half Bridge', 'Diameter – The Main Road', 'Centre – The Heart', 'Drawing Perfection', 'Wheel Technology', 'Braid & Pattern Design', 'Circular Wonders of Nature'],
         readingText: {
           en: 'A circle has a centre. The radius is the distance from the centre to the edge. The diameter goes all the way across through the centre. Diameter = 2 × Radius.',
           hi: 'एक वृत्त का एक केंद्र होता है। त्रिज्या केंद्र से किनारे तक की दूरी है। व्यास पूरे वृत्त को केंद्र से पार करता है। व्यास = 2 × त्रिज्या।',
@@ -259,7 +259,7 @@ const mathSubject: Subject = {
     {
       id: 'm12', title: '8. The Way The World Looks', topics: [{
         id: 'm12-t1', title: 'Weight & Mass',
-        subtopics: ['Gram and kilogram', 'Weighing objects', 'Comparing weights'],
+        subtopics: ['Iron vs Feathers Analogy', 'Gram & Kilogram Units', 'Human Scale Challenge', 'Market Grocery Mission', 'Weight Balance Logic', 'Cooking with Math', 'Animal Weights Comparison', 'The Heavy Lifter Safety'],
         readingText: {
           en: '1 kilogram = 1000 grams. Heavy things like rice bags are measured in kg. Light things like a feather are measured in grams.',
           hi: '1 किलोग्राम = 1000 ग्राम। भारी चीजें जैसे चावल के बैग किग्रा में मापी जाती हैं। हल्की चीजें ग्राम में।',
@@ -291,7 +291,7 @@ const mathSubject: Subject = {
     {
       id: 'm14', title: '9. Tables and Shares', topics: [{
         id: 'm14-t1', title: 'Data Handling & Tally Marks',
-        subtopics: ['Tally marks', 'Pictographs', 'Simple tables'],
+        subtopics: ['The Secret Caveman Code', 'Tally Mark Race', 'Pictograph Artistry', 'Survey Detective Work', 'Data Table Organisation', 'Interpreting the Graph', 'Predicting the Future', 'Information Literacy'],
         readingText: {
           en: 'Tally marks help us count quickly. We draw 4 lines and cross the 5th through them to make groups of 5. Pictographs use pictures to show data.',
           hi: 'मिलान चिह्न हमें जल्दी गिनने में मदद करते हैं। हम 4 रेखाएँ बनाते हैं और 5वीं को उन पर आड़ा काटते हैं।',
@@ -329,7 +329,7 @@ const evsSubject: Subject = {
     {
       id: 'e1', title: '1. Going to School', topics: [{
         id: 'e1-t1', title: 'Bridges & Transport',
-        subtopics: ['Types of bridges', 'How children reach school', 'Boats and bamboo bridges'],
+        subtopics: ['The Ant Crossing Water Analogy', 'Bamboo & Cement Bridges', 'The Vallam Boat Journey', 'Trolley Travels in Ladakh', 'Safety in Travel Mission', 'Building Your Own Model', 'Why Geography Matters', 'Connecting People Globally'],
         readingText: {
           en: 'Children use many ways to reach school—walking, cycling, boats (Vallams in Kerala), bamboo bridges, and rope bridges. Each region has its unique way based on geography.',
           hi: 'बच्चे स्कूल पहुँचने के लिए कई तरीके अपनाते हैं—पैदल चलना, साइकिल, नाव (केरल में वल्लम), बाँस के पुल।',
@@ -361,7 +361,7 @@ const evsSubject: Subject = {
     {
       id: 'e2', title: '2. Ear to Ear', topics: [{
         id: 'e2-t1', title: 'Animal Ears & Hearing',
-        subtopics: ['Ears of different animals', 'Hidden ears', 'Hearing abilities'],
+        subtopics: ['The Fan-Ears Analogy', 'Hidden Ear Detective', 'Sound Vibrations Secrets', 'Hearing Ranges in Nature', 'Animal Skins & Patterns', 'Feathers vs Fur Logic', 'Sensitivity & Safety', 'Silent World Empathy'],
         readingText: {
           en: 'Animals have ears of different shapes and sizes. Elephants have huge fan-shaped ears. Birds and lizards have tiny holes instead of outer ears. Some animals can hear sounds humans cannot.',
           hi: 'जानवरों के कान अलग-अलग आकार के होते हैं। हाथी के बड़े पंखे जैसे कान। पक्षियों के सिर पर छोटे छेद होते हैं।',
@@ -623,7 +623,7 @@ const hindiSubject: Subject = {
     {
       id: 'h1', title: '1. मन के भोले-भाले बादल', topics: [{
         id: 'h1-t1', title: 'बादलों की कविता',
-        subtopics: ['बादलों के आकार', 'मौसम और बादल', 'कवि की कल्पना'],
+        subtopics: ['The Cotton Candy Cloud Analogy', 'How Clouds are Born', 'Cloud Observation Task', 'The Sky Canvas Art', 'Weather & Moods', 'The Water Cycle Song', 'Rainmakers Challenge', 'Protecting Our Sky'],
         readingText: {
           en: 'This poem describes clouds as innocent, playful children. They puff their cheeks like balloons, have fluffy hair, and run around the sky looking very cute.',
           hi: 'यह कविता बादलों को भोले-भाले बच्चों की तरह बताती है। वे गाल फुलाते हैं, झब्बर-झब्बर बालों वाले हैं, और आसमान में इधर-उधर दौड़ते हैं।',
@@ -654,7 +654,7 @@ const hindiSubject: Subject = {
     {
       id: 'h2', title: '2. बीरबल की सूझ-बूझ', topics: [{
         id: 'h2-t1', title: 'बीरबल की चतुराई',
-        subtopics: ['अकबर-बीरबल की जोड़ी', 'बुद्धि की ताकत', 'सवाल-जवाब का खेल'],
+        subtopics: ['The Brain vs Brawn Analogy', 'The King\'s Impossible Questions', 'The Wit Detective', 'Solving Your Own Riddle', 'Logic & Clear Thinking', 'Birbal\'s Court History', 'Fair Justice Mission', 'The Future of Wisdom'],
         readingText: {
           en: 'Birbal was a witty minister in Akbar\'s court. When asked impossible questions, Birbal gave such clever answers that the questioner was left speechless. Intelligence is the greatest weapon.',
           hi: 'बीरबल अकबर के दरबार में सबसे चतुर मंत्री थे। जब अकबर ने असंभव सवाल पूछे, बीरबल ने ऐसे जवाब दिए कि पूछने वाले हैरान रह गए। बुद्धि सबसे बड़ा हथियार है!',
@@ -685,7 +685,7 @@ const hindiSubject: Subject = {
     {
       id: 'h3', title: '3. किरमिच की गेंद', topics: [{
         id: 'h3-t1', title: 'ईमानदारी',
-        subtopics: ['किरमिच की गेंद कहानी', 'ईमानदारी का मूल्य', 'सही और गलत'],
+        subtopics: ['The Lost Treasure Analogy', 'The Shiny Kirmic Ball', 'The Truth Mirror Test', 'Returning the Found Item', 'Honesty – The Real Gold', 'Trust Building Task', 'The Consequence Game', 'Becoming an Integrity Hero'],
         readingText: {
           en: 'This story is about a shiny ball made of kirmic (rexine). A child finds it and must decide whether to keep it or return it to its owner. Honesty is the best policy.',
           hi: 'यह कहानी किरमिच (रेक्सिन) की एक चमकदार गेंद के बारे में है। एक बच्चे को गेंद मिलती है और उसे फैसला करना है कि वह रखे या मालिक को लौटाए। ईमानदारी सबसे अच्छी नीति है।',
@@ -716,7 +716,7 @@ const hindiSubject: Subject = {
     {
       id: 'h4', title: '4. पापा जब बच्चे थे', topics: [{
         id: 'h4-t1', title: 'बचपन की यादें',
-        subtopics: ['पापा का बचपन', 'खेल और सपने', 'तब और अब'],
+        subtopics: ['The Time Machine Analogy', 'Papa\'s Funny Dreams', 'When Toys were Sticks', 'Interviewing Grandpa Task', 'The Bridge of Generations', 'The Value of Play', 'Dreaming Big Challenge', 'Building Your Own Future'],
         readingText: {
           en: 'This poem imagines what Papa was like as a child. Did he want to be a dog, or a watchman? Children have the funniest dreams! Let us explore Papa\'s childhood.',
           hi: 'यह कविता कल्पना करती है कि पापा बचपन में कैसे थे। क्या वे कुत्ता बनना चाहते थे या चौकीदार? बच्चों के सपने कितने मज़ेदार होते हैं! आइए पापा के बचपन की सैर करें।',
@@ -747,7 +747,7 @@ const hindiSubject: Subject = {
     {
       id: 'h7', title: '5. दान का हिसाब', topics: [{
         id: 'h7-t1', title: 'गणित और चतुराई',
-        subtopics: ['दोगुना होने की शक्ति', 'संन्यासी की चतुराई', 'दान का मूल्य'],
+        subtopics: ['The Doubling Rice Analogy', 'The Greedy King Trap', 'Exponential Growth Power', 'Charity – The Heart of Math', 'Clever Negotiation Task', 'Kingdom Budget Mission', 'Fair Resource Sharing', 'Math for Social Good'],
         readingText: {
           en: 'A saint asks a greedy king for just 1 rupee on the first day, doubling each day for 30 days. The king agrees, not realizing that 1 doubled 30 times is over 100 crore! Small beginnings can lead to huge results.',
           hi: 'एक संन्यासी ने लालची राजा से बस पहले दिन 1 रुपया माँगा, हर दिन दोगुना करते हुए 30 दिनों तक। राजा ने हाँ कर दी, बिना यह समझे कि 1 का 30 बार दोगुना 100 करोड़ से ज़्यादा बनता है!',
@@ -778,7 +778,7 @@ const hindiSubject: Subject = {
     {
       id: 'h9', title: '6. बिन्नी और गांधीजी', topics: [{
         id: 'h9-t1', title: 'स्वतंत्रता संग्राम',
-        subtopics: ['नमक सत्याग्रह', 'गांधीजी का संदेश', 'बच्चों की भूमिका'],
+        subtopics: ['The Salt & Freedom Analogy', 'The Long Walk Mission', 'Children in History', 'Passive Resistance Power-Up', 'Writing Your Own Message', 'Simple Living Philosophy', 'Swadeshi & Self-Reliance', 'Leading the Nation Vision'],
         readingText: {
           en: 'Binni is a child who cares for his goat while Gandhi prepares for the Salt March. Even children can be part of great missions. Gandhi\'s non-violent resistance changed India.',
           hi: 'बिन्नी एक बच्चा है जो अपनी बकरी की देखभाल करता है जबकि गांधीजी नमक यात्रा की तैयारी करते हैं। बच्चे भी बड़े मिशन का हिस्सा बन सकते हैं।',
@@ -815,7 +815,7 @@ const englishSubject: Subject = {
     {
       id: 'en1', title: '1. Wake Up!', topics: [{
         id: 'en1-t1', title: 'Morning Poem',
-        subtopics: ['Nature waking up', 'Sun and birds', 'Rhyming words'],
+        subtopics: ['The Sun Alarm Clock Analogy', 'Morning Buzz Activity', 'Rhyming Word Twins', 'Poetry Performance Skills', 'Morning Habits for Success', 'Early Bird vs Night Owl', 'Nature Observation Task', 'Writing Your First Stanza'],
         readingText: {
           en: 'The sun rises and the birds sing "Wake up!" The bees buzz and flowers open. It is like the whole world is throwing a party to celebrate a new day!',
           hi: 'सूरज उगता है और पक्षी गाते हैं "जागो!" मधुमक्खियाँ गुनगुनाती हैं और फूल खिलते हैं।',
@@ -846,7 +846,7 @@ const englishSubject: Subject = {
     {
       id: 'en5', title: '2. Helen Keller', topics: [{
         id: 'en5-t1', title: 'Helen Keller\'s Story',
-        subtopics: ['Overcoming disability', 'Learning through touch', 'Anne Sullivan', 'Inspiration'],
+        subtopics: ['The Dark Room Analogy', 'Finger Language Secrets', 'Learning Through Touch', 'Anne Sullivan – The Guide', 'Breaking the Silence', 'Determination Power-Up', 'Inclusive Spirit Mission', 'Hope for the Future'],
         readingText: {
           en: 'Helen Keller lost her sight and hearing at 19 months old. With the help of teacher Anne Sullivan, she learned to read, write, and speak. She became a famous author and activist.',
           hi: 'हेलन केलर ने 19 महीने की उम्र में अपनी दृष्टि और सुनने की क्षमता खो दी। शिक्षिका ऐन सलिवन की मदद से उन्होंने पढ़ना-लिखना सीखा।',
@@ -877,7 +877,7 @@ const englishSubject: Subject = {
     {
       id: 'en7', title: '3. The Giving Tree', topics: [{
         id: 'en7-t1', title: 'Friendship & Giving',
-        subtopics: ['The tree and the boy', 'Selfless giving', 'Growing up', 'Gratitude'],
+        subtopics: ['The Nature Power-Bank Analogy', 'Tree\'s Selfless Journey', 'The Growing Boy Cycle', 'Nature vs Need Logic', 'Gratitude Exercise', 'Tree Conservation Task', 'Sustainability Vision', 'Generosity Mastery'],
         readingText: {
           en: 'A tree gives shade, fruit, branches, and its trunk to a boy as he grows up. The tree is left as a stump but is still happy when the old man sits on it. It is about selfless friendship.',
           hi: 'एक पेड़ एक लड़के को छाँव, फल, डालियाँ और अपना तना देता है जब वह बड़ा होता है। यह निस्वार्थ मित्रता की कहानी है।',
@@ -908,7 +908,7 @@ const englishSubject: Subject = {
     {
       id: 'en9', title: '4. Pinocchio', topics: [{
         id: 'en9-t1', title: 'Honesty & Truth',
-        subtopics: ['Pinocchio\'s lies', 'Growing nose', 'Becoming a real boy', 'Importance of truth'],
+        subtopics: ['The Visual Glitch Analogy', 'Lies & The Growing Nose', 'Consequences of Truth', 'Becoming "Real" Strategy', 'Trust – The Broken Mirror', 'Honesty Challenge', 'Self-Improvement Mission', 'Character Building Mastery'],
         readingText: {
           en: 'Pinocchio is a wooden puppet who wants to become a real boy. Every time he tells a lie, his nose grows longer. He learns that honesty is the only way to become real. Always tell the truth!',
           hi: 'पिनोकियो एक लकड़ी का कठपुतली है जो असली लड़का बनना चाहता है। जब भी वह झूठ बोलता है, उसकी नाक बढ़ जाती है।',
@@ -945,7 +945,7 @@ const kannadaSubject: Subject = {
     {
       id: 'k1', title: '1. ಕನ್ನಡ ನಾಡು', topics: [{
         id: 'k1-t1', title: 'ನಮ್ಮ ಕರ್ನಾಟಕ',
-        subtopics: ['ಕರ್ನಾಟಕದ ಸಂಸ್ಕೃತಿ', 'ಕನ್ನಡ ಭಾಷೆಯ ಮಹತ್ವ', 'ನಾಡಗೀತೆ'],
+        subtopics: ['ನಮ್ಮ ನಾಡಿನ ಹೆಮ್ಮೆ', 'ಕನ್ನಡ ಅಕ್ಷರಗಳ ಮಾಂತ್ರಿಕ ಲೋಕ', 'ಕಲೆ ಮತ್ತು ಸಾಹಿತ್ಯ', 'ಐತಿಹಾಸಿಕ ತಾಣಗಳು', 'ನಾಡಹಬ್ಬಗಳ ಸಡಗರ', 'ನಮ್ಮ ಪರಿಸರ', 'ಕನ್ನಡವೇ ನಮ್ಮ ಉಸಿರು', 'ಭವ್ಯ ಕರ್ನಾಟಕದ ಕನಸು'],
         readingText: {
           en: 'Karnataka is known for its rich culture, language, and traditions. The Kannada language is one of the oldest Dravidian languages. Our duty is to respect and protect our mother tongue.',
           hi: 'कर्नाटक अपनी समृद्ध संस्कृति, भाषा और परंपराओं के लिए जाना जाता है।',
@@ -976,7 +976,7 @@ const kannadaSubject: Subject = {
     {
       id: 'k2', title: '2. ತೆನಾಲಿ ರಾಮಕೃಷ್ಣ', topics: [{
         id: 'k2-t1', title: 'ಬುದ್ಧಿವಂತಿಕೆ',
-        subtopics: ['ತೆನಾಲಿ ರಾಮಕೃಷ್ಣನ ಕಥೆ', 'ಚಾತುರ್ಯ', 'ಸಮಸ್ಯೆ ಪರಿಹಾರ'],
+        subtopics: ['ತೆನಾಲಿ ರಾಮಕೃಷ್ಣನ ಚತುರ್ಯ', 'ಬುದ್ಧಿ ಬಲದ ಕಥೆ', 'ಹಾಸ್ಯದ ಉಪಯೋಗ', 'ಸಮಸ್ಯೆ ಎದುರಿಸುವ ಹಾದಿ', 'ವಿಜಯನಗರದ ವೈಭವ', 'ತೆನಾಲಿ ಮತ್ತು ಕೃಷ್ಣದೇವರಾಯ', 'ಸತ್ಯ ಮತ್ತು ಧರ್ಮ', 'ಚತುರತೆಯ ಪಾಠಗಳು'],
         readingText: {
           en: 'Tenali Ramakrishna was a witty poet in the court of Krishnadevaraya. He solved problems using intelligence and humour, teaching us that brains beat brawn.',
           hi: 'तेनालीराम कृष्णदेवराय के दरबार में एक चतुर कवि थे।',
@@ -1007,7 +1007,7 @@ const kannadaSubject: Subject = {
     {
       id: 'k3', title: '3. ವೀರಮಾತೆ ಜೀಜಾಬಾಯಿ', topics: [{
         id: 'k3-t1', title: 'ಧೈರ್ಯ ಮತ್ತು ಸ್ಫೂರ್ತಿ',
-        subtopics: ['ಜೀಜಾಬಾಯಿಯ ಜೀವನ', 'ಶಿವಾಜಿ ಮಹಾರಾಜ', 'ತಾಯಿಯ ಪ್ರೀತಿ ಮತ್ತು ಶಕ್ತಿ'],
+        subtopics: ['ವೀರಮಾತೆ ಜೀಜಾಬಾಯಿಯ ಶಕ್ತಿ', 'ಶಿವಾಜಿಯ ಸುಂದರ ಬಾಲ್ಯ', 'ದೇಶಪ್ರೇಮದ ಸಂಸ್ಕಾರ', 'ಧೈರ್ಯದ ಸ್ಫೂರ್ತಿ', 'ತಾಯಿಯ ಮಹತ್ವ', 'ನ್ಯಾಯದ ಹೋರಾಟ', 'ಸ್ವರಾಜ್ಯದ ಕನಸು', 'ನಮಗೆ ಜೀಜಾಬಾಯಿ ಸ್ಫೂರ್ತಿ'],
         readingText: {
           en: 'Jijabai was the brave mother of Shivaji Maharaj. She inspired Shivaji with stories of courage and taught him to fight for justice. She is an inspiration to all.',
           hi: 'जीजाबाई शिवाजी महाराज की वीर माता थीं। उन्होंने शिवाजी को साहस की कहानियाँ सुनाईं।',
@@ -1038,7 +1038,7 @@ const kannadaSubject: Subject = {
     {
       id: 'k4', title: '4. ಮಳೆ', topics: [{
         id: 'k4-t1', title: 'ಮಳೆಯ ಸೌಂದರ್ಯ',
-        subtopics: ['ಮಳೆಯ ವರ್ಣನೆ', 'ಮಳೆಯ ಉಪಯೋಗ', 'ನೀರಿನ ಚಕ್ರ'],
+        subtopics: ['ಮಳೆಯ ಸದ್ದು ಮತ್ತು ಮೋಜು', 'ವರುಣನ ಕೃಪೆ', 'ನೀರಿನ ಚಕ್ರದ ಜಾದೂ', 'ರೈತರ ಸಡಗರ', 'ಪರಿಸರ ರಕ್ಷಣೆ', 'ಗುಡುಗು ಮಿಂಚಿನ ಪಾಠ', 'ಜಲ ಸಂರಕ್ಷಣೆ', 'ಪರಿಸರದ ಸೌಂದರ್ಯ'],
         readingText: {
           en: 'Rain makes the earth cool and green. The rain god Varuna brings water from the sky. Plants grow, rivers fill, and farmers smile when it rains. Rain is a blessing for all life.',
           hi: 'बारिश पृथ्वी को ठंडा और हरा बनाती है। वरुण देव आसमान से पानी लाते हैं।',
@@ -1075,7 +1075,7 @@ const computerSubject: Subject = {
     {
       id: 'c1', title: '1. Parts of a Computer', topics: [{
         id: 'c1-t1', title: 'Computer Hardware',
-        subtopics: ['CPU – The brain', 'Monitor', 'Keyboard & Mouse', 'Input vs Output devices'],
+        subtopics: ['The Body Parts Analogy', 'CPU – The Silent Commander', 'Monitor – The Window', 'Input/Output Orchestra', 'The Parts Connection Task', 'Storage – The Memory Box', 'Healthy Tech Habits', 'Designing the Future PC'],
         readingText: {
           en: 'A computer has many parts. The CPU is the brain that processes everything. The monitor is the screen. The keyboard and mouse are input devices. Speakers and printers are output devices.',
           hi: 'कंप्यूटर के कई भाग होते हैं। CPU दिमाग है जो सब प्रोसेस करता है। मॉनिटर स्क्रीन है। कीबोर्ड और माउस इनपुट डिवाइस हैं।',
@@ -1107,7 +1107,7 @@ const computerSubject: Subject = {
     {
       id: 'c7', title: '2. Introduction to AI', topics: [{
         id: 'c7-t1', title: 'What is AI?',
-        subtopics: ['What machines can learn', 'Pattern recognition', 'AI in daily life', 'Smart assistants'],
+        subtopics: ['The Robot Puppy Analogy', 'Training Your Machine', 'The Pattern recognition Detective', 'AI in Your Phone', 'Smart Assistant Challenge', 'Data – The AI Food', 'Safe AI Exploration', 'The Future of AI Friends'],
         readingText: {
           en: 'AI (Artificial Intelligence) means teaching machines to think and learn. AI recognises faces in photos, suggests songs you like, and powers voice assistants like Alexa and Google Assistant.',
           hi: 'AI (कृत्रिम बुद्धिमत्ता) का मतलब है मशीनों को सोचना और सीखना सिखाना। AI फ़ोटो में चेहरे पहचानता है।',
