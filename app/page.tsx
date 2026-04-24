@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import VoiceAITutor from '../components/VoiceAITutor';
+import Link from 'next/link';
 import { syllabus, Subject, Chapter, Topic } from '../lib/curriculum';
 
 export default function Home() {
@@ -46,7 +47,10 @@ export default function Home() {
         {!selectedSubject ? (
           <div className="welcome-dashboard animate-fade-in">
             <header className="welcome-header">
-              <h1>Welcome back, Yasmeen! 🌟</h1>
+              <div className="header-top">
+                <h1>Welcome back, Yasmeen! 🌟</h1>
+                <Link href="/audit" className="audit-link-btn glass-card">📑 Full Audit View</Link>
+              </div>
               <p>Ready to learn something amazing today?</p>
             </header>
 
@@ -156,7 +160,14 @@ export default function Home() {
           margin: 0 auto;
           padding: 2rem 0;
         }
-        .welcome-header h1 { font-size: 3.5rem; margin-bottom: 0.5rem; color: var(--primary); font-weight: 900; }
+        .welcome-header h1 { font-size: 3.5rem; margin: 0; color: var(--primary); font-weight: 900; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .audit-link-btn { 
+          padding: 0.8rem 1.5rem !important; font-weight: 800; color: var(--primary); 
+          text-decoration: none; border-radius: 15px; background: white; 
+          transition: all 0.2s; border: 1px solid rgba(0,0,0,0.05);
+        }
+        .audit-link-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .welcome-header p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 3rem; color: var(--text-color); }
 
         .dashboard-grid {
