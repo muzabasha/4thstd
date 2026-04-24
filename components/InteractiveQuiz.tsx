@@ -1,284 +1,262 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { QuizQuestion } from '../lib/curriculum';
 
-interface InteractiveQuizProps {
+interface Props {
   questions: QuizQuestion[];
   onComplete: (score: number) => void;
 }
 
-export default function InteractiveQuiz({ questions, onComplete }: InteractiveQuizProps) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [isAnswered, setIsAnswered] = useState(false);
+const OPTION_COLORS = ['#7C3AED', '#EC4899', '#F59E0B', '#10B981'];
+const OPTION_LABELS = ['A', 'B', 'C', 'D'];
+
+export default function InteractiveQuiz({ questions, onComplete }: Props) {
+  const [idx, setIdx] = useState(0);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [answered, setAnswered] = useState(false);
   const [score, setScore] = useState(0);
-  const [showResult, setShowResult] = useState(false);
+  const [done, setDone] = useState(false);
 
-  const currentQuestion = questions[currentQuestionIndex];
-
-  const handleOptionClick = (option: string) => {
-    if (isAnswered) return;
-    setSelectedOption(option);
-    setIsAnswered(true);
-    if (option === currentQuestion.correctAnswer) {
-      setScore(prev => prev + 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentQuestionIndex + 1 < questions.length) {
-      setCurrentQuestionIndex(prev => prev + 1);
-      setSelectedOption(null);
-      setIsAnswered(false);
-    } else {
-      setShowResult(true);
-      onComplete(score + (selectedOption === currentQuestion.correctAnswer ? 1 : 0));
-    }
-  };
-
-  if (!questions || questions.length === 0) {
-    return <div className="quiz-container glass-card">No quiz available for this topic yet.</div>;
+  if (!questions?.length) {
+    return (
+      <div className="qz-empty glass-card">
+        <p>🚧 Quiz coming soon for this topic!</p>
+      </div>
+    );
   }
 
-  if (showResult) {
+  const q = questions[idx];
+  const isCorrect = picked === q.correctAnswer;
+  const finalScore = done ? score : 0;
+
+  const pick = (opt: string) => {
+    if (answered) return;
+    setPicked(opt);
+    setAnswered(true);
+    if (opt === q.correctAnswer) setScore(s => s + 1);
+  };
+
+  const next = () => {
+    const newScore = score + (isCorrect ? 0 : 0); // already counted
+    if (idx + 1 < questions.length) {
+      setIdx(i => i + 1);
+      setPicked(null);
+      setAnswered(false);
+    } else {
+      setDone(true);
+      onComplete(score + (isCorrect ? 1 : 0));
+    }
+  };
+
+  if (done) {
+    const total = questions.length;
+    const pct = Math.round((score / total) * 100);
     return (
-      <div className="quiz-container glass-card animate-scale-in">
-        <div className="result-view">
-          <div className="trophy">🏆</div>
-          <h2>Great Job, Yasmeen!</h2>
-          <p className="score-text">You scored {score} out of {questions.length}!</p>
-          <div className="feedback-message">
-            {score === questions.length ? "Perfect Score! You are a superstar! 🌟" : "Well done! Keep learning and you'll get them all next time! 💪"}
+      <div className="qz-result animate-pop-in">
+        <div className="qz-trophy">{pct === 100 ? '🏆' : pct >= 60 ? '🌟' : '💪'}</div>
+        <h2 className="qz-result-title">
+          {pct === 100 ? 'Perfect Score!' : pct >= 60 ? 'Well Done!' : 'Keep Practising!'}
+        </h2>
+        <p className="qz-score">{score} / {total}</p>
+        <div className="qz-result-bar">
+          <div className="progress-track" style={{ height: 14 }}>
+            <div className="progress-fill" style={{ width: `${pct}%` }} />
           </div>
-          <button className="done-btn" onClick={() => onComplete(score)}>Finish Quiz</button>
+          <span className="qz-pct">{pct}%</span>
         </div>
-        <style jsx>{`
-          .result-view {
-            text-align: center;
-            padding: 3rem;
-          }
-          .trophy {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            animation: bounce 2s infinite;
-          }
-          h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #ffd700, #ff8c00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          .score-text {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-weight: 800;
-          }
-          .feedback-message {
-            font-size: 1.2rem;
-            color: var(--text-color);
-            opacity: 0.8;
-            margin-bottom: 2rem;
-          }
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-          }
-        `}</style>
+        <p className="qz-msg">
+          {pct === 100
+            ? "You're a superstar, Yasmeen! 🌟 Every answer was correct!"
+            : pct >= 60
+              ? "Great job! Review the ones you missed and try again! 💪"
+              : "Don't give up! Read the topic again and you'll do better! 📚"}
+        </p>
+        <button className="btn btn-primary" onClick={() => onComplete(finalScore)}>
+          ← Back to Learning
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="quiz-container glass-card animate-fade-in">
-      <div className="quiz-header">
-        <span className="question-count">Question {currentQuestionIndex + 1} of {questions.length}</span>
-        <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}></div>
+    <div className="qz-wrap animate-fade-in">
+      {/* Header */}
+      <div className="qz-header">
+        <div className="qz-counter">
+          <span className="qz-num">{idx + 1}</span>
+          <span className="qz-of">of {questions.length}</span>
         </div>
+        <div className="progress-track" style={{ flex: 1 }}>
+          <div className="progress-fill" style={{ width: `${((idx + 1) / questions.length) * 100}%` }} />
+        </div>
+        <div className="qz-score-live">⭐ {score}</div>
       </div>
 
-      <div className="question-section">
-        <h3>{currentQuestion.question}</h3>
+      {/* Question */}
+      <div className="qz-question glass-card">
+        <p className="qz-q-text">{q.question}</p>
+        {q.hint && !answered && (
+          <p className="qz-hint">💡 Hint: {q.hint}</p>
+        )}
       </div>
 
-      <div className="options-grid">
-        {currentQuestion.options.map((option, index) => {
-          let statusClass = "";
-          if (isAnswered) {
-            if (option === currentQuestion.correctAnswer) statusClass = "correct";
-            else if (option === selectedOption) statusClass = "incorrect";
-            else statusClass = "dimmed";
-          } else if (option === selectedOption) {
-            statusClass = "selected";
+      {/* Options */}
+      <div className="qz-options">
+        {q.options.map((opt, i) => {
+          let state = '';
+          if (answered) {
+            if (opt === q.correctAnswer) state = 'correct';
+            else if (opt === picked) state = 'wrong';
+            else state = 'dim';
           }
-
           return (
             <button
-              key={index}
-              className={`option-btn ${statusClass}`}
-              onClick={() => handleOptionClick(option)}
-              disabled={isAnswered}
+              key={i}
+              className={`qz-opt ${state}`}
+              onClick={() => pick(opt)}
+              disabled={answered}
+              style={!answered ? { '--opt-color': OPTION_COLORS[i] } as React.CSSProperties : {}}
             >
-              <span className="option-label">{String.fromCharCode(65 + index)}</span>
-              {option}
-              {isAnswered && option === currentQuestion.correctAnswer && <span className="icon">✅</span>}
-              {isAnswered && option === selectedOption && option !== currentQuestion.correctAnswer && <span className="icon">❌</span>}
+              <span
+                className="qz-opt-label"
+                style={{ background: state === 'correct' ? '#10B981' : state === 'wrong' ? '#EF4444' : OPTION_COLORS[i] }}
+              >
+                {OPTION_LABELS[i]}
+              </span>
+              <span className="qz-opt-text">{opt}</span>
+              {state === 'correct' && <span className="qz-opt-icon">✅</span>}
+              {state === 'wrong' && <span className="qz-opt-icon">❌</span>}
             </button>
           );
         })}
       </div>
 
-      {isAnswered && (
-        <div className="explanation animate-slide-up">
-          <p className={selectedOption === currentQuestion.correctAnswer ? "correct-text" : "incorrect-text"}>
-            {selectedOption === currentQuestion.correctAnswer 
-              ? "That's correct! Brilliant! 🎉" 
-              : `Not quite! The correct answer is: ${currentQuestion.correctAnswer}`}
-          </p>
-          <button className="next-btn" onClick={handleNext}>
-            {currentQuestionIndex + 1 === questions.length ? "See Results" : "Next Question ➡️"}
+      {/* Feedback */}
+      {answered && (
+        <div className={`qz-feedback animate-pop-in ${isCorrect ? 'correct' : 'wrong'}`}>
+          <span className="qz-fb-icon">{isCorrect ? '🎉' : '🤔'}</span>
+          <div>
+            <p className="qz-fb-title">{isCorrect ? 'Brilliant!' : `The answer is: ${q.correctAnswer}`}</p>
+            {q.explanation && <p className="qz-fb-exp">{q.explanation}</p>}
+          </div>
+          <button className="btn btn-primary" onClick={next}>
+            {idx + 1 === questions.length ? 'See Results 🏆' : 'Next →'}
           </button>
         </div>
       )}
 
       <style jsx>{`
-        .quiz-container {
-          padding: 2.5rem;
-          max-width: 800px;
-          margin: 0 auto;
-          width: 100%;
-        }
-        .quiz-header {
-          margin-bottom: 2rem;
-        }
-        .question-count {
-          font-size: 0.9rem;
-          color: var(--accent);
-          font-weight: 700;
-          text-transform: uppercase;
-        }
-        .progress-bar {
-          height: 8px;
-          background: rgba(0, 0, 0, 0.05);
-          border-radius: 10px;
-          margin-top: 0.5rem;
-          overflow: hidden;
-        }
-        .progress-fill {
-          height: 100%;
-          background: var(--primary);
-          transition: width 0.3s ease;
-        }
-        h3 {
-          font-size: 1.8rem;
-          margin-bottom: 2rem;
-          color: var(--text-color);
-          line-height: 1.4;
-          font-weight: 800;
-        }
-        .options-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
+        .qz-wrap { display: flex; flex-direction: column; gap: 1.25rem; max-width: 700px; margin: 0 auto; }
+
+        .qz-header {
+          display: flex;
+          align-items: center;
           gap: 1rem;
         }
-        .option-btn {
-          background: white;
-          border: 2px solid rgba(0, 0, 0, 0.05);
-          padding: 1.5rem;
-          border-radius: 16px;
-          color: var(--text-color);
-          font-size: 1.2rem;
-          text-align: left;
-          cursor: pointer;
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-          display: flex;
-          align-items: center;
-          gap: 1.2rem;
-          position: relative;
-          width: 100%;
-          font-weight: 600;
-          box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-        .option-btn:hover:not(:disabled) {
-          background: rgba(255, 255, 255, 0.1);
-          border-color: var(--accent);
-          transform: translateY(-2px);
-        }
-        .option-label {
-          background: rgba(108, 92, 231, 0.1);
-          width: 35px;
-          height: 35px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 8px;
+        .qz-counter { display: flex; align-items: baseline; gap: 0.25rem; }
+        .qz-num  { font-family: 'Baloo 2', cursive; font-size: 1.6rem; font-weight: 900; color: #7C3AED; }
+        .qz-of   { font-size: 0.85rem; font-weight: 700; color: #9CA3AF; }
+        .qz-score-live { font-size: 1rem; font-weight: 800; color: #F59E0B; white-space: nowrap; }
+
+        .qz-question { padding: 1.75rem 2rem !important; }
+        .qz-q-text {
+          font-family: 'Baloo 2', cursive;
+          font-size: 1.3rem;
           font-weight: 800;
-          color: var(--primary);
+          color: #1E1B4B;
+          line-height: 1.4;
         }
-        .option-btn.correct {
-          background: rgba(46, 213, 115, 0.2);
-          border-color: #2ed573;
-        }
-        .option-btn.incorrect {
-          background: rgba(255, 71, 87, 0.2);
-          border-color: #ff4757;
-        }
-        .option-btn.dimmed {
-          opacity: 0.5;
-        }
-        .icon {
-          margin-left: auto;
-          font-size: 1.2rem;
-        }
-        .explanation {
-          margin-top: 1.5rem;
-          padding: 1.5rem;
+        .qz-hint { font-size: 0.85rem; color: #6B7280; font-weight: 600; margin-top: 0.75rem; font-style: italic; }
+
+        .qz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        .qz-opt {
+          display: flex;
+          align-items: center;
+          gap: 0.85rem;
+          padding: 1rem 1.25rem;
           background: white;
+          border: 2px solid #E5E7EB;
+          border-radius: 16px;
+          cursor: pointer;
+          text-align: left;
+          transition: all 0.18s;
+          font-family: 'Nunito', sans-serif;
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #374151;
+          width: 100%;
+        }
+        .qz-opt:hover:not(:disabled) {
+          border-color: var(--opt-color, #7C3AED);
+          background: #F5F3FF;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(124,58,237,0.12);
+        }
+        .qz-opt.correct { background: #F0FDF4; border-color: #10B981; }
+        .qz-opt.wrong   { background: #FEF2F2; border-color: #EF4444; }
+        .qz-opt.dim     { opacity: 0.4; }
+        .qz-opt-label {
+          width: 32px; height: 32px;
+          border-radius: 10px;
+          display: flex; align-items: center; justify-content: center;
+          color: white;
+          font-size: 0.85rem;
+          font-weight: 900;
+          flex-shrink: 0;
+        }
+        .qz-opt-text { flex: 1; }
+        .qz-opt-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+        .qz-feedback {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          padding: 1.25rem 1.5rem;
           border-radius: 20px;
+          flex-wrap: wrap;
+        }
+        .qz-feedback.correct { background: #F0FDF4; border: 2px solid #A7F3D0; }
+        .qz-feedback.wrong   { background: #FEF2F2; border: 2px solid #FECACA; }
+        .qz-fb-icon  { font-size: 2rem; flex-shrink: 0; }
+        .qz-fb-title { font-weight: 800; font-size: 1rem; color: #1E1B4B; margin-bottom: 0.2rem; }
+        .qz-fb-exp   { font-size: 0.85rem; color: #6B7280; font-weight: 600; }
+        .qz-feedback .btn { margin-left: auto; white-space: nowrap; }
+
+        /* Result */
+        .qz-result {
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 1rem;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+          padding: 3rem 2rem;
+          text-align: center;
+          background: white;
+          border-radius: 28px;
+          box-shadow: 0 8px 32px rgba(124,58,237,0.12);
         }
-        .correct-text {
-          color: #2ed573;
-          font-weight: 700;
-          font-size: 1.3rem;
+        .qz-trophy { font-size: 5rem; animation: bounce-in 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+        .qz-result-title {
+          font-family: 'Baloo 2', cursive;
+          font-size: 2rem;
+          font-weight: 900;
+          background: linear-gradient(135deg, #7C3AED, #EC4899);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
-        .incorrect-text {
-          color: #ff4757;
-          font-weight: 700;
-          font-size: 1.3rem;
-        }
-        .next-btn {
-          padding: 1.2rem 4rem;
-          background: var(--primary);
-          color: white;
-          border: none;
-          border-radius: 16px;
-          font-weight: 800;
-          cursor: pointer;
-          transition: all 0.2s;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          font-size: 1.1rem;
-          width: 100%;
-          max-width: 400px;
-          box-shadow: 0 8px 20px rgba(108, 92, 231, 0.2);
-        }
-        .next-btn:hover {
-          transform: scale(1.05);
-          box-shadow: 0 0 20px rgba(255, 209, 102, 0.4);
-        }
+        .qz-score { font-family: 'Baloo 2', cursive; font-size: 3rem; font-weight: 900; color: #7C3AED; line-height: 1; }
+        .qz-result-bar { display: flex; align-items: center; gap: 0.75rem; width: 100%; max-width: 320px; }
+        .qz-result-bar .progress-track { flex: 1; }
+        .qz-pct { font-weight: 900; color: #7C3AED; }
+        .qz-msg { font-size: 1rem; color: #6B7280; font-weight: 600; max-width: 360px; line-height: 1.5; }
+
+        .qz-empty { text-align: center; padding: 3rem; font-size: 1.1rem; font-weight: 700; color: #6B7280; }
 
         @media (max-width: 600px) {
-          .options-grid {
-            grid-template-columns: 1fr;
-          }
+          .qz-options { grid-template-columns: 1fr; }
+          .qz-feedback { flex-direction: column; }
+          .qz-feedback .btn { width: 100%; }
         }
       `}</style>
     </div>
