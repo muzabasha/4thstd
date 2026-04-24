@@ -1,132 +1,175 @@
 "use client";
 
-import { useState, useCallback, useMemo, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
+
+// Language detection by Unicode script range
+function detectScript(text: string): string | null {
+  if (/[\u0900-\u097F]/.test(text)) return 'hi-IN';   // Devanagari → Hindi
+  if (/[\u0C80-\u0CFF]/.test(text)) return 'kn-IN';   // Kannada script
+  return null;
+}
+
+// Find the best available voice for a given BCP-47 lang code
+function pickVoice(voices: SpeechSynthesisVoice[], lang: string): SpeechSynthesisVoice | null {
+  const code = lang.toLowerCase();
+  const base = code.split('-')[0];
+
+  // Exact match first
+  let v = voices.find(v => v.lang.toLowerCase() === code);
+  if (v) return v;
+
+  // Prefix match (e.g. hi-IN matches hi)
+  v = voices.find(v => v.lang.toLowerCase().startsWith(base));
+  if (v) return v;
+
+  // Name-based fallback for Indian languages
+  if (base === 'hi') {
+    v = voices.find(v => /hindi|devanagari/i.test(v.name));
+    if (v) return v;
+  }
+  if (base === 'kn') {
+    v = voices.find(v => /kannada/i.test(v.name));
+    if (v) return v;
+  }
+
+  // Generic India fallback
+  v = voices.find(v => /india/i.test(v.name));
+  return v ?? null;
+}
 
 export const useVoice = () => {
   const [isListening, setIsListening] = useState(false);
   const [transcript, setTranscript] = useState('');
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [lang, setLang] = useState('en-IN');
+  const [lang, setLangState] = useState('en-IN');
+  const langRef = useRef('en-IN');
+  const voicesRef = useRef<SpeechSynthesisVoice[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const recognitionRef = useRef<any>(null);
 
-  const recognition = useMemo(() => {
+  // Keep langRef in sync
+  const setLang = useCallback((l: string) => {
+    langRef.current = l;
+    setLangState(l);
+  }, []);
+
+  // Load voices — retry until available (browsers load them async)
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+
+    const load = () => {
+      const v = window.speechSynthesis.getVoices();
+      if (v.length > 0) voicesRef.current = v;
+    };
+
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+
+    // Retry a few times for browsers that are slow to load voices
+    const timers = [
+      setTimeout(load, 500),
+      setTimeout(load, 1500),
+      setTimeout(load, 3000),
+    ];
+
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+      timers.forEach(clearTimeout);
+    };
+  }, []);
+
+  // Build recognition lazily
+  const getRecognition = useCallback(() => {
     if (typeof window === 'undefined') return null;
+    if (recognitionRef.current) return recognitionRef.current;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-    if (!SpeechRecognition) return null;
-    
-    const rec = new SpeechRecognition();
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) return null;
+
+    const rec = new SR();
     rec.continuous = false;
     rec.interimResults = false;
-    rec.lang = lang;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     rec.onresult = (event: any) => {
-      const current = event.resultIndex;
-      const result = event.results[current][0].transcript;
+      const result = event.results[event.resultIndex][0].transcript;
       setTranscript(result);
       setIsListening(false);
     };
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     rec.onerror = (event: any) => {
       console.error('Speech recognition error:', event.error);
       setIsListening(false);
     };
+    rec.onend = () => setIsListening(false);
 
-    rec.onend = () => {
-      setIsListening(false);
-    };
-
+    recognitionRef.current = rec;
     return rec;
-  }, [lang]);
+  }, []);
 
   const startListening = useCallback(() => {
-    if (!recognition) return;
+    const rec = getRecognition();
+    if (!rec) return;
+    rec.lang = langRef.current;
     setIsListening(true);
-    recognition.start();
-  }, [recognition]);
+    try { rec.start(); } catch { setIsListening(false); }
+  }, [getRecognition]);
 
   const stopListening = useCallback(() => {
-    if (!recognition) return;
+    const rec = recognitionRef.current;
+    if (!rec) return;
     setIsListening(false);
-    recognition.stop();
-  }, [recognition]);
+    try { rec.stop(); } catch { /* ignore */ }
+  }, []);
 
   const speak = useCallback((text: string, overrideLang?: string) => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    if (!text.trim()) return;
 
-    // Auto-detect Language based on script
-    let detectedLang = overrideLang || lang;
-    if (/[\u0900-\u097F]/.test(text)) {
-      detectedLang = 'hi-IN';
-    } else if (/[\u0C80-\u0CFF]/.test(text)) {
-      detectedLang = 'kn-IN';
-    }
+    // Auto-detect script, then fall back to override, then current lang
+    const scriptLang = detectScript(text);
+    const targetLang = scriptLang ?? overrideLang ?? langRef.current;
 
-    // Browser policy: Resume if paused
-    if (window.speechSynthesis.paused) {
-      window.speechSynthesis.resume();
-    }
-    
-    // Stop current speech
     window.speechSynthesis.cancel();
 
-    const langCode = detectedLang.split('-')[0].toLowerCase();
-
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = detectedLang;
-    
-    // Discovery loop for voices
-    const voices = window.speechSynthesis.getVoices();
-    let targetVoice = voices.find(v => 
-      v.lang.toLowerCase() === detectedLang.toLowerCase() ||
-      v.lang.toLowerCase().startsWith(langCode)
-    );
+    utterance.lang = targetLang;
 
-    // Deep search for Hindi/Kannada indicators in voice names
-    if (!targetVoice && (langCode === 'hi' || langCode === 'kn')) {
-      targetVoice = voices.find(v => {
-        const name = v.name.toLowerCase();
-        return name.includes('india') || name.includes('hindi') || name.includes('kannada');
-      });
-    }
-    
-    if (targetVoice) {
-      utterance.voice = targetVoice;
+    // Pick best voice — use cached list, retry once if empty
+    let voices = voicesRef.current;
+    if (voices.length === 0) {
+      voices = window.speechSynthesis.getVoices();
+      voicesRef.current = voices;
     }
 
-    utterance.rate = 0.9; // Even slower for better articulation of complex scripts
-    utterance.pitch = 1.1; 
+    const voice = pickVoice(voices, targetLang);
+    if (voice) utterance.voice = voice;
+
+    // Slower rate for Hindi/Kannada for better articulation
+    const base = targetLang.split('-')[0].toLowerCase();
+    utterance.rate = (base === 'hi' || base === 'kn') ? 0.82 : 0.92;
+    utterance.pitch = 1.05;
     utterance.volume = 1.0;
 
     utterance.onstart = () => setIsSpeaking(true);
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = (e) => {
-      console.error('TTS Error:', e);
+      // 'interrupted' is normal when cancel() is called — don't log it
+      if (e.error !== 'interrupted') console.error('TTS error:', e.error);
       setIsSpeaking(false);
     };
 
-    // Final check for synthesis readiness
+    // Small delay to let cancel() settle before speaking
     setTimeout(() => {
+      if (window.speechSynthesis.paused) window.speechSynthesis.resume();
       window.speechSynthesis.speak(utterance);
-    }, 50);
-  }, [lang]);
-
-  // Pre-fetch and update voices
-  useEffect(() => {
-    if (typeof window === 'undefined' || !window.speechSynthesis) return;
-
-    const updateVoices = () => {
-      window.speechSynthesis.getVoices();
-    };
-
-    updateVoices();
-    window.speechSynthesis.onvoiceschanged = updateVoices;
-    
-    return () => {
-      window.speechSynthesis.onvoiceschanged = null;
-    };
+    }, 80);
   }, []);
 
-  return { isListening, transcript, isSpeaking, startListening, stopListening, speak, setLang };
+  return {
+    isListening, transcript, isSpeaking,
+    lang, setLang,
+    startListening, stopListening, speak,
+  };
 };
