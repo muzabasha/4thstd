@@ -918,39 +918,63 @@ const kannadaSubject: Subject = {
   id: 'kannada', title: 'Kannada (Siri Kannada)', icon: '🚩', color: '#D63031',
   chapters: [
     {
-      id: 'k1', title: '1. ಕನ್ನಡ ನಾಡು', topics: [{
+      id: 'k1', title: '1. ಕನ್ನಡ ನಾಡು ನುಡಿ', topics: [{
         id: 'k1-t1', title: 'ನಮ್ಮ ಕರ್ನಾಟಕ',
-        subtopics: ['ನಾಡಿನ ಹೆಮ್ಮೆ'],
+        subtopics: ['ಕರ್ನಾಟಕದ ಇತಿಹಾಸ', 'ನಾಡಗೀತೆ ಮತ್ತು ಧ್ವಜ', 'ಪ್ರೇಕ್ಷಣೀಯ ಸ್ಥಳಗಳು', 'ಕನ್ನಡ ಸಾಹಿತ್ಯದ ಪರಿಚಯ'],
         readingText: {
-          en: 'Karnataka is rich in culture.',
-          hi: 'कर्नाटक अपनी संस्कृति के लिए प्रसिद्ध है।',
-          kn: 'ಕರ್ನಾಟಕ ತನ್ನ ಶ್ರೀಮಂತ ಸಂಸ್ಕೃತಿ ಮತ್ತು ಕನ್ನಡ ಭಾಷೆಗೆ ಹೆಸರುವಾಸಿ.'
+          en: 'Karnataka is known for its rich culture, heritage, and the Kannada language. It has beautiful monuments, forests, and rivers.',
+          hi: 'कर्नाटक अपनी समृद्ध संस्कृति, विरासत और कन्नड़ भाषा के लिए जाना जाता है।',
+          kn: 'ಕರ್ನಾಟಕವು ತನ್ನ ಶ್ರೀಮಂತ ಸಂಸ್ಕೃತಿ, ಪರಂಪರೆ ಮತ್ತು ಕನ್ನಡ ಭಾಷೆಗೆ ಹೆಸರುವಾಸಿಯಾಗಿದೆ. ಇಲ್ಲಿ ಸುಂದರವಾದ ಸ್ಮಾರಕಗಳು, ಕಾಡುಗಳು ಮತ್ತು ನದಿಗಳಿವೆ.'
         },
         activities: [
-          act('ನಾಡಗೀತೆ', 'ಹಾಡಿರಿ.', 'speaking', 'low', ['ಹಾಡಿ'], [], 'ಜೈ ಕರ್ನಾಟಕ!')
+          act('ನಾಡಗೀತೆ ಗಾಯನ', 'ಕುವೆಂಪು ರವರ "ಜಯ ಭಾರತ ಜನನಿಯ ತನುಜಾತೆ" ಗೀತೆಯನ್ನು ಹಾಡಿರಿ.', 'speaking', 'low', ['ಗೀತೆಯನ್ನು ಓದಿ', 'ಲಯಬದ್ಧವಾಗಿ ಹಾಡಿ', 'ಅರ್ಥವನ್ನು ತಿಳಿಯಿರಿ'], [], 'ಯಾರು ಬರೆದಿದ್ದಾರೆ?'),
+          act('ನಕ್ಷೆ ಗುರುತಿಸುವಿಕೆ', 'ಕರ್ನಾಟಕದ ಜಿಲ್ಲೆಗಳನ್ನು ನಕ್ಷೆಯಲ್ಲಿ ಗುರುತಿಸಿ.', 'drawing', 'mid', ['ನಕ್ಷೆ ತೆಗೆದುಕೊಳ್ಳಿ', 'ನಿಮ್ಮ ಜಿಲ್ಲೆಯನ್ನು ಗುರುತಿಸಿ', 'ನೆರೆರಾಜ್ಯಗಳನ್ನು ಬಣ್ಣ ಮಾಡಿ'], ['ಕರ್ನಾಟಕ ನಕ್ಷೆ', 'ಬಣ್ಣದ ಪೆನ್ಸಿಲ್'], 'ನಿಮ್ಮ ಜಿಲ್ಲೆಯ ಹೆಸರೇನು?')
         ],
         quiz: [
-          q('ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ?', ['ಬೆಂಗಳೂರು', 'ಮೈಸೂರು'], 'ಬೆಂಗಳೂರು', 'ಉದ್ಯಾನ ನಗರಿ.')
+          q('ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಯಾವುದು?', ['ಮೈಸೂರು', 'ಬೆಂಗಳೂರು', 'ಹುಬ್ಬಳ್ಳಿ', 'ಮಂಗಳೂರು'], 'ಬೆಂಗಳೂರು', 'ಬೆಂಗಳೂರು ಕರ್ನಾಟಕದ ರಾಜಧಾನಿ ಮತ್ತು ಉದ್ಯಾನ ನಗರಿ.'),
+          q('ನಾಡಗೀತೆಯನ್ನು ಬರೆದವರು ಯಾರು?', ['ಕುವೆಂಪು', 'ಬೇಂದ್ರೆ', 'ಕಾರಂತ', 'ಮಾಸ್ತಿ'], 'ಕುವೆಂಪು', 'ರಾಷ್ಟ್ರಕವಿ ಕುವೆಂಪುರವರು ಜಯ ಭಾರತ ಜನನಿಯ ತನುಜಾತೆ ಗೀತೆಯನ್ನು ಬರೆದಿದ್ದಾರೆ.')
         ],
-        learningOutcomes: ['ನಾಡಿನ ಅರಿವು']
+        learningOutcomes: ['ಕರ್ನಾಟಕದ ಸಂಸ್ಕೃತಿಯ ಅರಿವು', 'ನಾಡಗೀತೆಯ ಗೌರವ']
       }]
     },
     {
-      id: 'k2', title: '2. ತೆನಾಲಿ ರಾಮಕೃಷ್ಣ', topics: [{
-        id: 'k2-t1', title: 'ಬುದ್ಧಿವಂತಿಕೆ',
-        subtopics: ['ಹಾಸ್ಯ'],
+      id: 'k2', title: '2. ಬುದ್ಧಿವಂತ ತೆನಾಲಿ ರಾಮ', topics: [{
+        id: 'k2-t1', title: 'ಚತುರ ರಾಮಕೃಷ್ಣ',
+        subtopics: ['ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ', 'ಕೃಷ್ಣದೇವರಾಯನ ಆಸ್ಥಾನ', 'ತೆನಾಲಿಯ ಹಾಸ್ಯ ಪ್ರಜ್ಞೆ', 'ಸಮಯ ಪ್ರಜ್ಞೆ'],
         readingText: {
-          en: 'Tenali was a witty poet.',
-          hi: 'तेनालीराम अपनी चतुराई के लिए जाने जाते थे।',
-          kn: 'ತೆನಾಲಿ ರಾಮಕೃಷ್ಣನು ಕೃಷ್ಣದೇವರಾಯನ ಆಸ್ಥಾನದ ಚತುರ ಕವಿ.'
+          en: 'Tenali Rama was a wise and witty poet in the court of King Krishnadevaraya. He solved many problems with his intelligence.',
+          hi: 'तेनाली राम राजा कृष्णदेवराय के दरबार में एक बुद्धिमान और चतुर कवि थे।',
+          kn: 'ತೆನಾಲಿ ರಾಮಕೃಷ್ಣನು ವಿಜಯನಗರದ ಅರಸ ಕೃಷ್ಣದೇವರಾಯನ ಆಸ್ಥಾನದಲ್ಲಿದ್ದ ಚತುರ ಕವಿ. ಅವನು ತನ್ನ ಬುದ್ಧಿವಂತಿಕೆಯಿಂದ ಎಂತಹ ಕಷ್ಟದ ಸಮಸ್ಯೆಗಳನ್ನೂ ಪರಿಹರಿಸುತ್ತಿದ್ದನು.'
         },
         activities: [
-          act('ಕಥೆ ಹೇಳಿ', 'ತೆನಾಲಿ ಕಥೆ.', 'speaking', 'low', ['ಹೇಳಿ'], [], 'ಮಜಾ ಬಂತೇ?')
+          act('ಕಥೆ ಹೇಳುವ ಸ್ಪರ್ಧೆ', 'ತೆನಾಲಿ ರಾಮನ ಯಾವುದಾದರೂ ಒಂದು ಕಥೆಯನ್ನು ತರಗತಿಯಲ್ಲಿ ಹೇಳಿ.', 'speaking', 'low', ['ಕಥೆಯನ್ನು ಓದಿ', 'ಪಾತ್ರಗಳನ್ನು ನೆನಪಿಡಿ', 'ಅಭಿನಯದೊಂದಿಗೆ ಹೇಳಿ'], [], 'ಕಥೆಯ ನೀತಿ ಏನು?'),
+          act('ಚಿತ್ರಕಲೆ', 'ಕೃಷ್ಣದೇವರಾಯನ ಆಸ್ಥಾನದ ಚಿತ್ರವನ್ನು ಬಿಡಿಸಿ.', 'drawing', 'mid', ['ಆಸ್ಥಾನದ ಕಲ್ಪನೆ ಮಾಡಿಕೊಳ್ಳಿ', 'ರಾಜ ಮತ್ತು ಕವಿಗಳನ್ನು ಬಿಡಿಸಿ', 'ಬಣ್ಣ ಹಚ್ಚಿ'], ['ಕಾಗದ', 'ರಂಗು'], 'ರಾಜನ ಹೆಸರೇನು?')
         ],
         quiz: [
-          q('ತೆನಾಲಿ ಯಾರ ಆಸ್ಥಾನದಲ್ಲಿದ್ದ?', ['ಕೃಷ್ಣದೇವರಾಯ', 'ಅಕ್ಬರ'], 'ಕೃಷ್ಣದೇವರಾಯ', 'ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ.')
+          q('ತೆನಾಲಿ ರಾಮ ಯಾರ ಆಸ್ಥಾನದಲ್ಲಿದ್ದನು?', ['ಅಕ್ಬರ್', 'ಕೃಷ್ಣದೇವರಾಯ', 'ಶಿವಾಜಿ', 'ಬಿಕ್ರಮಾದಿತ್ಯ'], 'ಕೃಷ್ಣದೇವರಾಯ', 'ತೆನಾಲಿ ರಾಮನು ಕೃಷ್ಣದೇವರಾಯನ ಆಸ್ಥಾನದ ಅಷ್ಟದಿಗ್ಗಜರಲ್ಲಿ ಒಬ್ಬನು.'),
+          q('ತೆನಾಲಿ ರಾಮ ಏನಕ್ಕೆ ಪ್ರಸಿದ್ಧನಾಗಿದ್ದನು?', ['ಯುದ್ಧ', 'ಬುದ್ಧಿವಂತಿಕೆ ಮತ್ತು ಹಾಸ್ಯ', 'ಹಾಡುಗಾರಿಕೆ', 'ನೃತ್ಯ'], 'ಬುದ್ಧಿವಂತಿಕೆ ಮತ್ತು ಹಾಸ್ಯ', 'ಅವನು ತನ್ನ ಚತುರತೆ ಮತ್ತು ತಮಾಷೆಯ ಪ್ರಸಂಗಗಳಿಗೆ ಹೆಸರುವಾಸಿ.')
         ],
-        learningOutcomes: ['ಚತುರತೆ']
+        learningOutcomes: ['ಬುದ್ಧಿವಂತಿಕೆಯ ಮಹತ್ವ', 'ಹಾಸ್ಯ ಪ್ರಜ್ಞೆಯ ಬೆಳೆಸುವಿಕೆ']
+      }]
+    },
+    {
+      id: 'k3', title: '3. ಪರಿಸರ ರಕ್ಷಣೆ', topics: [{
+        id: 'k3-t1', title: 'ಗಿಡಮರಗಳ ಮಹತ್ವ',
+        subtopics: ['ಕಾಡಿನ ಸಂರಕ್ಷಣೆ', 'ಮಾಲಿನ್ಯ ತಡೆಗಟ್ಟುವುದು', 'ಪ್ಲಾಸ್ಟಿಕ್ ಮುಕ್ತ ಭೂಮಿ', 'ನೀರಿನ ಉಳಿತಾಯ'],
+        readingText: {
+          en: 'Nature provides us with oxygen, food, and shelter. It is our duty to protect trees and animals for a healthy life.',
+          hi: 'प्रकृति हमें ऑक्सीजन, भोजन और आश्रय प्रदान करती है।',
+          kn: 'ಪ್ರಕೃತಿಯು ನಮಗೆ ಆಮ್ಲಜನಕ, ಆಹಾರ ಮತ್ತು ವಸತಿಯನ್ನು ನೀಡುತ್ತದೆ. ಆರೋಗ್ಯಕರ ಜೀವನಕ್ಕಾಗಿ ಗಿಡಮರಗಳನ್ನು ಮತ್ತು ಪ್ರಾಣಿಗಳನ್ನು ರಕ್ಷಿಸುವುದು ನಮ್ಮ ಕರ್ತವ್ಯ.'
+        },
+        activities: [
+          act('ಸಸಿ ನೆಡುವುದು', 'ನಿಮ್ಮ ಮನೆಯ ಹತ್ತಿರ ಒಂದು ಸಸಿಯನ್ನು ನೆಟ್ಟು ನೀರು ಹಾಕಿ.', 'performing', 'high', ['ಗುಂಡಿ ತೋಡಿ', 'ಸಸಿ ನೆಡಿ', 'ಪ್ರತಿದಿನ ನೀರು ಹಾಕಿ', 'ಅದರ ಬೆಳವಣಿಗೆ ಗಮನಿಸಿ'], ['ಸಸಿ', 'ನೀರು', 'ಮಣ್ಣು'], 'ನೀವು ನೆಟ್ಟ ಸಸಿಯ ಹೆಸರೇನು?'),
+          act('ಘೋಷಣೆಗಳನ್ನು ಬರೆಯಿರಿ', 'ಪರಿಸರ ಉಳಿಸುವ ಬಗ್ಗೆ ಘೋಷಣೆಗಳನ್ನು ಸಿದ್ಧಪಡಿಸಿ.', 'writing', 'mid', ['ಪರಿಸರದ ಬಗ್ಗೆ ಯೋಚಿಸಿ', 'ಸಣ್ಣ ವಾಕ್ಯಗಳನ್ನು ಬರೆಯಿರಿ', 'ಅದನ್ನು ಪ್ರದರ್ಶಿಸಿ'], ['ಚಾರ್ಟ್ ಪೇಪರ್'], '"ಪರಿಸರ ಉಳಿಸಿ, ____ ಬೆಳೆಸಿ" - ಖಾಲಿ ಜಾಗ ತುಂಬಿ.')
+        ],
+        quiz: [
+          q('ವಿಶ್ವ ಪರಿಸರ ದಿನಾಚರಣೆ ಯಾವಾಗ?', ['ಜೂನ್ 5', 'ಆಗಸ್ಟ್ 15', 'ಜನವರಿ 26', 'ಅಕ್ಟೋಬರ್ 2'], 'ಜೂನ್ 5', 'ಪ್ರತಿ ವರ್ಷ ಜೂನ್ 5 ರಂದು ಪರಿಸರ ದಿನವನ್ನು ಆಚರಿಸಲಾಗುತ್ತದೆ.'),
+          q('ಆಮ್ಲಜನಕವನ್ನು ನೀಡುವವರು ಯಾರು?', ['ಕಾರುಗಳು', 'ಗಿಡಮರಗಳು', 'ಕಟ್ಟಡಗಳು', 'ಪ್ಲಾಸ್ಟಿಕ್'], 'ಗಿಡಮರಗಳು', 'ಗಿಡಮರಗಳು ನಮಗೆ ಉಸಿರಾಡಲು ಬೇಕಾದ ಆಮ್ಲಜನಕವನ್ನು ನೀಡುತ್ತವೆ.')
+        ],
+        learningOutcomes: ['ಪರಿಸರದ ಬಗ್ಗೆ ಕಾಳಜಿ', 'ಗಿಡಮರಗಳ ಸಂರಕ್ಷಣೆ']
       }]
     }
   ]
@@ -961,39 +985,63 @@ const computerSubject: Subject = {
   id: 'computers', title: 'Computer Science', icon: '💻', color: '#636E72',
   chapters: [
     {
-      id: 'c1', title: '1. Parts of a Computer', topics: [{
-        id: 'c1-t1', title: 'Computer Hardware',
-        subtopics: ['CPU - Brain'],
+      id: 'c1', title: '1. Evolution of Computers', topics: [{
+        id: 'c1-t1', title: 'History & Generations',
+        subtopics: ['Abacus - The First Calculator', 'Charles Babbage - Father of Computers', 'Generations of Computers', 'Modern Supercomputers'],
         readingText: {
-          en: 'CPU is the brain, monitor is the screen.',
-          hi: 'CPU दिमाग है, मॉनिटर स्क्रीन है।',
-          kn: 'CPU ಮೆದುಳು, ಮಾನಿಟರ್ ಪರದೆ.'
+          en: 'Computers have evolved from simple counting machines like the Abacus to powerful smart devices. Charles Babbage is known as the Father of the Computer.',
+          hi: 'कंप्यूटर अबैकस जैसी साधारण गणना मशीनों से विकसित होकर शक्तिशाली स्मार्ट उपकरणों तक पहुँच गए हैं।',
+          kn: 'ಅಬ್ಯಾಕಸ್‌ನಂತಹ ಸರಳ ಗಣಿತ ಯಂತ್ರಗಳಿಂದ ಇಂದಿನ ಸ್ಮಾರ್ಟ್ ಸಾಧನಗಳವರೆಗೆ ಕಂಪ್ಯೂಟರ್‌ಗಳು ವಿಕಸನಗೊಂಡಿವೆ. ಚಾರ್ಲ್ಸ್ ಬ್ಯಾಬೇಜ್ ಕಂಪ್ಯೂಟರ್‌ನ ಪಿತಾಮಹ.'
         },
         activities: [
-          act('Identify', 'Point to parts.', 'performing', 'low', ['Point'], [], 'Well done!')
+          act('Timeline Creator', 'Make a timeline showing the different stages of computer evolution.', 'drawing', 'mid', ['Research early machines', 'Draw a timeline', 'Mark important dates'], ['Chart paper', 'Markers'], 'Who invented the first mechanical computer?'),
+          act('Abacus Practice', 'Use a virtual or real abacus to do simple addition.', 'calculating', 'low', ['Get an abacus', 'Move beads to represent 5+3', 'Find the total'], ['Abacus'], 'What is the oldest calculating device?')
         ],
         quiz: [
-          q('Which is the brain?', ['CPU', 'Mouse'], 'CPU', 'Central Processing Unit.')
+          q('Who is the Father of Computers?', ['Bill Gates', 'Charles Babbage', 'Steve Jobs', 'Albert Einstein'], 'Charles Babbage', 'Babbage designed the first mechanical computer.'),
+          q('What was the first calculating device?', ['Calculator', 'Abacus', 'Laptop', 'Smartphone'], 'Abacus', 'Abacus was invented thousands of years ago for counting.')
         ],
-        learningOutcomes: ['Hardware knowledge']
+        learningOutcomes: ['Understand computer history', 'Identify major inventions']
       }]
     },
     {
-      id: 'c7', title: '2. Introduction to AI', topics: [{
-        id: 'c7-t1', title: 'What is AI?',
-        subtopics: ['Smart Machines'],
+      id: 'c2', title: '2. Storage & Memory', topics: [{
+        id: 'c2-t1', title: 'Input, Output & Storage',
+        subtopics: ['Input Devices (Keyboard, Mouse)', 'Output Devices (Monitor, Printer)', 'Primary Memory (RAM, ROM)', 'Secondary Storage (Hard Disk, USB)'],
         readingText: {
-          en: 'AI teaches machines to learn.',
-          hi: 'AI मशीनों को सोचना सिखाता है।',
-          kn: 'AI ಯಂತ್ರಗಳಿಗೆ ಕಲಿಯಲು ಕಲಿಸುತ್ತದೆ.'
+          en: 'Input devices give data to the computer. Output devices show results. Memory stores data temporarily (RAM) or permanently (Hard Disk).',
+          hi: 'इनपुट डिवाइस कंप्यूटर को डेटा देते हैं। आउटपुट डिवाइस परिणाम दिखाते हैं।',
+          kn: 'ಇನ್‌ಪುಟ್ ಸಾಧನಗಳು ಕಂಪ್ಯೂಟರ್‌ಗೆ ಮಾಹಿತಿ ನೀಡುತ್ತವೆ. ಔಟ್‌ಪುಟ್ ಸಾಧನಗಳು ಫಲಿತಾಂಶವನ್ನು ತೋರಿಸುತ್ತವೆ. ಮೆಮೊರಿ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸುತ್ತದೆ.'
         },
         activities: [
-          act('AI Spotter', 'Find AI around you.', 'writing', 'low', ['List'], [], 'Siri/Alexa are AI!')
+          act('Device Sorter', 'Classify a list of computer parts into Input, Output, and Storage.', 'writing', 'low', ['List items: Monitor, Mouse, Printer, Pen drive', 'Make 3 columns', 'Sort the items'], [], 'Is a touch screen an input or output device?'),
+          act('Memory Match', 'Match different storage devices with their capacity.', 'calculating', 'mid', ['Look at Hard Disk, DVD, Floppy', 'Find their sizes', 'Match them'], [], 'Which stores more: a CD or a USB drive?')
         ],
         quiz: [
-          q('AI stands for?', ['Artificial Intelligence', 'Auto Ink'], 'Artificial Intelligence', 'Smart machines.')
+          q('Which is an Input device?', ['Monitor', 'Printer', 'Keyboard', 'Speaker'], 'Keyboard', 'Keyboard is used to type data into the computer.'),
+          q('Where is data stored permanently?', ['RAM', 'Hard Disk', 'CPU', 'Mouse'], 'Hard Disk', 'Hard Disk stores files even after the computer is turned off.')
         ],
-        learningOutcomes: ['Future tech']
+        learningOutcomes: ['Distinguish between input/output', 'Understand data storage']
+      }]
+    },
+    {
+      id: 'c3', title: '3. Fun with MS Word', topics: [{
+        id: 'c3-t1', title: 'Editing & Formatting',
+        subtopics: ['Opening MS Word', 'Typing and Editing Text', 'Formatting (Bold, Italic, Underline)', 'Saving and Printing'],
+        readingText: {
+          en: 'MS Word is a word processor used to create documents. You can change font styles, colors, and sizes to make your text look beautiful.',
+          hi: 'MS Word एक वर्ड प्रोसेसर है जिसका उपयोग दस्तावेज़ बनाने के लिए किया जाता है।',
+          kn: 'ಎಂಎಸ್ ವರ್ಡ್ ಒಂದು ವರ್ಡ್ ಪ್ರೊಸೆಸರ್ ಆಗಿದ್ದು, ಇದನ್ನು ದಾಖಲೆಗಳನ್ನು ಸಿದ್ಧಪಡಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ. ನೀವು ಅಕ್ಷರಗಳ ಶೈಲಿ ಮತ್ತು ಬಣ್ಣವನ್ನು ಬದಲಾಯಿಸಬಹುದು.'
+        },
+        activities: [
+          act('Letter Writing', 'Type a short letter to your friend in MS Word.', 'writing', 'mid', ['Open MS Word', 'Type the letter', 'Change font to blue', 'Make your name Bold'], ['Computer', 'MS Word'], 'How do you save a file?'),
+          act('Formatting Challenge', 'Use Bold, Italic, and Underline on 3 different sentences.', 'performing', 'low', ['Type 3 sentences', 'Select text', 'Apply formatting'], [], 'What is the shortcut for Bold?')
+        ],
+        quiz: [
+          q('Which shortcut is used to Save a file?', ['Ctrl+C', 'Ctrl+S', 'Ctrl+V', 'Ctrl+P'], 'Ctrl+S', 'Ctrl+S is the universal shortcut to save a document.'),
+          q('What does the "B" button do in MS Word?', ['Bold', 'Blue', 'Big', 'Back'], 'Bold', 'The Bold button makes text thicker and darker.')
+        ],
+        learningOutcomes: ['Create and edit documents', 'Apply basic formatting']
       }]
     }
   ]

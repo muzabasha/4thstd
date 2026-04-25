@@ -106,7 +106,21 @@ const KB: Record<string, string> = {
   "आज़ाद भारत (Vision)": "आज हम जिस आज़ाद भारत में हैं, वह महान लोगों के बलिदान का फल है। हमें इस आज़ादी का सम्मान करना चाहिए और देश को आगे बढ़ाना चाहिए। 🌟",
   "गांधीजी की विरासत (Mastery)": "सादा जीवन, उच्च विचार — यही गांधीजी की विरासत है। क्या आप अपनी ज़रूरतों को कम करके दूसरों के काम आ सकते हैं? 🙏",
 
-  // Math - Patterns & Symmetry
+  "ಬೆಂಚಿನ ಮೇಲೆ ಕುಳಿತು", "ಕನ್ನಡದ ಕಣ್ಮಣಿ", "ಜಯ ಭಾರತ ಜನನಿಯ ತನುಜಾತೆ", "ಕುವೆಂಪು ರವರ ನಾಡಗೀತೆ": "ಕುವೆಂಪು ರವರ 'ಜಯ ಭಾರತ ಜನನಿಯ ತನುಜಾತೆ' ಕರ್ನಾಟಕದ ಅಧಿಕೃತ ನಾಡಗೀತೆ. ಇದು ನಮ್ಮ ನಾಡಿನ ಪ್ರಕೃತಿ, ಸಂಸ್ಕೃತಿ ಮತ್ತು ಇತಿಹಾಸವನ್ನು ಕೊಂಡಾಡುತ್ತದೆ. ಕುವೆಂಪು ರವರು ಜ್ಞಾನಪೀಠ ಪ್ರಶಸ್ತಿ ವಿಜೇತ ಮಹಾನ್ ಕವಿ. 🚩",
+  "ಕರ್ನಾಟಕದ ಇತಿಹಾಸ": "ಕರ್ನಾಟಕವು ಸಾವಿರಾರು ವರ್ಷಗಳ ಸುದೀರ್ಘ ಇತಿಹಾಸವನ್ನು ಹೊಂದಿದೆ. ಕದಂಬರು, ಚಾಲುಕ್ಯರು, ಹೊಯ್ಸಳರು ಮತ್ತು ವಿಜಯನಗರದ ಅರಸರು ಈ ನಾಡನ್ನು ಆಳಿದರು. ನಮ್ಮ ನಾಡು ಶಿಲ್ಪಕಲೆ ಮತ್ತು ಸಾಹಿತ್ಯಕ್ಕೆ ಜಗತ್ಪ್ರಸಿದ್ಧಿಯಾಗಿದೆ. 🏛️",
+  "ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ": "ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯವು ದಕ್ಷಿಣ ಭಾರತದ ಅತ್ಯಂತ ಶಕ್ತಿಯುತ ಸಾಮ್ರಾಜ್ಯವಾಗಿತ್ತು. ಹಂಪಿ ಇದರ ರಾಜಧಾನಿಯಾಗಿತ್ತು. ಕೃಷ್ಣದೇವರಾಯನ ಕಾಲದಲ್ಲಿ ಸಾಹಿತ್ಯ ಮತ್ತು ಕಲೆ ಅತ್ಯಂತ ಉನ್ನತ ಮಟ್ಟಕ್ಕೇರಿತು. 🏰",
+  "ತೆನಾಲಿಯ ಹಾಸ್ಯ ಪ್ರಜ್ಞೆ": "ತೆನಾಲಿ ರಾಮಕೃಷ್ಣನು ಕೇವಲ ಹಾಸ್ಯಗಾರನಲ್ಲ, ಅವನು ಅತ್ಯಂತ ಚತುರ ಮತ್ತು ಬುದ್ಧಿವಂತ. ಅವನು ತನ್ನ ಮಾತಿನ ಚಾತುರ್ಯದಿಂದ ಎಂತಹ ದೊಡ್ಡ ಶತ್ರುಗಳನ್ನೂ ಸೋಲಿಸುತ್ತಿದ್ದನು. 🧠",
+  "ಕಾಡಿನ ಸಂರಕ್ಷಣೆ": "ಕಾಡುಗಳು ಭೂಮಿಯ ಶ್ವಾಸಕೋಶದಂತೆ. ಅವು ನಮಗೆ ಮಳೆಯನ್ನು ತರುತ್ತವೆ ಮತ್ತು ಪ್ರಾಣಿಗಳಿಗೆ ಆಶ್ರಯ ನೀಡುತ್ತವೆ. ಗಿಡಮರಗಳನ್ನು ಕಡಿಯುವುದನ್ನು ನಿಲ್ಲಿಸಿ, ಹೆಚ್ಚು ಗಿಡಗಳನ್ನು ನೆಡುವುದು ನಮ್ಮ ಗುರಿಯಾಗಬೇಕು. 🌳",
+
+  // Computer Science entries
+  "Abacus - The First Calculator": "The Abacus is the world's first mechanical counting device, invented over 5,000 years ago! It uses beads on rods to represent numbers. Even today, learning Abacus helps you do math faster than a calculator! 🧮",
+  "Charles Babbage - Father of Computers": "Charles Babbage was an English mathematician who designed the first 'Analytical Engine' in the 1830s. Although he never finished it, his designs provided the foundation for all modern computers. 👨‍🔬",
+  "Generations of Computers": "Computers have 5 generations! 1st used Vacuum Tubes (huge like a room), 2nd used Transistors, 3rd used Integrated Circuits, 4th used Microprocessors (like your PC), and 5th uses AI! ⚡",
+  "Input Devices (Keyboard, Mouse)": "Input devices are like the computer's 'Sense Organs'. The keyboard lets you 'talk' by typing, and the mouse lets you 'point' and 'click'. Without them, you couldn't tell the computer what to do! 🖱️",
+  "Output Devices (Monitor, Printer)": "Output devices are like the computer's 'Mouth and Hands'. The monitor shows you pictures and text, and the printer puts your work on paper. They show you the results of your commands! 🖥️",
+  "Primary Memory (RAM, ROM)": "RAM (Random Access Memory) is like your 'Working Table' — it's where the computer keeps things while it's working on them. ROM (Read Only Memory) is like a 'Instruction Manual' that is always there. 🧠",
+  "Secondary Storage (Hard Disk, USB)": "Secondary storage is like a 'Library' where you keep your books forever. Hard disks stay inside the computer, while USB drives are like 'Backpacks' that let you carry your files anywhere! 🎒",
+  "Formatting (Bold, Italic, Underline)": "Formatting is like 'Dressing Up' your text! Bold makes it strong, Italic makes it stylish, and Underline draws attention. Use them to make your stories and letters look professional! ✍️",
   "Jaali Pattern Ninja": "A Jaali is like a 'breathing wall'. It has beautiful holes that let in light and cool air while keeping the heat out. In olden days, before fans and AC, Jaalis were the natural cooling systems of palaces! 🏰",
   "Mirror Magic Symmetry": "Symmetry is when one half of a shape is a perfect reflection of the other. It's like your face — if you put a mirror in the middle, the reflection completes the image! Nature loves symmetry — look at a butterfly's wings or a flower! 🦋",
   "The Floor Pattern Challenge": "Builders use patterns to make floors strong and beautiful. By repeating the same shape (like a brick or tile) without any gaps, they create a 'Tessellation'. Can you find a tessellation in your house? (Hint: check the bathroom tiles!) 🏠",
