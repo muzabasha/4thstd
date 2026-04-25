@@ -529,11 +529,38 @@ export default function VoiceAITutor({ subject, topic }: Props) {
         }
 
         @media (max-width: 600px) {
-          .tutor-topbar { flex-direction: column; align-items: flex-start; }
-          .tb-right { align-items: flex-start; width: 100%; }
-          .content-card { padding: 1.25rem !important; }
+          .tutor-topbar { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+          .tb-right { align-items: flex-start; width: 100%; min-width: unset; }
+          .tb-progress { width: 100%; }
+          .content-card { padding: 1rem 1.1rem !important; min-height: unset; }
+          .content-header { flex-wrap: wrap; gap: 0.5rem; }
+          .content-line { font-size: 0.95rem; }
           .action-row { flex-direction: column; }
-          .action-row .btn { width: 100%; }
+          .action-row .btn { width: 100%; justify-content: center; }
+          .overlay { padding: 0; align-items: flex-end; }
+          .overlay-inner {
+            border-radius: 24px 24px 0 0;
+            max-height: 90dvh;
+            overflow-y: auto;
+            padding: 1.5rem 1.25rem;
+          }
+          .level-tabs { gap: 0.3rem; }
+          .level-tab { font-size: 0.78rem; padding: 0.5rem 0.3rem; }
+          .act-header { gap: 0.75rem; }
+          .act-icon { font-size: 1.8rem; }
+          .step-row { padding: 0.55rem 0.75rem; }
+          .step-text { font-size: 0.84rem; }
+          .reading-panel { padding: 0.85rem 1rem; }
+          .rp-tabs { gap: 0.35rem; }
+          .rp-tab { font-size: 0.75rem; padding: 0.35rem 0.7rem; }
+          .outcomes-card { padding: 1rem !important; }
+          .step-dots { gap: 0.3rem; }
+          .dot { width: 8px; height: 8px; }
+          .dot.current { width: 22px; }
+        }
+        @media (max-width: 380px) {
+          .tb-title { font-size: 1rem; }
+          .overlay-title { font-size: 1.1rem; }
         }
       `}</style>
     </div>

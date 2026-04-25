@@ -1,9 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Yasmeen's Learning World — CBSE Grade 4",
-  description: "AI-powered interactive learning platform for CBSE Grade 4 — Mathematics, EVS, English, Hindi, Kannada with voice assistance in English, Hindi and Kannada.",
+  description: "AI-powered interactive learning platform for CBSE Grade 4 — Mathematics, EVS, English, Hindi, Kannada with voice assistance.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -254,9 +254,19 @@ export default function InteractiveQuiz({ questions, onComplete }: Props) {
         .qz-empty { text-align: center; padding: 3rem; font-size: 1.1rem; font-weight: 700; color: #6B7280; }
 
         @media (max-width: 600px) {
-          .qz-options { grid-template-columns: 1fr; }
-          .qz-feedback { flex-direction: column; }
-          .qz-feedback .btn { width: 100%; }
+          .qz-options { grid-template-columns: 1fr; gap: 0.6rem; }
+          .qz-opt { padding: 0.85rem 1rem; font-size: 0.88rem; }
+          .qz-q-text { font-size: 1.1rem; }
+          .qz-feedback { flex-direction: column; gap: 0.75rem; }
+          .qz-feedback .btn { width: 100%; margin-left: 0; }
+          .qz-result { padding: 2rem 1.25rem; }
+          .qz-result-title { font-size: 1.5rem; }
+          .qz-score { font-size: 2.2rem; }
+          .qz-question { padding: 1.25rem !important; }
+        }
+        @media (max-width: 380px) {
+          .qz-num { font-size: 1.3rem; }
+          .qz-opt-label { width: 28px; height: 28px; font-size: 0.78rem; }
         }
       `}</style>
     </div>
