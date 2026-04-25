@@ -44,9 +44,15 @@ export default function VoiceAITutor({ subject, topic }: Props) {
         text = `🎉 Amazing work! You've explored all ${topic.subtopics.length} concepts in "${topic.title}". Time for the Mastery Quiz!`;
       }
       setContent(text);
-      if (step > 0 && activeTab === 'learn') {
-        const clean = text.replace(/\*\*/g, '').replace(/[🎉📖🌈🔍🚀🏆]/g, '');
-        speakRef.current(clean, targetLang);
+      
+      // Auto-speak the content in the Learn tab
+      if (activeTab === 'learn') {
+        // Auto-speak step 0 for all subjects as per user request 
+        // and step > 0 for all subjects
+        if (step >= 0) {
+          const clean = text.replace(/\*\*/g, '').replace(/[🎉📖🌈🔍🚀🏆]/g, '');
+          speakRef.current(clean, targetLang);
+        }
       }
       setIsLoading(false);
     };
@@ -251,7 +257,7 @@ export default function VoiceAITutor({ subject, topic }: Props) {
                     <div className="act-section">
                       <p className="section-label">🎒 Materials</p>
                       <div className="materials-list">
-                        {activity.materials.map((m, i) => <span key={i} className="mat-tag">{m}</span>)}
+                        {activity.materials?.map((m, i) => <span key={i} className="mat-tag">{m}</span>)}
                       </div>
                     </div>
                     <div className="act-section">
