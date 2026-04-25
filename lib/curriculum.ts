@@ -540,150 +540,218 @@ const evsSubject: Subject = {
     {
       id: 'e3', title: '3. A Day with Nandu', topics: [{
         id: 'e3-t1', title: 'Elephant Families',
-        subtopics: ['Herd life', 'Baby elephants', 'Matriarch leadership'],
+        subtopics: ['Elephant herd structure', 'What elephants eat', 'How elephants communicate', 'Baby elephant (calf) care', 'Threats to elephants', 'Elephant conservation'],
         readingText: {
-          en: 'Elephants live in herds led by the oldest female (matriarch).',
-          hi: 'हाथी झुंड में रहते हैं जिसका नेतृत्व सबसे बुज़ुर्ग मादा करती है।',
-          kn: 'ಆನೆಗಳು ಹಿಂಡಿನಲ್ಲಿ ವಾಸಿಸುತ್ತವೆ. ಹಿರಿಯ ಹೆಣ್ಣು ಆನೆ ನಾಯಕಿ.'
+          en: 'Nandu is a baby elephant who lives in a forest. Elephants live in herds led by the oldest female called the matriarch. They eat grass, leaves, bark and fruit — up to 150 kg a day! Baby elephants are called calves. Male elephants leave the herd at age 14–15.',
+          hi: 'नंदू एक बच्चा हाथी है जो जंगल में रहता है। हाथी झुंड में रहते हैं जिसका नेतृत्व सबसे बुज़ुर्ग मादा (मातृसत्ता) करती है। वे घास, पत्तियाँ, छाल और फल खाते हैं — एक दिन में 150 किलो तक! बच्चे हाथी को बछड़ा कहते हैं।',
+          kn: 'ನಂದು ಒಂದು ಮರಿ ಆನೆ. ಆನೆಗಳು ಹಿಂಡಿನಲ್ಲಿ ವಾಸಿಸುತ್ತವೆ. ಹಿರಿಯ ಹೆಣ್ಣು ಆನೆ ನಾಯಕಿ. ಅವು ಹುಲ್ಲು, ಎಲೆ, ತೊಗಟೆ ತಿನ್ನುತ್ತವೆ — ದಿನಕ್ಕೆ 150 ಕೆಜಿ ವರೆಗೆ!'
         },
         activities: [
-          act('Elephant Diary', 'Write a diary entry as a baby elephant.', 'writing', 'mid',
-            ['Imagine you are Nandu', 'Describe your morning'],
-            ['Notebook'], 'What was the best part of the day?')
+          act('Elephant Diary', 'Write a diary entry as Nandu the baby elephant for one full day.', 'writing', 'low',
+            ['Imagine you are Nandu waking up', 'Write what you eat for breakfast', 'Describe playing with the herd', 'Write about going to the river'],
+            ['Notebook', 'Pencil'], 'What was the most exciting part of Nandu\'s day?'),
+          act('Elephant Food Chart', 'Make a chart of what elephants eat and compare with what you eat.', 'drawing', 'mid',
+            ['Draw a table with two columns', 'Column 1: Elephant food', 'Column 2: Your food', 'Find 3 things you both eat'],
+            ['Paper', 'Crayons'], 'Elephants eat 150 kg a day — how many times your weight is that?'),
+          act('Save the Elephant', 'Research threats to elephants and make a conservation poster.', 'drawing', 'high',
+            ['List 3 threats: habitat loss, poaching, human conflict', 'Write 3 ways to protect elephants', 'Draw an elephant in its habitat', 'Add a slogan'],
+            ['Chart paper', 'Crayons'], 'What can YOU do to help elephants?')
         ],
-        virtualLab: { title: 'Elephant Habitat Lab', simulation: 'Explore an elephant\'s daily life', task: 'Guide a herd to water' },
+        virtualLab: { title: 'Elephant Habitat Lab', simulation: 'Explore an elephant\'s daily life in the forest', task: 'Guide a herd of 5 elephants safely to the river' },
         quiz: [
-          q('Who leads an elephant herd?', ['Oldest female', 'Youngest male', 'Biggest male'], 'Oldest female', 'The matriarch leads.')
+          q('Who leads an elephant herd?', ['Oldest female', 'Youngest male', 'Biggest male', 'Oldest male'], 'Oldest female', 'The matriarch (oldest female) leads with her experience and memory.'),
+          q('Baby elephants are called ___', ['Cubs', 'Calves', 'Foals', 'Pups'], 'Calves', 'Baby elephants, like baby cows, are called calves.'),
+          q('How much can an adult elephant eat per day?', ['15 kg', '50 kg', '150 kg', '500 kg'], '150 kg', 'Adult elephants eat up to 150 kg of vegetation daily.'),
+          q('At what age do male elephants leave the herd?', ['5', '10', '14–15', '20'], '14–15', 'Young males leave around age 14–15 to live alone or in bachelor groups.')
         ],
-        learningOutcomes: ['Understand elephant social structure']
+        learningOutcomes: ['Understand elephant social structure', 'Learn about elephant diet and habitat', 'Appreciate wildlife conservation'],
+        crossCurricularLink: 'Hindi: Story of Nandu the elephant'
       }]
     },
 
     {
       id: 'e4', title: '4. The Story of Amrita', topics: [{
         id: 'e4-t1', title: 'Trees & Conservation',
-        subtopics: ['The Khejadi Tree Miracle', 'Bishnoi Community Spirit', 'Hugging the Trees'],
+        subtopics: ['Who was Amrita Devi Bishnoi?', 'The Khejadi tree and its importance', 'The Chipko movement', 'Why trees are vital', 'How we can protect trees', 'Deforestation and its effects'],
         readingText: {
-          en: 'Amrita Devi Bishnoi protected Khejadi trees by hugging them. They sacrificed lives to save trees.',
-          hi: 'अमृता देवी बिश्नोई ने खेजड़ी के पेड़ों को बचाने के लिए उन्हें गले लगाया।',
-          kn: 'ಅಮೃತಾ ದೇವಿ ಬಿಶ್ನೋಯಿ ಖೇಜಡಿ ಮರಗಳನ್ನು ಉಳಿಸಲು ಅವುಗಳನ್ನು ಅಪ್ಪಿಕೊಂಡರು.'
+          en: 'Amrita Devi Bishnoi lived in Rajasthan. When soldiers came to cut Khejadi trees, she hugged a tree to protect it. She and 363 others gave their lives to save the trees. This inspired the Chipko movement — "chipko" means "to hug." Trees give us oxygen, food, shade and homes for animals.',
+          hi: 'अमृता देवी बिश्नोई राजस्थान में रहती थीं। जब सैनिक खेजड़ी के पेड़ काटने आए, उन्होंने पेड़ को गले लगाकर बचाया। उन्होंने और 363 अन्य लोगों ने पेड़ों को बचाने के लिए अपनी जान दी। इससे चिपको आंदोलन की प्रेरणा मिली।',
+          kn: 'ಅಮೃತಾ ದೇವಿ ಬಿಶ್ನೋಯಿ ರಾಜಸ್ಥಾನದಲ್ಲಿ ವಾಸಿಸುತ್ತಿದ್ದರು. ಸೈನಿಕರು ಖೇಜಡಿ ಮರ ಕಡಿಯಲು ಬಂದಾಗ ಅವರು ಮರವನ್ನು ತಬ್ಬಿಕೊಂಡರು. ಇದು ಚಿಪ್ಕೋ ಚಳವಳಿಗೆ ಸ್ಫೂರ್ತಿ ನೀಡಿತು.'
         },
         activities: [
-          act('Tree Friend', 'Adopt a tree near your house.', 'performing', 'low',
-            ['Choose a tree', 'Water it', 'Observe it'],
-            ['Water', 'Paper'], 'What is your tree\'s name?')
+          act('Tree Friend', 'Adopt a tree near your house and observe it for a week.', 'performing', 'low',
+            ['Choose a tree near your home', 'Measure its trunk with your arms', 'Draw it in your notebook', 'Water it and observe for 7 days'],
+            ['Notebook', 'Water'], 'What animals or birds live in your tree?'),
+          act('Chipko Poster', 'Make a poster about saving trees.', 'drawing', 'mid',
+            ['Write "Save Trees, Save Life"', 'Draw a person hugging a tree', 'List 5 things trees give us', 'Add facts about deforestation'],
+            ['Chart paper', 'Crayons'], 'How many trees are cut every minute worldwide?'),
+          act('Plant a Sapling', 'Plant a sapling and record its growth for 2 weeks.', 'performing', 'high',
+            ['Get a small sapling or seed', 'Plant in a pot with soil', 'Water daily', 'Measure height every 3 days and record'],
+            ['Pot', 'Soil', 'Sapling', 'Ruler'], 'How much did your plant grow in 2 weeks?')
         ],
         quiz: [
-          q('Where did Amrita live?', ['Rajasthan', 'Kerala', 'Assam'], 'Rajasthan', 'She lived in Khejadli village.')
+          q('Where did Amrita Devi live?', ['Kerala', 'Rajasthan', 'Assam', 'Punjab'], 'Rajasthan', 'She lived in Khejadli village in Rajasthan.'),
+          q('"Chipko" means ___', ['Cut', 'Hug/cling to', 'Plant', 'Water'], 'Hug/cling to', 'Chipko means to hug — people hugged trees to protect them.'),
+          q('Trees release ___ which we breathe.', ['Carbon dioxide', 'Nitrogen', 'Oxygen', 'Hydrogen'], 'Oxygen', 'Trees absorb CO₂ and release oxygen through photosynthesis.'),
+          q('Deforestation means ___', ['Planting trees', 'Cutting down forests', 'Watering trees', 'Growing crops'], 'Cutting down forests', 'Deforestation destroys habitats and causes climate change.')
         ],
-        learningOutcomes: ['Understand value of trees']
+        learningOutcomes: ['Understand the importance of trees', 'Learn about the Chipko movement', 'Develop conservation mindset'],
+        crossCurricularLink: 'Hindi: Amrita Devi story; Science: Photosynthesis'
       }]
     },
 
     {
       id: 'e10', title: '5. Hu Tu Tu, Hu Tu Tu', topics: [{
-        id: 'e10-t1', title: 'Games We Play',
-        subtopics: ['Traditional Indian games', 'Rules of Kabaddi', 'Teamwork'],
+        id: 'e10-t1', title: 'Traditional Indian Games',
+        subtopics: ['Rules of Kabaddi', 'Kho-Kho basics', 'Gilli-Danda and Pitthu', 'Benefits of outdoor play', 'Teamwork and sportsmanship', 'Games from different states'],
         readingText: {
-          en: 'India has many traditional games like Kabaddi, Kho-Kho. Games keep us fit.',
-          hi: 'भारत में कबड्डी, खो-खो जैसे पारंपरिक खेल हैं।',
-          kn: 'ಭಾರತದಲ್ಲಿ ಕಬಡ್ಡಿ, ಖೋ-ಖೋ ಮುಂತಾದ ಸಾಂಪ್ರದಾಯಿಕ ಆಟಗಳಿವೆ.'
+          en: 'India has many traditional games. In Kabaddi, a raider holds their breath, chants "kabaddi-kabaddi" and tries to touch opponents. Kho-Kho is a chasing game. Gilli-Danda is played with two sticks. These games keep us fit, teach teamwork and are part of our culture.',
+          hi: 'भारत में कई पारंपरिक खेल हैं। कबड्डी में एक खिलाड़ी सांस रोककर "कबड्डी-कबड्डी" बोलते हुए विरोधियों को छूने की कोशिश करता है। खो-खो एक दौड़ने वाला खेल है। गिल्ली-डंडा दो लकड़ियों से खेला जाता है।',
+          kn: 'ಭಾರತದಲ್ಲಿ ಅನೇಕ ಸಾಂಪ್ರದಾಯಿಕ ಆಟಗಳಿವೆ. ಕಬಡ್ಡಿಯಲ್ಲಿ ಆಟಗಾರ ಉಸಿರು ಹಿಡಿದು "ಕಬಡ್ಡಿ-ಕಬಡ್ಡಿ" ಎನ್ನುತ್ತಾ ಎದುರಾಳಿಗಳನ್ನು ಮುಟ್ಟಲು ಪ್ರಯತ್ನಿಸುತ್ತಾನೆ.'
         },
         activities: [
-          act('Kabaddi Coach', 'Organise a game of Kabaddi.', 'performing', 'mid',
-            ['Divide into 2 teams', 'Mark area', 'Play 5 mins'],
-            ['Chalk'], 'Who was best raider?')
+          act('Kabaddi Rules Poster', 'Make a poster explaining Kabaddi rules with diagrams.', 'drawing', 'low',
+            ['Draw a Kabaddi court', 'Write the 5 main rules', 'Draw a raider and defenders', 'Add the chant "Kabaddi-Kabaddi"'],
+            ['Chart paper', 'Crayons'], 'Have you ever played Kabaddi? What was it like?'),
+          act('Traditional Games Survey', 'Ask elders about games they played as children.', 'speaking', 'mid',
+            ['Ask grandparents or parents', 'List 5 games they played', 'Learn the rules of one game', 'Teach it to a friend'],
+            ['Notebook', 'Pencil'], 'Are any of these games still played today?'),
+          act('Mini Sports Day', 'Organise a mini sports day with 3 traditional games.', 'performing', 'high',
+            ['Choose 3 games: Kabaddi, Kho-Kho, Pitthu', 'Explain rules to classmates', 'Play each for 5 minutes', 'Award points and declare winner'],
+            ['Chalk', 'Ball'], 'Which game was most popular? Why?')
         ],
         quiz: [
-          q('In Kabaddi, what must the raider say?', ['Run-run', 'Kabaddi-Kabaddi', 'Tag-tag'], 'Kabaddi-Kabaddi', 'Prove they hold breath.')
+          q('In Kabaddi, what must the raider chant?', ['Run-run', 'Kabaddi-Kabaddi', 'Tag-tag', 'Go-go'], 'Kabaddi-Kabaddi', 'The chant proves the raider is holding their breath.'),
+          q('Kho-Kho is a game of ___', ['Strength', 'Chasing and dodging', 'Swimming', 'Throwing'], 'Chasing and dodging', 'One team chases while the other dodges.'),
+          q('Gilli-Danda is played with ___', ['A ball and bat', 'Two sticks', 'A rope', 'Cards'], 'Two sticks', 'A small stick (gilli) is hit with a longer stick (danda).'),
+          q('Traditional games help us ___', ['Stay indoors', 'Stay fit and learn teamwork', 'Watch TV', 'Sleep more'], 'Stay fit and learn teamwork', 'Physical play improves health and social skills.')
         ],
-        learningOutcomes: ['Know traditional games']
+        learningOutcomes: ['Know rules of Kabaddi and Kho-Kho', 'Appreciate traditional Indian games', 'Understand benefits of physical activity'],
+        crossCurricularLink: 'PE: Physical fitness; EVS: Culture of India'
       }]
     },
 
     {
       id: 'e11', title: '6. The Valley of Flowers', topics: [{
-        id: 'e11-t1', title: 'Flowers & Plants',
-        subtopics: ['Valley of Flowers', 'Medicinal plants', 'Edible flowers'],
+        id: 'e11-t1', title: 'Flowers, Plants & Biodiversity',
+        subtopics: ['Valley of Flowers — UNESCO site', 'Wildflowers of Uttarakhand', 'Edible flowers and plants', 'Medicinal plants: Tulsi, Neem, Aloe Vera', 'Flowers we eat as vegetables', 'Protecting plant biodiversity'],
         readingText: {
-          en: 'The Valley of Flowers in Uttarakhand is home to rare wildflowers.',
-          hi: 'उत्तराखंड में फूलों की घाटी दुर्लभ फूलों का घर है।',
-          kn: 'ಉತ್ತರಾಖಂಡದ ಹೂಗಳ ಕಣಿವೆ ಅಪರೂಪದ ಹೂವುಗಳಿಗೆ ನೆಲೆ.'
+          en: 'The Valley of Flowers in Uttarakhand is a UNESCO World Heritage Site. It blooms with hundreds of wildflowers in summer. Some flowers like Kachnar and Sahjan are eaten as vegetables. Plants like Tulsi, Neem and Aloe Vera have medicinal properties. India has over 45,000 plant species!',
+          hi: 'उत्तराखंड में फूलों की घाटी एक यूनेस्को विश्व धरोहर स्थल है। गर्मियों में यहाँ सैकड़ों जंगली फूल खिलते हैं। कचनार और सहजन जैसे फूल सब्जी के रूप में खाए जाते हैं। तुलसी, नीम और एलोवेरा जैसे पौधों में औषधीय गुण हैं।',
+          kn: 'ಉತ್ತರಾಖಂಡದ ಹೂಗಳ ಕಣಿವೆ ಯುನೆಸ್ಕೋ ವಿಶ್ವ ಪರಂಪರೆ ತಾಣ. ಬೇಸಿಗೆಯಲ್ಲಿ ನೂರಾರು ಕಾಡು ಹೂವುಗಳು ಅರಳುತ್ತವೆ. ತುಳಸಿ, ಬೇವು ಮತ್ತು ಅಲೋ ವೆರಾ ಔಷಧೀಯ ಗುಣ ಹೊಂದಿವೆ.'
         },
         activities: [
-          act('Flower Press', 'Collect and press flowers.', 'performing', 'low',
-            ['Collect 5 flowers', 'Place in newspaper', 'Put heavy books'],
-            ['Newspaper', 'Books'], 'Check after 5 days.')
+          act('Flower Scrapbook', 'Collect and press 5 different flowers and label them.', 'performing', 'low',
+            ['Collect 5 flowers from garden', 'Press between book pages for 3 days', 'Stick in notebook', 'Label: name, colour, smell'],
+            ['Flowers', 'Heavy book', 'Notebook', 'Glue'], 'Which flower has the strongest smell?'),
+          act('Edible Plants Chart', 'Make a chart of 8 plants we eat.', 'drawing', 'mid',
+            ['List: spinach, banana flower, drumstick, lotus stem, kachnar', 'Draw each plant', 'Write which part we eat (leaf/flower/root)', 'Write one health benefit'],
+            ['Paper', 'Crayons'], 'How many of these plants grow in your area?'),
+          act('Medicinal Plant Garden', 'Grow a Tulsi plant and record its growth for 2 weeks.', 'performing', 'high',
+            ['Plant Tulsi seeds in a pot', 'Water daily', 'Measure height every 3 days', 'Record in a table and draw a graph'],
+            ['Pot', 'Soil', 'Tulsi seeds', 'Ruler'], 'What are 3 uses of Tulsi in your home?')
         ],
         quiz: [
-          q('Where is the Valley of Flowers?', ['Uttarakhand', 'Kerala', 'Rajasthan'], 'Uttarakhand', 'UNESCO World Heritage Site.')
+          q('The Valley of Flowers is in ___', ['Kerala', 'Uttarakhand', 'Punjab', 'Bihar'], 'Uttarakhand', 'It is in Chamoli district, Uttarakhand — a UNESCO World Heritage Site.'),
+          q('Kachnar flowers are used as ___', ['Medicine only', 'Decoration only', 'Vegetable', 'Perfume'], 'Vegetable', 'Kachnar flowers are cooked and eaten as a vegetable in India.'),
+          q('Tulsi is known for its ___ properties.', ['Poisonous', 'Medicinal', 'Decorative only', 'Sour taste'], 'Medicinal', 'Tulsi (Holy Basil) is used in Ayurvedic medicine for colds and immunity.'),
+          q('UNESCO protects places of ___', ['Political importance', 'Natural and cultural heritage', 'Military importance', 'Economic value'], 'Natural and cultural heritage', 'UNESCO World Heritage Sites have outstanding universal value.')
         ],
-        learningOutcomes: ['Identify common flowers']
+        learningOutcomes: ['Identify edible and medicinal plants', 'Learn about Valley of Flowers', 'Appreciate plant biodiversity'],
+        crossCurricularLink: 'Maths: Measuring plant growth; Science: Photosynthesis'
       }]
     },
-
     {
-      id: 'e13', title: '7. A River\'s Tale', topics: [{
-        id: 'e13-t1', title: 'Water Pollution',
-        subtopics: ['Clean vs dirty water', 'Water conservation'],
-        readingText: {
-          en: 'Rivers start clean from mountains but get polluted near cities.',
-          hi: 'नदियाँ पहाड़ों से साफ शुरू होती हैं लेकिन शहरों में प्रदूषित हो जाती हैं।',
-          kn: 'ನದಿಗಳು ಬೆಟ್ಟಗಳಿಂದ ಶುದ್ಧವಾಗಿ ಹರಿಯುತ್ತವೆ ಆದರೆ ನಗರಗಳಲ್ಲಿ ಮಲಿನವಾಗುತ್ತವೆ.'
-        },
-        activities: [
-          act('Water Tester', 'Compare clean and muddy water.', 'performing', 'low',
-            ['Take two glasses', 'Add mud to one'],
-            ['Glasses', 'Mud'], 'Which one is better?')
-        ],
-        quiz: [
-          q('Where do rivers start?', ['Mountains', 'Oceans', 'Lakes'], 'Mountains', 'From glaciers or springs.')
-        ],
-        learningOutcomes: ['Understand pollution causes']
-      }]
+  id: 'e13', title: '7. A River\'s Tale', topics: [{
+    id: 'e13-t1', title: 'Rivers and Water Conservation',
+    subtopics: ['How rivers are born', 'Uses of river water', 'Causes of river pollution', 'Effects of pollution on life', 'Water conservation methods', 'Famous rivers of India'],
+    readingText: {
+      en: 'Rivers start as small streams from mountains or glaciers and flow to the sea. They give us water for drinking, farming and industry. But factories, garbage and sewage pollute rivers. The Ganga, Yamuna, Kaveri and Brahmaputra are major Indian rivers. Only 3% of Earth\'s water is fresh!',
+      hi: 'नदियाँ पहाड़ों या ग्लेशियरों से छोटी धाराओं के रूप में शुरू होती हैं। वे पीने, खेती और उद्योग के लिए पानी देती हैं। गंगा, यमुना, कावेरी और ब्रह्मपुत्र भारत की प्रमुख नदियाँ हैं।',
+      kn: 'ನದಿಗಳು ಪರ್ವತಗಳಿಂದ ಸಣ್ಣ ತೊರೆಗಳಾಗಿ ಆರಂಭವಾಗಿ ಸಮುದ್ರಕ್ಕೆ ಹರಿಯುತ್ತವೆ. ಗಂಗಾ, ಯಮುನಾ, ಕಾವೇರಿ ಮತ್ತು ಬ್ರಹ್ಮಪುತ್ರ ಭಾರತದ ಪ್ರಮುಖ ನದಿಗಳು.'
     },
+    activities: [
+      act('River Journey Map', 'Trace a river from source to sea on a map of India.', 'drawing', 'low',
+        ['Choose the Ganga or Kaveri', 'Draw its path on India map', 'Mark source, tributaries, mouth', 'Write 3 cities on its banks'],
+        ['India map', 'Pencil', 'Crayons'], 'Which river flows nearest to your city?'),
+      act('Water Audit', 'Calculate how much water your family uses in a day.', 'calculating', 'mid',
+        ['Count: drinking, cooking, bathing, washing', 'Estimate litres for each activity', 'Add total daily usage', 'Find 3 ways to reduce by 20%'],
+        ['Notebook', 'Pencil'], 'How can you save 10 litres of water every day?'),
+      act('Clean River Campaign', 'Make a poster about river pollution and solutions.', 'drawing', 'high',
+        ['List 5 causes of river pollution', 'Write 5 solutions', 'Design a campaign slogan', 'Draw the poster'],
+        ['Paper', 'Crayons'], 'What would happen if all rivers became polluted?')
+    ],
+    quiz: [
+      q('Rivers start from ___', ['The sea', 'Mountains or glaciers', 'Lakes', 'Ponds'], 'Mountains or glaciers', 'Most rivers originate from mountain glaciers or springs.'),
+      q('Which is a major cause of river pollution?', ['Fish swimming', 'Factory waste', 'Boats', 'Rain'], 'Factory waste', 'Industrial effluents are a major source of river pollution.'),
+      q('The Ganga flows into the ___', ['Arabian Sea', 'Bay of Bengal', 'Indian Ocean', 'Pacific Ocean'], 'Bay of Bengal', 'The Ganga empties into the Bay of Bengal.'),
+      q('What percentage of Earth\'s water is fresh?', ['30%', '10%', '3%', '50%'], '3%', 'Only about 3% of Earth\'s water is fresh water.')
+    ],
+    learningOutcomes: ['Trace a river from source to sea', 'Understand river uses and pollution', 'Practice water conservation'],
+    crossCurricularLink: 'Maths: Measuring water volume; Geography: Rivers of India'
+  }]
+},
 
     {
       id: 'e19', title: '8. Abdul in the Garden', topics: [{
-        id: 'e19-t1', title: 'Roots & Plants',
-        subtopics: ['Types of roots', 'Root functions', 'Banyan tree aerial roots'],
-        readingText: {
-          en: 'Roots anchor plants. Banyan has aerial roots hanging from branches.',
-          hi: 'जड़ें पौधों को टिकाती हैं। बरगद की हवाई जड़ें होती हैं।',
-          kn: 'ಬೇರುಗಳು ಸಸ್ಯಗಳನ್ನು ಹಿಡಿಯುತ್ತವೆ. ಆಲದ ಮರಕ್ಕೆ ಗಾಳಿಯ ಬೇರುಗಳಿವೆ.'
-        },
-        activities: [
-          act('Seed Germinator', 'Grow a bean seed.', 'performing', 'mid',
-            ['Wet cotton in glass', 'Place bean', 'Watch daily'],
-            ['Cotton', 'Bean'], 'Root or shoot first?')
-        ],
-        quiz: [
-          q('Which plant has aerial roots?', ['Mango', 'Banyan', 'Rose'], 'Banyan', 'Roots hang from branches.')
-        ],
-        learningOutcomes: ['Identify tap and fibrous roots']
-      }]
+      id: 'e19-t1', title: 'Roots and Plants',
+      subtopics: ['Types of roots: taproot and fibrous', 'Functions of roots', 'Roots we eat', 'Banyan tree prop roots', 'Desert Oak deep roots', 'Plants and their special roots'],
+      readingText: {
+        en: 'Roots anchor plants in soil and absorb water and minerals. Taproot systems have one main root (carrot, radish, beetroot). Fibrous roots spread in many directions (grass, wheat). The Banyan tree has prop roots that hang from branches and touch the ground. The Desert Oak has roots 30 times deeper than its height to find water!',
+        hi: 'जड़ें पौधों को मिट्टी में स्थिर रखती हैं और पानी व खनिज अवशोषित करती हैं। मूसला जड़ में एक मुख्य जड़ होती है (गाजर, मूली)। रेशेदार जड़ें कई दिशाओं में फैलती हैं। बरगद की स्तंभ जड़ें शाखाओं से लटककर ज़मीन तक पहुँचती हैं।',
+        kn: 'ಬೇರುಗಳು ಸಸ್ಯಗಳನ್ನು ಮಣ್ಣಿನಲ್ಲಿ ಹಿಡಿದಿಡುತ್ತವೆ ಮತ್ತು ನೀರು ಮತ್ತು ಖನಿಜಗಳನ್ನು ಹೀರಿಕೊಳ್ಳುತ್ತವೆ. ಆಲದ ಮರಕ್ಕೆ ಕೊಂಬೆಗಳಿಂದ ನೇತಾಡುವ ಆಧಾರ ಬೇರುಗಳಿವೆ.'
+      },
+      activities: [
+        act('Root Observation', 'Pull out a grass plant and a radish and compare their roots.', 'performing', 'low',
+          ['Carefully pull out a grass plant', 'Pull out a radish from soil', 'Draw both root systems', 'Label: taproot or fibrous'],
+          ['Grass plant', 'Radish', 'Paper', 'Pencil'], 'Which root system holds the plant more firmly?'),
+        act('Edible Roots Chart', 'Make a chart of 8 roots we eat.', 'drawing', 'mid',
+          ['List: carrot, radish, beetroot, turnip, sweet potato, ginger, turmeric, garlic', 'Draw each root', 'Write one use for each', 'Mark which are vegetables and which are spices'],
+          ['Paper', 'Crayons'], 'Which edible root is your favourite?'),
+        act('Seed Germinator', 'Grow a bean seed and observe which comes first — root or shoot.', 'performing', 'high',
+          ['Soak a bean seed overnight', 'Place in wet cotton in a glass', 'Observe daily for 7 days', 'Draw and record changes each day'],
+          ['Bean seeds', 'Cotton', 'Glass', 'Water'], 'Does the root or shoot appear first? Why?')
+      ],
+      quiz: [
+        q('Carrot is an example of ___', ['Fibrous root', 'Taproot', 'Prop root', 'Aerial root'], 'Taproot', 'Carrot is a modified taproot that stores food.'),
+        q('Banyan tree has ___ roots.', ['Taproot', 'Fibrous', 'Prop', 'No roots'], 'Prop', 'Banyan trees have prop roots that grow from branches to the ground.'),
+        q('Roots absorb ___ from the soil.', ['Sunlight', 'Carbon dioxide', 'Water and minerals', 'Oxygen'], 'Water and minerals', 'Roots take up water and dissolved minerals from the soil.'),
+        q('Which is NOT an edible root?', ['Carrot', 'Radish', 'Spinach', 'Beetroot'], 'Spinach', 'Spinach is a leaf vegetable, not a root.')
+      ],
+      learningOutcomes: ['Identify types of roots', 'Understand root functions', 'Name edible roots'],
+      crossCurricularLink: 'Maths: Measuring root length; Science: Plant nutrition'
+    }]
     },
-
     {
-      id: 'e27', title: '9. Chuskit Goes to School', topics: [{
-        id: 'e27-t1', title: 'Disability & Inclusion',
-        subtopics: ['Chuskit\'s story', 'Accessibility'],
-        readingText: {
-          en: 'Chuskit from Ladakh uses a wheelchair. Friends built a bridge for her.',
-          hi: 'चुसकित लद्दाख की लड़की है जो व्हीलचेयर इस्तेमाल करती है।',
-          kn: 'ಚುಸ್ಕಿತ್ ಲಡಾಖ್‌ನ ಹುಡುಗಿ, ವೀಲ್‌ಚೇರ್ ಬಳಸುತ್ತಾಳೆ.'
-        },
-        activities: [
-          act('Accessibility Auditor', 'Check if school is accessible.', 'writing', 'mid',
-            ['Check for ramps', 'Check bathrooms'],
-            ['Notebook'], 'Write suggestions.')
-        ],
-        quiz: [
-          q('Where is Chuskit from?', ['Ladakh', 'Kerala', 'Assam'], 'Ladakh', 'A region in northern India.')
-        ],
-        learningOutcomes: ['Understand inclusion']
-      }]
-    }
+    id: 'e27', title: '9. Chuskit Goes to School', topics: [{
+      id: 'e27-t1', title: 'Inclusion and Accessibility',
+      subtopics: ['Chuskit\'s story in Ladakh', 'What is disability?', 'Challenges faced by differently-abled people', 'Making spaces accessible', 'Right to Education for all', 'How we can be inclusive'],
+      readingText: {
+        en: 'Chuskit is a 10-year-old girl from Ladakh who uses a wheelchair. Her father and the community built a bridge so she could cross the river to reach school. The Right to Education Act says every child deserves education. We must make our schools accessible for everyone.',
+        hi: 'चुसकित लद्दाख की 10 साल की लड़की है जो व्हीलचेयर का उपयोग करती है। उसके पिता और समुदाय ने एक पुल बनाया ताकि वह नदी पार करके स्कूल जा सके। शिक्षा का अधिकार अधिनियम कहता है कि हर बच्चे को शिक्षा मिलनी चाहिए।',
+        kn: 'ಚುಸ್ಕಿತ್ ಲಡಾಖ್‌ನ 10 ವರ್ಷದ ಹುಡುಗಿ, ವೀಲ್‌ಚೇರ್ ಬಳಸುತ್ತಾಳೆ. ಅವಳ ತಂದೆ ಮತ್ತು ಸಮುದಾಯ ಸೇತುವೆ ನಿರ್ಮಿಸಿ ಅವಳು ಶಾಲೆಗೆ ಹೋಗಲು ಸಾಧ್ಯವಾಯಿತು.'
+      },
+      activities: [
+        act('Empathy Walk', 'Spend 10 minutes doing tasks with one hand tied behind your back.', 'performing', 'low',
+          ['Tie one hand behind back', 'Try: writing, eating, opening a bottle', 'Record what was difficult', 'Discuss how to help differently-abled people'],
+          ['Cloth for tying'], 'How did it feel? What did you learn about empathy?'),
+        act('Accessibility Audit', 'Check your school for accessibility features.', 'performing', 'mid',
+          ['Look for: ramps, wide doors, handrails', 'Check toilets for wheelchair access', 'List what is missing', 'Write 3 suggestions for improvement'],
+          ['Notebook', 'Pencil'], 'Is your school fully accessible for everyone?'),
+        act('Inclusion Campaign', 'Make a poster about the right to education for all children.', 'drawing', 'high',
+          ['Write: "Education is for Everyone"', 'Draw children of different abilities learning together', 'List 3 ways to make schools inclusive', 'Present to class'],
+          ['Chart paper', 'Crayons'], 'What can YOU do to include everyone in your class?')
+      ],
+      quiz: [
+        q('Chuskit uses a ___ to move around.', ['Crutches', 'Wheelchair', 'Walking stick', 'Bicycle'], 'Wheelchair', 'Chuskit has a physical disability and uses a wheelchair.'),
+        q('What did Chuskit\'s community build for her?', ['A ramp', 'A bridge', 'A new school', 'A road'], 'A bridge', 'The community built a bridge over the river so Chuskit could reach school.'),
+        q('Every child has the right to ___', ['Work', 'Education', 'Drive', 'Vote'], 'Education', 'The Right to Education Act guarantees free education for all children in India.'),
+        q('Making spaces accessible means ___', ['Making them expensive', 'Making them usable by everyone', 'Making them smaller', 'Making them prettier'], 'Making them usable by everyone', 'Accessibility ensures people with disabilities can use spaces independently.')
+      ],
+      learningOutcomes: ['Understand challenges faced by differently-abled people', 'Appreciate inclusion and empathy', 'Know about the Right to Education'],
+      crossCurricularLink: 'Hindi: Story of Sunita\'s wheelchair; Civics: Rights of children'
+    }]
+  }
   ]
 };
 

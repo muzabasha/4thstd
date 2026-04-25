@@ -1,10 +1,14 @@
-export interface AIResponse {
-  content: string;
-  type: 'explanation' | 'question' | 'feedback';
-}
+// This script writes the complete lib/ai.ts
+const fs = require('fs');
+const lines = [];
+const w = s => lines.push(s);
 
-const KB: Record<string, string> = {
-  // EVS entries
+w(`export interface AIResponse { content: string; type: 'explanation'|'question'|'feedback'; }`);
+w(``);
+w(`const KB: Record<string, string> = {`);
+
+// ── EVS entries ──────────────────────────────────────────────────────────────
+const evs = {
   "The Ant Crossing Water Analogy": "How does an ant cross a puddle? It might use a fallen leaf as a bridge! Humans do the same with bamboo, cement and iron. Bridges are just Giant Leaves that help us stay dry and safe. In Kerala, children use small wooden boats called Vallams to reach school — a floating school bus! 🍃",
   "Bamboo & Cement Bridges": "Bamboo bridges are light and quick to build in villages. Cement bridges are heavy and hold giant trucks. It's like comparing a bicycle to a bus — both get you there, but one carries more weight! Bamboo is actually stronger than steel by weight — nature's engineering marvel! 🎋",
   "The Vallam Boat Journey": "In Kerala, children use small wooden boats called Vallams to reach school. Imagine balancing in a boat with your school bag — it takes great skill! The backwaters of Kerala are like a network of watery roads connecting hundreds of villages. 🚣",
@@ -35,8 +39,11 @@ const KB: Record<string, string> = {
   "Root functions": "Roots do four jobs: Anchor the plant in soil, Absorb water and minerals, Store food (carrot, radish, sweet potato), and sometimes Breathe (mangrove aerial roots). Without roots, plants would fall over and starve — roots are the unsung heroes of the plant world! 🌿",
   "Banyan tree aerial roots": "The Banyan tree (India's National Tree) grows aerial roots from its branches that hang down and become new trunks! The Great Banyan Tree in Kolkata is 250 years old, covers 1.5 hectares and has 3,600 aerial roots — it looks like an entire forest but is just ONE tree! 🌳",
   "Chuskit's story": "Chuskit is a 10-year-old girl in Ladakh who uses a wheelchair. She couldn't reach school because of a river. Her father and the whole community built a bridge so she could cross. Her story shows that when a community comes together, no barrier is too big. Education is for everyone! ♿",
+};
+Object.entries(evs).forEach(([k, v]) => w(`  ${JSON.stringify(k)}: ${JSON.stringify(v)},`));
 
-  // English entries
+// ── English entries ──────────────────────────────────────────────────────────
+const english = {
   "The Sun Alarm Clock Analogy": "The Sun is the world's most reliable alarm clock — no batteries, no snooze button! When it peeps over the horizon, it's nature's way of saying 'The party of the day has started!' Birds start singing 45 minutes before sunrise — they're nature's alarm chorus! ☀️",
   "Morning Buzz Activity": "Go outside for 2 minutes. Close your eyes. How many Morning Sounds can you hear? The buzzing bee? The singing bird? The rustling leaves? Write them down — they are the morning's orchestra! Sound is vibration — every sound you hear is air molecules dancing! 🎵",
   "Rhyming Word Twins": "Words like 'Day' and 'Play' are sound-twins — they sing the same note at the end. Rhyming makes poems musical and easy to remember. Ancient stories were told in rhyme so people could memorise them! Can you find a twin for 'Bee'? (Hint: it grows on a tree!) 🌳",
@@ -49,8 +56,11 @@ const KB: Record<string, string> = {
   "The Dark Room Analogy": "Close your eyes and try to walk to your desk. It feels scary, right? That's how Helen Keller felt every day — but she lived in a Dark Room without sound too. She had a key though: Touch! She learned to read, write and speak through the power of touch alone. 🤲",
   "Finger Language Secrets": "Imagine writing letters on a friend's palm — A-B-C. That's how Anne Sullivan talked to Helen Keller! This is called Finger Spelling. Your mission: spell your name on your desk using only your finger. Braille is another touch-based language — 6 raised dots create every letter! ✋",
   "Inspiration Power-Up": "Helen Keller's story is a Cheat Code for life. It tells us that 'I can't' is just a word. If Helen could write books, give speeches and travel the world without seeing or hearing, you can solve any math problem, write any essay, learn any language today! 💪",
+};
+Object.entries(english).forEach(([k, v]) => w(`  ${JSON.stringify(k)}: ${JSON.stringify(v)},`));
 
-  // Hindi entries
+// ── Hindi entries ────────────────────────────────────────────────────────────
+const hindi = {
   "रुई के गोले": "कल्पना कीजिए कि आसमान एक बहुत बड़ी रजाई है और बादल उसमें भरे हुए रुई के गोले हैं। ये गोले कभी हाथी बनते हैं तो कभी ऊंट। क्या आपने कभी बादलों में अपनी पसंद का खिलौना देखा है? बादल पानी की बूंदों और बर्फ के क्रिस्टल से बने होते हैं! ☁️",
   "बादलों का जादू": "जब सूरज की गर्मी से नदियों का पानी भाप बनकर ऊपर उड़ता है, तो वह ठंडा होकर बादल बन जाता है। यह बिलकुल वैसा ही है जैसे गरम चाय के कप से भाप निकलती है! यही जल चक्र है — प्रकृति का सबसे बड़ा जादू! 🌧️",
   "बुद्धि बनाम ताकत": "ताकत से हम पहाड़ तोड़ सकते हैं, लेकिन बुद्धि से हम पूरी दुनिया जीत सकते हैं। बीरबल ने सिखाया कि हर समस्या का समाधान तलवार से नहीं, तर्क से होता है। आज के दौर में, समस्या सुलझाने वाले (Problem Solvers) ही असली हीरो हैं! 🧠",
@@ -86,7 +96,7 @@ const KB: Record<string, string> = {
   "बचपन की खोज (Task)": "आपका मिशन: अपने पापा या दादाजी से पूछें कि वे बचपन में कौन सा खेल खेलते थे। क्या आप वह खेल आज खेल सकते हैं? 🎮",
   "पुरानी यादों का तर्क (Logic)": "पुराने खेल जैसे गिल्ली-डंडा या कंचे हमें टीम वर्क और एकाग्रता सिखाते थे। वे आज के मोबाइल गेम्स से भी ज़्यादा चुनौतीपूर्ण थे! 🏏",
   "पीढ़ियों का पुल (Strategy)": "बुज़ुर्गों के अनुभव हमारे लिए एक पुल की तरह हैं। उनकी कहानियों से हमें जीवन के सबक मिलते हैं जो किताबों में नहीं लिखे होते। 🌉",
-  "बचपन का mission (Mission)": "आज की भागदौड़ में अपना 'बचपन' जीवित रखें। रोज़ाना कम से कम एक घंटा बाहर खेलें और प्रकृति से जुड़ें। 🌿",
+  "बचपन का मिशन (Mission)": "आज की भागदौड़ में अपना 'बचपन' जीवित रखें। रोज़ाना कम से कम एक घंटा बाहर खेलें और प्रकृति से जुड़ें। 🌿",
   "सपनों का भविष्य (Vision)": "पापा ने जो सपने देखे, उनमें से कुछ पूरे हुए। आप भी आज जो सपने देख रहे हैं, वे आपके कल का निर्माण करेंगे। बड़े सपने देखें! 🌟",
   "अपनी कहानी (Mastery)": "आप भी अपनी एक 'डायरी' लिखें। आज आप क्या बनना चाहते हैं? 10 साल बाद जब आप इसे पढ़ेंगे, तो आपको बहुत मज़ा आएगा! 📔",
   "चावल का जादू (Analogy)": "अगर आप 1 दाने से शुरू करें और रोज़ दोगुना करें, तो 30 दिनों में वह इतना हो जाएगा कि पूरा देश खा सके। यह 'कंपाउंडिंग' का जादू है! 🌾",
@@ -99,65 +109,12 @@ const KB: Record<string, string> = {
   "परोपकार की जीत (Mastery)": "अंत में, राजा को अपनी गलती का अहसास हुआ। परोपकार ही सबसे बड़ा धर्म है। क्या आप आज किसी की मदद करेंगे? 🙏",
   "नमक का जादू (Analogy)": "नमक खाने में मामूली लगता है, लेकिन इसने पूरे देश को आज़ाद कराने में मदद की। एक छोटी सी चीज़ भी बहुत बड़ा बदलाव ला सकती है! 🧂",
   "अहिंसा की शक्ति (Concept)": "बिना लड़े, बिना गुस्सा किए अपनी बात मनवाना ही अहिंसा है। गांधीजी ने दिखाया कि शांति में युद्ध से भी ज़्यादा ताकत होती है। 🕊️",
-  "दांडी यात्रा का मिशन (Task)": "आपका मिशन: गांधीजी की तरह शांति का एक संदेश लिखें। आप अपने स्कूल को और भी बेहतर and शांत कैसे बना सकते हैं? ✍️",
+  "दांडी यात्रा का मिशन (Task)": "आपका मिशन: गांधीजी की तरह शांति का एक संदेश लिखें। आप अपने स्कूल को और भी बेहतर और शांत कैसे बना सकते हैं? ✍️",
   "स्वतंत्रता का तर्क (Logic)": "अंग्रेज़ों ने नमक पर टैक्स लगाया था जो गलत था। अपनी आवाज़ उठाना और अन्याय के खिलाफ खड़े होना ही सच्ची स्वतंत्रता है। 🗣️",
   "सत्याग्रह की रणनीति (Strategy)": "सत्याग्रह का मतलब है 'सत्य के लिए आग्रह'। अगर आप सही हैं, तो आपको डरने की ज़रूरत नहीं है। सत्य आपका सबसे बड़ा हथियार है। 💪",
   "देशभक्ति का मिशन (Mission)": "देशभक्ति सिर्फ बॉर्डर पर नहीं, बल्कि अपने आसपास सफाई रखकर और नियमों का पालन करके भी दिखाई जा सकती है। 🇮🇳",
   "आज़ाद भारत (Vision)": "आज हम जिस आज़ाद भारत में हैं, वह महान लोगों के बलिदान का फल है। हमें इस आज़ादी का सम्मान करना चाहिए और देश को आगे बढ़ाना चाहिए। 🌟",
   "गांधीजी की विरासत (Mastery)": "सादा जीवन, उच्च विचार — यही गांधीजी की विरासत है। क्या आप अपनी ज़रूरतों को कम करके दूसरों के काम आ सकते हैं? 🙏",
-
-  // Math - Patterns & Symmetry
-  "Jaali Pattern Ninja": "A Jaali is like a 'breathing wall'. It has beautiful holes that let in light and cool air while keeping the heat out. In olden days, before fans and AC, Jaalis were the natural cooling systems of palaces! 🏰",
-  "Mirror Magic Symmetry": "Symmetry is when one half of a shape is a perfect reflection of the other. It's like your face — if you put a mirror in the middle, the reflection completes the image! Nature loves symmetry — look at a butterfly's wings or a flower! 🦋",
-  "The Floor Pattern Challenge": "Builders use patterns to make floors strong and beautiful. By repeating the same shape (like a brick or tile) without any gaps, they create a 'Tessellation'. Can you find a tessellation in your house? (Hint: check the bathroom tiles!) 🏠",
-  "Brick Chemistry & Strength": "Bricks are made from clay and 'baked' in a giant oven called a Kiln. This heat changes the chemistry of the clay, making it as hard as rock! A single brick can hold the weight of two elephants if stacked correctly! 🐘",
-  "Architect's Vision": "Architects are like 'Building Artists'. They use math and patterns to design safe and beautiful homes. They have to think about how much weight a wall can hold and where the windows should be to let in the most sun! 🏛️",
-  "The Future of Building": "In the future, we might use 3D printers to 'print' entire houses made of recycled plastic or even Moon Dust! These houses will be ultra-strong, eco-friendly, and can be built in just 24 hours. You could be the one to design them! 🚀",
-
-  // Math - Measuring Length
-  "The Giant Step Analogy": "Imagine you are a giant! One big step for a giant might be 1 kilometre, while one small step for an ant is only 1 millimetre. We use different units (cm, m, km) because the world has both tiny things and giant distances! 👣",
-  "Centimetre vs Metre War": "Centimetres (cm) are for small things like your pencil or eraser. Metres (m) are for bigger things like your height or the length of a classroom. 100 cm is exactly 1 metre — it's like 100 small soldiers making one big captain! ⚔️",
-  "Kilometre Marathon": "When you travel between cities, metres are too small to count. That's when we use Kilometres (km). 1 km is 1,000 metres! A brisk 15-minute walk is usually about 1 km long. 🏃‍♂️",
-  "Human Ruler Task": "Did you know your body is a ruler? Your hand span is about 15-20 cm, and the distance from your nose to your fingertips is about 1 metre. Ancient people used their feet and arms to measure everything before rulers were invented! 📏",
-  "Map Scale Secrets": "Maps are like 'Shrink Rays'. A giant city can fit on a small piece of paper because we use a Scale. For example, 1 cm on the map might represent 1 km in real life. It's how explorers find their way without carrying a giant map! 🗺️",
-
-  // Math - Jugs and Mugs
-  "Litre vs Millilitre Battle": "Litres (L) are for big volumes like a bucket of water. Millilitres (mL) are for tiny drops like medicine or a teaspoon of honey. There are 1,000 mL in 1 Litre! 💧",
-  "Measuring Jug Missions": "A measuring jug is a scientist's best friend in the kitchen. It has lines that tell you exactly how much liquid is inside. Accuracy is key — too much water and your cake won't bake! 🧪",
-
-  // General Subject Fallbacks
-  "mathematics": "Math is the language of the universe! From the patterns on a tiger's skin to the orbits of the planets, everything follows mathematical rules. Let's solve some mysteries! 🔢",
-  "science": "EVS helps us understand the amazing world around us — from the tiniest ant to the giant elephant. Nature is the best teacher! 🌿",
-  "hindi": "हिन्दी हमारी शान है! कहानियों और कविताओं के ज़रिए हम अपनी संस्कृति और मूल्यों को सीखते हैं। चलिए, शब्दों के सफर पर चलते हैं! 📝",
-  "english": "English is a window to the world! It helps us share our ideas with people everywhere. Let's read, write, and dream in English! 📖",
-  "kannada": "ಕನ್ನಡ ಅಚ್ಚುಮೆಚ್ಚಿನ ಭಾಷೆ! ನಮ್ಮ ನಾಡು, ನುಡಿ ಮತ್ತು ಸಂಸ್ಕೃತಿಯ ಬಗ್ಗೆ ತಿಳಿಯೋಣ. 🚩",
-  "computers": "Computers are magic boxes that follow our commands! Learning how they work is like learning a secret superpower for the future. 💻"
 };
+Object.entries(hindi).forEach(([k, v]) => w(`  ${JSON.stringify(k)}: ${JSON.stringify(v)},`));
 
-export async function generateAIResponse(type: string, title: string, context?: string): Promise<string> {
-  // Simulate network delay
-  await new Promise(resolve => setTimeout(resolve, 500));
-
-  const key = title;
-  const ctx = context?.toLowerCase() || '';
-  
-  // Try exact match, then context match, then subject fallback
-  let response = KB[key];
-  
-  if (!response && context) {
-    // Try to find if any KB key contains the context or vice versa
-    const foundKey = Object.keys(KB).find(k => k.includes(title) || title.includes(k));
-    if (foundKey) response = KB[foundKey];
-  }
-
-  if (!response) {
-    if (ctx.includes('math')) response = KB['mathematics'];
-    else if (ctx.includes('evs') || ctx.includes('sci')) response = KB['science'];
-    else if (ctx.includes('hindi')) response = KB['hindi'];
-    else if (ctx.includes('english')) response = KB['english'];
-    else if (ctx.includes('kannada')) response = KB['kannada'];
-    else if (ctx.includes('computer')) response = KB['computers'];
-  }
-
-  return response || `That's a very interesting topic! Let's explore more about **${title}** together. It's an important part of our Grade 4 journey! 🚀`;
-}
