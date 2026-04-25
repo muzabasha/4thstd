@@ -42,15 +42,15 @@ const mathSubject: Subject = {
           kn: 'ಇಟ್ಟಿಗೆಗಳು ಆಯತಾಕಾರದ ಘನಗಳಾಗಿದ್ದು 6 ಮುಖ, 8 ಮೂಲೆ ಮತ್ತು 12 ಅಂಚುಗಳಿವೆ.'
         },
         activities: [
-          act('Wall Designer', 'Draw a 3×3 brick wall on grid paper and find its symmetry line.', 'drawing', 'low',
-            ['Draw a 3×3 grid', 'Sketch bricks', 'Colour alternate bricks', 'Find the symmetry line'],
-            ['Grid paper', 'Crayons'], 'Use a mirror to check symmetry!'),
-          act('Jaali Maker', 'Cut a Jaali pattern from paper.', 'performing', 'mid',
-            ['Fold paper in half', 'Cut small shapes', 'Unfold and hold to light', 'Count the holes'],
-            ['Paper', 'Scissors'], 'How many holes did you make?'),
-          act('3D Brick Model', 'Build a brick from clay and count its faces.', 'performing', 'high',
-            ['Roll clay into a rectangle', 'Press flat on all 6 sides', 'Count faces, edges, corners', 'Compare with a real brick'],
-            ['Clay', 'Ruler'], 'Can you make a Jaali wall with 4 clay bricks?')
+          act('The Wall Architect', 'Build a mini-wall using real or sponge bricks to understand strength and patterns.', 'performing', 'mid',
+            ['Collect 20 blocks or bricks', 'Stack them in an interlocking pattern', 'Try building a hole (Jaali)', 'Test if it stands firm'],
+            ['Lego blocks', 'Sponge bricks', 'Pebbles'], 'Interlocking bricks are much stronger than straight stacks!'),
+          act('Symmetry Mirror Quest', 'Find hidden symmetry in your house using a small mirror.', 'drawing', 'low',
+            ['Find an object like a leaf or a cup', 'Place a mirror in the middle', 'Check if the reflection looks the same', 'Draw the symmetry line'],
+            ['Mirror', 'Notebook', 'Natural objects'], 'Did you know most butterfly wings are perfectly symmetric?'),
+          act('Jaali Paper Ninja', 'Create a decorative window pattern to see how light passes through.', 'performing', 'mid',
+            ['Fold a paper 3 times', 'Cut triangles and circles on the edges', 'Unfold and paste on a window', 'Observe the light patterns'],
+            ['Paper', 'Child-safe scissors'], 'How many different shapes can you see in the light?')
         ],
         virtualLab: { title: 'Brick Builder Lab', simulation: 'Place bricks on a grid', task: 'Build a wall with a Jaali pattern using 9 bricks' },
         quiz: [
@@ -73,15 +73,15 @@ const mathSubject: Subject = {
           kn: '1 ಮೀಟರ್ = 100 ಸೆಂಟಿಮೀಟರ್. 1 ಕಿಲೋಮೀಟರ್ = 1000 ಮೀಟರ್.'
         },
         activities: [
-          act('Body Ruler', 'Measure body parts using a ruler and tape.', 'calculating', 'low',
-            ['Measure your hand span in cm', 'Measure your height in cm', 'Convert height to metres', 'Compare with a friend'],
-            ['Ruler', 'Measuring tape'], 'How many hand spans make 1 metre?'),
-          act('Distance Detective', 'Estimate distances around school.', 'calculating', 'mid',
-            ['Walk from class to playground', 'Count your steps', 'Measure one step in cm', 'Calculate total distance in m'],
-            ['Notebook', 'Pen'], 'How far is the school gate in metres?'),
-          act('Map Maker', 'Draw a scale map of your room.', 'drawing', 'high',
-            ['Measure room length and width', 'Choose a scale (1 cm = 1 m)', 'Draw the room on paper', 'Add furniture to scale'],
-            ['Graph paper', 'Ruler', 'Pencil'], 'Can you find the perimeter from your map?')
+          act('The Human Tape Measure', 'Measure your classroom or room using your own body as a ruler.', 'calculating', 'mid',
+            ['Measure your hand span in cm', 'Walk across the room counting steps', 'Multiply steps by your foot length', 'Check with a real tape'],
+            ['Ruler', 'Your own feet!'], 'Whose steps were the most accurate?'),
+          act('Estimation Marathon', 'Guess the length of 5 objects before measuring them.', 'calculating', 'low',
+            ['Look at a pencil, table, and door', 'Write down your guess in cm/m', 'Measure them precisely', 'Find the difference'],
+            ['Ruler', 'Measuring tape', 'Notebook'], 'Can you get within 2cm of the real length?'),
+          act('Perimeter Patrol', 'Find the total boundary length of your study table.', 'drawing', 'high',
+            ['Measure all 4 sides', 'Add them together', 'Draw the table on paper', 'Label the lengths'],
+            ['Notebook', 'Measuring tape'], 'Perimeter is like the fence around a garden!')
         ],
         virtualLab: { title: 'Length Converter Lab', simulation: 'Convert between cm, m, and km interactively', task: 'Arrange objects from shortest to longest' },
         quiz: [
@@ -104,8 +104,12 @@ const mathSubject: Subject = {
           kn: 'ಪ್ರವಾಸ ಯೋಜಿಸುವಾಗ ನಾವು ದೊಡ್ಡ ಸಂಖ್ಯೆಗಳನ್ನು ಬಳಸುತ್ತೇವೆ.'
         },
         activities: [
-          act('Trip Planner', 'Plan a class trip: count students, arrange buses.', 'calculating', 'low',
-            ['Count students', 'Divide by 40'], ['Notebook'], 'What if 5 teachers also come?')
+          act('Picnic Budget Master', 'Plan a class picnic for 50 people with a fixed budget.', 'calculating', 'high',
+            ['Count students and teachers', 'Calculate total food cost', 'Determine how many buses are needed', 'Stay within ₹5000'],
+            ['Notebook', 'Price list of snacks'], 'Can you save ₹500 from the budget?'),
+          act('The Bus Seat Puzzle', 'Arrange 210 students into buses of 40 and 50 seats.', 'calculating', 'mid',
+            ['Calculate total seats', 'Compare different bus combinations', 'Find the cheapest way', 'Draw the seating plan'],
+            ['Notebook'], 'How many empty seats are left over?')
         ],
         quiz: [
           q('210 ÷ 40 = ? (rounded up)', ['4', '5', '6', '7'], '6', '6 buses needed.')
@@ -123,7 +127,12 @@ const mathSubject: Subject = {
           kn: 'ಒಂದು ದಿನದಲ್ಲಿ 24 ಗಂಟೆಗಳಿವೆ.'
         },
         activities: [
-          act('Clock Reader', 'Read time from a clock model.', 'calculating', 'low', ['Look at hands', 'Write time'], ['Clock'], 'Convert to 24-hour time.')
+          act('The 1-Minute Challenge', 'Understand how long one minute actually feels.', 'performing', 'mid',
+            ['Close your eyes', 'Raise your hand when you think 1 minute has passed', 'Stop the timer and check', 'Try again while jumping'],
+            ['Stopwatch or Clock'], 'Did jumping make the minute feel longer or shorter?'),
+          act('My Hero Day Log', 'Create a 24-hour timeline of your best day.', 'writing', 'low',
+            ['Write down your wake-up time', 'Log every 2 hours of activity', 'Convert all to 24-hour format', 'Draw a clock for noon'],
+            ['Crayons', 'Paper'], 'What is 3:30 PM in Railway Time?')
         ],
         quiz: [
           q('3:00 PM in 24-hour format is?', ['03:00', '15:00'], '15:00', '3 PM + 12 = 15:00.')
@@ -159,7 +168,12 @@ const mathSubject: Subject = {
           kn: 'ಲಾಭ = ಮಾರಾಟ ಬೆಲೆ − ವೆಚ್ಚ ಬೆಲೆ.'
         },
         activities: [
-          act('Shopkeeper Game', 'Practice buying and selling.', 'performing', 'low', ['Price items', 'Sell and give change'], ['Play money'], 'Make ₹10 profit.')
+          act('The Lemonade Stand', 'Simulate a business to understand profit and loss.', 'performing', 'high',
+            ['Buy lemons and sugar (imaginary or real)', 'Calculate the Total Cost Price', 'Sell 10 cups at ₹5 each', 'Calculate Profit/Loss'],
+            ['Play money', 'Paper cups'], 'What happens if you lower the price to ₹3?'),
+          act('Bill Detective', 'Read real grocery bills and find errors.', 'calculating', 'mid',
+            ['Collect 3 old shop bills', 'Re-calculate the totals', 'Check for discount deductions', 'Find the change returned'],
+            ['Real bills', 'Calculator (optional)'], 'Did the shopkeeper give the right change?')
         ],
         quiz: [
           q('Buy at ₹30, sell at ₹45. Profit?', ['₹10', '₹15'], '₹15', '45 - 30 = 15.')
@@ -177,7 +191,12 @@ const mathSubject: Subject = {
           kn: '1 ಲೀಟರ್ = 1000 ಮಿಲಿಲೀಟರ್.'
         },
         activities: [
-          act('Pour & Measure', 'Measure water using cups.', 'performing', 'low', ['Fill 1L bottle', 'Pour into cups'], ['1L bottle', 'Cups'], 'How many cups?')
+          act('The Magic Potion Maker', 'Mix different liquids to reach an exact volume.', 'performing', 'mid',
+            ['Collect 100ml, 200ml and 500ml cups', 'Try to get exactly 1 Litre', 'Use a medicine dropper for mL', 'Mark levels on a jar'],
+            ['Water', 'Measuring cups', 'Food colour'], 'How many drops of water make 1 mL?'),
+          act('Capacity Survey', 'Check the labels of everything in your kitchen.', 'writing', 'low',
+            ['List 5 items (Milk, Oil, Juice)', 'Write their capacity in L or mL', 'Sort them from smallest to largest', 'Estimate remaining water'],
+            ['Kitchen items', 'Notebook'], 'Which is bigger: 500mL or 0.5L?')
         ],
         quiz: [
           q('How many mL in 1 Litre?', ['100', '1000'], '1000', 'Standard conversion.')
@@ -195,7 +214,12 @@ const mathSubject: Subject = {
           kn: 'ವ್ಯಾಸ = 2 × ತ್ರಿಜ್ಯ.'
         },
         activities: [
-          act('Compass Artist', 'Draw circles with a compass.', 'drawing', 'mid', ['Set 3cm radius', 'Draw circle'], ['Compass'], 'What is the diameter?')
+          act('The Perfect Centre Mission', 'Find the exact middle of a physical circular object.', 'performing', 'high',
+            ['Trace a plate on paper', 'Cut out the circle', 'Fold it twice to find the centre', 'Measure the Radius'],
+            ['Paper', 'Plates of different sizes', 'Ruler'], 'Is the diameter always twice the radius?'),
+          act('Bangle Art', 'Create a Rangoli using circles of different sizes.', 'drawing', 'low',
+            ['Collect bangles, caps, and coins', 'Trace them in a pattern', 'Label the biggest and smallest', 'Colour the circles'],
+            ['Bangles', 'Colours'], 'Can you draw a circle inside another circle?')
         ],
         quiz: [
           q('If radius is 4 cm, diameter is?', ['4 cm', '8 cm'], '8 cm', '4 x 2 = 8.')
@@ -213,7 +237,12 @@ const mathSubject: Subject = {
           kn: 'ಅರ್ಧ (1/2) ಮತ್ತು ಕಾಲು (1/4) ಭಾಗಗಳು.'
         },
         activities: [
-          act('Paper Folder', 'Fold paper into quarters.', 'drawing', 'low', ['Fold twice', 'Shade 1/4'], ['Paper'], 'How many 1/4 make a whole?')
+          act('The Pizza Party Fraction', 'Divide a paper pizza into equal shares for friends.', 'drawing', 'mid',
+            ['Draw a giant circle', 'Cut it into 4 equal slices (Quarters)', 'Give 3/4 to one group', 'How much is left?'],
+            ['Paper', 'Scissors', 'Crayons'], 'If you have 8 slices, what is 1/2 of the pizza?'),
+          act('Fraction Hunt', 'Find things in your house that are "Half" or "Quarter".', 'performing', 'low',
+            ['Find a half-filled bottle', 'Cut an apple in half', 'Fold a towel into quarters', 'Take a photo of a half-moon'],
+            ['Camera/Notebook', 'Household items'], 'Can you find something that is 1/3 full?')
         ],
         quiz: [
           q('How many quarters make a whole?', ['2', '4'], '4', '1/4 + 1/4 + 1/4 + 1/4 = 1.')
@@ -231,7 +260,12 @@ const mathSubject: Subject = {
           kn: 'ವಿನ್ಯಾಸಗಳು ಪುನರಾವರ್ತಿತ ಕ್ರಮಗಳು.'
         },
         activities: [
-          act('Number Detective', 'Find the next numbers.', 'calculating', 'mid', ['5, 10, 15...', 'Find rule'], ['Notebook'], 'What is next?')
+          act('Nature Pattern Quest', 'Find and draw repeating patterns found in plants and flowers.', 'drawing', 'low',
+            ['Go to a garden or look at plants', 'Find a pattern in the leaves or petals', 'Draw it in your notebook', 'Predict the next step'],
+            ['Notebook', 'Crayons', 'A garden!'], 'Nature is the best pattern designer!'),
+          act('The Code Breaker', 'Create a secret pattern code for a friend to solve.', 'calculating', 'mid',
+            ['Choose a rule (e.g., +3, -1)', 'Write the first 4 numbers', 'Let your friend guess the next 3', 'Reverse roles'],
+            ['Notebook', 'Pen'], 'Can you create a pattern with both shapes and numbers?')
         ],
         quiz: [
           q('Next in 2, 4, 6, 8, ?', ['9', '10'], '10', 'Add 2.')
@@ -249,7 +283,12 @@ const mathSubject: Subject = {
           kn: 'ಗುಣಾಕಾರ ಪದೇ ಪದೇ ಕೂಡಿಸುವುದು.'
         },
         activities: [
-          act('Array Creator', 'Arrange pebbles in rows.', 'calculating', 'low', ['3 rows of 4', 'Total?'], ['Pebbles'], '3 x 4 = ?')
+          act('The Candy Factory', 'Simulate a factory to understand grouping and division.', 'performing', 'mid',
+            ['Collect 24 seeds or beads (candies)', 'Pack them into boxes of 4', 'Count how many boxes you filled', 'Try packing in 6s'],
+            ['Pebbles or Seeds', 'Small bowls or boxes'], 'Division is just making equal groups!'),
+          act('Multiplication Array Master', 'Build a grid of objects to visualize multiplication.', 'drawing', 'low',
+            ['Choose a table (e.g., 3 x 5)', 'Draw 3 rows of 5 dots', 'Count the total number', 'Write the table'],
+            ['Graph paper', 'Markers'], 'Rotating the array (5 x 3) gives the same total!')
         ],
         quiz: [
           q('7 × 8 = ?', ['54', '56'], '56', '7 times 8.')
@@ -267,7 +306,12 @@ const mathSubject: Subject = {
           kn: '1 ಕೆಜಿ = 1000 ಗ್ರಾಮ್.'
         },
         activities: [
-          act('Weight Guesser', 'Guess and then weigh objects.', 'performing', 'low', ['Guess weight', 'Use scale'], ['Scale'], 'Was it close?')
+          act('The Human Balance Scale', 'Use your hands to compare the weight of different household items.', 'performing', 'low',
+            ['Hold an apple in one hand', 'Hold a book in the other', 'Guess which is heavier', 'Check using a real kitchen scale'],
+            ['Household objects', 'Kitchen scale (optional)'], 'Was your hand-scale accurate?'),
+          act('Weight Label Detective', 'Find the "Net Weight" printed on food packets.', 'writing', 'mid',
+            ['Collect 5 empty packets (Biscuits, Flour)', 'Find the weight in g or kg', 'Add them together to find total weight', 'Sort by weight'],
+            ['Empty food packets', 'Notebook'], '1000g is exactly 1kg — check if your total adds up to a kg!')
         ],
         quiz: [
           q('How many grams in 1 kg?', ['100', '1000'], '1000', 'Metric standard.')
@@ -285,7 +329,12 @@ const mathSubject: Subject = {
           kn: 'ಸುತ್ತಳತೆ ಮತ್ತು ವಿಸ್ತೀರ್ಣ.'
         },
         activities: [
-          act('Boundary Walker', 'Measure desk perimeter with string.', 'calculating', 'low', ['Use string', 'Measure with ruler'], ['String'], 'Total cm?')
+          act('The Thread Perimeter Challenge', 'Measure the boundary of irregular shapes using a string.', 'calculating', 'high',
+            ['Draw an irregular shape like a cloud', 'Lay a string exactly along its boundary', 'Mark the string and measure it with a ruler', 'Compare with a rectangle'],
+            ['String', 'Ruler', 'Paper'], 'Perimeter is the length of the "fence" around any shape!'),
+          act('Area Square Counter', 'Calculate the area of your hand on grid paper.', 'drawing', 'mid',
+            ['Trace your hand on a grid sheet', 'Count all full squares inside', 'Count two half-squares as one full', 'Find the total area in sq cm'],
+            ['Grid paper', 'Pencil'], 'The more squares you count, the bigger the area!')
         ],
         quiz: [
           q('Perimeter of square with side 5 cm?', ['20 cm', '25 cm'], '20 cm', '5 x 4 = 20.')
@@ -303,7 +352,12 @@ const mathSubject: Subject = {
           kn: 'ಟ್ಯಾಲಿ ಮಾರ್ಕ್ಸ್ ಮತ್ತು ಪಿಕ್ಟೋಗ್ರಾಫ್.'
         },
         activities: [
-          act('Survey', 'Ask friends for favourite fruit.', 'writing', 'low', ['Use tally marks', 'Show results'], ['Notebook'], 'Which is top?')
+          act('The Emoji Feeling Survey', 'Collect and chart data about how your friends are feeling today.', 'writing', 'mid',
+            ['Ask 10 friends to pick an emoji (Happy, Sad, Excited)', 'Use Tally Marks to record choices', 'Draw a Pictograph', 'Find the most popular feeling'],
+            ['Notebook', 'Crayons'], 'Which emoji has the most tally marks?'),
+          act('Bird Watcher Chart', 'Observe birds or vehicles for 10 minutes and chart them.', 'drawing', 'low',
+            ['Look out of a window', 'Record each bird/car you see with a tally', 'Create a bar chart of your data', 'Present your findings'],
+            ['Window view', 'Notebook'], 'What was the rarest thing you saw?')
         ],
         quiz: [
           q('Tally for 5 is?', ['||||', '|||| with cross'], '|||| with cross', 'Standard tally.')
