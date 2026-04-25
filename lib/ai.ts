@@ -49,6 +49,8 @@ const KB: Record<string, string> = {
   "The Dark Room Analogy": "Close your eyes and try to walk to your desk. It feels scary, right? That's how Helen Keller felt every day — but she lived in a Dark Room without sound too. She had a key though: Touch! She learned to read, write and speak through the power of touch alone. 🤲",
   "Finger Language Secrets": "Imagine writing letters on a friend's palm — A-B-C. That's how Anne Sullivan talked to Helen Keller! This is called Finger Spelling. Your mission: spell your name on your desk using only your finger. Braille is another touch-based language — 6 raised dots create every letter! ✋",
   "Inspiration Power-Up": "Helen Keller's story is a Cheat Code for life. It tells us that 'I can't' is just a word. If Helen could write books, give speeches and travel the world without seeing or hearing, you can solve any math problem, write any essay, learn any language today! 💪",
+  "Strange Talk (Poem)": "Animals have their own secret languages! A frog croaks, a duck quacks, and a pig says 'wee-wee'. Even though they don't say 'Good Morning' like us, they are all communicating with their friends in their own special way. 🐸",
+  "The Grasshopper and the Ant": "This story is about 'Planning for the Future'. The ant worked hard while the grasshopper just played. It teaches us that there is a time for play and a time for work. Hard work today makes tomorrow easier! 🐜",
 
   // Hindi entries
   "रुई के गोले": "कल्पना कीजिए कि आसमान एक बहुत बड़ी रजाई है और बादल उसमें भरे हुए रुई के गोले हैं। ये गोले कभी हाथी बनते हैं तो कभी ऊंट। क्या आपने कभी बादलों में अपनी पसंद का खिलौना देखा है? बादल पानी की बूंदों और बर्फ के क्रिस्टल से बने होते हैं! ☁️",
@@ -114,6 +116,10 @@ const KB: Record<string, string> = {
   "ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯ": "ವಿಜಯನಗರ ಸಾಮ್ರಾಜ್ಯವು ದಕ್ಷಿಣ ಭಾರತದ ಅತ್ಯಂತ ಶಕ್ತಿಯುತ ಸಾಮ್ರಾಜ್ಯವಾಗಿತ್ತು. ಹಂಪಿ ಇದರ ರಾಜಧಾನಿಯಾಗಿತ್ತು. ಕೃಷ್ಣದೇವರಾಯನ ಕಾಲದಲ್ಲಿ ಸಾಹಿತ್ಯ ಮತ್ತು ಕಲೆ ಅತ್ಯಂತ ಉನ್ನತ ಮಟ್ಟಕ್ಕೇರಿತು. 🏰",
   "ತೆನಾಲಿಯ ಹಾಸ್ಯ ಪ್ರಜ್ಞೆ": "ತೆನಾಲಿ ರಾಮಕೃಷ್ಣನು ಕೇವಲ ಹಾಸ್ಯಗಾರನಲ್ಲ, ಅವನು ಅತ್ಯಂತ ಚತುರ ಮತ್ತು ಬುದ್ಧಿವಂತ. ಅವನು ತನ್ನ ಮಾತಿನ ಚಾತುರ್ಯದಿಂದ ಎಂತಹ ದೊಡ್ಡ ಶತ್ರುಗಳನ್ನೂ ಸೋಲಿಸುತ್ತಿದ್ದನು. 🧠",
   "ಕಾಡಿನ ಸಂರಕ್ಷಣೆ": "ಕಾಡುಗಳು ಭೂಮಿಯ ಶ್ವಾಸಕೋಶದಂತೆ. ಅವು ನಮಗೆ ಮಳೆಯನ್ನು ತರುತ್ತವೆ ಮತ್ತು ಪ್ರಾಣಿಗಳಿಗೆ ಆಶ್ರಯ ನೀಡುತ್ತವೆ. ಗಿಡಮರಗಳನ್ನು ಕಡಿಯುವುದನ್ನು ನಿಲ್ಲಿಸಿ, ಹೆಚ್ಚು ಗಿಡಗಳನ್ನು ನೆಡುವುದು ನಮ್ಮ ಗುರಿಯಾಗಬೇಕು. 🌳",
+  "ಸವಿ ದಾರಿ": "ಕನ್ನಡ ವ್ಯಾಕರಣವು ತುಂಬಾ ಆಸಕ್ತಿದಾಯಕವಾಗಿದೆ. ವಿಭಕ್ತಿ ಪ್ರತ್ಯಯಗಳು ವಾಕ್ಯಗಳನ್ನು ಜೋಡಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತವೆ. ಸರಿಯಾದ ವ್ಯಾಕರಣ ಬಳಸಿದರೆ ಭಾಷೆ ಇನ್ನು ಸುಂದರವಾಗುತ್ತದೆ! ✍️",
+  "ಪರಿಸರ ಗೀತೆ": "ಪ್ರಕೃತಿಯು ದೈವದತ್ತವಾದ ಕೊಡುಗೆ. ಹಸಿರು ಕಾಡುಗಳು, ಹರಿಯುವ ನದಿಗಳು ಮತ್ತು ಸುಂದರ ಬೆಟ್ಟಗಳು ನಮಗೆ ನೆಮ್ಮದಿ ನೀಡುತ್ತವೆ. ನಾವು ನಮ್ಮ ಪರಿಸರವನ್ನು ಸದಾ ಸ್ವಚ್ಛವಾಗಿಟ್ಟುಕೊಳ್ಳಬೇಕು. 🌿",
+  "ಸ್ವಾತಂತ್ರ್ಯದ ಬೆಳಕು": "ನಮ್ಮ ದೇಶದ ಸ್ವಾತಂತ್ರ್ಯಕ್ಕಾಗಿ ಅನೇಕ ವೀರರು ಬಲಿದಾನ ಮಾಡಿದ್ದಾರೆ. ಸಂಗೊಳ್ಳಿ ರಾಯಣ್ಣ ಮತ್ತು ಕಿತ್ತೂರು ಚೆನ್ನಮ್ಮರಂತಹ ಹೋರಾಟಗಾರರ ಕಥೆಗಳು ನಮಗೆ ಸದಾ ಸ್ಪೂರ್ತಿದಾಯಕ. 🇮🇳",
+  "ಮಕ್ಕಳ ರಾಜ್ಯ": "ಪ್ರತಿಯೊಬ್ಬ ಮಗುವಿಗೂ ಸಮಾನ ಹಕ್ಕುಗಳಿವೆ. ಶಿಕ್ಷಣ ಪಡೆಯುವುದು ಮಕ್ಕಳ ಮೂಲಭೂತ ಹಕ್ಕು. ಬಾಲ ಕಾರ್ಮಿಕ ಪದ್ಧತಿಯನ್ನು ದೂರವಿರಿಸಿ ಎಲ್ಲರೂ ಶಾಲೆಗೆ ಹೋಗೋಣ! 🎒",
 
   // Computer Science entries
   "Abacus - The First Calculator": "The Abacus is the world's first mechanical counting device, invented over 5,000 years ago! It uses beads on rods to represent numbers. Even today, learning Abacus helps you do math faster than a calculator! 🧮",
@@ -130,6 +136,10 @@ const KB: Record<string, string> = {
   "Brick Chemistry & Strength": "Bricks are made from clay and 'baked' in a giant oven called a Kiln. This heat changes the chemistry of the clay, making it as hard as rock! A single brick can hold the weight of two elephants if stacked correctly! 🐘",
   "Architect's Vision": "Architects are like 'Building Artists'. They use math and patterns to design safe and beautiful homes. They have to think about how much weight a wall can hold and where the windows should be to let in the most sun! 🏛️",
   "The Future of Building": "In the future, we might use 3D printers to 'print' entire houses made of recycled plastic or even Moon Dust! These houses will be ultra-strong, eco-friendly, and can be built in just 24 hours. You could be the one to design them! 🚀",
+  "MS Paint Mastery": "MS Paint is your 'Digital Canvas'! You can use the Pencil tool to sketch, Shapes to build houses, and the Bucket tool to splash colors everywhere. It's the first step to becoming a digital artist or a game designer! 🎨",
+  "PowerPoint Basics": "PowerPoint is like a 'Storyteller'. You can put your ideas on slides, add pictures, and even make things move with animations! It's how people share big ideas with the world. 📊",
+  "Scratch Jr. Intro": "Scratch Jr. is a 'Code Playground'. You don't need to type — you just snap blocks together like LEGOs! You can make a cat dance or a rocket blast off. Coding is just like writing a story for a robot! 🤖",
+  "Email & Communication": "Emails are 'Instant Letters'. They travel across the world in seconds! Learning to write a polite email is like having a key to the entire internet. But remember: stay safe and never share passwords! 📧",
 
   // Math - Measuring Length
   "The Giant Step Analogy": "Imagine you are a giant! One big step for a giant might be 1 kilometre, while one small step for an ant is only 1 millimetre. We use different units (cm, m, km) because the world has both tiny things and giant distances! 👣",
