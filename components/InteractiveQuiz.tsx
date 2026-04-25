@@ -38,7 +38,6 @@ export default function InteractiveQuiz({ questions, onComplete }: Props) {
   };
 
   const next = () => {
-    const newScore = score + (isCorrect ? 0 : 0); // already counted
     if (idx + 1 < questions.length) {
       setIdx(i => i + 1);
       setPicked(null);

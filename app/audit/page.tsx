@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { syllabus, Subject, Chapter, Topic } from '../../lib/curriculum';
+import { syllabus, type Subject, type Chapter, type Topic } from '../../lib/curriculum';
 import Link from 'next/link';
 
 export default function AuditPage() {

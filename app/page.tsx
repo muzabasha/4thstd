@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import VoiceAITutor from '../components/VoiceAITutor';
-import { syllabus, Subject, Chapter, Topic } from '../lib/curriculum';
+import { syllabus, type Subject, type Chapter, type Topic } from '../lib/curriculum';
 
 const SUBJECT_BG: Record<string, string> = {
   mathematics: 'linear-gradient(135deg,#EDE9FE,#DDD6FE)',
@@ -22,10 +22,12 @@ export default function Home() {
   const [greeting, setGreeting] = useState('Good morning');
 
   useEffect(() => {
-    const h = new Date().getHours();
-    setGreeting(h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening');
-    const saved = JSON.parse(localStorage.getItem('yasmeen_progress') || '{}');
-    setProgress(saved);
+    setTimeout(() => {
+      const h = new Date().getHours();
+      setGreeting(h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening');
+      const saved = JSON.parse(localStorage.getItem('yasmeen_progress') || '{}');
+      setProgress(saved);
+    }, 0);
   }, []);
 
   const totalTopics = syllabus.reduce((a, s) => a + s.chapters.reduce((b, c) => b + c.topics.length, 0), 0);
