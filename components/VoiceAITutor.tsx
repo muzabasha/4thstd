@@ -67,7 +67,7 @@ export default function VoiceAITutor({ subject, topic }: Props) {
     speakRef.current(clean, targetLang);
   }, [content, targetLang]);
 
-  const activity = topic.activities.find(a => a.level === level);
+  const activity = topic.activities.find(a => a.level === level) || topic.activities[0];
   const pct = Math.round(((step + 1) / (topic.subtopics.length + 2)) * 100);
 
   return (
