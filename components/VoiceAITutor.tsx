@@ -5,6 +5,7 @@ import { Subject, Topic } from '../lib/curriculum';
 import { useVoice } from '../hooks/useVoice';
 import { generateAIResponse } from '../lib/ai';
 import InteractiveQuiz from './InteractiveQuiz';
+import Math3DLab from './Math3DLab';
 
 interface Props { subject: Subject; topic: Topic; }
 
@@ -133,6 +134,11 @@ export default function VoiceAITutor({ subject, topic }: Props) {
                 );
               })}
             </div>
+
+            {/* ── 3D LAB (Mathematics Only) ── */}
+            {subject.id === 'mathematics' && step > 0 && step <= topic.subtopics.length && (
+              <Math3DLab topicId={topic.id} />
+            )}
 
             {/* Reading text panel */}
             {step === 0 && topic.readingText && (
