@@ -70,7 +70,7 @@ const mathSubject: Subject = {
         readingText: {
           en: '1 metre = 100 centimetres. 1 kilometre = 1000 metres. We measure short things in cm, longer things in m, and very long distances in km.',
           hi: '1 मीटर = 100 सेंटीमीटर। 1 किलोमीटर = 1000 मीटर। हम छोटी चीजें सेमी में और बड़ी दूरी किमी में मापते हैं।',
-          kn: '1 ಮೀಟರ್ = 1ದಿನದಲ್ಲಿ 100 ಸೆಂಟಿಮೀಟರ್. 1 ಕಿಲೋಮೀಟರ್ = 1000 ಮೀಟರ್.'
+          kn: '1 ಮೀಟರ್ = 100 ಸೆಂಟಿಮೀಟರ್. 1 ಕಿಲೋಮೀಟರ್ = 1000 ಮೀಟರ್.'
         },
         activities: [
           act('The Human Tape Measure', 'Measure your classroom or room using your own body as a ruler.', 'calculating', 'mid',
