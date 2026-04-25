@@ -5,14 +5,14 @@ import { Subject, Topic } from '../lib/curriculum';
 import { useVoice } from '../hooks/useVoice';
 import { generateAIResponse } from '../lib/ai';
 import InteractiveQuiz from './InteractiveQuiz';
-import Math3DLab from './Math3DLab';
+import ExperientialLab from './ExperientialLab';
 
 interface Props { subject: Subject; topic: Topic; }
 
 export default function VoiceAITutor({ subject, topic }: Props) {
   const [content, setContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [mode, setMode] = useState<'learn' | 'quiz' | 'activity'>('learn');
+  const [activeTab, setActiveTab] = useState<'learn' | 'lab' | 'activity' | 'quiz'>('learn');
   const [level, setLevel] = useState<'low' | 'mid' | 'high'>('low');
   const [step, setStep] = useState(0);
   const [isSpeakingNow, setIsSpeakingNow] = useState(false);
@@ -44,7 +44,7 @@ export default function VoiceAITutor({ subject, topic }: Props) {
         text = `🎉 Amazing work! You've explored all ${topic.subtopics.length} concepts in "${topic.title}". Time for the Mastery Quiz!`;
       }
       setContent(text);
-      if (step > 0) {
+      if (step > 0 && activeTab === 'learn') {
         const clean = text.replace(/\*\*/g, '').replace(/[🎉📖🌈🔍🚀🏆]/g, '');
         speakRef.current(clean, targetLang);
       }
@@ -86,213 +86,211 @@ export default function VoiceAITutor({ subject, topic }: Props) {
         </div>
       </div>
 
-      {/* ── Step dots ── */}
-      <div className="step-dots">
-        {Array.from({ length: topic.subtopics.length + 2 }).map((_, i) => (
-          <div
-            key={i}
-            className={`dot ${i <= step ? 'done' : ''} ${i === step ? 'current' : ''}`}
-            style={i === step ? { background: subject.color } : {}}
-          />
-        ))}
+      {/* ── Main Tab Navigation ── */}
+      <div className="tab-nav glass-card">
+        <button className={`tab-btn ${activeTab === 'learn' ? 'active' : ''}`} onClick={() => setActiveTab('learn')}>
+          📖 Learn
+        </button>
+        <button className={`tab-btn ${activeTab === 'lab' ? 'active' : ''}`} onClick={() => setActiveTab('lab')}>
+          🧪 3D Lab
+        </button>
+        <button className={`tab-btn ${activeTab === 'activity' ? 'active' : ''}`} onClick={() => setActiveTab('activity')}>
+          🎯 Activity
+        </button>
+        <button className={`tab-btn ${activeTab === 'quiz' ? 'active' : ''}`} onClick={() => setActiveTab('quiz')}>
+          🏆 Quiz
+        </button>
       </div>
 
-      {/* ── Content card ── */}
-      <div className="content-card glass-card animate-fade-in">
-        {isLoading ? (
-          <div className="loading-wrap">
-            <div className="loading-spinner" style={{ borderTopColor: subject.color }} />
-            <p className="loading-text">Spark is thinking… 🤔</p>
-          </div>
-        ) : (
-          <>
-            <div className="content-header">
-              <div className="ch-badge" style={{ background: `${subject.color}20`, color: subject.color }}>
-                {step === 0 ? '🌟 Introduction' : step <= topic.subtopics.length ? `🔍 Concept ${step}` : '🏆 Complete!'}
-              </div>
-              <button
-                className={`speak-btn ${isSpeakingNow ? 'speaking' : ''}`}
-                onClick={handleSpeak}
-                title={isSpeakingNow ? 'Speaking…' : 'Read aloud'}
-              >
-                {isSpeakingNow ? '🔊' : '🔈'} {isSpeakingNow ? 'Speaking…' : 'Listen'}
-              </button>
+      {/* ── TAB CONTENT ── */}
+      <div className="tab-content-area">
+        
+        {/* LEARN TAB */}
+        {activeTab === 'learn' && (
+          <div className="tab-pane animate-fade-in">
+            {/* Step dots */}
+            <div className="step-dots" style={{ marginBottom: '1rem' }}>
+              {Array.from({ length: topic.subtopics.length + 2 }).map((_, i) => (
+                <div
+                  key={i}
+                  className={`dot ${i <= step ? 'done' : ''} ${i === step ? 'current' : ''}`}
+                  style={i === step ? { background: subject.color } : {}}
+                />
+              ))}
             </div>
 
-            <div className="content-body">
-              {content.split('\n').map((line, i) => {
-                if (!line.trim()) return <div key={i} style={{ height: '0.5rem' }} />;
-                const parts = line.split(/(\*\*.*?\*\*)/);
-                return (
-                  <p key={i} className="content-line">
-                    {parts.map((p, j) =>
-                      p.startsWith('**') && p.endsWith('**')
-                        ? <strong key={j} className="content-bold">{p.slice(2, -2)}</strong>
-                        : p
-                    )}
-                  </p>
-                );
-              })}
-            </div>
-
-            {/* ── 3D LAB (Mathematics Only) ── */}
-            {subject.id === 'mathematics' && step > 0 && step <= topic.subtopics.length && (
-              <Math3DLab topicId={topic.id} />
-            )}
-
-            {/* Reading text panel */}
-            {step === 0 && topic.readingText && (
-              <div className="reading-panel">
-                <p className="rp-label">📚 Read in your language</p>
-                <div className="rp-tabs">
-                  {(['en', 'hi', 'kn'] as const).filter(l => topic.readingText?.[l]).map(l => (
+            <div className="content-card glass-card">
+              {isLoading ? (
+                <div className="loading-wrap">
+                  <div className="loading-spinner" style={{ borderTopColor: subject.color }} />
+                  <p className="loading-text">Spark is thinking… 🤔</p>
+                </div>
+              ) : (
+                <>
+                  <div className="content-header">
+                    <div className="ch-badge" style={{ background: `${subject.color}20`, color: subject.color }}>
+                      {step === 0 ? '🌟 Introduction' : step <= topic.subtopics.length ? `🔍 Concept ${step}` : '🏆 Complete!'}
+                    </div>
                     <button
-                      key={l}
-                      className="rp-tab"
-                      onClick={() => speakRef.current(topic.readingText![l]!, l === 'en' ? 'en-IN' : l === 'hi' ? 'hi-IN' : 'kn-IN')}
+                      className={`speak-btn ${isSpeakingNow ? 'speaking' : ''}`}
+                      onClick={handleSpeak}
                     >
-                      {l === 'en' ? '🇬🇧 English' : l === 'hi' ? '🇮🇳 हिन्दी' : '🚩 ಕನ್ನಡ'}
+                      {isSpeakingNow ? '🔊' : '🔈'} {isSpeakingNow ? 'Speaking…' : 'Listen'}
+                    </button>
+                  </div>
+
+                  <div className="content-body">
+                    {content.split('\n').map((line, i) => {
+                      if (!line.trim()) return <div key={i} style={{ height: '0.5rem' }} />;
+                      const parts = line.split(/(\*\*.*?\*\*)/);
+                      return (
+                        <p key={i} className="content-line">
+                          {parts.map((p, j) =>
+                            p.startsWith('**') && p.endsWith('**')
+                              ? <strong key={j} className="content-bold">{p.slice(2, -2)}</strong>
+                              : p
+                          )}
+                        </p>
+                      );
+                    })}
+                  </div>
+
+                  {step === 0 && topic.readingText && (
+                    <div className="reading-panel">
+                      <p className="rp-label">📚 Read in your language</p>
+                      <div className="rp-tabs">
+                        {(['en', 'hi', 'kn'] as const).filter(l => topic.readingText?.[l]).map(l => (
+                          <button
+                            key={l}
+                            className="rp-tab"
+                            onClick={() => speakRef.current(topic.readingText![l]!, l === 'en' ? 'en-IN' : l === 'hi' ? 'hi-IN' : 'kn-IN')}
+                          >
+                            {l === 'en' ? '🇬🇧 English' : l === 'hi' ? '🇮🇳 हिन्दी' : '🚩 ಕನ್ನಡ'}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="action-row">
+                    {step === 0 ? (
+                      <button className="btn btn-primary btn-lg" onClick={() => setStep(1)}>
+                        🚀 Start Learning!
+                      </button>
+                    ) : step <= topic.subtopics.length ? (
+                      <button className="btn btn-secondary" onClick={() => setStep(s => s + 1)}>
+                        Next Concept →
+                      </button>
+                    ) : (
+                      <button className="btn btn-success btn-lg" onClick={() => setActiveTab('quiz')}>
+                        🏆 Go to Quiz!
+                      </button>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+
+            {step === 0 && !isLoading && (
+              <div className="outcomes-card glass-card animate-fade-in" style={{ marginTop: '1.25rem' }}>
+                <p className="oc-label">💡 What you&apos;ll learn</p>
+                <div className="oc-tags">
+                  {topic.learningOutcomes.map((lo, i) => <span key={i} className="oc-tag">{lo}</span>)}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* LAB TAB */}
+        {activeTab === 'lab' && (
+          <div className="tab-pane animate-fade-in">
+            <div className="lab-wrap glass-card">
+              <h3 className="pane-title">🧪 Experiential 3D Lab</h3>
+              <p className="pane-desc">Visualize the concept with interactive 3D models.</p>
+              <ExperientialLab subjectId={subject.id} topicId={topic.id} />
+              
+              <div className="lab-info">
+                <div className="info-card">
+                  <span>💡</span>
+                  <p>Rotate the object to see all angles. Understanding shapes and structures helps in deeper learning!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ACTIVITY TAB */}
+        {activeTab === 'activity' && (
+          <div className="tab-pane animate-fade-in">
+            <div className="activity-pane-inner glass-card">
+              <div className="pane-header">
+                <h3 className="pane-title">🎯 Learning Activity</h3>
+                <div className="level-tabs-inline">
+                  {(['low', 'mid', 'high'] as const).map(l => (
+                    <button key={l} className={`level-tab ${level === l ? 'active' : ''}`} onClick={() => setLevel(l)}>
+                      {l === 'low' ? '🌱 Starter' : l === 'mid' ? '🌿 Explorer' : '🌳 Expert'}
                     </button>
                   ))}
                 </div>
               </div>
-            )}
-          </>
-        )}
 
-        {/* ── Action buttons ── */}
-        {!isLoading && (
-          <div className="action-row">
-            {step === 0 && (
-              <button className="btn btn-primary btn-lg" onClick={() => setStep(1)}>
-                🚀 Start Learning!
-              </button>
-            )}
-            {step > 0 && step <= topic.subtopics.length && (
-              <>
-                <button className="btn btn-secondary" onClick={() => setStep(s => s + 1)}>
-                  Next Concept →
-                </button>
-                <button className="btn btn-accent" onClick={() => setMode('activity')}>
-                  🎯 Do Activity
-                </button>
-              </>
-            )}
-            {step > topic.subtopics.length && (
-              <button className="btn btn-success btn-lg" onClick={() => setMode('quiz')}>
-                🏆 Take Quiz!
-              </button>
-            )}
-          </div>
-        )}
-      </div>
-
-      {/* ── Learning outcomes ── */}
-      {step === 0 && !isLoading && (
-        <div className="outcomes-card glass-card animate-fade-in">
-          <p className="oc-label">💡 What you&apos;ll learn</p>
-          <div className="oc-tags">
-            {topic.learningOutcomes.map((lo, i) => (
-              <span key={i} className="oc-tag">{lo}</span>
-            ))}
-          </div>
-          {topic.crossCurricularLink && (
-            <p className="oc-link">🔗 Connected to: <em>{topic.crossCurricularLink}</em></p>
-          )}
-        </div>
-      )}
-
-      {/* ── ACTIVITY OVERLAY ── */}
-      {mode === 'activity' && (
-        <div className="overlay animate-pop-in">
-          <div className="overlay-inner">
-            <div className="overlay-header">
-              <h3 className="overlay-title">🎯 Learn by Doing</h3>
-              <button className="btn btn-ghost btn-sm" onClick={() => setMode('learn')}>✕ Close</button>
-            </div>
-
-            <div className="level-tabs">
-              {(['low', 'mid', 'high'] as const).map(l => (
-                <button
-                  key={l}
-                  className={`level-tab ${level === l ? 'active' : ''}`}
-                  onClick={() => setLevel(l)}
-                >
-                  {l === 'low' ? '🌱 Starter' : l === 'mid' ? '🌿 Explorer' : '🌳 Expert'}
-                </button>
-              ))}
-            </div>
-
-            {activity ? (
-              <div className="activity-body glass-card">
-                <div className="act-header">
-                  <span className="act-icon">
-                    {activity.skill === 'drawing' ? '🎨' : activity.skill === 'calculating' ? '🔢' : activity.skill === 'writing' ? '✏️' : activity.skill === 'speaking' ? '🗣️' : activity.skill === 'listening' ? '👂' : '🎭'}
-                  </span>
-                  <div>
-                    <h4 className="act-title">{activity.title}</h4>
-                    <p className="act-desc">{activity.description}</p>
-                  </div>
-                </div>
-
-                {activity.materials && activity.materials.length > 0 && (
-                  <div className="act-materials">
-                    <p className="act-section-label">🎒 You need:</p>
-                    <div className="materials-chips">
-                      {activity.materials.map((m, i) => <span key={i} className="mat-chip">{m}</span>)}
+              {activity ? (
+                <div className="activity-main">
+                  <div className="act-header-main">
+                    <span className="act-icon-large">
+                      {activity.skill === 'drawing' ? '🎨' : activity.skill === 'calculating' ? '🔢' : activity.skill === 'writing' ? '✏️' : activity.skill === 'speaking' ? '🗣️' : activity.skill === 'listening' ? '👂' : '🎭'}
+                    </span>
+                    <div>
+                      <h4 className="act-title-large">{activity.title}</h4>
+                      <p className="act-desc-large">{activity.description}</p>
                     </div>
                   </div>
-                )}
 
-                <div className="act-steps">
-                  <p className="act-section-label">📋 Steps:</p>
-                  {activity.steps.map((s, i) => (
-                    <label key={i} className="step-row">
-                      <input type="checkbox" className="step-check" />
-                      <span className="step-num">{i + 1}</span>
-                      <span className="step-text">{s}</span>
-                    </label>
-                  ))}
-                </div>
-
-                {activity.doItYourself && (
-                  <div className="act-diy">
-                    <span>🤔</span>
-                    <p>{activity.doItYourself}</p>
+                  <div className="act-grid">
+                    <div className="act-section">
+                      <p className="section-label">🎒 Materials</p>
+                      <div className="materials-list">
+                        {activity.materials.map((m, i) => <span key={i} className="mat-tag">{m}</span>)}
+                      </div>
+                    </div>
+                    <div className="act-section">
+                      <p className="section-label">📋 Steps to Follow</p>
+                      <div className="steps-list">
+                        {activity.steps.map((s, i) => (
+                          <div key={i} className="step-item">
+                            <span className="step-idx">{i+1}</span>
+                            <p>{s}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                )}
-
-                <button className="btn btn-success" style={{ width: '100%', marginTop: '1.5rem' }}
-                  onClick={() => setMode('learn')}>
-                  ✅ Mission Complete!
-                </button>
-              </div>
-            ) : (
-              <p style={{ textAlign: 'center', color: '#6B7280', padding: '2rem' }}>No activity at this level yet.</p>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* ── QUIZ OVERLAY ── */}
-      {mode === 'quiz' && (
-        <div className="overlay animate-pop-in">
-          <div className="overlay-inner">
-            <div className="overlay-header">
-              <h3 className="overlay-title">🏆 Mastery Quiz</h3>
-              <button className="btn btn-ghost btn-sm" onClick={() => setMode('learn')}>✕ Close</button>
+                </div>
+              ) : (
+                <p className="no-data">No activity for this level.</p>
+              )}
             </div>
-            <InteractiveQuiz
-              questions={topic.quiz}
-              onComplete={score => {
-                setMode('learn');
-                setStep(0);
-                alert(`🎉 You scored ${score}/${topic.quiz.length}! ${score === topic.quiz.length ? 'Perfect! 🌟' : 'Great effort! 💪'}`);
-              }}
-            />
           </div>
-        </div>
-      )}
+        )}
+
+        {/* QUIZ TAB */}
+        {activeTab === 'quiz' && (
+          <div className="tab-pane animate-fade-in">
+            <div className="quiz-pane-inner glass-card">
+              <h3 className="pane-title">🏆 Knowledge Mastery</h3>
+              <p className="pane-desc">Test what you&apos;ve learned!</p>
+              <InteractiveQuiz
+                questions={topic.quiz}
+                onComplete={score => {
+                  alert(`🎉 Amazing! You scored ${score}/${topic.quiz.length}!`);
+                }}
+              />
+            </div>
+          </div>
+        )}
+
+      </div>
 
       <style jsx>{`
         .tutor-wrap {
@@ -317,6 +315,73 @@ export default function VoiceAITutor({ subject, topic }: Props) {
         .tb-progress { display: flex; align-items: center; gap: 0.5rem; width: 100%; }
         .tb-progress .progress-track { flex: 1; }
         .tb-pct { font-size: 0.8rem; font-weight: 800; color: #7C3AED; white-space: nowrap; }
+
+        /* Tab Navigation */
+        .tab-nav {
+          display: flex;
+          gap: 0.5rem;
+          padding: 0.4rem !important;
+          background: rgba(255,255,255,0.6) !important;
+        }
+        .tab-btn {
+          flex: 1;
+          padding: 0.75rem;
+          border-radius: 12px;
+          border: none;
+          background: transparent;
+          font-weight: 800;
+          font-size: 0.9rem;
+          color: #6B7280;
+          cursor: pointer;
+          transition: all 0.2s;
+        }
+        .tab-btn:hover { background: rgba(255,255,255,0.8); color: #1E1B4B; }
+        .tab-btn.active {
+          background: white;
+          color: #7C3AED;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        /* Tab Content Area */
+        .tab-content-area {
+          min-height: 400px;
+        }
+        .pane-title { font-family: 'Baloo 2', cursive; font-size: 1.5rem; font-weight: 800; color: #1E1B4B; margin-bottom: 0.25rem; }
+        .pane-desc { font-size: 0.9rem; color: #6B7280; font-weight: 600; margin-bottom: 1.5rem; }
+
+        /* Lab Styling */
+        .lab-wrap { padding: 2rem !important; }
+        .lab-info { margin-top: 1.5rem; }
+        .info-card {
+          display: flex;
+          gap: 0.75rem;
+          background: #EFF6FF;
+          padding: 1rem;
+          border-radius: 16px;
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #1E40AF;
+          border: 1px solid #DBEAFE;
+        }
+
+        /* Activity Pane Layout */
+        .activity-pane-inner { padding: 2rem !important; }
+        .pane-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+        .level-tabs-inline { display: flex; gap: 0.4rem; background: #F3F4F6; padding: 0.3rem; border-radius: 12px; }
+        .act-header-main { display: flex; gap: 1.5rem; align-items: center; margin-bottom: 2rem; }
+        .act-icon-large { font-size: 3.5rem; }
+        .act-title-large { font-family: 'Baloo 2', cursive; font-size: 1.4rem; font-weight: 800; color: #1E1B4B; }
+        .act-desc-large { font-size: 1rem; color: #6B7280; font-weight: 600; }
+        .act-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; }
+        .section-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #9CA3AF; margin-bottom: 1rem; }
+        .materials-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .mat-tag { padding: 0.4rem 1rem; background: #FEF3C7; color: #92400E; border-radius: 99px; font-weight: 700; font-size: 0.85rem; }
+        .steps-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .step-item { display: flex; gap: 1rem; align-items: flex-start; background: white; padding: 1rem; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .step-idx { background: #7C3AED; color: white; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900; font-size: 0.8rem; flex-shrink: 0; }
+
+        /* Quiz Pane */
+        .quiz-pane-inner { padding: 2rem !important; }
 
         /* Step dots */
         .step-dots {
