@@ -13,8 +13,8 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
   const [activeChoice, setActiveChoice] = useState(0);
 
   const getChoices = () => {
-    if (subjectId !== 'mathematics') return [];
     switch (topicId) {
+      // Mathematics
       case 'm1-t1': return ['Red Clay Brick', 'Concrete Block', 'Ancient Brick'];
       case 'm2-t1': return ['Steel Ruler', 'Fiber Tape', 'Wood Scale'];
       case 'm3-t1': return ['School Bus', 'Fuel Tanker', 'Express Truck'];
@@ -28,7 +28,38 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
       case 'm12-t1': return ['Brass Beam Balance', 'Digital Scale', 'Weight Stone'];
       case 'm13-t1': return ['Fenced Garden', 'Photo Frame', 'Football Pitch'];
       case 'm14-t1': return ['Glass Bar Chart', 'Glow Pie Chart', 'Data Pyramid'];
-      default: return ['Concept Model'];
+      
+      // Science / EVS
+      case 'e1-t1': return ['Suspension Bridge', 'Bamboo Bridge', 'Stone Arch'];
+      case 'e2-t1': return ['Elephant Ears', 'Rabbit Ears', 'Human Ear'];
+      case 'e5-t1': return ['Natural Beehive', 'Box Hive', 'Honey Jar'];
+      case 'e11-t1': return ['Rose Flower', 'Sunflower', 'Lotus'];
+      case 'e12-t1': return ['Mud House', 'Brick House', 'Modern Villa'];
+      case 'e13-t1': return ['Clean River', 'Polluted River', 'Frozen Stream'];
+      case 'e16-t1': return ['Twig Nest', 'Mud Nest', 'Hollow Tree'];
+      case 'e23-t1': return ['Handloom', 'Silk Fabric', 'Dyeing Pot'];
+      
+      // Hindi
+      case 'h1-t1': return ['Rain Cloud', 'Thunder Cloud', 'Golden Cloud'];
+      case 'h3-t1': return ['Red Cricket Ball', 'Tennis Ball', 'Glowing Ball'];
+      case 'h6-t1': return ['Paper Boat', 'Speed Boat', 'Wooden Ship'];
+      
+      // English
+      case 'en2-t1': return ['Funny Nose', 'Long Nose', 'Sharp Nose'];
+      case 'en8-t1': return ['Story Book', 'Dictionary', 'Magic Scroll'];
+      case 'en9-t1': return ['Wooden Puppet', 'String Puppet', 'Shadow Puppet'];
+      
+      // Kannada
+      case 'k1-t1': return ['Karnataka Map', 'State Flag', 'Gandaberunda'];
+      case 'k5-t1': return ['Banyan Tree', 'Mango Tree', 'Coconut Palm'];
+      
+      // Computer Science
+      case 'c1-t1': return ['Desktop PC', 'Laptop', 'Supercomputer'];
+      case 'c2-t1': return ['Optical Mouse', 'Mechanical Keyboard', 'Inkjet Printer'];
+      case 'c7-t1': return ['Paint Bucket', 'Artist Palette', 'Digital Brush'];
+      case 'c8-t1': return ['Projector Screen', 'Slide Deck', 'Laser Pointer'];
+      
+      default: return ['Conceptual Model', 'Abstract View', 'Golden Trophy'];
     }
   };
 
@@ -578,7 +609,6 @@ function RealObject({ topicId, type }: { topicId: string; type: number }) {
           ))}
         </group>
       );
-
     case 'e13-t1': // River
       return (
         <mesh rotation={[-Math.PI / 2, 0, 0]}>
@@ -593,6 +623,225 @@ function RealObject({ topicId, type }: { topicId: string; type: number }) {
             transparent
           />
         </mesh>
+      );
+
+    case 'e2-t1': // Ears
+      return (
+        <group>
+          {[-0.8, 0.8].map((x, i) => (
+            <mesh key={i} position={[x, 0, 0]} rotation={[0, x > 0 ? -0.5 : 0.5, 0]}>
+              <torusGeometry args={[0.4, 0.1, 16, 32, Math.PI]} />
+              <meshStandardMaterial color="#FDE68A" />
+            </mesh>
+          ))}
+          <mesh position={[0, 0, -0.2]}>
+            <sphereGeometry args={[0.6, 32, 32]} />
+            <meshStandardMaterial color="#FDE68A" />
+          </mesh>
+        </group>
+      );
+
+    case 'en2-t1': // Nose
+      return (
+        <group>
+          <mesh rotation={[Math.PI / 2, 0, 0]}>
+            <coneGeometry args={[0.3, 1, 32]} />
+            <meshStandardMaterial color="#FDE68A" />
+          </mesh>
+          <mesh position={[0, -0.3, 0]}>
+            <sphereGeometry args={[0.2, 16, 16]} />
+            <meshStandardMaterial color="#FDE68A" />
+          </mesh>
+        </group>
+      );
+
+    case 'c7-t1': // Paint Bucket
+      return (
+        <group>
+          <mesh castShadow>
+            <cylinderGeometry args={[0.6, 0.5, 1.2, 32]} />
+            <meshStandardMaterial color="#94A3B8" metalness={0.5} />
+          </mesh>
+          <mesh position={[0, 0.61, 0]}>
+            <cylinderGeometry args={[0.55, 0.55, 0.05, 32]} />
+            <meshStandardMaterial color={type === 0 ? "#EF4444" : "#3B82F6"} />
+          </mesh>
+        </group>
+      );
+
+    case 'c8-t1': // Slide Deck
+      return (
+        <group>
+          <mesh castShadow>
+            <boxGeometry args={[2.5, 1.5, 0.1]} />
+            <meshStandardMaterial color="#FFF" />
+          </mesh>
+          <mesh position={[0, 0, 0.06]}>
+            <boxGeometry args={[2.2, 1.2, 0.01]} />
+            <meshStandardMaterial color="#F43F5E" />
+          </mesh>
+        </group>
+      );
+    case 'e11-t1': // Flower
+      return (
+        <group>
+          <mesh position={[0, -0.8, 0]}>
+            <cylinderGeometry args={[0.05, 0.05, 1.5, 8]} />
+            <meshStandardMaterial color="#059669" />
+          </mesh>
+          <mesh position={[0, 0.2, 0]}>
+            <sphereGeometry args={[0.3, 16, 16]} />
+            <meshStandardMaterial color={type === 0 ? "#FACC15" : type === 1 ? "#78350F" : "#FDE68A"} />
+          </mesh>
+          {[...Array(8)].map((_, i) => (
+            <mesh key={i} rotation={[0, 0, i * Math.PI / 4]} position={[Math.sin(i * Math.PI / 4) * 0.4, 0.2 + Math.cos(i * Math.PI / 4) * 0.4, 0.1]}>
+              <boxGeometry args={[0.6, 0.2, 0.05]} />
+              <meshPhysicalMaterial color={type === 0 ? "#EF4444" : type === 1 ? "#F59E0B" : "#F472B6"} roughness={0.3} />
+            </mesh>
+          ))}
+        </group>
+      );
+
+    case 'e12-t1': // House
+      return (
+        <group>
+          <mesh castShadow receiveShadow>
+            <boxGeometry args={[2, 1.2, 1.5]} />
+            <meshStandardMaterial color={type === 0 ? "#92400E" : "#E5E7EB"} />
+          </mesh>
+          <mesh position={[0, 1, 0]} rotation={[0, Math.PI / 4, 0]}>
+            <coneGeometry args={[1.6, 1, 4]} />
+            <meshStandardMaterial color={type === 0 ? "#78350F" : "#B91C1C"} />
+          </mesh>
+        </group>
+      );
+
+    case 'e16-t1': // Nest
+      return (
+        <group>
+          <mesh castShadow>
+            <torusGeometry args={[0.8, 0.3, 16, 32]} />
+            <meshStandardMaterial color="#78350F" roughness={1} />
+          </mesh>
+          {/* Eggs */}
+          <mesh position={[0, 0.1, 0]}>
+            <sphereGeometry args={[0.2, 16, 16]} />
+            <meshPhysicalMaterial color="#F3F4F6" roughness={0.1} />
+          </mesh>
+          <mesh position={[0.2, 0.1, 0.2]}>
+            <sphereGeometry args={[0.2, 16, 16]} />
+            <meshPhysicalMaterial color="#BFDBFE" roughness={0.1} />
+          </mesh>
+        </group>
+      );
+
+    case 'h1-t1': // Cloud
+      return (
+        <group>
+          <mesh castShadow>
+            <sphereGeometry args={[0.6, 16, 16]} />
+            <meshPhysicalMaterial 
+              color={type === 0 ? "#94A3B8" : type === 1 ? "#334155" : "#FDE68A"} 
+              transmission={0.4} 
+              transparent 
+              opacity={0.8}
+            />
+          </mesh>
+          <mesh position={[0.5, 0.2, 0]}><sphereGeometry args={[0.5, 16, 16]} /><meshStandardMaterial color={type === 0 ? "#CBD5E1" : "#475569"} /></mesh>
+          <mesh position={[-0.5, 0, 0.2]}><sphereGeometry args={[0.4, 16, 16]} /><meshStandardMaterial color={type === 0 ? "#CBD5E1" : "#475569"} /></mesh>
+        </group>
+      );
+
+    case 'h6-t1': // Paper Boat
+      return (
+        <group rotation={[0, Math.PI / 2, 0]}>
+          <mesh castShadow rotation={[0, Math.PI / 4, 0]}>
+            <coneGeometry args={[0.8, 1, 4]} />
+            <meshStandardMaterial color={type === 0 ? "#FFFFFF" : "#3B82F6"} />
+          </mesh>
+          <mesh position={[0, -0.2, 0]} rotation={[Math.PI, Math.PI / 4, 0]}>
+            <coneGeometry args={[1, 0.4, 4]} />
+            <meshStandardMaterial color={type === 0 ? "#F3F4F6" : "#2563EB"} />
+          </mesh>
+        </group>
+      );
+
+    case 'en8-t1': // Book
+      return (
+        <group>
+          <mesh castShadow>
+            <boxGeometry args={[1.2, 1.6, 0.2]} />
+            <meshStandardMaterial color={type === 0 ? "#1D4ED8" : "#B91C1C"} />
+          </mesh>
+          <mesh position={[0, 0, 0.01]}>
+            <boxGeometry args={[1, 1.4, 0.2]} />
+            <meshStandardMaterial color="#FFF" />
+          </mesh>
+          <mesh position={[-0.61, 0, 0]}>
+            <boxGeometry args={[0.02, 1.6, 0.22]} />
+            <meshStandardMaterial color="#FBBF24" />
+          </mesh>
+        </group>
+      );
+
+    case 'c2-t1': // Mouse / Keyboard
+      return (
+        <group>
+          {type === 0 ? (
+            <mesh castShadow>
+              <sphereGeometry args={[0.5, 32, 32]} scale={[1, 0.5, 1.5]} />
+              <meshPhysicalMaterial color="#374151" roughness={0.2} metalness={0.5} />
+            </mesh>
+          ) : (
+            <mesh castShadow>
+              <boxGeometry args={[2.5, 0.1, 1]} />
+              <meshStandardMaterial color="#111827" />
+            </mesh>
+          )}
+        </group>
+      );
+
+    case 'k5-t1': // Tree
+      return (
+        <group>
+          <mesh position={[0, 0, 0]} castShadow>
+            <cylinderGeometry args={[0.2, 0.3, 2, 16]} />
+            <meshStandardMaterial color="#78350F" />
+          </mesh>
+          <mesh position={[0, 1.2, 0]} castShadow>
+            <sphereGeometry args={[1, 16, 16]} />
+            <meshStandardMaterial color="#059669" />
+          </mesh>
+          <mesh position={[0.4, 1.6, 0.2]} castShadow>
+            <sphereGeometry args={[0.7, 16, 16]} />
+            <meshStandardMaterial color="#10B981" />
+          </mesh>
+        </group>
+      );
+
+    case 'en9-t1': // Puppet
+      return (
+        <group>
+          <mesh position={[0, 0.5, 0]} castShadow>
+            <sphereGeometry args={[0.4, 16, 16]} />
+            <meshStandardMaterial color="#FDE68A" />
+          </mesh>
+          <mesh position={[0, -0.4, 0]} castShadow>
+            <boxGeometry args={[0.6, 1, 0.3]} />
+            <meshStandardMaterial color="#B91C1C" />
+          </mesh>
+          {/* Strings */}
+          <mesh position={[0, 1.5, 0]}>
+            <boxGeometry args={[0.8, 0.05, 0.05]} />
+            <meshStandardMaterial color="#92400E" />
+          </mesh>
+          {[-0.3, 0.3].map((x, i) => (
+            <mesh key={i} position={[x, 1, 0]}>
+              <cylinderGeometry args={[0.01, 0.01, 1, 8]} />
+              <meshStandardMaterial color="#E5E7EB" transparent opacity={0.5} />
+            </mesh>
+          ))}
+        </group>
       );
 
     default:
