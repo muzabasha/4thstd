@@ -503,6 +503,14 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
+                {topicId === 'h13-t1' && (
+                  <>
+                    <label>Crest Spread: {param1}</label>
+                    <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                    <label>Bird Size: {param2}</label>
+                    <input type="range" min="1" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
+                  </>
+                )}
                 {topicId === 'h14-t1' && (
                   <>
                     <label>Trunk Height: {param1}</label>
@@ -556,7 +564,23 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
-                {topicId === 'en14-t1' && (
+                {topicId === 'en1-t1' && (
+                  <>
+                    <label>Sun Intensity: {param1}</label>
+                    <input type="range" min="1" max="20" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                    <label>Sun Size: {param2}</label>
+                    <input type="range" min="1" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
+                  </>
+                )}
+                {topicId === 'en5-t1' && (
+                  <>
+                    <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
+                      {toggle ? 'READER MODE ON' : 'READER MODE OFF'}
+                    </button>
+                    <p style={{ fontSize: '12px', opacity: 0.7, marginTop: '10px' }}>Feel the dots to read "HELEN"</p>
+                  </>
+                )}
+                {(topicId === 'en9-t1' || topicId === 'en14-t1') && (
                   <>
                     <label>Lie Intensity: {param1}</label>
                     <input type="range" min="1" max="20" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
@@ -593,8 +617,17 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                 )}
                 {topicId === 'k7-t1' && (
                   <>
-                    <label>Onake Swing Power: {param1}</label>
+                    <label>Onake Length: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                    <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
+                      {toggle ? 'ATTACKING' : 'READY'}
+                    </button>
+                  </>
+                )}
+                {topicId === 'k8-t1' && (
+                  <>
+                    <label>Elephant Scale: {param2}</label>
+                    <input type="range" min="1" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
                   </>
                 )}
               </div>
@@ -1334,27 +1367,28 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
       );
 
     // ─── COMPUTER SCIENCE ─────────────────────────────────────────────
-    case 'k7-t1': // Obavva (Onake and Kindi)
+    case 'k7-t1': // Obavva's Fort (Kindi & Onake)
       return (
         <group>
-          {/* Fort Wall with Kindi (Hole) */}
-          <mesh position={[0, 0, -0.5]}>
-            <boxGeometry args={[4, 3, 0.5]} />
-            <meshStandardMaterial color="#4B5563" roughness={1} />
-            <mesh position={[0, -0.5, 0]}>
-              <sphereGeometry args={[0.4, 16, 16]} />
-              <meshBasicMaterial color="#000" />
-            </mesh>
+          {/* Fort Wall with Kindi */}
+          <mesh position={[0, 0, -1]} castShadow receiveShadow>
+            <boxGeometry args={[6, 4, 1]} />
+            <meshStandardMaterial color="#4B5563" />
           </mesh>
-          {/* Onake (Pestle) */}
-          <group position={[0, 0, 0.5]} rotation={[Math.sin(Date.now() * 0.005 * param1) * 0.8, 0, 0]}>
+          {/* The Kindi (Hole) */}
+          <mesh position={[0, -0.5, -0.5]}>
+            <boxGeometry args={[0.8, 1.2, 1.1]} />
+            <meshStandardMaterial color="#000" />
+          </mesh>
+          {/* The Onake (Pestle) */}
+          <group position={[0, 0, 0.5]} rotation={[0, 0, toggle ? Math.sin(Date.now() * 0.01) * 0.5 : 0]}>
             <mesh castShadow>
-              <cylinderGeometry args={[0.1, 0.1, 3, 16]} />
-              <meshStandardMaterial color="#78350F" metalness={0.5} />
+              <cylinderGeometry args={[0.1, 0.12, 3 * (param1 / 5), 16]} />
+              <meshStandardMaterial color="#78350F" roughness={0.8} />
             </mesh>
             <mesh position={[0, 1.5, 0]}>
-              <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
-              <meshStandardMaterial color="#94A3B8" metalness={0.8} />
+              <cylinderGeometry args={[0.15, 0.15, 0.2, 16]} />
+              <meshStandardMaterial color="#9CA3AF" metalness={0.8} />
             </mesh>
           </group>
         </group>
@@ -1580,6 +1614,33 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
           </mesh>
         </group>
       );
+
+    case 'k8-t1': // Mysore Dasara Ambari (Elephant)
+      return (
+        <group scale={param2 / 5}>
+          {/* Elephant Body */}
+          <mesh castShadow>
+            <boxGeometry args={[2, 1.5, 1.2]} />
+            <meshStandardMaterial color="#1F2937" />
+          </mesh>
+          {/* Head */}
+          <mesh position={[1.2, 0.4, 0]} castShadow>
+            <sphereGeometry args={[0.6, 32, 32]} />
+            <meshStandardMaterial color="#1F2937" />
+          </mesh>
+          {/* Golden Howdah (Ambari) */}
+          <mesh position={[0, 1.2, 0]} castShadow>
+            <boxGeometry args={[1, 0.8, 0.8]} />
+            <meshStandardMaterial color="#FBBF24" metalness={1} roughness={0.2} />
+          </mesh>
+          {/* Decorative Cloth */}
+          <mesh position={[0, 0, 0]} scale={[1.1, 1.1, 1.1]}>
+            <boxGeometry args={[2.1, 0.1, 1.3]} />
+            <meshStandardMaterial color="#B91C1C" />
+          </mesh>
+        </group>
+      );
+
     case 'm13-t1': // Perimeter & Area
       return (
         <group>
@@ -1924,6 +1985,36 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
+    case 'h13-t1': // Hoopoe Bird (Hudhud)
+      return (
+        <group scale={param2 / 5}>
+          {/* Body */}
+          <mesh castShadow>
+            <sphereGeometry args={[0.5, 32, 32]} />
+            <meshStandardMaterial color="#D97706" />
+          </mesh>
+          {/* Head & Crest */}
+          <group position={[0.4, 0.4, 0]}>
+            <mesh castShadow>
+              <sphereGeometry args={[0.3, 32, 32]} />
+              <meshStandardMaterial color="#D97706" />
+            </mesh>
+            {/* Crest (Kalgi) */}
+            {[...Array(8)].map((_, i) => (
+              <mesh key={i} position={[0, 0.2, 0]} rotation={[0, 0, (i - 3.5) * 0.3 * (param1 / 5)]}>
+                <boxGeometry args={[0.02, 0.6, 0.1]} />
+                <meshStandardMaterial color={i % 2 === 0 ? "#000" : "#D97706"} />
+              </mesh>
+            ))}
+            {/* Beak */}
+            <mesh position={[0.3, 0, 0]} rotation={[0, 0, -Math.PI/2]}>
+              <cylinderGeometry args={[0.02, 0.05, 0.8, 8]} />
+              <meshStandardMaterial color="#1F2937" />
+            </mesh>
+          </group>
+        </group>
+      );
+
     case 'h6-t1': // Origami Paper Boat
       return (
         <group position={[0, toggle ? -1 : Math.sin(Date.now() * 0.001 * param1) * 0.2, 0]}>
@@ -2047,40 +2138,70 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
-    case 'c2-t1': // Mouse / Keyboard
+    case 'en1-t1': // Morning Sky
       return (
         <group>
-          {type === 0 ? (
-            <mesh castShadow>
-              <sphereGeometry args={[0.5, 32, 32]} scale={[1, 0.5, 1.5]} />
-              <meshPhysicalMaterial color="#374151" roughness={0.2} metalness={0.5} />
+          <mesh>
+            <sphereGeometry args={[5, 32, 32]} />
+            <meshStandardMaterial color="#87CEEB" side={2} emissive="#FDE68A" emissiveIntensity={param1 / 20} />
+          </mesh>
+          {[...Array(5)].map((_, i) => (
+            <mesh key={i} position={[Math.sin(Date.now() * 0.001 + i) * 2, 2 + i * 0.2, Math.cos(Date.now() * 0.001 + i) * 2]} rotation={[0, Date.now() * 0.002, 0]}>
+              <coneGeometry args={[0.2, 0.5, 4]} />
+              <meshStandardMaterial color="#FFF" />
             </mesh>
-          ) : (
-            <mesh castShadow>
-              <boxGeometry args={[2.5, 0.1, 1]} />
-              <meshStandardMaterial color="#111827" />
-            </mesh>
-          )}
+          ))}
+          <mesh position={[0, 3, -3]}>
+            <sphereGeometry args={[0.8 * (param2 / 5), 32, 32]} />
+            <meshStandardMaterial color="#FBBF24" emissive="#FBBF24" emissiveIntensity={2} />
+          </mesh>
         </group>
       );
 
-
-    case 'en9-t1': // Puppet
+    case 'en5-t1': // Braille Board
       return (
-        <group rotation={[0, toggle ? Math.sin(Date.now() * 0.005) * 0.5 : 0, 0]}>
-          <mesh position={[0, 0.5, 0]} castShadow>
-            <sphereGeometry args={[0.4, 16, 16]} />
-            <meshStandardMaterial color="#FDE68A" />
+        <group rotation={[-Math.PI / 6, 0, 0]}>
+          <mesh castShadow receiveShadow>
+            <boxGeometry args={[3, 4, 0.1]} />
+            <meshStandardMaterial color="#F3F4F6" />
           </mesh>
-          <mesh position={[0, -0.4, 0]} castShadow>
+          {/* Braille Dots for 'HELEN' */}
+          {[
+            [0,0], [0,1], [0,2], // H
+            [1,0], [1,2], // E
+            [2,0], [2,1], [2,2], // L
+            [3,0], [3,2]  // E
+          ].map((pos, i) => (
+            <mesh key={i} position={[-1 + pos[0] * 0.6, 1.5 - pos[1] * 0.8, 0.1]} castShadow>
+              <sphereGeometry args={[0.15, 16, 16]} />
+              <meshStandardMaterial color="#1F2937" emissive={toggle ? "#3B82F6" : "#000"} emissiveIntensity={toggle ? 2 : 0} />
+            </mesh>
+          ))}
+        </group>
+      );
+
+    case 'en14-t1': // Pinocchio (Jointed Puppet) - High Fidelity
+    case 'en9-t1':
+      return (
+        <group scale={param1 / 10} rotation={[0, toggle ? Math.sin(Date.now() * 0.005) * 0.5 : 0, 0]}>
+          <mesh position={[0, 1.2, 0]} castShadow>
+            <sphereGeometry args={[0.4, 32, 32]} />
+            <meshStandardMaterial color={toggle ? "#FDE68A" : "#92400E"} />
+            <mesh position={[0, 0, 0.4]} rotation={[Math.PI / 2, 0, 0]}>
+              <cylinderGeometry args={[0.02, 0.05, param1 / 5, 16]} />
+              <meshStandardMaterial color={toggle ? "#FDE68A" : "#92400E"} />
+            </mesh>
+          </mesh>
+          <mesh position={[0, 0.4, 0]} castShadow>
             <boxGeometry args={[0.6, 1, 0.3]} />
             <meshStandardMaterial color="#B91C1C" />
           </mesh>
-          {/* Strings */}
-          <mesh position={[0, 1.5, 0]} scale={[param1 / 5, 1, 1]}>
-            <boxGeometry args={[0.8, 0.05, 0.05]} />
-            <meshStandardMaterial color="#92400E" />
-          </mesh>
+          {[-0.4, 0.4].map((x, i) => (
+            <mesh key={i} position={[x, 0.6, 0]} rotation={[Math.sin(Date.now() * 0.002) * 0.5, 0, 0]}>
+              <cylinderGeometry args={[0.08, 0.08, 0.8, 8]} />
+              <meshStandardMaterial color={toggle ? "#FDE68A" : "#92400E"} />
+            </mesh>
+          ))}
         </group>
       );
 
@@ -2095,7 +2216,6 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
             <cylinderGeometry args={[0.1, 0.1, 0.8, 16]} />
             <meshStandardMaterial color="#3B82F6" />
           </mesh>
-          {/* Water drops */}
           {[...Array(param1)].map((_, i) => (
             <mesh key={i} position={[1, -i * 0.2, 0]}>
               <sphereGeometry args={[0.05, 8, 8]} />
