@@ -293,8 +293,10 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                 )}
                 {topicId === 'e2-t1' && (
                   <>
-                    <label>Ear Size: {param1}</label>
+                    <label>Ear Scale: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                    <label>{activeChoice === 0 ? 'Floppiness' : activeChoice === 1 ? 'Perkiness' : 'Ear Angle'}: {param2}</label>
+                    <input type="range" min="1" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
                     <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
                       {toggle ? 'HIDE HOLES' : 'SHOW EAR HOLES'}
                     </button>
@@ -1517,24 +1519,52 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
     case 'e2-t1': // Ears
       return (
         <group scale={param1 / 5}>
-          {[-0.8, 0.8].map((x, i) => (
-            <group key={i} position={[x, 0, 0]}>
-              <mesh rotation={[0, x > 0 ? -0.5 : 0.5, 0]}>
-                <torusGeometry args={[0.4, 0.1, 16, 32, Math.PI]} />
+          {type === 0 && ( // Elephant
+            <group>
+              {[-1.2, 1.2].map((x, i) => (
+                <mesh key={i} position={[x, 0, 0]} rotation={[param2 / 10, x > 0 ? -0.3 : 0.3, 0]} castShadow>
+                  <boxGeometry args={[1.5, 2, 0.1]} />
+                  <meshStandardMaterial color="#4B5563" roughness={0.8} />
+                </mesh>
+              ))}
+              <mesh position={[0, 0, -0.2]} castShadow>
+                <sphereGeometry args={[0.8, 32, 32]} scale={[1, 1.2, 0.8]} />
+                <meshStandardMaterial color="#4B5563" />
+              </mesh>
+            </group>
+          )}
+          {type === 1 && ( // Rabbit
+            <group>
+              {[-0.4, 0.4].map((x, i) => (
+                <mesh key={i} position={[x, 1, 0]} rotation={[-(10 - param2) / 20, 0, x > 0 ? -0.2 : 0.2]} castShadow>
+                  <cylinderGeometry args={[0.2, 0.2, 2, 16]} />
+                  <meshStandardMaterial color="#F3F4F6" />
+                </mesh>
+              ))}
+              <mesh position={[0, 0, 0]} castShadow>
+                <sphereGeometry args={[0.5, 32, 32]} />
+                <meshStandardMaterial color="#F3F4F6" />
+              </mesh>
+            </group>
+          )}
+          {type === 2 && ( // Human
+            <group>
+              <mesh position={[0.8, 0, 0]} rotation={[0, -param2 / 10, 0]} castShadow>
+                <torusGeometry args={[0.4, 0.1, 16, 32, Math.PI * 1.5]} />
                 <meshStandardMaterial color="#FDE68A" />
               </mesh>
-              {toggle && (
-                <mesh position={[0, 0, -0.1]}>
-                  <sphereGeometry args={[0.05, 8, 8]} />
-                  <meshStandardMaterial color="#000" />
-                </mesh>
-              )}
+              <mesh position={[0, 0, -0.2]} castShadow>
+                <sphereGeometry args={[0.6, 32, 32]} />
+                <meshStandardMaterial color="#FDE68A" />
+              </mesh>
             </group>
-          ))}
-          <mesh position={[0, 0, -0.2]}>
-            <sphereGeometry args={[0.6, 32, 32]} />
-            <meshStandardMaterial color="#FDE68A" />
-          </mesh>
+          )}
+          {toggle && (
+            <mesh position={[type === 2 ? 0.8 : 0, 0, -0.05]}>
+              <sphereGeometry args={[0.08, 8, 8]} />
+              <meshStandardMaterial color="#000" />
+            </mesh>
+          )}
         </group>
       );
 
