@@ -451,40 +451,61 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                     <input type="range" min="0" max="50" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                     <label>Cloud Size: {param2}</label>
                     <input type="range" min="1" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
+                    <div className="choice-row">
+                      {['Elephant', 'Camel', 'Sun'].map((name, i) => (
+                        <button key={i} className={`choice-pill ${activeChoice === i ? 'active' : ''}`} onClick={() => setActiveChoice(i)}>
+                          {name}
+                        </button>
+                      ))}
+                    </div>
                   </>
                 )}
                 {topicId === 'h3-t1' && (
                   <>
-                    <label>Bounce: {param1}</label>
+                    <label>Bounce Power: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
-                    <label>Ball Scale: {param2}</label>
+                    <label>Ball Size: {param2}</label>
                     <input type="range" min="1" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
+                    <div className="choice-row">
+                      {['Red', 'Green', 'Blue'].map((name, i) => (
+                        <button key={i} className={`choice-pill ${activeChoice === i ? 'active' : ''}`} onClick={() => setActiveChoice(i)}>
+                          {name}
+                        </button>
+                      ))}
+                    </div>
                   </>
                 )}
                 {topicId === 'h6-t1' && (
                   <>
-                    <label>Wave Power: {param1}</label>
+                    <label>Wave Speed: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                    <div className="choice-row">
+                      {['White', 'Red', 'Blue'].map((name, i) => (
+                        <button key={i} className={`choice-pill ${activeChoice === i ? 'active' : ''}`} onClick={() => setActiveChoice(i)}>
+                          {name}
+                        </button>
+                      ))}
+                    </div>
                     <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
-                      {toggle ? 'FLOAT' : 'SINK'}
+                      {toggle ? 'SINKING' : 'FLOATING'}
                     </button>
                   </>
                 )}
                 {topicId === 'h7-t1' && (
                   <>
-                    <label>Donation Amount: {param1}</label>
+                    <label>Coins Donated: {param1}</label>
                     <input type="range" min="1" max="100" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
                 {topicId === 'h9-t1' && (
                   <>
-                    <label>Spin Speed: {param1}</label>
+                    <label>Charkha Speed: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
                 {topicId === 'h14-t1' && (
                   <>
-                    <label>Tree Height: {param1}</label>
+                    <label>Trunk Height: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                     <label>Coconuts: {param2}</label>
                     <input type="range" min="0" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
@@ -497,45 +518,50 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
               <div className="control-group">
                 {topicId === 'en2-t1' && (
                   <>
-                    <label>Nose Wiggle: {param1}</label>
+                    <label>Nose Wobble: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
                 {topicId === 'en7-t1' && (
                   <>
-                    <label>Tree Age: {param1}</label>
+                    <label>Apples Count: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
                 {topicId === 'en8-t1' && (
                   <>
-                    <label>Thickness: {param1}</label>
+                    <label>Page Thickness: {param1}</label>
                     <input type="range" min="1" max="20" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
-                    <label>Scale: {param2}</label>
-                    <input type="range" min="1" max="10" value={param2} onChange={(e) => setParam2(parseInt(e.target.value))} />
+                    <div className="choice-row">
+                      {['Blue Cover', 'Red Cover'].map((name, i) => (
+                        <button key={i} className={`choice-pill ${activeChoice === i ? 'active' : ''}`} onClick={() => setActiveChoice(i)}>
+                          {name}
+                        </button>
+                      ))}
+                    </div>
                   </>
                 )}
                 {topicId === 'en9-t1' && (
                   <>
-                    <label>Stiffness: {param1}</label>
+                    <label>Puppet Sway: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                     <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
-                      {toggle ? 'DANCE' : 'STILL'}
+                      {toggle ? 'DANCING' : 'STILL'}
                     </button>
                   </>
                 )}
                 {topicId === 'en12-t1' && (
                   <>
-                    <label>Water Flow: {param1}</label>
+                    <label>Water Level: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
                 {topicId === 'en14-t1' && (
                   <>
-                    <label>Nose Growth: {param1}</label>
+                    <label>Lie Intensity: {param1}</label>
                     <input type="range" min="1" max="20" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                     <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
-                      {toggle ? 'REAL' : 'WOOD'}
+                      {toggle ? 'REAL BOY' : 'WOODEN PUPPET'}
                     </button>
                   </>
                 )}
@@ -552,22 +578,22 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                 )}
                 {topicId === 'k5-t1' && (
                   <>
-                    <label>Canopy Size: {param1}</label>
+                    <label>Greenery Density: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
                 {topicId === 'k6-t1' && (
                   <>
-                    <label>Hero Power: {param1}</label>
+                    <label>Warrior Courage: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                     <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
-                      {toggle ? 'ATTACK' : 'DEFEND'}
+                      {toggle ? 'BATTLE READY' : 'DEFENDING'}
                     </button>
                   </>
                 )}
                 {topicId === 'k7-t1' && (
                   <>
-                    <label>Strength: {param1}</label>
+                    <label>Onake Swing Power: {param1}</label>
                     <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
