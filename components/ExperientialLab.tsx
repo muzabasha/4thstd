@@ -1308,17 +1308,29 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
       );
 
     // ─── COMPUTER SCIENCE ─────────────────────────────────────────────
-    case 'k7-t1': // Obavva (Onake)
+    case 'k7-t1': // Obavva (Onake and Kindi)
       return (
-        <group rotation={[Math.sin(Date.now() * 0.005 * param1) * 0.8, 0, 0]}>
-          <mesh castShadow>
-            <cylinderGeometry args={[0.1, 0.1, 3, 16]} />
-            <meshStandardMaterial color="#78350F" metalness={0.5} />
+        <group>
+          {/* Fort Wall with Kindi (Hole) */}
+          <mesh position={[0, 0, -0.5]}>
+            <boxGeometry args={[4, 3, 0.5]} />
+            <meshStandardMaterial color="#4B5563" roughness={1} />
+            <mesh position={[0, -0.5, 0]}>
+              <sphereGeometry args={[0.4, 16, 16]} />
+              <meshBasicMaterial color="#000" />
+            </mesh>
           </mesh>
-          <mesh position={[0, 1.5, 0]}>
-            <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
-            <meshStandardMaterial color="#94A3B8" metalness={0.8} />
-          </mesh>
+          {/* Onake (Pestle) */}
+          <group position={[0, 0, 0.5]} rotation={[Math.sin(Date.now() * 0.005 * param1) * 0.8, 0, 0]}>
+            <mesh castShadow>
+              <cylinderGeometry args={[0.1, 0.1, 3, 16]} />
+              <meshStandardMaterial color="#78350F" metalness={0.5} />
+            </mesh>
+            <mesh position={[0, 1.5, 0]}>
+              <cylinderGeometry args={[0.15, 0.15, 0.4, 16]} />
+              <meshStandardMaterial color="#94A3B8" metalness={0.8} />
+            </mesh>
+          </group>
         </group>
       );
 
@@ -1839,39 +1851,63 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
-    case 'h1-t1': // Cloud
+    case 'h1-t1': // Clouds (Animal shapes)
       return (
         <group scale={param2 / 5}>
-          <mesh castShadow>
-            <sphereGeometry args={[0.6, 16, 16]} />
-            <meshPhysicalMaterial 
-              color={type === 0 ? "#94A3B8" : type === 1 ? "#334155" : "#FDE68A"} 
-              transmission={0.4} 
-              transparent 
-              opacity={0.8}
-            />
-          </mesh>
-          <mesh position={[0.5, 0.2, 0]}><sphereGeometry args={[0.5, 16, 16]} /><meshStandardMaterial color={type === 0 ? "#CBD5E1" : "#475569"} /></mesh>
-          <mesh position={[-0.5, 0, 0.2]}><sphereGeometry args={[0.4, 16, 16]} /><meshStandardMaterial color={type === 0 ? "#CBD5E1" : "#475569"} /></mesh>
-          {/* Rain drops */}
-          {[...Array(param1)].map((_, i) => (
-            <mesh key={i} position={[Math.random() * 2 - 1, -Math.random() * 2, Math.random() * 2 - 1]}>
-              <cylinderGeometry args={[0.01, 0.01, 0.2]} />
-              <meshStandardMaterial color="#3B82F6" transparent opacity={0.6} />
+          <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+            <mesh castShadow>
+              <sphereGeometry args={[1.2, 32, 32]} scale={[1.2, 0.8, 1]} />
+              <meshStandardMaterial color={type === 0 ? "#FFF" : type === 1 ? "#94A3B8" : "#FBBF24"} transparent opacity={0.8} />
+            </mesh>
+            {type === 0 && ( // Elephant Trunk Cloud
+              <mesh position={[1, 0, 0]} rotation={[0, 0, -0.5]}>
+                <cylinderGeometry args={[0.2, 0.4, 1.2, 16]} />
+                <meshStandardMaterial color="#FFF" transparent opacity={0.8} />
+              </mesh>
+            )}
+            {type === 1 && ( // Camel Hump Cloud
+              <mesh position={[0, 0.6, 0]}>
+                <sphereGeometry args={[0.6, 16, 16]} />
+                <meshStandardMaterial color="#94A3B8" transparent opacity={0.8} />
+              </mesh>
+            )}
+          </Float>
+          {toggle && [...Array(param1)].map((_, i) => (
+            <mesh key={i} position={[Math.random() * 2 - 1, -Math.random() * 3, Math.random() * 2 - 1]}>
+              <sphereGeometry args={[0.02, 8, 8]} />
+              <meshStandardMaterial color="#3B82F6" />
             </mesh>
           ))}
         </group>
       );
 
-    case 'h3-t1': // Ball
+    case 'h3-t1': // Kirmich Ball (Honesty)
       return (
-        <group position={[0, Math.abs(Math.sin(Date.now() * 0.005)) * (param1 / 2) - 1, 0]}>
-          <mesh castShadow scale={param2 / 5}>
-            <sphereGeometry args={[1, 32, 32]} />
+        <group rotation={[0, Date.now() * 0.002, 0]}>
+          <mesh castShadow position={[0, Math.abs(Math.sin(Date.now() * 0.005 * param1)) * 2, 0]}>
+            <sphereGeometry args={[param2 / 5, 32, 32]} />
             <meshStandardMaterial 
-              color={type === 0 ? "#EF4444" : type === 1 ? "#059669" : "#FBBF24"} 
-              roughness={0.4}
+              color={type === 0 ? "#B91C1C" : type === 1 ? "#047857" : "#1D4ED8"} 
+              roughness={0.9}
             />
+          </mesh>
+          <mesh position={[0, -1.1, 0]} rotation={[-Math.PI/2, 0, 0]} receiveShadow>
+            <circleGeometry args={[2, 32]} />
+            <meshStandardMaterial color="#065F46" />
+          </mesh>
+        </group>
+      );
+
+    case 'h6-t1': // Origami Paper Boat
+      return (
+        <group position={[0, toggle ? -1 : Math.sin(Date.now() * 0.001 * param1) * 0.2, 0]}>
+          <mesh castShadow rotation={[0, Math.PI / 4, Math.PI]}>
+            <coneGeometry args={[1.5, 1, 4]} />
+            <meshStandardMaterial color={type === 0 ? "#FFF" : type === 1 ? "#EF4444" : "#1E40AF"} />
+          </mesh>
+          <mesh position={[0, 0.5, 0]} rotation={[0, Math.PI / 4, 0]}>
+            <coneGeometry args={[0.5, 1, 4]} />
+            <meshStandardMaterial color={type === 0 ? "#FFF" : type === 1 ? "#EF4444" : "#1E40AF"} />
           </mesh>
         </group>
       );
@@ -2043,27 +2079,6 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
-    case 'en14-t1': // Pinocchio
-      return (
-        <group>
-          {/* Head */}
-          <mesh position={[0, 0.5, 0]} castShadow>
-            <sphereGeometry args={[0.5, 32, 32]} />
-            <meshStandardMaterial color={toggle ? "#FDE68A" : "#78350F"} />
-          </mesh>
-          {/* Nose */}
-          <mesh position={[0, 0.5, 0.4]} rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.05, 0.05, param1 / 5, 16]} />
-            <meshStandardMaterial color={toggle ? "#FDE68A" : "#78350F"} />
-          </mesh>
-          {/* Body */}
-          <mesh position={[0, -0.6, 0]}>
-            <boxGeometry args={[0.8, 1.2, 0.5]} />
-            <meshStandardMaterial color="#EF4444" />
-          </mesh>
-        </group>
-      );
-
     case 'k6-t1': // Chennamma
       return (
         <group rotation={[0, toggle ? Math.sin(Date.now() * 0.01) * 0.5 : 0, 0]}>
@@ -2095,32 +2110,6 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
               <meshStandardMaterial color="#1F2937" />
             </mesh>
           ))}
-        </group>
-      );
-
-    case 'c9-t1': // Scratch Cat (Abstract)
-      return (
-        <group scale={param1 / 5}>
-          <mesh castShadow>
-            <sphereGeometry args={[0.6, 32, 32]} />
-            <meshStandardMaterial 
-              color="#F97316" 
-              emissive={toggle ? "#F97316" : "#000"} 
-              emissiveIntensity={toggle ? 1 : 0} 
-            />
-          </mesh>
-          <mesh position={[0.4, 0.4, 0.4]}>
-            <sphereGeometry args={[0.15, 16, 16]} />
-            <meshStandardMaterial color="#FFF" />
-          </mesh>
-          <mesh position={[-0.4, 0.4, 0.4]}>
-            <sphereGeometry args={[0.15, 16, 16]} />
-            <meshStandardMaterial color="#FFF" />
-          </mesh>
-          <mesh position={[0, -0.6, 0]}>
-            <boxGeometry args={[0.8, 0.8, 0.4]} />
-            <meshStandardMaterial color="#F97316" />
-          </mesh>
         </group>
       );
 
