@@ -1466,31 +1466,46 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
-    case 'c1-t1': // Desktop PC
+    case 'c1-t1': // Desktop PC (High Fidelity)
       return (
         <group scale={param1 / 5}>
           {/* Monitor */}
-          <mesh position={[0, 0.6, 0]} castShadow>
-            <boxGeometry args={[2, 1.2, 0.15]} />
-            <meshPhysicalMaterial color="#1F2937" roughness={0.2} metalness={0.8} clearcoat={1} />
-          </mesh>
-          {/* Screen */}
-          <mesh position={[0, 0.6, 0.08]}>
-            <planeGeometry args={[1.8, 1]} />
-            <meshStandardMaterial 
-              color="#000" 
-              emissive={toggle ? "#3B82F6" : "#000"} 
-              emissiveIntensity={toggle ? 2 : 0} 
-            />
+          <mesh castShadow position={[0, 0.5, 0]}>
+            <boxGeometry args={[2.5, 1.6, 0.1]} />
+            <meshStandardMaterial color="#1F2937" />
+            {toggle && (
+              <mesh position={[0, 0, 0.06]}>
+                <boxGeometry args={[2.3, 1.4, 0.01]} />
+                <meshStandardMaterial color="#3B82F6" emissive="#3B82F6" emissiveIntensity={0.5} />
+              </mesh>
+            )}
           </mesh>
           {/* Stand */}
-          <mesh position={[0, -0.1, 0]}>
-            <cylinderGeometry args={[0.1, 0.1, 0.4, 16]} />
-            <meshStandardMaterial color="#374151" />
+          <mesh position={[0, -0.4, 0]}>
+            <cylinderGeometry args={[0.1, 0.2, 0.5, 16]} />
+            <meshStandardMaterial color="#4B5563" />
           </mesh>
-          <mesh position={[0, -0.3, 0]}>
-            <boxGeometry args={[1, 0.05, 0.6]} />
-            <meshStandardMaterial color="#111827" />
+          <mesh position={[0, -0.65, 0]}>
+            <boxGeometry args={[1, 0.05, 0.8]} />
+            <meshStandardMaterial color="#4B5563" />
+          </mesh>
+          {/* Keyboard */}
+          <group position={[0, -0.7, 1]}>
+            <mesh receiveShadow>
+              <boxGeometry args={[2.2, 0.1, 0.8]} />
+              <meshStandardMaterial color="#374151" />
+            </mesh>
+            {[...Array(12)].map((_, i) => (
+              <mesh key={i} position={[(i % 6) * 0.3 - 0.75, 0.06, Math.floor(i / 6) * 0.3 - 0.15]}>
+                <boxGeometry args={[0.2, 0.05, 0.2]} />
+                <meshStandardMaterial color="#4B5563" />
+              </mesh>
+            ))}
+          </group>
+          {/* Mouse */}
+          <mesh position={[1.5, -0.7, 1]} castShadow>
+            <sphereGeometry args={[0.15, 16, 16]} scale={[1, 0.6, 1.5]} />
+            <meshStandardMaterial color="#1F2937" />
           </mesh>
         </group>
       );
