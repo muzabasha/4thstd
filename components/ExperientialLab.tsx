@@ -1322,46 +1322,74 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
-    case 'c3-t1': // Windows
+    case 'c3-t1': // Windows Desktop
       return (
         <group>
+          {/* Main Monitor/Screen */}
           <mesh castShadow>
             <boxGeometry args={[4, 3, 0.1]} />
             <meshStandardMaterial color="#1E3A8A" />
           </mesh>
+          {/* Taskbar */}
+          <mesh position={[0, -1.3, 0.06]}>
+            <boxGeometry args={[3.8, 0.3, 0.02]} />
+            <meshStandardMaterial color="#000" opacity={0.8} transparent />
+          </mesh>
+          {/* Start Button */}
+          <mesh position={[-1.75, -1.3, 0.08]}>
+            <boxGeometry args={[0.2, 0.2, 0.02]} />
+            <meshStandardMaterial color="#3B82F6" />
+          </mesh>
+          {/* Windows/Icons */}
           {[...Array(param1)].map((_, i) => (
-            <mesh key={i} position={[Math.cos(i) * 1.5, Math.sin(i) * 1, 0.1]}>
-              <boxGeometry args={[0.3, 0.3, 0.05]} />
-              <meshStandardMaterial color="#60A5FA" />
+            <mesh key={i} position={[Math.cos(i) * 1.2, Math.sin(i) * 0.8, 0.1]}>
+              <boxGeometry args={[0.6, 0.5, 0.05]} />
+              <meshStandardMaterial color={i % 2 === 0 ? "#FFF" : "#60A5FA"} />
             </mesh>
           ))}
         </group>
       );
 
-    case 'c4-t1': // MS Word
+    case 'c4-t1': // MS Word (Document)
       return (
         <group>
+          {/* Paper */}
           <mesh castShadow>
             <boxGeometry args={[3, 4, 0.05]} />
             <meshStandardMaterial color="#FFF" />
           </mesh>
-          <mesh position={[0, 0, 0.03]}>
-            <boxGeometry args={[2.5, 0.2 * param1, 0.01]} />
-            <meshStandardMaterial color={toggle ? "#000" : "#4B5563"} />
+          {/* Blue Header (Word look) */}
+          <mesh position={[0, 1.8, 0.03]}>
+            <boxGeometry args={[3, 0.4, 0.01]} />
+            <meshStandardMaterial color="#2B579A" />
           </mesh>
+          {/* Text Lines */}
+          {[...Array(Math.min(15, param1 * 2))].map((_, i) => (
+            <mesh key={i} position={[0, 1.2 - i * 0.2, 0.03]}>
+              <boxGeometry args={[2.4, 0.05, 0.01]} />
+              <meshStandardMaterial color={toggle && i < 3 ? "#000" : "#94A3B8"} />
+            </mesh>
+          ))}
         </group>
       );
 
-    case 'c5-t1': // Internet Safety
+    case 'c5-t1': // Internet Safety (Shield & Lock)
       return (
         <group>
-          <mesh castShadow rotation={[0, 0, Math.sin(Date.now() * 0.001) * 0.2]}>
-            <sphereGeometry args={[1.5, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
-            <meshStandardMaterial color="#10B981" transparent opacity={0.5} />
+          {/* Protective Dome */}
+          <mesh rotation={[0, 0, Math.sin(Date.now() * 0.001) * 0.2]}>
+            <sphereGeometry args={[2, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
+            <meshStandardMaterial color="#10B981" transparent opacity={0.2} wireframe={param1 < 5} />
           </mesh>
-          <mesh position={[0, 0, 0]}>
-            <boxGeometry args={[0.8, 1, 0.6]} />
-            <meshStandardMaterial color="#FBBF24" />
+          {/* Padlock Body */}
+          <mesh position={[0, 0, 0]} castShadow>
+            <boxGeometry args={[1, 0.8, 0.5]} />
+            <meshStandardMaterial color="#FBBF24" metalness={0.7} />
+          </mesh>
+          {/* Padlock Shackle */}
+          <mesh position={[0, 0.6, 0]} rotation={[0, 0, 0]}>
+            <torusGeometry args={[0.3, 0.08, 16, 32, Math.PI]} />
+            <meshStandardMaterial color="#94A3B8" metalness={0.9} />
           </mesh>
         </group>
       );
@@ -1386,21 +1414,41 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
-    case 'c9-t1': // Scratch
+    case 'c9-t1': // Scratch Cat (High Relevance)
       return (
         <group scale={param1 / 5}>
+          {/* Head */}
           <mesh castShadow>
-            <sphereGeometry args={[0.8, 32, 32]} />
-            <meshStandardMaterial color="#F97316" emissive={toggle ? "#F97316" : "#000"} emissiveIntensity={0.5} />
+            <sphereGeometry args={[1, 32, 32]} scale={[1, 0.8, 0.9]} />
+            <meshStandardMaterial color="#F97316" emissive={toggle ? "#F97316" : "#000"} emissiveIntensity={0.2} />
           </mesh>
-          <mesh position={[0.4, 0.8, 0.4]}>
-            <boxGeometry args={[0.2, 0.6, 0.1]} />
-            <meshStandardMaterial color="#F97316" />
-          </mesh>
-          <mesh position={[-0.4, 0.8, 0.4]}>
-            <boxGeometry args={[0.2, 0.6, 0.1]} />
-            <meshStandardMaterial color="#F97316" />
-          </mesh>
+          {/* Ears */}
+          {[-0.5, 0.5].map((x, i) => (
+            <mesh key={i} position={[x, 0.8, 0.2]} rotation={[0, 0, x > 0 ? -0.4 : 0.4]}>
+              <coneGeometry args={[0.3, 0.6, 4]} />
+              <meshStandardMaterial color="#F97316" />
+            </mesh>
+          ))}
+          {/* Eyes */}
+          {[-0.3, 0.3].map((x, i) => (
+            <mesh key={i} position={[x, 0.2, 0.8]}>
+              <sphereGeometry args={[0.2, 16, 16]} />
+              <meshStandardMaterial color="#FFF" />
+              <mesh position={[0, 0, 0.15]}>
+                <sphereGeometry args={[0.08, 8, 8]} />
+                <meshStandardMaterial color="#000" />
+              </mesh>
+            </mesh>
+          ))}
+          {/* Whiskers */}
+          {[-1, 1].map((side) => (
+            [...Array(2)].map((_, j) => (
+              <mesh key={`${side}-${j}`} position={[side * 0.8, -0.1 + j * 0.2, 0.7]} rotation={[0, side * 0.5, 0]}>
+                <boxGeometry args={[0.6, 0.02, 0.02]} />
+                <meshStandardMaterial color="#FFF" />
+              </mesh>
+            ))
+          ))}
         </group>
       );
 
@@ -1411,8 +1459,8 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
             <boxGeometry args={[2, 1.2, 0.1]} />
             <meshStandardMaterial color="#EF4444" />
           </mesh>
-          <mesh position={[0, 0, 0.06]}>
-            <coneGeometry args={[1, 0.5, 4]} rotation={[Math.PI / 2, 0, Math.PI / 4]} />
+          <mesh position={[0, 0, 0.06]} rotation={[Math.PI / 2, 0, Math.PI / 4]}>
+            <coneGeometry args={[1, 0.5, 4]} />
             <meshStandardMaterial color="#B91C1C" />
           </mesh>
         </group>
