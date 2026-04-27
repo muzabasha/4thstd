@@ -86,10 +86,14 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
       // Computer Science
       case 'c1-t1': return ['High-End Desktop', 'Gaming Laptop', 'Mini PC'];
       case 'c2-t1': return ['RGB Mouse', 'Mechanical Keyboard', 'Scanner'];
+      case 'c3-t1': return ['Windows Desktop', 'File Folder', 'App Icon'];
+      case 'c4-t1': return ['Typewriter', 'Digital Page', 'Font Styles'];
+      case 'c5-t1': return ['Cyber Shield', 'Secure Lock', 'Privacy Wall'];
       case 'c6-t1': return ['Logic Gates', 'Flowchart', 'Code Blocks'];
       case 'c7-t1': return ['Red Paint Bucket', 'Blue Paint Bucket', 'Rainbow Palette'];
       case 'c8-t1': return ['Presentation Slide', 'Title Slide', 'Chart Slide'];
       case 'c9-t1': return ['Scratch Cat', 'Magic Wand', 'Code Block'];
+      case 'c10-t1': return ['Email Envelope', 'Inbox Tray', 'Digital Message'];
       
       default: return ['Conceptual Model', 'Abstract View', 'Golden Trophy'];
     }
@@ -581,6 +585,27 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                     </button>
                   </>
                 )}
+                {topicId === 'c3-t1' && (
+                  <>
+                    <label>Icon Arrangement: {param1}</label>
+                    <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                  </>
+                )}
+                {topicId === 'c4-t1' && (
+                  <>
+                    <label>Font Size: {param1 * 5}px</label>
+                    <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                    <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
+                      {toggle ? 'BOLD' : 'NORMAL'}
+                    </button>
+                  </>
+                )}
+                {topicId === 'c5-t1' && (
+                  <>
+                    <label>Security Level: {param1}</label>
+                    <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
+                  </>
+                )}
                 {topicId === 'c6-t1' && (
                   <>
                     <label>Logic Steps: {param1}</label>
@@ -606,6 +631,12 @@ export default function ExperientialLab({ subjectId, topicId }: Props) {
                     <button className={`toggle-btn ${toggle ? 'on' : ''}`} onClick={() => setToggle(!toggle)}>
                       {toggle ? 'GLOW' : 'NORMAL'}
                     </button>
+                  </>
+                )}
+                {topicId === 'c10-t1' && (
+                  <>
+                    <label>Flight Speed: {param1}</label>
+                    <input type="range" min="1" max="10" value={param1} onChange={(e) => setParam1(parseInt(e.target.value))} />
                   </>
                 )}
               </div>
@@ -1291,6 +1322,50 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
         </group>
       );
 
+    case 'c3-t1': // Windows
+      return (
+        <group>
+          <mesh castShadow>
+            <boxGeometry args={[4, 3, 0.1]} />
+            <meshStandardMaterial color="#1E3A8A" />
+          </mesh>
+          {[...Array(param1)].map((_, i) => (
+            <mesh key={i} position={[Math.cos(i) * 1.5, Math.sin(i) * 1, 0.1]}>
+              <boxGeometry args={[0.3, 0.3, 0.05]} />
+              <meshStandardMaterial color="#60A5FA" />
+            </mesh>
+          ))}
+        </group>
+      );
+
+    case 'c4-t1': // MS Word
+      return (
+        <group>
+          <mesh castShadow>
+            <boxGeometry args={[3, 4, 0.05]} />
+            <meshStandardMaterial color="#FFF" />
+          </mesh>
+          <mesh position={[0, 0, 0.03]}>
+            <boxGeometry args={[2.5, 0.2 * param1, 0.01]} />
+            <meshStandardMaterial color={toggle ? "#000" : "#4B5563"} />
+          </mesh>
+        </group>
+      );
+
+    case 'c5-t1': // Internet Safety
+      return (
+        <group>
+          <mesh castShadow rotation={[0, 0, Math.sin(Date.now() * 0.001) * 0.2]}>
+            <sphereGeometry args={[1.5, 32, 32, 0, Math.PI * 2, 0, Math.PI / 2]} />
+            <meshStandardMaterial color="#10B981" transparent opacity={0.5} />
+          </mesh>
+          <mesh position={[0, 0, 0]}>
+            <boxGeometry args={[0.8, 1, 0.6]} />
+            <meshStandardMaterial color="#FBBF24" />
+          </mesh>
+        </group>
+      );
+
     case 'c6-t1': // Flowchart / Algorithm
       return (
         <group>
@@ -1308,6 +1383,38 @@ function RealObject({ topicId, type, param1, param2, toggle }: { topicId: string
               )}
             </group>
           ))}
+        </group>
+      );
+
+    case 'c9-t1': // Scratch
+      return (
+        <group scale={param1 / 5}>
+          <mesh castShadow>
+            <sphereGeometry args={[0.8, 32, 32]} />
+            <meshStandardMaterial color="#F97316" emissive={toggle ? "#F97316" : "#000"} emissiveIntensity={0.5} />
+          </mesh>
+          <mesh position={[0.4, 0.8, 0.4]}>
+            <boxGeometry args={[0.2, 0.6, 0.1]} />
+            <meshStandardMaterial color="#F97316" />
+          </mesh>
+          <mesh position={[-0.4, 0.8, 0.4]}>
+            <boxGeometry args={[0.2, 0.6, 0.1]} />
+            <meshStandardMaterial color="#F97316" />
+          </mesh>
+        </group>
+      );
+
+    case 'c10-t1': // Email
+      return (
+        <group position={[Math.sin(Date.now() * 0.001 * param1) * 3, 0, 0]} rotation={[0, 0, Math.cos(Date.now() * 0.001 * param1) * 0.5]}>
+          <mesh castShadow>
+            <boxGeometry args={[2, 1.2, 0.1]} />
+            <meshStandardMaterial color="#EF4444" />
+          </mesh>
+          <mesh position={[0, 0, 0.06]}>
+            <coneGeometry args={[1, 0.5, 4]} rotation={[Math.PI / 2, 0, Math.PI / 4]} />
+            <meshStandardMaterial color="#B91C1C" />
+          </mesh>
         </group>
       );
 
